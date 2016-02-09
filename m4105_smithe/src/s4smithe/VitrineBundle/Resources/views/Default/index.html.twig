@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ name }}</title>
+	</head>
+	<body>
+
+		<h1>Hello {{ name }} !</h1>  {# On définit un bloc appelé "title" #}
+		<p>Te voilà sur la the page Synfony de la mort qui tue !</p>
+		<a href="{{ path('s4smithe_vitrine_homepage', { 'name': 'Fabien' }) }}">Fabien</a>
+		<a href="{{ path('s4smithe_vitrine_homepage', { 'name': 'Jorge' }) }}">Jorge</a>
+		{# Génère l'URL "/hello/Fabien" #}
+
+		{# On inclut le template "navigation" #} 
+		{# {% include "AcmeDemoBundle:Demo:navigation.html.twig" #}
+
+	</body>
+</html>

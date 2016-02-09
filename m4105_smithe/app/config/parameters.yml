@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: postgres-info
+    database_port: null
+    database_name: users423
+    database_user: users423
+    database_password: p23
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: d649a6a875017edb77016b1191f1cee49404617b

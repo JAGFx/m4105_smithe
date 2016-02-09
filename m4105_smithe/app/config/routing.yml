@@ -1,0 +1,7 @@
+s4smithe_vitrine:
+    resource: "@s4smitheVitrineBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
