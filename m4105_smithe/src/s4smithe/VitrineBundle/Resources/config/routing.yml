@@ -1,5 +1,5 @@
 s4smithe_vitrine_homepage:
-    path:     /accueil/{name}
+    path:     /
     defaults: { _controller: s4smitheVitrineBundle:Default:index, name: Visiteur}
     
 s4smithe_vitrine_mentions:

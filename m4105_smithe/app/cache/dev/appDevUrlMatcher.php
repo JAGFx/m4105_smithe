@@ -106,8 +106,12 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         // s4smithe_vitrine_homepage
-        if (0 === strpos($pathinfo, '/accueil') && preg_match('#^/accueil(?:/(?P<name>[^/]++))?$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 's4smithe_vitrine_homepage')), array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\DefaultController::indexAction',  'name' => 'Visiteur',));
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 's4smithe_vitrine_homepage');
+            }
+
+            return array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\DefaultController::indexAction',  'name' => 'Visiteur',  '_route' => 's4smithe_vitrine_homepage',);
         }
 
         // s4smithe_vitrine_mentions
