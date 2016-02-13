@@ -1,7 +1,11 @@
 s4smithe_vitrine_homepage:
-    path:     /
-    defaults: { _controller: s4smitheVitrineBundle:Default:index, name: Visiteur}
+     path:     /
+     defaults: { _controller: s4smitheVitrineBundle:Default:index, name: Visiteur}
     
 s4smithe_vitrine_mentions:
-    path:     /mentions
-    defaults: { _controller: s4smitheVitrineBundle:Default:mentions}
+     path:     /mentions
+     defaults: { _controller: s4smitheVitrineBundle:Default:mentions}
+
+s4smithe_vitrine_manager:
+     path:     /manager
+     defaults: { _controller: s4smitheVitrineBundle:Manager:index }
