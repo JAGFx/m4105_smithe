@@ -1,0 +1,48 @@
+{#
+	Fichier : Default/index.html.twing
+	Auteur : Emmanuel SMITH
+	Creation : 09/02/2016
+	Modification :
+		> 09/02/2016		Mise en place de l'index
+		> 12/02/2016		Ajout template + catalogue statique
+
+	Page d'accueil de l'app web e-commerce
+#}
+
+{% extends "s4smitheVitrineBundle::layout.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active">Categorie</li>
+{% endblock %}
+
+{% block categoriesList %}
+	{% for cat in categories %}
+		<a href="{{ path('s4smithe_vitrine_articlesParCategorie', {catId: cat.id}) }}" class="list-group-item">{{ cat.name }}</a>
+	{% endfor %}
+{% endblock %}
+
+{% block content %}
+	{% for item in produits %}
+		<div class="col-sm-4 col-lg-6 col-md-6">
+			<div class="thumbnail">
+				<img src="http://placehold.it/420x200" alt="">
+				<div class="caption">
+					<h4 class="pull-right">{{ item.price }}€</h4>
+					<h4><a href="#">{{ item.name }}</a>
+					</h4>
+					<p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+				</div>
+				<div class="ratings">
+					<p class="pull-right">15 reviews</p>
+					<p>
+						<span class="glyphicon glyphicon-star"></span>
+						<span class="glyphicon glyphicon-star"></span>
+						<span class="glyphicon glyphicon-star"></span>
+						<span class="glyphicon glyphicon-star"></span>
+						<span class="glyphicon glyphicon-star"></span>
+					</p>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}	

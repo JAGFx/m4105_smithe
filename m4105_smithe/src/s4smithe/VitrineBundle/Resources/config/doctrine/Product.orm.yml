@@ -1,0 +1,26 @@
+# src//VitrineBundle/Resources/config/doctrine/Product.orm.yml
+s4smithe\VitrineBundle\Entity\Product:       # L’espace de nom où sera créée l’entité
+    type: entity
+    table: product                        # La table a laquelle elle correspond
+    id:                                   # Les champs qui composent la clé primaire
+       id:
+           type: integer
+           generator: { strategy: AUTO }
+           
+    fields:                               # Les autres champs de la table
+       name:
+           type: string
+           length: 100
+       price:
+           type: decimal
+           scale: 2
+       description:
+           type: text
+           
+    manyToOne:                        # Dans l’entité Product on ajoute un champ
+        category:                     # category qui pointe vers une entité Category
+             targetEntity: Category   # category_id sera, dans la table, le nom de la clé
+             inversedBy: products     # étrangère qui référence le champ id d’une
+             joinColumn:              # Category
+                 name: category_id
+                 referencedColumnName: id

@@ -1,10 +1,20 @@
 s4smithe_vitrine_homepage:
      path:     /
-     defaults: { _controller: s4smitheVitrineBundle:Default:index, name: Visiteur}
+     defaults: { _controller: s4smitheVitrineBundle:Default:index}
     
 s4smithe_vitrine_mentions:
      path:     /mentions
      defaults: { _controller: s4smitheVitrineBundle:Default:mentions}
+     
+s4smithe_vitrine_catalogue:
+     path:     /catalogue
+     defaults: { _controller: s4smitheVitrineBundle:Default:index}
+     
+s4smithe_vitrine_articlesParCategorie:
+     path:     /articlesParCategorie/{catId}
+     defaults: { _controller: s4smitheVitrineBundle:Default:articlesParCategorie, catId: 1 }
+     requirements:
+          catId:	\d+
 
 s4smithe_vitrine_manager:
      path:     /manager

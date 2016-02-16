@@ -16,35 +16,26 @@ class __TwigTemplate_4b5bcd58c63dd493d06a784c9802656ad122e62241558323b151f377ab9
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_056988e7f0e21018892e7603cab92243ce9eb27fe78bd528888aa198a4bca05f = $this->env->getExtension("native_profiler");
-        $__internal_056988e7f0e21018892e7603cab92243ce9eb27fe78bd528888aa198a4bca05f->enter($__internal_056988e7f0e21018892e7603cab92243ce9eb27fe78bd528888aa198a4bca05f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "s4smitheVitrineBundle::header.html.twig"));
+        $__internal_f2a99a5364499f1fcd48794f716954503c8a7ba7c2777b4105d4fc0943300f9d = $this->env->getExtension("native_profiler");
+        $__internal_f2a99a5364499f1fcd48794f716954503c8a7ba7c2777b4105d4fc0943300f9d->enter($__internal_f2a99a5364499f1fcd48794f716954503c8a7ba7c2777b4105d4fc0943300f9d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "s4smitheVitrineBundle::header.html.twig"));
 
-        // line 1
-        echo "<!--
-\tFichier : header.html.twing
-\tAuteur : Emmanuel SMITH
-\tCreation : 12/02/2016
-\tModification :
-\t\t> 12/02/2016\t\tMise en place du header pour le Template
-
-\tEntête par défaut des toutes les pages
--->
-
+        // line 10
+        echo "
 ";
         // line 11
         $this->displayBlock('header', $context, $blocks);
         // line 67
         echo "\t";
         
-        $__internal_056988e7f0e21018892e7603cab92243ce9eb27fe78bd528888aa198a4bca05f->leave($__internal_056988e7f0e21018892e7603cab92243ce9eb27fe78bd528888aa198a4bca05f_prof);
+        $__internal_f2a99a5364499f1fcd48794f716954503c8a7ba7c2777b4105d4fc0943300f9d->leave($__internal_f2a99a5364499f1fcd48794f716954503c8a7ba7c2777b4105d4fc0943300f9d_prof);
 
     }
 
     // line 11
     public function block_header($context, array $blocks = array())
     {
-        $__internal_04de14780bd76f5c8441eaeff549330c72e16fd928e207730c445cec99a0df9e = $this->env->getExtension("native_profiler");
-        $__internal_04de14780bd76f5c8441eaeff549330c72e16fd928e207730c445cec99a0df9e->enter($__internal_04de14780bd76f5c8441eaeff549330c72e16fd928e207730c445cec99a0df9e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "header"));
+        $__internal_3dd157a3015918fb02bb278056962a8461be201ed69f0c4c0585a30070ba3b52 = $this->env->getExtension("native_profiler");
+        $__internal_3dd157a3015918fb02bb278056962a8461be201ed69f0c4c0585a30070ba3b52->enter($__internal_3dd157a3015918fb02bb278056962a8461be201ed69f0c4c0585a30070ba3b52_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "header"));
 
         // line 12
         echo "\t<header>
@@ -64,8 +55,14 @@ class __TwigTemplate_4b5bcd58c63dd493d06a784c9802656ad122e62241558323b151f377ab9
 \t\t\t\t<!-- Collect the nav links, forms, and other content for toggling -->
 \t\t\t\t<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">
 \t\t\t\t\t<ul class=\"nav navbar-nav\">
-\t\t\t\t\t\t<li class=\"active\"><a href=\"#\">Link <span class=\"sr-only\">(current)</span></a></li>
-\t\t\t\t\t\t<li><a href=\"#\">Link</a></li>
+\t\t\t\t\t\t<li class=\"active\"><a href=\"";
+        // line 29
+        echo $this->env->getExtension('routing')->getPath("s4smithe_vitrine_homepage");
+        echo "\">Catalogue<span class=\"sr-only\">(current)</span></a></li>
+\t\t\t\t\t\t<li><a href=\"";
+        // line 30
+        echo $this->env->getExtension('routing')->getPath("s4smithe_vitrine_mentions");
+        echo "\">Mentions légales</a></li>
 \t\t\t\t\t\t<li class=\"dropdown\">
 \t\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>
 \t\t\t\t\t\t\t<ul class=\"dropdown-menu\">
@@ -104,7 +101,7 @@ class __TwigTemplate_4b5bcd58c63dd493d06a784c9802656ad122e62241558323b151f377ab9
 \t</header>
 ";
         
-        $__internal_04de14780bd76f5c8441eaeff549330c72e16fd928e207730c445cec99a0df9e->leave($__internal_04de14780bd76f5c8441eaeff549330c72e16fd928e207730c445cec99a0df9e_prof);
+        $__internal_3dd157a3015918fb02bb278056962a8461be201ed69f0c4c0585a30070ba3b52->leave($__internal_3dd157a3015918fb02bb278056962a8461be201ed69f0c4c0585a30070ba3b52_prof);
 
     }
 
@@ -115,10 +112,10 @@ class __TwigTemplate_4b5bcd58c63dd493d06a784c9802656ad122e62241558323b151f377ab9
 
     public function getDebugInfo()
     {
-        return array (  50 => 12,  44 => 11,  37 => 67,  35 => 11,  23 => 1,);
+        return array (  64 => 30,  60 => 29,  41 => 12,  35 => 11,  28 => 67,  26 => 11,  23 => 10,);
     }
 }
-/* <!--*/
+/* {# */
 /* 	Fichier : header.html.twing*/
 /* 	Auteur : Emmanuel SMITH*/
 /* 	Creation : 12/02/2016*/
@@ -126,7 +123,7 @@ class __TwigTemplate_4b5bcd58c63dd493d06a784c9802656ad122e62241558323b151f377ab9
 /* 		> 12/02/2016		Mise en place du header pour le Template*/
 /* */
 /* 	Entête par défaut des toutes les pages*/
-/* -->*/
+/* #}*/
 /* */
 /* {% block header %}*/
 /* 	<header>*/
@@ -146,8 +143,8 @@ class __TwigTemplate_4b5bcd58c63dd493d06a784c9802656ad122e62241558323b151f377ab9
 /* 				<!-- Collect the nav links, forms, and other content for toggling -->*/
 /* 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">*/
 /* 					<ul class="nav navbar-nav">*/
-/* 						<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>*/
-/* 						<li><a href="#">Link</a></li>*/
+/* 						<li class="active"><a href="{{ path('s4smithe_vitrine_homepage') }}">Catalogue<span class="sr-only">(current)</span></a></li>*/
+/* 						<li><a href="{{ path('s4smithe_vitrine_mentions') }}">Mentions légales</a></li>*/
 /* 						<li class="dropdown">*/
 /* 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>*/
 /* 							<ul class="dropdown-menu">*/

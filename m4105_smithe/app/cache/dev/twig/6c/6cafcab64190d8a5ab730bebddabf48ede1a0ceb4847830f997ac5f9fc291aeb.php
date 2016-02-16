@@ -16,32 +16,23 @@ class __TwigTemplate_8bfcb8a46c694736a92ea0a6e083ccfed975a24151e44efb579a7a137d6
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_79b0f366e279ea0b3c4254dd8b62f3c3023bff1055011ddb17e8e3af982db3bb = $this->env->getExtension("native_profiler");
-        $__internal_79b0f366e279ea0b3c4254dd8b62f3c3023bff1055011ddb17e8e3af982db3bb->enter($__internal_79b0f366e279ea0b3c4254dd8b62f3c3023bff1055011ddb17e8e3af982db3bb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "s4smitheVitrineBundle::footer.html.twig"));
+        $__internal_37a6f8ff6fd0079e3e36c224c715c392ca8e12879a18b4d25523ae72198029ea = $this->env->getExtension("native_profiler");
+        $__internal_37a6f8ff6fd0079e3e36c224c715c392ca8e12879a18b4d25523ae72198029ea->enter($__internal_37a6f8ff6fd0079e3e36c224c715c392ca8e12879a18b4d25523ae72198029ea_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "s4smitheVitrineBundle::footer.html.twig"));
 
-        // line 1
-        echo "<!--
-\tFichier : footer.html.twing
-\tAuteur : Emmanuel SMITH
-\tCreation : 12/02/2016
-\tModification :
-\t\t> 12/02/2016\t\tMise en place du footer pour le Template
-
-\tPieds de page par défaut des toutes les pages
--->
-
+        // line 10
+        echo "
 ";
         // line 11
         $this->displayBlock('footer', $context, $blocks);
         
-        $__internal_79b0f366e279ea0b3c4254dd8b62f3c3023bff1055011ddb17e8e3af982db3bb->leave($__internal_79b0f366e279ea0b3c4254dd8b62f3c3023bff1055011ddb17e8e3af982db3bb_prof);
+        $__internal_37a6f8ff6fd0079e3e36c224c715c392ca8e12879a18b4d25523ae72198029ea->leave($__internal_37a6f8ff6fd0079e3e36c224c715c392ca8e12879a18b4d25523ae72198029ea_prof);
 
     }
 
     public function block_footer($context, array $blocks = array())
     {
-        $__internal_9dbee42c2a3acc78d681b90beb7cc5d1aa19f96fe7e8861ae760026c1ba5d63b = $this->env->getExtension("native_profiler");
-        $__internal_9dbee42c2a3acc78d681b90beb7cc5d1aa19f96fe7e8861ae760026c1ba5d63b->enter($__internal_9dbee42c2a3acc78d681b90beb7cc5d1aa19f96fe7e8861ae760026c1ba5d63b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "footer"));
+        $__internal_c47c4cb646452fa969e77ce2387506a52c13cedc3f4e964b1c7f6369bdd01b61 = $this->env->getExtension("native_profiler");
+        $__internal_c47c4cb646452fa969e77ce2387506a52c13cedc3f4e964b1c7f6369bdd01b61->enter($__internal_c47c4cb646452fa969e77ce2387506a52c13cedc3f4e964b1c7f6369bdd01b61_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "footer"));
 
         // line 12
         echo "\t<footer class=\"page-footer\" if=\"footer\">
@@ -120,7 +111,7 @@ class __TwigTemplate_8bfcb8a46c694736a92ea0a6e083ccfed975a24151e44efb579a7a137d6
 \t</footer>
 ";
         
-        $__internal_9dbee42c2a3acc78d681b90beb7cc5d1aa19f96fe7e8861ae760026c1ba5d63b->leave($__internal_9dbee42c2a3acc78d681b90beb7cc5d1aa19f96fe7e8861ae760026c1ba5d63b_prof);
+        $__internal_c47c4cb646452fa969e77ce2387506a52c13cedc3f4e964b1c7f6369bdd01b61->leave($__internal_c47c4cb646452fa969e77ce2387506a52c13cedc3f4e964b1c7f6369bdd01b61_prof);
 
     }
 
@@ -131,10 +122,10 @@ class __TwigTemplate_8bfcb8a46c694736a92ea0a6e083ccfed975a24151e44efb579a7a137d6
 
     public function getDebugInfo()
     {
-        return array (  47 => 12,  35 => 11,  23 => 1,);
+        return array (  38 => 12,  26 => 11,  23 => 10,);
     }
 }
-/* <!--*/
+/* {# */
 /* 	Fichier : footer.html.twing*/
 /* 	Auteur : Emmanuel SMITH*/
 /* 	Creation : 12/02/2016*/
@@ -142,7 +133,7 @@ class __TwigTemplate_8bfcb8a46c694736a92ea0a6e083ccfed975a24151e44efb579a7a137d6
 /* 		> 12/02/2016		Mise en place du footer pour le Template*/
 /* */
 /* 	Pieds de page par défaut des toutes les pages*/
-/* -->*/
+/* #}*/
 /* */
 /* {% block footer %}*/
 /* 	<footer class="page-footer" if="footer">*/
