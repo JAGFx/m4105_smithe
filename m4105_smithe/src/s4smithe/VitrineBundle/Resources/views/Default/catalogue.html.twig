@@ -12,13 +12,7 @@
 {% extends "s4smitheVitrineBundle::layout.html.twig" %}
 
 {% block linkFollowing %}
-	<li class="active">Categorie</li>
-{% endblock %}
-
-{% block categoriesList %}
-	{% for cat in categories %}
-		<a href="{{ path('s4smithe_vitrine_articlesParCategorie', {catId: cat.id}) }}" class="list-group-item">{{ cat.name }}</a>
-	{% endfor %}
+	<li class="active">Catalogue</li>
 {% endblock %}
 
 {% block content %}

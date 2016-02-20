@@ -23,26 +23,22 @@
 
 				<!--Second column-->
 				<div class="col-md-2 col-md-offset-1">
-					<p class="column-title white-text">USEFUL LINKS</p>
+					<p class="column-title white-text">Sitemap</p>
 					<ul>
-						<li><a href="http://mdbootstrap.com/material-design-for-bootstrap/">About MDB</a></li>
-						<li><a href="http://mdbootstrap.com/forums/forum/support/">Suport</a></li>
-						<li><a href="http://mdbootstrap.com/forums/forum/bugs/">Bug Report</a></li>
-						<li><a href="http://mdbootstrap.com/wp-content/uploads/2015/09/MDB-License.pdf">License</a></li>
+						<li><a href="{{ path('s4smithe_vitrine_homepage') }}">Accueil</a></li>
+						<li><a href="{{ path('s4smithe_vitrine_mentions') }}">Mentions</a></li>
+						<li><a href="{{ path('s4smithe_vitrine_catalogue') }}">Catalogue</a></li>
 					</ul>
 				</div>
 				<!--/.Second column-->
 
 				<!--Third column-->
 				<div class="col-md-2">
-					<p class="column-title white-text">MDB Free Popular</p>
+					<p class="column-title white-text">Catégories</p>
 					<ul>
-						<li><a href="http://mdbootstrap.com/templates/">Templates</a></li>
-						<li><a href="http://mdbootstrap.com/css/animations/">Animations</a></li>
-						<li><a href="http://mdbootstrap.com/components/forms/">Forms</a></li>
-						<li><a href="http://mdbootstrap.com/javascript/carousel/">Carousel</a></li>
-						<li><a href="http://mdbootstrap.com/components/buttons/">Buttons</a></li>
-						<li><a href="http://mdbootstrap.com/javascript/parallax/">Parallax</a></li>
+						{% for cat in categories %}
+							<li><a href="{{ path('s4smithe_vitrine_articlesParCategorie', {catId: cat.id}) }}">{{ cat.name }}</a></li>
+						{% endfor %}
 					</ul>
 				</div>
 				<!--/.Third column-->
@@ -65,7 +61,6 @@
 				<!--Fifth column-->
 				<div class="col-md-2 text-center">
 					<p class="column-title white-text">SOCIAL MEDIA</p>
-
 					<a target="_blank" href="https://www.facebook.com/mdbootstrap" class="btn-floating btn-large fb-bg waves-effect waves-light"><i class="fa fa-facebook"> </i></a>
 					<a target="_blank" href="https://twitter.com/MDBootstrap" class="btn-floating btn-large tw-bg waves-effect waves-light"><i class="fa fa-twitter"> </i></a>
 					<a target="_blank" href="https://plus.google.com/u/0/b/107863090883699620484/107863090883699620484/posts" class="btn-floating btn-large gplus-bg waves-effect waves-light"><i class="fa fa-google-plus"> </i></a>
@@ -78,7 +73,7 @@
 		<!--Coprytights-->
 		<div class="footer-copyright text-center rgba-black-light">
 			<div class="container-fluid">
-				© 2015 Copyright: <a href="http://www.MDBootstrap.com"> MDBootstrap.com </a>
+				© 2016 Copyright: <a href="{{ path('s4smithe_vitrine_homepage') }}"> {{ sfNameShop }} </a>
 			</div>
 		</div>
 		<!--/.Coprytights-->

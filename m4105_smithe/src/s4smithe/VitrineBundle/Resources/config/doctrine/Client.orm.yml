@@ -1,21 +1,30 @@
-# src/s4XX/VitrineBundle/Resources/config/doctrine/Category.orm.yml
 s4smithe\VitrineBundle\Entity\Client:
-	type: entity
-	id:
-		id:
-			type: integer
-			generator: { strategy: AUTO }
-	fields:
-		name:
-			type: string
-			length: 100
-		mail:
-			type: string
-			length: 100
-		address:
-			type: text
-			length: 100
-	oneToMany:						# Dans l’entité Category on ajoute un champ
-		products:					# products qui permet d’associer à une Category
-			targetEntity: Product		# toutes les entités Products dont le champ
-			mappedBy: category		# category pointe vers cette entité.
+    type: entity
+    table: null
+    repositoryClass: s4smithe\VitrineBundle\Repository\ClientRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '255'
+        mail:
+            type: string
+            length: '255'
+        address:
+            type: text
+        tel:
+            type: string
+            length: '10'
+        dateBirthday:
+            type: datetime
+            
+    oneToMany:                        # Dans l’entité Category on ajoute un champ
+        commande:                     # products qui permet d’associer à une Category
+             targetEntity: Commande    # toutes les entités Products dont le champ
+             mappedBy: client       # category pointe vers cette entité.
+    lifecycleCallbacks: {  }

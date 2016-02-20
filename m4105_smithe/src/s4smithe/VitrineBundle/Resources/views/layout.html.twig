@@ -11,13 +11,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Hello</title>
+		<title>{{ sfNameShop }}</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 		
 		<link href="{{ asset('bundles/s4smithevitrine/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
 		<link href="{{ asset('bundles/s4smithevitrine/bootstrap/css/bootstrap-theme-cust.min.css') }}" rel="stylesheet" type="text/css"/>
+		<link href="{{ asset('bundles/s4smithevitrine/sfStore.css') }}" rel="stylesheet" type="text/css"/>
+		<link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 		{% include "s4smitheVitrineBundle::header.html.twig" %}
@@ -30,9 +32,12 @@
 					{% endblock %}
 				</ol>
 				<div class="col-md-3">
-					<p class="lead">Shop Name</p>
+					<p class="lead">{{ sfNameShop }}</p>
 					<div class="list-group">
 						{% block categoriesList %}
+							{% for cat in categories %}
+								<a href="{{ path('s4smithe_vitrine_articlesParCategorie', {catId: cat.id}) }}" class="list-group-item">{{ cat.name }}</a>
+							{% endfor %}
 						{% endblock %}
 					</div>
 				</div>

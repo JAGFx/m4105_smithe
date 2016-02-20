@@ -1,21 +1,21 @@
 # src/s4XX/VitrineBundle/Resources/config/doctrine/Category.orm.yml
 s4smithe\VitrineBundle\Entity\Commande:
-	type: entity
-	id:
-		id:
-			type: integer
-			generator: { strategy: AUTO }
-	fields:
-		date:
-			type: timestemp
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        date:
+            type: datetime
                
-		etat:
-			type: boolean
+        etat:
+            type: boolean
 
-	manyToOne:						 # Dans l’entité Product on ajoute un champ
-		client:						  # category qui pointe vers une entité Category
-			targetEntity: Client			# category_id sera, dans la table, le nom de la clé
-			inversedBy: products			# étrangère qui référence le champ id d’une
-			joinColumn:					# Category
-				name: client_id
-				referencedColumnName: id
+    manyToOne:						 # Dans l’entité Product on ajoute un champ
+        client:						  # category qui pointe vers une entité Category
+            targetEntity: Client			# category_id sera, dans la table, le nom de la clé
+            inversedBy: products			# étrangère qui référence le champ id d’une
+            joinColumn:					# Category
+                name: client_id
+                referencedColumnName: id

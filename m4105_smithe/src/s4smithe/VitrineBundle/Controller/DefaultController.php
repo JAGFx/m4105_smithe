@@ -19,14 +19,50 @@
 
 	class DefaultController extends Controller {
 
-		public function indexAction() {
+		public function indexAction($name) {
+			$categories = $this->findAllCtge();
 			
-
-			return $this->render('s4smitheVitrineBundle:Default:catalogue.html.twig', array(
-				'produits' => $this->findAllProduct(),
-				'categories' => $this->findAllCtge()
+			return $this->render('s4smitheVitrineBundle:Default:index.html.twig', array(
+				'name' => $name,
+				'categories' => $categories
 			));
 		}
+		
+		public function catalogueAction() {
+			$produits = $this->findAllProduct();
+			$categories = $this->findAllCtge();
+
+			return $this->render('s4smitheVitrineBundle:Default:catalogue.html.twig', array(
+				'produits' => $produits,
+				'categories' => $categories
+			));
+		}
+		
+		public function mentionsAction() {
+			$categories = $this->findAllCtge();
+			
+			return $this->render('s4smitheVitrineBundle:Default:mentions.html.twig', array(
+				'categories' => $categories
+			));
+		}
+		
+		public function articlesParCategorieAction( $catId ) {
+			$catID = $this->findCtge($catId);
+			$produits = $catID->getProducts();
+			$categories = $this->findAllCtge();
+			
+			return $this->render('s4smitheVitrineBundle:Default:articlesParCategorie.html.twig', array(
+				'categorie' => $catID, 
+				'categories' => $categories,
+				'produits' => $produits)
+			);
+		}
+		
+		
+		
+		
+		
+		
 
 		public function addProduct() {
 			$product = new Product(); // La classe Product créée par l’ORM contient des getters et des setters
@@ -90,24 +126,6 @@
 			}
 			
 			return $ctge;
-		}
-
-		
-		
-		public function mentionsAction() {
-			return $this->render('s4smitheVitrineBundle:Default:mentions.html.twig');
-		}
-		
-		public function articlesParCategorieAction( $catId ) {
-			$catID = $this->findCtge($catId);
-			$produits = $catID->getProducts();
-			$categories = $this->findAllCtge();
-			
-			return $this->render('s4smitheVitrineBundle:Default:articlesParCategorie.html.twig', array(
-				'categorie' => $catID, 
-				'categories' => $categories,
-				'produits' => $produits)
-			);
 		}
 
 	}

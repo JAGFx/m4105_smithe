@@ -1,0 +1,20 @@
+{#
+	Fichier : Default/index.html.twing
+	Auteur : Emmanuel SMITH
+	Creation : 09/02/2016
+	Modification :
+		> 09/02/2016		Mise en place de l'index
+		> 12/02/2016		Ajout template + catalogue statique
+
+	Page d'accueil de l'app web e-commerce
+#}
+
+{% extends "s4smitheVitrineBundle::layout.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active">Categorie</li>
+{% endblock %}
+
+{% block content %}
+	Bonjour à topi {{ name }} !
+{% endblock %}
