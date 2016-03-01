@@ -1,0 +1,18 @@
+<div class="col-sm-4 col-lg-6 col-md-6">
+	
+	<div class="thumbnail">
+		<img src="http://placehold.it/420x200" alt="">
+		<div class="caption">
+			<h4 class="pull-right">{{ item.price }}€</h4>
+			<h4><a href="#">{{ item.name }}</a>
+			</h4>
+			<p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+		</div>
+		<div class="ratings">
+			<p class="pull-right">15 reviews</p>
+			<p>
+				<a class="btn btn-primary" href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.id}) }}">Ajouter au panier</a>
+			</p>
+		</div>
+	</div>
+</div>

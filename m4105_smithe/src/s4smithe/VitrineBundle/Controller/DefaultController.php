@@ -20,42 +20,14 @@
 	class DefaultController extends Controller {
 
 		public function indexAction($name) {
-			$categories = $this->findAllCtge();
 			
 			return $this->render('s4smitheVitrineBundle:Default:index.html.twig', array(
-				'name' => $name,
-				'categories' => $categories
+				'name' => $name
 			));
 		}
 		
-		public function catalogueAction() {
-			$produits = $this->findAllProduct();
-			$categories = $this->findAllCtge();
-
-			return $this->render('s4smitheVitrineBundle:Default:catalogue.html.twig', array(
-				'produits' => $produits,
-				'categories' => $categories
-			));
-		}
-		
-		public function mentionsAction() {
-			$categories = $this->findAllCtge();
-			
-			return $this->render('s4smitheVitrineBundle:Default:mentions.html.twig', array(
-				'categories' => $categories
-			));
-		}
-		
-		public function articlesParCategorieAction( $catId ) {
-			$catID = $this->findCtge($catId);
-			$produits = $catID->getProducts();
-			$categories = $this->findAllCtge();
-			
-			return $this->render('s4smitheVitrineBundle:Default:articlesParCategorie.html.twig', array(
-				'categorie' => $catID, 
-				'categories' => $categories,
-				'produits' => $produits)
-			);
+		public function mentionsAction() {			
+			return $this->render('s4smitheVitrineBundle:Default:mentions.html.twig');
 		}
 		
 		
@@ -90,42 +62,6 @@
 			$product->setName('New product name!');
 			$em->flush();
 			return $this->redirect($this->generateUrl('homepage'));
-		}
-
-		public function findAllProduct() {
-			$product = $this->getDoctrine()->getManager()
-				->getRepository('s4smitheVitrineBundle:Product')
-				->findAll();
-			
-			if (!$product) {
-				throw $this->createNotFoundException('Produit non trouvé avec id ');
-			}
-			
-			return $product;
-		}
-		
-		public function findAllCtge(){
-			$ctges = $this->getDoctrine()->getManager()
-				->getRepository('s4smitheVitrineBundle:Category')
-				->findAll();
-			
-			if (!$ctges) {
-				throw $this->createNotFoundException('Produit non trouvé avec id ');
-			}
-			
-			return $ctges;
-		}
-		
-		public function findCtge($id){
-			$ctge = $this->getDoctrine()->getManager()
-				->getRepository('s4smitheVitrineBundle:Category')
-				->findOneById($id);
-			
-			if (!$ctge) {
-				throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
-			}
-			
-			return $ctge;
 		}
 
 	}

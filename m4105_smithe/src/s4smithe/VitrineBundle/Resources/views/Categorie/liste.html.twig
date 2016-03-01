@@ -1,0 +1,3 @@
+{% for cat in categories %}
+	<a href="{{ path('s4smithe_vitrine_articlesParCategorie', {catId: cat.id}) }}" class="list-group-item">{{ cat.name }}</a>
+{% endfor %}

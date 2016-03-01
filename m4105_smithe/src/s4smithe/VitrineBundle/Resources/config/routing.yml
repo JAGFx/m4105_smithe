@@ -10,13 +10,33 @@ s4smithe_vitrine_mentions:
      
 s4smithe_vitrine_catalogue:
      path:     /catalogue
-     defaults: { _controller: s4smitheVitrineBundle:Default:catalogue}
+     defaults: { _controller: s4smitheVitrineBundle:Catalogue:index}
      
 s4smithe_vitrine_articlesParCategorie:
      path:     /articlesParCategorie/{catId}
-     defaults: { _controller: s4smitheVitrineBundle:Default:articlesParCategorie, catId: 1 }
+     defaults: { _controller: s4smitheVitrineBundle:Categorie:articlesParCategorie, catId: 1 }
      requirements:
           catId:	\d+
+          
+          
+          
+          
+s4smithe_vitrine_contenuPanier:
+     path:     /contenuPanier
+     defaults: { _controller: s4smitheVitrineBundle:Panier:contenuPanier}
+     
+s4smithe_vitrine_addArticlePanier:
+     path:     /addArticlePanier/{articleId}/{qte}
+     defaults: { _controller: s4smitheVitrineBundle:Panier:ajouterUnArticle, articleId: -1, qte: 1}
+     requirements:
+          articleId: \d+
+          qte: \d+
+
+s4smithe_vitrine_emptyPanier:
+     path:     /emptyPanier
+     defaults: { _controller: s4smitheVitrineBundle:Panier:emptyPanier}
+     
+     
 
 s4smithe_vitrine_manager:
      path:     /manager

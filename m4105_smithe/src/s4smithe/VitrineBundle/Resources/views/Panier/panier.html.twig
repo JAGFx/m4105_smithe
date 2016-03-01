@@ -1,0 +1,46 @@
+{#
+	Fichier : Default/index.html.twing
+	Auteur : Emmanuel SMITH
+	Creation : 09/02/2016
+	Modification :
+		> 09/02/2016		Mise en place de l'index
+		> 12/02/2016		Ajout template + catalogue statique
+
+	Page d'accueil de l'app web e-commerce
+#}
+
+{% extends "s4smitheVitrineBundle::layout.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active">Panier</li>
+{% endblock %}
+
+{% block content %}
+	<table class="table table-striped">
+		<tr>
+			<th>Article</th>
+			<th>Qte</th>
+			<th>Prix Unitaire</th>
+			<th>Sous-total</th>
+		</tr>
+		
+		{% if panier|length > 0 %}
+			{% for item in panier %}
+				<tr>
+					<td>{{ item.name }}</td>
+					<td>{{ item.qte }}</td>
+					<td>{{ item.prixU }}</td>
+					<td>{{ item.qte * item.prixU }}</td>
+				</tr>
+			{% endfor %}
+			<tr>
+				<td colspan="4">{{ total }}</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="4"> Pas d'article dans le panier</td>
+			</tr>
+		{% endif %}
+
+	</table>
+{% endblock %}

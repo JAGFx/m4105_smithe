@@ -36,9 +36,7 @@
 				<div class="col-md-2">
 					<p class="column-title white-text">Catégories</p>
 					<ul>
-						{% for cat in categories %}
-							<li><a href="{{ path('s4smithe_vitrine_articlesParCategorie', {catId: cat.id}) }}">{{ cat.name }}</a></li>
-						{% endfor %}
+						{{ render( controller('s4smitheVitrineBundle:Categorie:listeCategorieFooter') ) }}
 					</ul>
 				</div>
 				<!--/.Third column-->
