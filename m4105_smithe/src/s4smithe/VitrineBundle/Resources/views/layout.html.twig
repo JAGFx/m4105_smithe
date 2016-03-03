@@ -18,6 +18,7 @@
 		
 		<link href="{{ asset('bundles/s4smithevitrine/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
 		<link href="{{ asset('bundles/s4smithevitrine/bootstrap/css/bootstrap-theme-cust.min.css') }}" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link href="{{ asset('bundles/s4smithevitrine/sfStore.css') }}" rel="stylesheet" type="text/css"/>
 		<link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
 	</head>
@@ -32,7 +33,7 @@
 					{% endblock %}
 				</ol>
 				<div class="col-md-3">
-					<p class="lead">{{ sfNameShop }}</p>
+					<p class="lead">Catégories</p>
 					<div class="list-group">
 						{{ render( controller('s4smitheVitrineBundle:Categorie:listeCategorie') ) }}
 					</div>
@@ -40,6 +41,7 @@
 
 				<div class="col-md-9">
 					<div class="row">
+						<h3 id="masterTitle">{{ namePage }}</h3>
 						{% block content %}
 						{% endblock %}
 					</div>

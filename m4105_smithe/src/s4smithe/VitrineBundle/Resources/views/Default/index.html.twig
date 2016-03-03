@@ -9,6 +9,8 @@
 	Page d'accueil de l'app web e-commerce
 #}
 
+{% set namePage = name %}
+{% set typePage = namePage %}
 {% extends "s4smitheVitrineBundle::layout.html.twig" %}
 
 {% block linkFollowing %}
@@ -16,5 +18,5 @@
 {% endblock %}
 
 {% block content %}
-	Bonjour à topi {{ name }} !
+	Bonjour à toi {{ name }} !
 {% endblock %}

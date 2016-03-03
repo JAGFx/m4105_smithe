@@ -12,7 +12,7 @@
 		/**
 		 * @var array
 		 */
-		private $articles;
+		private $articles = array();
 
 
 		
@@ -22,13 +22,16 @@
 		 * @param string $articleID
 		 * @param int $qte
 		 */
-		public function addArticle( $articleID, $qte = 1 ) {
-			$this->articles[] = array(
-				'id' => $articleID,
-				/*'name' => $article->getName(),
-				'prixU' => $article->getPrice(),*/
-				'qte' => $qte
-			);
+		public function addArticle( $articleID, $qte ) {
+			if(key_exists($articleID, $this->articles) ){
+				$this->articles[ $articleID ]['qte'] += $qte;
+				
+			} else {
+				$this->articles[ $articleID ] = array(
+					'id' => (int) $articleID,
+					'qte' => (int) $qte
+				);
+			}
 		}
 		
 		/**
@@ -36,8 +39,23 @@
 		 *
 		 * @param string $articleID
 		 */
-		public function removeArticle( $articleID ) {
-			unset( $this->articles[ $articleID ] );
+		public function removeOneArticle( $articleID, $qte ) {
+			if( key_exists($articleID, $this->articles) && $this->articles[ $articleID ]['qte'] > 1 ){
+				$this->articles[ $articleID ]['qte'] -= $qte;
+				
+			} else {
+				unset( $this->articles[ $articleID ] );
+			}
+		}
+		
+		/**
+		 * remove article
+		 *
+		 * @param string $articleID
+		 */
+		public function removeArticles( $articleID ) {
+			if( key_exists($articleID, $this->articles) )
+				unset( $this->articles[ $articleID ] );
 		}
 		
 		public function clearPanier(){
@@ -54,7 +72,12 @@
 		}
 		
 		public function getNbArticle(){
-			return count($this->articles);
+			$nb = 0;
+			
+			foreach ($this->articles as $artice)
+				$nb += $artice['qte'];
+			
+			return $nb;
 		}
 
 	}

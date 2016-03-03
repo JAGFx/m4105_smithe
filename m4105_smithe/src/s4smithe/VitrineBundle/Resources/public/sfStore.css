@@ -1,14 +1,187 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 20 févr. 2016, 12:27:41
-    Author     : emsm
-*/
+	/*
+	To change this license header, choose License Headers in Project Properties.
+	To change this template file, choose Tools | Templates
+	and open the template in the editor.
+	*/
+	/* 
+	    Created on : 20 févr. 2016, 12:27:41
+	    Author     : emsm
+	*/
 
-footer.page-footer {
-	background-color: #494e59;
-	padding: 15px 0;
-}
+	header nav #panier{
+
+	}
+
+
+
+	/*--------------------------------------------------------------------
+	---- Catalogue
+	--------------------------------------------------------------------*/
+	#masterTitle { margin: 0 15px 15px 15px; }
+	
+	@media (max-width: 768px) {
+		.thumbnail .caption p { text-align: left; }
+	}
+	
+	@media (min-width: 768px) {
+		.thumbnail .caption p { text-align: justify; text-align-last: center;}
+	}
+
+	
+	.thumbnail { 
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+		border-radius: 0;
+		padding: 0;
+	}
+	.thumbnail .cover { position: relative; overflow: hidden; }
+	.thumbnail .caption { padding: 0 20px 15px 20px; }
+	.thumbnail .caption h3, .thumbnail .caption h4 {
+		border-bottom: 1px #5fc7ed solid;
+		font-size: 17px;
+		text-transform: uppercase;
+		text-align: center;
+		margin: 5px auto 10px auto;
+		padding: 10px 0;
+	}
+	.thumbnail .caption h4{
+		padding: 10px 20px 10px 10px;
+		font-size: .95em;
+		padding-left: 0;
+		text-align: left;
+		display: inline-block;
+	}
+	.thumbnail .cover img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin: 0;
+	}
+	.thumbnail .cover .labelThumb{
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	.thumbnail .cover .labelThumb .label{
+		border-radius: 0;
+		font-size: .8em;
+		font-style: normal;
+		padding: 7px 15px;
+		text-transform: uppercase;
+		display: inline-block;
+		text-shadow: none;
+	}
+	.thumbnail .labelThumb > .addCart { display: inline-block; }
+	.thumbnail .labelThumb > .addCart > a{
+		font-size: .9em;
+		padding: 0px 10px 1px 10px;
+		background: #2E3138;
+		transition: all .1s ease-in;
+	}
+	.thumbnail .labelThumb > .addCart > a:hover{
+		background: #48BFEA;
+		transition: all .2s ease-in-out;
+	}
+
+
+
+	/*--------------------------------------------------------------------
+	---- Panier
+	--------------------------------------------------------------------*/
+
+	.table .littleTD { width: 110px; }
+	.text-small { font-size: .8em; }
+	.table a, table a { text-decoration: none; }
+
+	.badge.badge-blue{
+		background: #5fc7ed;
+		color: #2E3138;
+		font-weight: normal;
+	}
+	.badge.badge-blue .fa { font-size: .7em; }
+
+	#panierList { font-size: 1em; }
+
+	#panierList tr:first-child{ 
+		color: #5fc7ed;
+		border-bottom: solid 2px #5fc7ed;
+		padding-bottom: 7px;
+		padding-top: 7px;
+		font-weight: bold;
+	}
+	#panierList tr:not(:first-child) > td{
+		padding-top: 7px;
+		padding-bottom: 7px;
+		background: #494e59;
+		border: 0;
+		vertical-align: middle;
+		border-bottom: solid 1px rgba(255, 255, 255, .1);
+	}
+	#panierList tr:nth-last-child(2) > td:not(:last-child) { border-color: rgba(255, 255, 255, .2); }
+	#panierList tr:nth-last-child(2) > td:nth-last-child(2){ border-color: #5fc7ed; }
+	#panierList tr:last-child > td{ border: 0; }
+
+	#panierList .qte { width: 90px; }
+
+	#panierList .subInfoPanier { font-style: italic; color: rgba(255, 255, 255, .4); font-size: .9em; }
+
+	#panierList .actionItem { width: 60px; }
+	#panierList .actionItem > a.badge.badge-blue{
+		background: #2E3138;
+		color: rgba(255, 255, 255, 0.3);
+		transition: all .1s ease-in;
+	}
+	#panierList .actionItem > a.badge.badge-blue:hover{
+		background: #5fc7ed;
+		color: #1f1b1a;
+		transition: all .2s ease-in-out;
+	}
+
+	#panierList .total { color: #5fc7ed; }
+	
+	
+	
+	
+	
+	
+	/*--------------------------------------------------------------------
+	---- Footer
+	--------------------------------------------------------------------*/
+	
+	footer {
+		background-color: #494e59;
+		padding: 20px 0 0 0;
+	}
+	
+	footer .collumn > h4 { 
+		font-variant: small-caps;
+		border-bottom: solid 1px #5fc7ed;
+		padding: 10px 20px;
+		margin: 0;
+		color: #5fc7ed;
+	}
+	footer .collumn > p {
+		margin: 0;
+		padding: 10px 35px;
+	}
+	footer .collumn > ul {
+		margin-bottom: 0;
+		list-style: none;
+		padding: 0;
+	}
+	footer .collumn > ul > li > a { 
+		display: block;
+		padding: 10px 35px;
+		border-bottom: solid 1px rgba(255, 255, 255, .1);
+		color: rgba(255, 255, 255, .4);
+		transition: all .1s ease-in;		
+	}
+	footer .collumn > ul > li > a:hover{
+		color: #ebebeb;
+		transition: all .2s ease-in-out;
+	}
+	footer .collumn > ul > li:last-child > a { border: 0; }
+	footer .copyright{ padding: 35px; }

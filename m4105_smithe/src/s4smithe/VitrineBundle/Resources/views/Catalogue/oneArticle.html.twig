@@ -1,18 +1,19 @@
-<div class="col-sm-4 col-lg-6 col-md-6">
-	
+<div class="col-sm-4" id="catalogue">
 	<div class="thumbnail">
-		<img src="http://placehold.it/420x200" alt="">
-		<div class="caption">
-			<h4 class="pull-right">{{ item.price }}€</h4>
-			<h4><a href="#">{{ item.name }}</a>
+		<div class="cover">
+			<img src="http://placehold.it/420x300" alt="">
+			<h4 class="labelThumb">
+				<span class="label label-primary">{{ item.price }} €</span><!--
+				--><div class="addCart">
+					<a class="btn btn-primary btn-sm" href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.id}) }}" title="Ajouter au panier">
+						<span class="fa fa-cart-arrow-down"></span>
+					</a>
+				</div>
 			</h4>
-			<p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
 		</div>
-		<div class="ratings">
-			<p class="pull-right">15 reviews</p>
-			<p>
-				<a class="btn btn-primary" href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.id}) }}">Ajouter au panier</a>
-			</p>
+		<div class="caption">
+			<h3>{{ item.name }}</h3>
+			<p>{{ item.description }}</p>
 		</div>
 	</div>
 </div>

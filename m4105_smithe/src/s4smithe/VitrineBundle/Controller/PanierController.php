@@ -22,6 +22,9 @@
 			$panier = $this->getSessionPanier();
 			$articles = array();
 			
+			//var_dump(array_search(2, $panier->getArticles()));
+			//var_dump($panier->getArticles());
+			
 			if( !empty($panier->getArticles()) )
 				foreach ($panier->getArticles() as $item){
 					$article = $this->getDoctrine()->getManager()
@@ -29,15 +32,18 @@
 						->findOneById($item['id']);
 					
 					$articles[] = array(
+						'id' => $item['id'],
 						'name' => $article->getName(),
 						'qte' => $item['qte'],
 						'prixU' => $article->getPrice(),
+						'ctge' => $article->getCategory()->getName()
 					);
 				}
 						
 			return $this->render('s4smitheVitrineBundle:Panier:panier.html.twig', array(
 				'panier' => $articles,
-				'total' => $this->getTotalPanier()
+				'total' => $this->getTotalPanier(),
+				'nbArticles' => $panier->getNbArticle()
 			));
 		}
 		
@@ -52,6 +58,26 @@
 			$panier = $this->getSessionPanier();
 			
 			$panier->addArticle( $articleId, $qte );
+			
+			$this->setSessionPanier($panier);
+			
+			return $this->redirect($this->generateUrl('s4smithe_vitrine_contenuPanier'));
+		}
+		
+		public function enleverUnArticleAction( $articleId, $qte ) {
+			$panier = $this->getSessionPanier();
+			
+			$panier->removeOneArticle( $articleId, $qte );
+			
+			$this->setSessionPanier($panier);
+			
+			return $this->redirect($this->generateUrl('s4smithe_vitrine_contenuPanier'));
+		}
+		
+		public function enleverArticlesAction( $articleId ) {
+			$panier = $this->getSessionPanier();
+			
+			$panier->removeArticles( $articleId );
 			
 			$this->setSessionPanier($panier);
 			

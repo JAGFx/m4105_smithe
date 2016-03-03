@@ -9,6 +9,8 @@
 	Page d'accueil de l'app web e-commerce
 #}
 
+{% set namePage = "Catalogue" %}
+{% set typePage = namePage %}
 {% extends "s4smitheVitrineBundle::layout.html.twig" %}
 
 {% block linkFollowing %}
@@ -17,26 +19,6 @@
 
 {% block content %}
 	{% for item in produits %}
-		<div class="col-sm-4 col-lg-6 col-md-6">
-			<div class="thumbnail">
-				<img src="http://placehold.it/420x200" alt="">
-				<div class="caption">
-					<h4 class="pull-right">{{ item.price }}€</h4>
-					<h4><a href="#">{{ item.name }}</a>
-					</h4>
-					<p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-				</div>
-				<div class="ratings">
-					<p class="pull-right">15 reviews</p>
-					<p>
-						<span class="glyphicon glyphicon-star"></span>
-						<span class="glyphicon glyphicon-star"></span>
-						<span class="glyphicon glyphicon-star"></span>
-						<span class="glyphicon glyphicon-star"></span>
-						<span class="glyphicon glyphicon-star"></span>
-					</p>
-				</div>
-			</div>
-		</div>
+		{% include "s4smitheVitrineBundle:Catalogue:oneArticle.html.twig" %}
 	{% endfor %}
 {% endblock %}	

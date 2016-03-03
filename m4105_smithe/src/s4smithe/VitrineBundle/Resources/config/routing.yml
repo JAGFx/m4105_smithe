@@ -22,18 +22,31 @@ s4smithe_vitrine_articlesParCategorie:
           
           
 s4smithe_vitrine_contenuPanier:
-     path:     /contenuPanier
+     path:     /panier/contenu
      defaults: { _controller: s4smitheVitrineBundle:Panier:contenuPanier}
      
 s4smithe_vitrine_addArticlePanier:
-     path:     /addArticlePanier/{articleId}/{qte}
+     path:     /panier/addArticle/{articleId}/{qte}
      defaults: { _controller: s4smitheVitrineBundle:Panier:ajouterUnArticle, articleId: -1, qte: 1}
      requirements:
           articleId: \d+
           qte: \d+
+          
+s4smithe_vitrine_removeOneArticlePanier:
+     path:     /panier/removeOneArticle/{articleId}/{qte}
+     defaults: { _controller: s4smitheVitrineBundle:Panier:enleverUnArticle, articleId: -1, qte: 1}
+     requirements:
+          articleId: \d+
+          qte: \d+
+
+s4smithe_vitrine_removeArticlesPanier:
+     path:     /panier/removeArticles/{articleId}
+     defaults: { _controller: s4smitheVitrineBundle:Panier:enleverArticles, articleId: -1}
+     requirements:
+          articleId: \d+
 
 s4smithe_vitrine_emptyPanier:
-     path:     /emptyPanier
+     path:     /panier/empty
      defaults: { _controller: s4smitheVitrineBundle:Panier:emptyPanier}
      
      

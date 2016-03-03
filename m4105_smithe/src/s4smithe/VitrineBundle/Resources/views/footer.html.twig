@@ -9,21 +9,23 @@
 #}
 
 {% block footer %}
-	<footer class="page-footer" if="footer">
+	<footer>
 		<!--Footer Content-->
 		<div class="container">
-			<div class="row center-on-small-only">
+			<div class="row">
 				<!--First column-->
-				<div class="col-md-3">
-					<p class="white-text center-on-small-only">GET STARTED</p>
-					<p class="white-text center-on-small-only">Register for free and start to create amazing things.</p>
-					<a href="http://mdbootstrap.com/material-design-for-bootstrap/" target="_blank" class="btn btn-danger  waves-effect waves-light"><i class="fa fa-download right"></i>Get started</a>
+				<div class="col-md-5 collumn">
+					<h4>GET STARTED</h4>
+					<p>
+						Register for free and start to create amazing things.<br/>
+						<a href="http://mdbootstrap.com/material-design-for-bootstrap/" target="_blank" class="btn btn-danger"><i class="fa fa-download right"></i>Get started</a>
+					</p>
 				</div>
 				<!--/.First column-->
 
 				<!--Second column-->
-				<div class="col-md-2 col-md-offset-1">
-					<p class="column-title white-text">Sitemap</p>
+				<div class="col-md-3 col-md-offset-1 collumn">
+					<h4>Sitemap</h4>
 					<ul>
 						<li><a href="{{ path('s4smithe_vitrine_homepage') }}">Accueil</a></li>
 						<li><a href="{{ path('s4smithe_vitrine_mentions') }}">Mentions</a></li>
@@ -33,46 +35,20 @@
 				<!--/.Second column-->
 
 				<!--Third column-->
-				<div class="col-md-2">
-					<p class="column-title white-text">Catégories</p>
+				<div class="col-md-3 collumn">
+					<h4>Catégories</h4>
 					<ul>
 						{{ render( controller('s4smitheVitrineBundle:Categorie:listeCategorieFooter') ) }}
 					</ul>
 				</div>
 				<!--/.Third column-->
-
-				<!--Fourth column-->
-				<div class="col-md-2">
-					<p class="column-title white-text">MDB Pro Popular</p>
-
-					<ul>
-						<li><a href="http://mdbootstrap.com/sets/e-commerce/">E-commerce Set</a></li>
-						<li><a href="http://mdbootstrap.com/sets/magazine/">Magazine Set</a></li>
-						<li><a href="http://mdbootstrap.com/components/cards/">Cards</a></li>
-						<li><a href="http://mdbootstrap.com/javascript/sidenav/">SideNav</a></li>
-						<li><a href="http://mdbootstrap.com/components/material-box/">MaterialBox</a></li>
-						<li><a href="http://mdbootstrap.com/components/social-buttons/">Social Buttons</a></li>
-					</ul>
-				</div>
-				<!--/.Fourth column-->
-
-				<!--Fifth column-->
-				<div class="col-md-2 text-center">
-					<p class="column-title white-text">SOCIAL MEDIA</p>
-					<a target="_blank" href="https://www.facebook.com/mdbootstrap" class="btn-floating btn-large fb-bg waves-effect waves-light"><i class="fa fa-facebook"> </i></a>
-					<a target="_blank" href="https://twitter.com/MDBootstrap" class="btn-floating btn-large tw-bg waves-effect waves-light"><i class="fa fa-twitter"> </i></a>
-					<a target="_blank" href="https://plus.google.com/u/0/b/107863090883699620484/107863090883699620484/posts" class="btn-floating btn-large gplus-bg waves-effect waves-light"><i class="fa fa-google-plus"> </i></a>
-				</div>
-				<!--/.Fifth column-->
 			</div>
 		</div>
 		<!--/.Footer Content-->
 
 		<!--Coprytights-->
-		<div class="footer-copyright text-center rgba-black-light">
-			<div class="container-fluid">
-				© 2016 Copyright: <a href="{{ path('s4smithe_vitrine_homepage') }}"> {{ sfNameShop }} </a>
-			</div>
+		<div class="container text-center copyright">
+			© 2016 Copyright: <a href="{{ path('s4smithe_vitrine_homepage') }}"> {{ sfNameShop }} </a>
 		</div>
 		<!--/.Coprytights-->
 	</footer>
