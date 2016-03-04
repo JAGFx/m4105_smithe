@@ -1,6 +1,7 @@
 # src/s4XX/VitrineBundle/Resources/config/doctrine/Category.orm.yml
 s4smithe\VitrineBundle\Entity\Category:
     type: entity
+    repositoryClass: s4smithe\VitrineBundle\Repository\CategoryRepository
     id:
         id:
             type: integer

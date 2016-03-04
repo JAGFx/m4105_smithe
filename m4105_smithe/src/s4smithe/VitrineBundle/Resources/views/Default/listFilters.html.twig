@@ -1,0 +1,19 @@
+<div>
+
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#categories" aria-controls="home" role="tab" data-toggle="tab">Categorie</a></li>
+		<li role="presentation"><a href="#marques" aria-controls="profile" role="tab" data-toggle="tab">Marque</a></li>
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="categories">
+			{{ render( controller('s4smitheVitrineBundle:Categorie:listeCategorie') ) }}
+		</div>
+		<div role="tabpanel" class="tab-pane" id="marques">
+			{{ render( controller('s4smitheVitrineBundle:Marque:listeMarque') ) }}
+		</div>
+	</div>
+
+</div>

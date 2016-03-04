@@ -1,9 +1,9 @@
-<div class="col-sm-4" id="catalogue">
+<div class="col-sm-4">
 	<div class="thumbnail">
 		<div class="cover">
 			<img src="http://placehold.it/420x300" alt="">
 			<h4 class="labelThumb">
-				<span class="label label-primary">{{ item.price }} €</span><!--
+				<span class="label label-primary">{{ item.price|number_format(2, ',', ' ') }} €</span><!--
 				--><div class="addCart">
 					<a class="btn btn-primary btn-sm" href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.id}) }}" title="Ajouter au panier">
 						<span class="fa fa-cart-arrow-down"></span>

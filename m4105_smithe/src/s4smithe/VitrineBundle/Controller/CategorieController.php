@@ -12,7 +12,6 @@
 	
 
 	namespace s4smithe\VitrineBundle\Controller;
-
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 	class CategorieController extends Controller {
@@ -20,7 +19,7 @@
 		public function listeCategorieAction() {
 			$categories = $this->findAllCtge();
 			
-			return $this->render('s4smitheVitrineBundle:Categorie:liste.html.twig', array(
+			return $this->render('s4smitheVitrineBundle:Categorie:listeCategorie.html.twig', array(
 				'categories' => $categories
 			));
 		}
@@ -34,13 +33,11 @@
 		}
 		
 		public function articlesParCategorieAction( $catId ) {
-			$catID = $this->findCtge($catId);
-			$produits = $catID->getProducts();
+			$catObj = $this->findCtge($catId);
 			
-			return $this->render('s4smitheVitrineBundle:Categorie:articlesParCategorie.html.twig', array(
-				'categorie' => $catID, 
-				'produits' => $produits)
-			);
+			return $this->render('s4smitheVitrineBundle:Default:articlesParFiltre.html.twig', array(
+				'filter' => $catObj
+			));
 		}
 		
 		
@@ -50,7 +47,7 @@
 		public function findAllCtge(){
 			$ctges = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Category')
-				->findAll();
+				->findAllOrderedByName();
 			
 			if (!$ctges) {
 				throw $this->createNotFoundException('Produit non trouvé avec id ');

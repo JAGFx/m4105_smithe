@@ -32,11 +32,8 @@
 						->findOneById($item['id']);
 					
 					$articles[] = array(
-						'id' => $item['id'],
-						'name' => $article->getName(),
-						'qte' => $item['qte'],
-						'prixU' => $article->getPrice(),
-						'ctge' => $article->getCategory()->getName()
+						'article' => $article,
+						'qte' => $item['qte']
 					);
 				}
 						

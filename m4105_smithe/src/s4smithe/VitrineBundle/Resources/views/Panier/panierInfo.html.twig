@@ -1,6 +1,6 @@
 <li>
 	<a id="panier" href="{{ path('s4smithe_vitrine_contenuPanier') }}" data-toggle="tooltip" data-placement="left" title="{{ nbArticle }} article(s)">
 		<span class="glyphicon glyphicon-shopping-cart"></span>
-		<span class="badge">{{ total }}€</span>
+		<span class="badge">{{ total|number_format(2, ',', ' ') }}€</span>
 	</a>
 </li>

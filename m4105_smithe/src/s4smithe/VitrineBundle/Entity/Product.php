@@ -127,5 +127,32 @@
 			return $this->category;
 		}
 
-	}
-	
+    /**
+     * @var \s4smithe\VitrineBundle\Entity\Marque
+     */
+    private $marque;
+
+
+    /**
+     * Set marque
+     *
+     * @param \s4smithe\VitrineBundle\Entity\Marque $marque
+     * @return Product
+     */
+    public function setMarque(\s4smithe\VitrineBundle\Entity\Marque $marque = null)
+    {
+        $this->marque = $marque;
+    
+        return $this;
+    }
+
+    /**
+     * Get marque
+     *
+     * @return \s4smithe\VitrineBundle\Entity\Marque 
+     */
+    public function getMarque()
+    {
+        return $this->marque;
+    }
+}

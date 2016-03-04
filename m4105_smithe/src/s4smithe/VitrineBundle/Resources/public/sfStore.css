@@ -8,10 +8,25 @@
 	    Author     : emsm
 	*/
 
+	/*--------------------------------------------------------------------
+	---- Catalogue
+	--------------------------------------------------------------------*/
 	header nav #panier{
 
 	}
-
+	
+	.list-group { background: #424751; padding: 0; }
+	.list-group .tab-pane > a {
+		padding: 10px 15px;
+		border-top: 0;
+		font-size: 16px;
+		border-left: 2px transparent solid;
+		border-bottom: solid 1px rgba(255, 255, 255, .1);
+	}
+	.list-group .tab-pane > a:last-child{ border-bottom: 0; }
+	.list-group .tab-pane > a:hover { background: #2E3138; border-left-color: #5FC7ED; }
+	
+	
 
 
 	/*--------------------------------------------------------------------
@@ -103,7 +118,7 @@
 	}
 	.badge.badge-blue .fa { font-size: .7em; }
 
-	#panierList { font-size: 1em; }
+	#panierList { font-size: 1em; margin-left: 15px; }
 
 	#panierList tr:first-child{ 
 		color: #5fc7ed;

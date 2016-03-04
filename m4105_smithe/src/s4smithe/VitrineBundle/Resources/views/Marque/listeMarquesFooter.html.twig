@@ -1,0 +1,3 @@
+{% for mark in marques %}
+	<li><a href="{{ path('s4smithe_vitrine_articlesParMarque', {markId: mark.id}) }}">{{ mark.name }}</a></li>
+{% endfor %}

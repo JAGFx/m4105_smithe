@@ -12,7 +12,6 @@
 	
 
 	namespace s4smithe\VitrineBundle\Controller;
-
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 	class CatalogueController extends Controller {
@@ -31,7 +30,7 @@
 		public function findAllProduct() {
 			$product = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Product')
-				->findAll();
+				->findAllOrderedByName();
 			
 			if (!$product) {
 				throw $this->createNotFoundException('Produit non trouvé avec id ');

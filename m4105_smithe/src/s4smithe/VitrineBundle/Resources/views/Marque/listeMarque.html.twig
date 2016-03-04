@@ -1,0 +1,3 @@
+{% for mark in marques %}
+	<a href="{{ path('s4smithe_vitrine_articlesParMarque', {markId: mark.id}) }}" class="list-group-item">{{ mark.name }}</a>
+{% endfor %}

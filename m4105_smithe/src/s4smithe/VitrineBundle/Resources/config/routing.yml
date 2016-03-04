@@ -17,7 +17,12 @@ s4smithe_vitrine_articlesParCategorie:
      defaults: { _controller: s4smitheVitrineBundle:Categorie:articlesParCategorie, catId: 1 }
      requirements:
           catId:	\d+
-          
+
+s4smithe_vitrine_articlesParMarque:
+     path:     /articlesParMarque/{markId}
+     defaults: { _controller: s4smitheVitrineBundle:Marque:articlesParMarque, markId: 0 }
+     requirements:
+          markId:	\d+
           
           
           
@@ -27,21 +32,21 @@ s4smithe_vitrine_contenuPanier:
      
 s4smithe_vitrine_addArticlePanier:
      path:     /panier/addArticle/{articleId}/{qte}
-     defaults: { _controller: s4smitheVitrineBundle:Panier:ajouterUnArticle, articleId: -1, qte: 1}
+     defaults: { _controller: s4smitheVitrineBundle:Panier:ajouterUnArticle, articleId: 0, qte: 1}
      requirements:
           articleId: \d+
           qte: \d+
           
 s4smithe_vitrine_removeOneArticlePanier:
      path:     /panier/removeOneArticle/{articleId}/{qte}
-     defaults: { _controller: s4smitheVitrineBundle:Panier:enleverUnArticle, articleId: -1, qte: 1}
+     defaults: { _controller: s4smitheVitrineBundle:Panier:enleverUnArticle, articleId: 0, qte: 1}
      requirements:
           articleId: \d+
           qte: \d+
 
 s4smithe_vitrine_removeArticlesPanier:
      path:     /panier/removeArticles/{articleId}
-     defaults: { _controller: s4smitheVitrineBundle:Panier:enleverArticles, articleId: -1}
+     defaults: { _controller: s4smitheVitrineBundle:Panier:enleverArticles, articleId: 0}
      requirements:
           articleId: \d+
 

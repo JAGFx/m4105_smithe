@@ -14,7 +14,7 @@
 		<div class="container">
 			<div class="row">
 				<!--First column-->
-				<div class="col-md-5 collumn">
+				<div class="col-md-3 collumn">
 					<h4>GET STARTED</h4>
 					<p>
 						Register for free and start to create amazing things.<br/>
@@ -24,7 +24,7 @@
 				<!--/.First column-->
 
 				<!--Second column-->
-				<div class="col-md-3 col-md-offset-1 collumn">
+				<div class="col-md-3 collumn">
 					<h4>Sitemap</h4>
 					<ul>
 						<li><a href="{{ path('s4smithe_vitrine_homepage') }}">Accueil</a></li>
@@ -39,6 +39,15 @@
 					<h4>Catégories</h4>
 					<ul>
 						{{ render( controller('s4smitheVitrineBundle:Categorie:listeCategorieFooter') ) }}
+					</ul>
+				</div>
+				<!--/.Third column-->
+				
+				<!--Third column-->
+				<div class="col-md-3 collumn">
+					<h4>Marques</h4>
+					<ul>
+						{{ render( controller('s4smitheVitrineBundle:Marque:listeMarqueFooter') ) }}
 					</ul>
 				</div>
 				<!--/.Third column-->

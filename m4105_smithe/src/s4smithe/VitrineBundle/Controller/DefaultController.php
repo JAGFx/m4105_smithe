@@ -34,7 +34,6 @@
 		
 		
 		
-		
 
 		public function addProduct() {
 			$product = new Product(); // La classe Product créée par l’ORM contient des getters et des setters

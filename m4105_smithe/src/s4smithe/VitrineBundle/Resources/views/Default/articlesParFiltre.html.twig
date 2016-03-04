@@ -1,17 +1,17 @@
 
-{% set namePage = categorie.name %}
+{% set namePage = filter.name %}
 {% set typePage = "Catalogue" %}
 {% extends "s4smitheVitrineBundle::layout.html.twig" %}
 
 {% block linkFollowing %}
 	<li><a href="{{ path('s4smithe_vitrine_catalogue') }}">Catalogue</a></li>
-	<li>{{ categorie.name }}</li>
+	<li>{{ filter.name }}</li>
 {% endblock %}
 
 
 
 {% block content %}
-	{% for item in produits %}
+	{% for item in filter.products %}
 		{% include "s4smitheVitrineBundle:Catalogue:oneArticle.html.twig" %}
 	{% endfor %}
 {% endblock %}

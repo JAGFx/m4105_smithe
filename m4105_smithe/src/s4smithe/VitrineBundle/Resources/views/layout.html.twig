@@ -25,7 +25,6 @@
 	<body>
 		{% include "s4smitheVitrineBundle::header.html.twig" %}
 
-		<div class="container-fluid">
 			<div class="container">
 				<ol class="breadcrumb">
 					<li><a href="{{ path('s4smithe_vitrine_homepage') }}">Accueil</a></li>
@@ -33,12 +32,12 @@
 					{% endblock %}
 				</ol>
 				<div class="col-md-3">
-					<p class="lead">Catégories</p>
-					<div class="list-group">
-						{{ render( controller('s4smitheVitrineBundle:Categorie:listeCategorie') ) }}
+					<div class="row">
+						<div class="list-group">
+							{% include "s4smitheVitrineBundle:Default:listFilters.html.twig" %}
+						</div>
 					</div>
 				</div>
-
 				<div class="col-md-9">
 					<div class="row">
 						<h3 id="masterTitle">{{ namePage }}</h3>
@@ -46,8 +45,7 @@
 						{% endblock %}
 					</div>
 				</div>
-			</div>			
-		</div>
+			</div>		
 		
 		{% include "s4smitheVitrineBundle::footer.html.twig" %}
 		
