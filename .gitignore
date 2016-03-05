@@ -6,14 +6,14 @@
 # Cache and logs (Symfony2)
 /m4105_smithe/app/cache/*
 /m4105_smithe/app/logs/*
-!/m4105_smitheapp/cache/.gitkeep
-!/m4105_smitheapp/logs/.gitkeep
+!/m4105_smithe/app/cache/.gitkeep
+!/m4105_smithe/app/logs/.gitkeep
 
 # Cache and logs (Symfony3)
 /m4105_smithe/var/cache/*
 /m4105_smithe/var/logs/*
-!/m4105_smithevar/cache/.gitkeep
-!/m4105_smithevar/logs/.gitkeep
+!/m4105_smithe/var/cache/.gitkeep
+!/m4105_smithe/var/logs/.gitkeep
 
 # Parameters
 /m4105_smithe/app/config/parameters.yml
@@ -23,8 +23,8 @@
 /m4105_smithe/app/bootstrap.php.cache
 /m4105_smithe/var/bootstrap.php.cache
 /m4105_smithe/bin/*
-!/m4105_smithebin/console
-!/m4105_smithebin/symfony_requirements
+!/m4105_smithe/bin/console
+!/m4105_smithe/bin/symfony_requirements
 /m4105_smithe/vendor/
 
 # Assets and user uploads
