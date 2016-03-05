@@ -44,7 +44,7 @@
 		
 		
 		
-		public function findAllCtge(){
+		private function findAllCtge(){
 			$ctges = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Category')
 				->findAllOrderedByName();
@@ -56,7 +56,7 @@
 			return $ctges;
 		}
 		
-		public function findCtge($id){
+		private function findCtge($id){
 			$ctge = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Category')
 				->findOneById($id);

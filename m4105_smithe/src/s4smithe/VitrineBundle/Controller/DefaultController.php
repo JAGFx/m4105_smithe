@@ -35,7 +35,7 @@
 		
 		
 
-		public function addProduct() {
+		private function addProduct() {
 			$product = new Product(); // La classe Product créée par l’ORM contient des getters et des setters
 			//    pour manipuler tous les attributs spécifiés dans le mapping
 			//    objet-relationnel

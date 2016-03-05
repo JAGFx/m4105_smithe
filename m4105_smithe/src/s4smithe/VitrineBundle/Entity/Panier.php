@@ -2,8 +2,6 @@
 
 	namespace s4smithe\VitrineBundle\Entity;
 
-	use Doctrine\ORM\Mapping as ORM;
-
 	/**
 	 * Panier
 	 */

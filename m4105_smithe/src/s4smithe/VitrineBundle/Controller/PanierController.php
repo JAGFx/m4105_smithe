@@ -22,9 +22,6 @@
 			$panier = $this->getSessionPanier();
 			$articles = array();
 			
-			//var_dump(array_search(2, $panier->getArticles()));
-			//var_dump($panier->getArticles());
-			
 			if( !empty($panier->getArticles()) )
 				foreach ($panier->getArticles() as $item){
 					$article = $this->getDoctrine()->getManager()
@@ -96,7 +93,6 @@
 		
 		private function getSessionPanier(){
 			$session = $this->getRequest()->getSession();
-			//$session->clear();
 			
 			return $session->get('panier', new Panier() );
 		}

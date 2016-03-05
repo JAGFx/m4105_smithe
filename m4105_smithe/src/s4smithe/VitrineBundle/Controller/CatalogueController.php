@@ -27,7 +27,7 @@
 		
 		
 		
-		public function findAllProduct() {
+		private function findAllProduct() {
 			$product = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Product')
 				->findAllOrderedByName();

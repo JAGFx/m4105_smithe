@@ -45,7 +45,7 @@
 		
 		
 	
-		public function findAllMarque( $limit = -1 ){
+		private function findAllMarque( $limit = -1 ){
 			
 			$marque = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Marque')
@@ -58,7 +58,7 @@
 			return $marque;
 		}
 		
-		public function findMarque($id){
+		private function findMarque($id){
 			$mark = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Marque')
 				->findOneById($id);
