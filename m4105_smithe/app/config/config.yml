@@ -36,7 +36,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
-          sfNameShop: SfStore
+          sfNameShop: SfShop
 
 # Doctrine Configuration
 doctrine:

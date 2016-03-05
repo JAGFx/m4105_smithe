@@ -1,7 +1,7 @@
 <div class="col-sm-4">
 	<div class="thumbnail">
 		<div class="cover">
-			<img src="http://placehold.it/420x300" alt="">
+			<img src="{{ asset('bundles/s4smithevitrine/images/noImg.jpg') }}" alt="{{ item.category.name }}" height="182" width="255"/>
 			<h4 class="labelThumb">
 				<span class="label label-primary">{{ item.price|number_format(2, ',', ' ') }} €</span><!--
 				--><div class="addCart">

@@ -11,10 +11,41 @@
 	/*--------------------------------------------------------------------
 	---- Header
 	--------------------------------------------------------------------*/
+	@media (max-width: 768px) {
+		header .navbar li > a:hover,
+		header .navbar-nav > .active > a,
+		header .navbar-nav > .active > a:hover,
+		header .navbar-nav > .active > a:focus { border-color: transparent; }
+	}
+
+	@media (min-width: 768px) {
+		header .navbar li > a:hover,
+		header .navbar li.dropdown.open > a.dropdown-toggle,
+		header .navbar-nav > .active > a,
+		header .navbar-nav > .active > a:hover,
+		header .navbar-nav > .active > a:focus { border-color: #fff; }
+	}
+
+	
 	header nav .navbar-brand,
 	header nav .navbar-inverse .navbar-brand:focus,
-	header nav .navbar-inverse .navbar-brand:hover { padding: 12px 15px; background: #2E3138; }
-	header nav .navbar-nav > li > a { color: #fff; }
+	header nav .navbar-inverse .navbar-brand:hover { 
+		margin: 0; 
+		padding: 12px 15px; 
+		background: #2E3138; 
+		border-top: 2px #2E3138 solid;
+	}
+	header .navbar li > a{
+		padding: 19px 20px;
+		border-top: 2px transparent solid;
+		font-size: 1.2em;
+		color: #fff;
+		transition-duration: .1s;
+	}
+	header .navbar li > a:hover,
+	header .navbar-nav > .active > a,
+	header .navbar-nav > .active > a:hover,
+	header .navbar-nav > .active > a:focus { transition-duration: .3s; }
 	header nav #panier{
 		padding: 8px;
 		padding-left: 50px;
