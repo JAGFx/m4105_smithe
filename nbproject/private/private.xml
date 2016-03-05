@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/public/sfStore.css</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/Panier/panierInfo.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Controller/PanierController.php</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/Default/mentions.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Repository/MarqueRepository.php</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Entity/Panier.php</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/Catalogue/catalogue.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/public/sfStore.js</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/Catalogue/oneArticle.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/Marque/listeMarque.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Controller/MarqueController.php</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/Default/index.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Entity/Product.php</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Controller/CatalogueController.php</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/footer.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/header.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/Panier/panier.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Controller/CategorieController.php</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/layout.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/Default/listFilters.html.twig</file>
+            <file>file:/N:/wamp/www/Symfony/m4105_smithe/m4105_smithe/src/s4smithe/VitrineBundle/Resources/views/Default/articlesParFiltre.html.twig</file>
+        </group>
+    </open-files>
+</project-private>

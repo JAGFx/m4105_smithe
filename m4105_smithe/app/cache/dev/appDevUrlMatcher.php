@@ -106,12 +106,8 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         // s4smithe_vitrine_homepage
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 's4smithe_vitrine_homepage');
-            }
-
-            return array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\DefaultController::indexAction',  '_route' => 's4smithe_vitrine_homepage',);
+        if (0 === strpos($pathinfo, '/accueil') && preg_match('#^/accueil(?:/(?P<name>\\w+))?$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 's4smithe_vitrine_homepage')), array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\DefaultController::indexAction',  'name' => 'Visiteur',));
         }
 
         // s4smithe_vitrine_mentions
@@ -121,12 +117,51 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         // s4smithe_vitrine_catalogue
         if ($pathinfo === '/catalogue') {
-            return array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\DefaultController::indexAction',  '_route' => 's4smithe_vitrine_catalogue',);
+            return array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\CatalogueController::indexAction',  '_route' => 's4smithe_vitrine_catalogue',);
         }
 
-        // s4smithe_vitrine_articlesParCategorie
-        if (0 === strpos($pathinfo, '/articlesParCategorie') && preg_match('#^/articlesParCategorie(?:/(?P<catId>\\d+))?$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 's4smithe_vitrine_articlesParCategorie')), array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\DefaultController::articlesParCategorieAction',  'catId' => 1,));
+        if (0 === strpos($pathinfo, '/articlesPar')) {
+            // s4smithe_vitrine_articlesParCategorie
+            if (0 === strpos($pathinfo, '/articlesParCategorie') && preg_match('#^/articlesParCategorie(?:/(?P<catId>\\d+))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 's4smithe_vitrine_articlesParCategorie')), array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\CategorieController::articlesParCategorieAction',  'catId' => 0,));
+            }
+
+            // s4smithe_vitrine_articlesParMarque
+            if (0 === strpos($pathinfo, '/articlesParMarque') && preg_match('#^/articlesParMarque(?:/(?P<markId>\\d+))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 's4smithe_vitrine_articlesParMarque')), array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\MarqueController::articlesParMarqueAction',  'markId' => 0,));
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/panier')) {
+            // s4smithe_vitrine_contenuPanier
+            if ($pathinfo === '/panier/contenu') {
+                return array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\PanierController::contenuPanierAction',  '_route' => 's4smithe_vitrine_contenuPanier',);
+            }
+
+            // s4smithe_vitrine_addArticlePanier
+            if (0 === strpos($pathinfo, '/panier/addArticle') && preg_match('#^/panier/addArticle(?:/(?P<articleId>\\d+)(?:/(?P<qte>\\d+))?)?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 's4smithe_vitrine_addArticlePanier')), array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\PanierController::ajouterUnArticleAction',  'articleId' => 0,  'qte' => 1,));
+            }
+
+            if (0 === strpos($pathinfo, '/panier/remove')) {
+                // s4smithe_vitrine_removeOneArticlePanier
+                if (0 === strpos($pathinfo, '/panier/removeOneArticle') && preg_match('#^/panier/removeOneArticle(?:/(?P<articleId>\\d+)(?:/(?P<qte>\\d+))?)?$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 's4smithe_vitrine_removeOneArticlePanier')), array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\PanierController::enleverUnArticleAction',  'articleId' => 0,  'qte' => 1,));
+                }
+
+                // s4smithe_vitrine_removeArticlesPanier
+                if (0 === strpos($pathinfo, '/panier/removeArticles') && preg_match('#^/panier/removeArticles(?:/(?P<articleId>\\d+))?$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 's4smithe_vitrine_removeArticlesPanier')), array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\PanierController::enleverArticlesAction',  'articleId' => 0,));
+                }
+
+            }
+
+            // s4smithe_vitrine_emptyPanier
+            if ($pathinfo === '/panier/empty') {
+                return array (  '_controller' => 's4smithe\\VitrineBundle\\Controller\\PanierController::emptyPanierAction',  '_route' => 's4smithe_vitrine_emptyPanier',);
+            }
+
         }
 
         // s4smithe_vitrine_manager

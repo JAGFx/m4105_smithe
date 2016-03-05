@@ -1,7 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_pgsql
-    database_host: postgres-info
+    database_host: localhost
     database_port: 5432
     database_name: bases423
     database_user: users423
