@@ -1,100 +1,93 @@
 <?php
 
-namespace s4smithe\VitrineBundle\Entity;
+	namespace s4smithe\VitrineBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+	/**
+	 * Marque
+	 */
+	class Marque {
 
-/**
- * Marque
- */
-class Marque
-{
-    /**
-     * @var int
-     */
-    private $id;
+		/**
+		 * @var int
+		 */
+		private $id;
 
-    /**
-     * @var string
-     */
-    private $name;
+		/**
+		 * @var string
+		 */
+		private $name;
 
+		/**
+		 * Get id
+		 *
+		 * @return integer 
+		 */
+		public function getId() {
+			return $this->id;
+		}
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+		/**
+		 * Set name
+		 *
+		 * @param string $name
+		 * @return Marque
+		 */
+		public function setName($name) {
+			$this->name = $name;
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Marque
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    
-        return $this;
-    }
+			return $this;
+		}
 
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $products;
+		/**
+		 * Get name
+		 *
+		 * @return string 
+		 */
+		public function getName() {
+			return $this->name;
+		}
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+		/**
+		 * @var \Doctrine\Common\Collections\Collection
+		 */
+		private $products;
 
-    /**
-     * Add products
-     *
-     * @param \s4smithe\VitrineBundle\Entity\Product $products
-     * @return Marque
-     */
-    public function addProduct(\s4smithe\VitrineBundle\Entity\Product $products)
-    {
-        $this->products[] = $products;
-    
-        return $this;
-    }
+		/**
+		 * Constructor
+		 */
+		public function __construct() {
+			$this->products = new \Doctrine\Common\Collections\ArrayCollection();
+		}
 
-    /**
-     * Remove products
-     *
-     * @param \s4smithe\VitrineBundle\Entity\Product $products
-     */
-    public function removeProduct(\s4smithe\VitrineBundle\Entity\Product $products)
-    {
-        $this->products->removeElement($products);
-    }
+		/**
+		 * Add products
+		 *
+		 * @param \s4smithe\VitrineBundle\Entity\Product $products
+		 * @return Marque
+		 */
+		public function addProduct(\s4smithe\VitrineBundle\Entity\Product $products) {
+			$this->products[] = $products;
 
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-}
+			return $this;
+		}
+
+		/**
+		 * Remove products
+		 *
+		 * @param \s4smithe\VitrineBundle\Entity\Product $products
+		 */
+		public function removeProduct(\s4smithe\VitrineBundle\Entity\Product $products) {
+			$this->products->removeElement($products);
+		}
+
+		/**
+		 * Get products
+		 *
+		 * @return \Doctrine\Common\Collections\Collection 
+		 */
+		public function getProducts() {
+			return $this->products;
+		}
+
+	}
+	

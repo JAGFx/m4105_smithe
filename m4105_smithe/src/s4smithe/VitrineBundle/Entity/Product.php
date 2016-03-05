@@ -2,8 +2,6 @@
 
 	namespace s4smithe\VitrineBundle\Entity;
 
-	use Doctrine\ORM\Mapping as ORM;
-
 	/**
 	 * Product
 	 */
@@ -127,32 +125,31 @@
 			return $this->category;
 		}
 
-    /**
-     * @var \s4smithe\VitrineBundle\Entity\Marque
-     */
-    private $marque;
+		/**
+		 * @var \s4smithe\VitrineBundle\Entity\Marque
+		 */
+		private $marque;
 
+		/**
+		 * Set marque
+		 *
+		 * @param \s4smithe\VitrineBundle\Entity\Marque $marque
+		 * @return Product
+		 */
+		public function setMarque(\s4smithe\VitrineBundle\Entity\Marque $marque = null) {
+			$this->marque = $marque;
 
-    /**
-     * Set marque
-     *
-     * @param \s4smithe\VitrineBundle\Entity\Marque $marque
-     * @return Product
-     */
-    public function setMarque(\s4smithe\VitrineBundle\Entity\Marque $marque = null)
-    {
-        $this->marque = $marque;
-    
-        return $this;
-    }
+			return $this;
+		}
 
-    /**
-     * Get marque
-     *
-     * @return \s4smithe\VitrineBundle\Entity\Marque 
-     */
-    public function getMarque()
-    {
-        return $this->marque;
-    }
-}
+		/**
+		 * Get marque
+		 *
+		 * @return \s4smithe\VitrineBundle\Entity\Marque 
+		 */
+		public function getMarque() {
+			return $this->marque;
+		}
+
+	}
+	
