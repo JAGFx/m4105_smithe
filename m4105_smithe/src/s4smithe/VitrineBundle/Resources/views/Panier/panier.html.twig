@@ -19,49 +19,51 @@
 {% endblock %}
 
 {% block content %}
-	<table class="table table-responsive" id="panierList">
-		<tr>
-			<th>Article</th>
-			<th class="text-center qte">Qté</th>
-			<th class="text-center littleTD">Prix U. TTC</th>
-			<th class="text-center littleTD">Total TTC</th>
-			<th class="actionItem"></th>
-		</tr>
-		
-		{% if panier|length > 0 %}
-			{% for item in panier %}
+	<div style="padding-left: 15px;">
+		<table class="table table-responsive" id="panierList">
+			<tr>
+				<th>Article</th>
+				<th class="text-center qte">Qté</th>
+				<th class="text-center littleTD">Prix U. TTC</th>
+				<th class="text-center littleTD">Total TTC</th>
+				<th class="actionItem"></th>
+			</tr>
+
+			{% if panier|length > 0 %}
+				{% for item in panier %}
+					<tr>
+						<td>
+							<div class="col-md-12">{{ item.article.name }}</div>
+							<div class="col-md-12">
+								<span class="subInfoPanier">{{ item.article.category.name }}</span>
+								<span class="subInfoPanier">- {{ item.article.marque.name }}</span>
+							</div>
+						</td>
+						<td class="text-center"><span class="badge badge-blue">x {{ item.qte }}</span></td>
+						<td class="text-center">{{ item.article.price|number_format(2, ',', ' ') }} €</td>
+						<td class="text-center">{{ (item.qte * item.article.price)|number_format(2, ',', ' ') }} €</td>
+						<td class="text-center actionItem">
+							<a href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Ajouter"><span class="fa fa-plus"></span></a>
+							<a href="{{ path('s4smithe_vitrine_removeOneArticlePanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Enlever"><span class="fa fa-minus"></span></a>
+							<a href="{{ path('s4smithe_vitrine_removeArticlesPanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Supprimer"><span class="fa fa-times"></span></a>
+						</td>
+					</tr>
+				{% endfor %}
 				<tr>
 					<td>
-						<div class="col-md-12">{{ item.article.name }}</div>
-						<div class="col-md-12">
-							<span class="subInfoPanier">{{ item.article.category.name }}</span>
-							<span class="subInfoPanier">- {{ item.article.marque.name }}</span>
-						</div>
+						<span class="text-small">{{ nbArticles }} article(s) dans le panier</span>
+						<a href="{{ path('s4smithe_vitrine_emptyPanier') }}" title="Vider le panier" class="btn btn-primary btn-xs">Vider</a>
 					</td>
-					<td class="text-center"><span class="badge badge-blue">x {{ item.qte }}</span></td>
-					<td class="text-center">{{ item.article.price|number_format(2, ',', ' ') }} €</td>
-					<td class="text-center">{{ (item.qte * item.article.price)|number_format(2, ',', ' ') }} €</td>
-					<td class="text-center actionItem">
-						<a href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Ajouter"><span class="fa fa-plus"></span></a>
-						<a href="{{ path('s4smithe_vitrine_removeOneArticlePanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Enlever"><span class="fa fa-minus"></span></a>
-						<a href="{{ path('s4smithe_vitrine_removeArticlesPanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Supprimer"><span class="fa fa-times"></span></a>
-					</td>
+					<td colspan="2" class="text-right" style="font-variant: small-caps;">Total du Panier</td>
+					<td class="text-center total">{{ total|number_format(2, ',', ' ') }} €</td>
+					<td></td>
 				</tr>
-			{% endfor %}
-			<tr>
-				<td>
-					<span class="text-small">{{ nbArticles }} article(s) dans le panier</span>
-					<a href="{{ path('s4smithe_vitrine_emptyPanier') }}" title="Vider le panier" class="btn btn-primary btn-xs">Vider</a>
-				</td>
-				<td colspan="2" class="text-right" style="font-variant: small-caps;">Total du Panier</td>
-				<td class="text-center total">{{ total|number_format(2, ',', ' ') }} €</td>
-				<td></td>
-			</tr>
-		{% else %}
-			<tr>
-				<td colspan="5"> Pas d'article dans le panier</td>
-			</tr>
-		{% endif %}
+			{% else %}
+				<tr>
+					<td colspan="5"> Pas d'article dans le panier</td>
+				</tr>
+			{% endif %}
 
-	</table>
+		</table>
+	</div>
 {% endblock %}

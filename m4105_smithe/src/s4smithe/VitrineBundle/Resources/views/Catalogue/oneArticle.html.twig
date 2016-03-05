@@ -13,7 +13,8 @@
 		</div>
 		<div class="caption">
 			<h3>{{ item.name }}</h3>
-			<p>{{ item.description }}</p>
+			<h5><a href="{{ path('s4smithe_vitrine_articlesParCategorie', {catId: item.category.id}) }}">{{ item.category.name }}</a></h5>
+			<p>{{ item.description|slice(0, 150) }} ...</p>
 		</div>
 	</div>
 </div>

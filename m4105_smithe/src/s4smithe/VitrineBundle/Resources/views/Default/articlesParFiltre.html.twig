@@ -11,7 +11,9 @@
 
 
 {% block content %}
-	{% for item in filter.products %}
-		{% include "s4smitheVitrineBundle:Catalogue:oneArticle.html.twig" %}
-	{% endfor %}
+	<div id="contentArticles">
+		{% for item in filter.products %}
+			{% include "s4smitheVitrineBundle:Catalogue:oneArticle.html.twig" %}
+		{% endfor %}
+	</div>
 {% endblock %}

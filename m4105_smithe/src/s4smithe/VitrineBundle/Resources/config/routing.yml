@@ -14,7 +14,7 @@ s4smithe_vitrine_catalogue:
      
 s4smithe_vitrine_articlesParCategorie:
      path:     /articlesParCategorie/{catId}
-     defaults: { _controller: s4smitheVitrineBundle:Categorie:articlesParCategorie, catId: 1 }
+     defaults: { _controller: s4smitheVitrineBundle:Categorie:articlesParCategorie, catId: 0 }
      requirements:
           catId:	\d+
 

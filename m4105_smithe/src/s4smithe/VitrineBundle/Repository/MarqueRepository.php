@@ -11,10 +11,18 @@
 	 * repository methods below.
 	 */
 	class MarqueRepository extends EntityRepository {
-		public function findAllOrderedByName() {
-			return $this->getEntityManager()
-					->createQuery('SELECT p FROM s4smitheVitrineBundle:Marque p ORDER BY p.name ASC')
+		public function findAllOrderedByName( $limit = -1 ) {
+			
+			if( $limit <= 0 ) 
+				return $this->getEntityManager()
+					->createQuery('SELECT p FROM s4smitheVitrineBundle:Marque p ORDER BY p.name')
 					->getResult();
+			else 
+				return $this->getEntityManager()
+					->createQuery('SELECT p FROM s4smitheVitrineBundle:Marque p ORDER BY p.name')
+					->setMaxResults( $limit )
+					->getResult();
+			
 		}
 	}
 	

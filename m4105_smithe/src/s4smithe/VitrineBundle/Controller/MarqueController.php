@@ -25,7 +25,7 @@
 		}
 
 		public function listeMarqueFooterAction() {
-			$marques = $this->findAllMarque();
+			$marques = $this->findAllMarque( 5 );
 			
 			return $this->render('s4smitheVitrineBundle:Marque:listeMarquesFooter.html.twig', array(
 				'marques' => $marques
@@ -45,10 +45,11 @@
 		
 		
 	
-		public function findAllMarque(){
+		public function findAllMarque( $limit = -1 ){
+			
 			$marque = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Marque')
-				->findAllOrderedByName();
+				->findAllOrderedByName( $limit );
 			
 			if (!$marque) {
 				throw $this->createNotFoundException('Produit non trouvé avec id ');
