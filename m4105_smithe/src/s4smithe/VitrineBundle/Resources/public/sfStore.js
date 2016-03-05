@@ -9,7 +9,7 @@
 			if (p.child === null)
 				return;
 
-			var obj = $(p.parent + " " + p.child + " .caption");
+			var obj = $(p.parent + " " + p.child);
 			var hElem = (p.toDo === "max") ? 0 : 9999999999999;
 			var action = true;
 			var xsWindow = ($(window).width() < 768);
@@ -25,7 +25,7 @@
 
 			obj.each(function () {
 				$(this).removeAttr("style");
-				hCurrentElem = parseInt($(this).outerHeight()) + 182;
+				hCurrentElem = parseInt($(this).outerHeight()) + 187;
 
 				action = (xsWindow || (smWindow && hCurrentElem > 0) || !smWindow);
 
@@ -34,8 +34,8 @@
 				else if (action && p.toDo === "min")
 					hElem = (hCurrentElem <= hElem) ? hCurrentElem : hElem;
 				//console.log(action);
-				//console.log("hObj: " + hCurrentElem );
-				//console.log("hElem final: " + hElem);
+				console.log("hObj: " + hCurrentElem );
+				console.log("hElem final: " + hElem);
 			});
 
 			//console.log(!xsWindow);
@@ -48,5 +48,5 @@
 		
 
 		$('#panier').tooltip();
-		$("#contentArticles").setHeightAllElem({child: ".thumbnail"});
+		//$("#contentArticles").setHeightAllElem({child: ".thumbnail"});
 	});
