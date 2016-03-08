@@ -9,7 +9,7 @@
 	Page d'accueil de l'app web e-commerce
 #}
 
-{% set namePage = "Panier" %}
+{% set namePage = "Validation de panier" %}
 {% set typePage = namePage %}
 
 {% extends "s4smitheVitrineBundle::layout.html.twig" %}
@@ -26,7 +26,6 @@
 				<th class="text-center qte">Qté</th>
 				<th class="text-center littleTD">Prix U. TTC</th>
 				<th class="text-center littleTD">Total TTC</th>
-				<th class="actionItem"></th>
 			</tr>
 
 			{% if articles|length > 0 %}
@@ -42,29 +41,15 @@
 						<td class="text-center"><span class="badge badge-blue">x {{ item.qte }}</span></td>
 						<td class="text-center">{{ item.article.price|number_format(2, ',', ' ') }} €</td>
 						<td class="text-center">{{ (item.qte * item.article.price)|number_format(2, ',', ' ') }} €</td>
-						<td class="text-center actionItem">
-							<a href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Ajouter"><span class="fa fa-plus"></span></a>
-							<a href="{{ path('s4smithe_vitrine_removeOneArticlePanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Enlever"><span class="fa fa-minus"></span></a>
-							<a href="{{ path('s4smithe_vitrine_removeArticlesPanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Supprimer"><span class="fa fa-times"></span></a>
-						</td>
 					</tr>
 				{% endfor %}
 				<tr>
 					<td>
-						<span class="text-small">{{ panier.nbArticle }} article(s) dans le panier</span>
-						<a href="{{ path('s4smithe_vitrine_emptyPanier') }}" title="Vider le panier" class="btn btn-primary btn-xs">Vider</a>
+						<span class="text-small">{{ nbArticles }} article(s) dans le panier</span>
 					</td>
 					<td colspan="2" class="text-right" style="font-variant: small-caps;">Total du Panier</td>
 					<td class="text-center total">{{ total|number_format(2, ',', ' ') }} €</td>
 					<td></td>
-				</tr>
-				<tr>
-					<td colspan="4" class="text-right"><a href="{{ path('s4smithe_vitrine_validationPanier') }}" title="Commander" class="btn btn-primary btn-sm">Commander</a></td>
-					<td></td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5"> Pas d'article dans le panier</td>
 				</tr>
 			{% endif %}
 

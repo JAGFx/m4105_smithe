@@ -193,4 +193,34 @@
 			return $this->commande;
 		}
 
+		public function __toString() { // renvoyer une chaîne qui identifie de manière unique l’entité
+			return $this->getName(); // si l’attribut Intitule est unique pour chaque catégorie...
+		}
+
+		/**
+		 * @var string
+		 */
+		private $password;
+
+		/**
+		 * Set password
+		 *
+		 * @param string $password
+		 * @return Client
+		 */
+		public function setPassword($password) {
+			$this->password = $password;
+
+			return $this;
+		}
+
+		/**
+		 * Get password
+		 *
+		 * @return string 
+		 */
+		public function getPassword() {
+			return $this->password;
+		}
+
 	}

@@ -151,4 +151,9 @@
 			return $this->marque;
 		}
 
+		public function __toString() { // renvoyer une chaîne qui identifie de manière unique l’entité
+			return $this->getIntitule(); // si l’attribut Intitule est unique pour chaque catégorie...
+		}
+
 	}
+	

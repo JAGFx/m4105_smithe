@@ -15,6 +15,9 @@
 
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use s4smithe\VitrineBundle\Entity\Panier;
+	use s4smithe\VitrineBundle\Entity\Client;
+	use s4smithe\VitrineBundle\Entity\Commande;
+	use s4smithe\VitrineBundle\Entity\CommandeWorkflow;
 
 	class PanierController extends Controller {
 
@@ -35,12 +38,12 @@
 				}
 						
 			return $this->render('s4smitheVitrineBundle:Panier:panier.html.twig', array(
-				'panier' => $articles,
-				'total' => $this->getTotalPanier(),
-				'nbArticles' => $panier->getNbArticle()
+				'articles' => $articles,
+				'panier' => $panier,
+				'total' => $this->getTotalPanier()
 			));
 		}
-		
+	
 		public function emptyPanierAction() {
 			$panier = $this->getSessionPanier();
 			$panier->clearPanier();
@@ -81,20 +84,79 @@
 		public function panierInfoHeaderAction() {
 			$panier = $this->getSessionPanier();
 			
+			$user = $this->findUser( $this->getSessionUser() );
+			
 			return $this->render('s4smitheVitrineBundle:Panier:panierInfo.html.twig', array(
 				'total' => $this->getTotalPanier(),
-				'nbArticle' =>$panier->getNbArticle()
+				'nbArticle' =>$panier->getNbArticle(),
+				'pseudo' => $user->getName()
+			));
+		}
+		
+		public function validationAction() {
+			$commande = new Commande();
+			$commande->setDate( new \DateTime());
+			
+			$user = $this->findUser( $this->getSessionUser() );
+			$commande->setClient( $user );
+			
+			$panier = $this->getSessionPanier();
+			$articles = array();
+			$total = $this->getTotalPanier();
+			$nbArticles = $panier->getNbArticle();
+			
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($commande);
+			$em->flush();
+			
+			if( !empty($panier->getArticles()) )
+				foreach ($panier->getArticles() as $item){
+					$article = $this->getDoctrine()->getManager()
+						->getRepository('s4smitheVitrineBundle:Product')
+						->findOneById($item['id']);
+					
+					$ligneCommande = new CommandeWorkflow();
+					$ligneCommande->setCommande( $commande );
+					$ligneCommande->setProduct( $article );
+					$ligneCommande->setPrix( $article->getPrice() );
+					$ligneCommande->setQte( $item['qte'] );
+					
+					$articles[] = array(
+						'article' => $article,
+						'qte' => $item['qte']
+					);
+					
+					var_dump($ligneCommande->getProduct()->getId());
+					
+					
+					$em->persist($ligneCommande);
+					$em->flush();
+				}
+			
+			$this->setSessionPanier( new Panier() );
+			
+			return $this->render('s4smitheVitrineBundle:Panier:validation.html.twig', array(
+					'commande' => $commande,
+					'artiles' => $articles,
+					'total' => $total,
+					'nbArticles' => $nbArticles
 			));
 		}
 		
 		
 		
 		
-		
+																																																																																																																																																																																																																																																																																																																																												
 		private function getSessionPanier(){
 			$session = $this->getRequest()->getSession();
 			
 			return $session->get('panier', new Panier() );
+		}
+		
+		private function getSessionUser(){
+			$session = $this->getRequest()->getSession();
+			
+			return $session->get('userId', '-1' );
 		}
 		
 		private function setSessionPanier( $panier ) {
@@ -116,5 +178,18 @@
 				}
 			
 			return $total;
+		}
+		
+		private function findUser($id){
+			$user = $this->getDoctrine()->getManager()
+				->getRepository('s4smitheVitrineBundle:Client')
+				->findOneById($id);
+			
+			if (!$user) {
+				$user = new Client();
+				$user->setName('Inconus');																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				
+			}
+			
+			return $user;
 		}
 	}

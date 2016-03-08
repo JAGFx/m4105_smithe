@@ -1,0 +1,19 @@
+{% set namePage = name %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layout.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active">{{ namePage }}</li>
+{% endblock %}
+
+{% block content %}
+	
+	<div class="col-xs-6">
+		<h3>S'inscrire</h3>
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		<button type="submit" value="Login" />
+		{{ form_end(form) }}
+	</div>
+	
+{% endblock %}

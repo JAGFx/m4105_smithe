@@ -20,7 +20,7 @@
 		/**
 		 * @var boolean
 		 */
-		private $etat;
+		private $etat = false;
 
 		/**
 		 * @var \s4smithe\VitrineBundle\Entity\Client

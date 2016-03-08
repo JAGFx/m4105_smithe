@@ -1,0 +1,35 @@
+client_index:
+    path:     /
+    defaults: { _controller: "s4smitheVitrineBundle:Client:index" }
+    methods:  GET
+
+client_show:
+    path:     /{id}/show
+    defaults: { _controller: "s4smitheVitrineBundle:Client:show" }
+    methods:  GET
+
+client_new:
+    path:     /new
+    defaults: { _controller: "s4smitheVitrineBundle:Client:new" }
+    methods:  [GET, POST]
+    
+client_login:
+    path:     /login
+    defaults: { _controller: "s4smitheVitrineBundle:Client:login" }
+    methods:  [GET, POST]
+
+client_register:
+    path:     /register
+    defaults: { _controller: "s4smitheVitrineBundle:Client:new" }
+    methods:  [GET, POST]
+
+
+client_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "s4smitheVitrineBundle:Client:edit" }
+    methods:  [GET, POST]
+
+client_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "s4smitheVitrineBundle:Client:delete" }
+    methods:  DELETE

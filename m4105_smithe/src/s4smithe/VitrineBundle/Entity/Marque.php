@@ -89,4 +89,9 @@
 			return $this->products;
 		}
 
+		public function __toString() { // renvoyer une chaîne qui identifie de manière unique l’entité
+			return $this->getName(); // si l’attribut Intitule est unique pour chaque catégorie...
+		}
+
 	}
+	

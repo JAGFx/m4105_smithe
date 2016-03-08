@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Commande list</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Date</th>
+				<th>Etat</th>
+				<th>Client</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for commande in commandes %}
+				<tr>
+					<td><a href="{{ path('commande_show', { 'id': commande.id }) }}">{{ commande.id }}</a></td>
+					<td>{% if commande.date %}{{ commande.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+					<td>{% if commande.etat %}Yes{% else %}No{% endif %}</td>
+					<td>{{ commande.client.name }}</td>
+					<td>
+						<ul>
+							<li>
+								<a href="{{ path('commande_show', { 'id': commande.id }) }}">show</a>
+							</li>
+							<li>
+								<a href="{{ path('commande_edit', { 'id': commande.id }) }}">edit</a>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<ul>
+		<li>
+			<a href="{{ path('commande_new') }}">Create a new entry</a>
+		</li>
+	</ul>
+{% endblock %}

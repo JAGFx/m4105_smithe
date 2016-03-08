@@ -228,7 +228,7 @@
 	#panierList tr:last-child > td{ border: 0; }
 	#panierList .qte { width: 90px; }
 	#panierList .subInfoPanier { font-style: italic; color: rgba(255, 255, 255, .4); font-size: .9em; }
-	#panierList .actionItem { width: 60px; }
+	#panierList .actionItem { width: 65px; }
 	#panierList .actionItem > a.badge.badge-blue{
 		background: #2E3138;
 		color: rgba(255, 255, 255, 0.3);

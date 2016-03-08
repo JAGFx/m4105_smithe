@@ -1,3 +1,25 @@
+s4smithe_vitrine_category:
+    resource: "@s4smitheVitrineBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+
+s4smithe_vitrine_client:
+        resource: "@s4smitheVitrineBundle/Resources/config/routing/client.yml"
+        prefix:   /client
+
+s4smithe_vitrine_product:
+        resource: "@s4smitheVitrineBundle/Resources/config/routing/product.yml"
+        prefix:   /product
+
+s4smithe_vitrine_marque:
+        resource: "@s4smitheVitrineBundle/Resources/config/routing/marque.yml"
+        prefix:   /marque
+
+s4smithe_vitrine_commande:
+        resource: "@s4smitheVitrineBundle/Resources/config/routing/commande.yml"
+        prefix:   /commande
+
+
+
 s4smithe_vitrine_homepage:
      path:     /accueil/{name}
      defaults: { _controller: s4smitheVitrineBundle:Default:index, name: Visiteur}
@@ -14,7 +36,7 @@ s4smithe_vitrine_catalogue:
      
 s4smithe_vitrine_articlesParCategorie:
      path:     /articlesParCategorie/{catId}
-     defaults: { _controller: s4smitheVitrineBundle:Categorie:articlesParCategorie, catId: 0 }
+     defaults: { _controller: s4smitheVitrineBundle:Category:articlesParCategorie, catId: 0 }
      requirements:
           catId:	\d+
 
@@ -23,6 +45,7 @@ s4smithe_vitrine_articlesParMarque:
      defaults: { _controller: s4smitheVitrineBundle:Marque:articlesParMarque, markId: 0 }
      requirements:
           markId:	\d+
+
           
           
           
@@ -53,6 +76,10 @@ s4smithe_vitrine_removeArticlesPanier:
 s4smithe_vitrine_emptyPanier:
      path:     /panier/empty
      defaults: { _controller: s4smitheVitrineBundle:Panier:emptyPanier}
+     
+s4smithe_vitrine_validationPanier:
+     path:     /panier/validation
+     defaults: { _controller: s4smitheVitrineBundle:Panier:validation}
      
      
 
