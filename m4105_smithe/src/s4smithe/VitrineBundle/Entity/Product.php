@@ -28,6 +28,16 @@
 		private $description;
 
 		/**
+		 * @var \s4smithe\VitrineBundle\Entity\Category
+		 */
+		private $category;
+
+		/**
+		 * @var \s4smithe\VitrineBundle\Entity\Marque
+		 */
+		private $marque;
+
+		/**
 		 * Get id
 		 *
 		 * @return integer 
@@ -100,11 +110,6 @@
 		}
 
 		/**
-		 * @var \s4smithe\VitrineBundle\Entity\Category
-		 */
-		private $category;
-
-		/**
 		 * Set category
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Category $category
@@ -124,11 +129,6 @@
 		public function getCategory() {
 			return $this->category;
 		}
-
-		/**
-		 * @var \s4smithe\VitrineBundle\Entity\Marque
-		 */
-		private $marque;
 
 		/**
 		 * Set marque
@@ -151,9 +151,4 @@
 			return $this->marque;
 		}
 
-		public function __toString() { // renvoyer une chaîne qui identifie de manière unique l’entité
-			return $this->getIntitule(); // si l’attribut Intitule est unique pour chaque catégorie...
-		}
-
 	}
-	

@@ -1,6 +1,7 @@
 # src/s4XX/VitrineBundle/Resources/config/doctrine/Category.orm.yml
 s4smithe\VitrineBundle\Entity\Commande:
     type: entity
+    table: commande
     id:
         id:
             type: integer

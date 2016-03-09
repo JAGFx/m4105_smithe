@@ -1,6 +1,6 @@
 s4smithe\VitrineBundle\Entity\Marque:
     type: entity
-    table: null
+    table: marque
     repositoryClass: s4smithe\VitrineBundle\Repository\MarqueRepository
     id:
         id:

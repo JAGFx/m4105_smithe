@@ -1,6 +1,6 @@
 s4smithe\VitrineBundle\Entity\Client:
     type: entity
-    table: null
+    table: client
     repositoryClass: s4smithe\VitrineBundle\Repository\ClientRepository
     id:
         id:

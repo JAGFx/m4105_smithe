@@ -1,6 +1,6 @@
 s4smithe\VitrineBundle\Entity\CommandeWorkflow:
     type: entity
-    table: null
+    table: commandeworkflow
     repositoryClass: s4smithe\VitrineBundle\Repository\CommandeWorkflowRepository
     id:
         procuct:
@@ -28,4 +28,4 @@ s4smithe\VitrineBundle\Entity\CommandeWorkflow:
              joinColumn:								# Category
                  name: commande_id
                  referencedColumnName: id
-    lifecycleCallbacks: {  }
+
