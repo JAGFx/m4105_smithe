@@ -5,7 +5,6 @@
 	use Symfony\Component\HttpFoundation\Request;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use s4smithe\VitrineBundle\Entity\Client;
-	use s4smithe\VitrineBundle\Form\ClientType;
 
 	/**
 	 * Client controller.
@@ -26,7 +25,33 @@
 					'clients' => $clients,
 			));
 		}
+		
+		public function listeCommandeAction() {
+			$user = $this->findUser( $this->getSessionUser() );
 
+			return $this->render(
+				's4smitheVitrineBundle:Client:listeCommande.html.twig',
+				array(
+					'commandes' => $user->getCommandes()
+				)
+			);
+		}
+
+
+		public function userInfoHeaderAction() {
+			$sessionUser = $this->getSessionUser();
+			$user = $this->findUser( $sessionUser );
+			$userConnected = ( $sessionUser >= 0 ) ? true : false;
+			
+			return $this->render(
+				's4smitheVitrineBundle:Client:userInfo.html.twig',
+				array(
+					'userConnected' => $userConnected,
+					'pseudo'        => $user->getName()
+				)
+			);
+		}
+		
 		/**
 		 * Creates a new Client entity.
 		 *
@@ -40,10 +65,9 @@
 				$em = $this->getDoctrine()->getManager();
 				$em->persist($client);
 				$em->flush();
-				
-				$session = $this->getRequest()->getSession();
-				$session->set('userId', $client->getId());
 
+				$this->setSessionUser( $client->getId() );
+				
 				return $this->redirectToRoute('client_show', array('id' => $client->getId()));
 			}
 
@@ -53,19 +77,19 @@
 					'form' => $form->createView(),
 			));
 		}
-		
+
 		/**
 		 * Creates a new Client entity.
 		 *
 		 */
 		public function loginAction(Request $request) {
 			$client = new Client();
-			
+
 			$form = $this->get('form.factory')->createBuilder('form', $client)
 				->add('mail', 'email')
 				->add('password', 'password')
 				->getForm();
-			
+
 			$form->handleRequest($request);
 
 			if ($form->isSubmitted() && $form->isValid()) {
@@ -78,14 +102,13 @@
 						)
 					);
 
-				if (!$user) {
+				if ( !$user )
 					throw $this->createNotFoundException('Utilisateur non reconnus ' . $user->getName());
-				}
-				
-				$session = $this->getRequest()->getSession();
-				$session->set('userId', $user->getId());
 
-				return $this->redirectToRoute('client_show', array('id' => $user->getId()));
+
+				$this->setSessionUser( $user->getId() );
+
+				return $this->redirectToRoute( 's4smithe_vitrine_homepage' );
 			}
 
 			return $this->render('s4smitheVitrineBundle:Client:login.html.twig', array(
@@ -93,6 +116,12 @@
 					'client' => $client,
 					'form' => $form->createView(),
 			));
+		}
+
+		public function logoutAction() {
+			$this->setSessionUser( -1 );
+			
+			return $this->redirectToRoute( 's4smithe_vitrine_homepage' );
 		}
 
 		/**
@@ -164,5 +193,29 @@
 			;
 		}
 
+		
+		private function getSessionUser() {
+			$session = $this->getRequest()->getSession();
+			
+			return $session->get( 'userId', '-1' );
+		}
+		
+		private function setSessionUser( $userId ) {
+			$session = $this->getRequest()->getSession();
+			$session->set( 'userId', $userId );
+		}
+		
+		private function findUser( $id ) {
+			$user = $this->getDoctrine()->getManager()
+				->getRepository( 's4smitheVitrineBundle:Client' )
+				->findOneById( $id );
+			
+			if ( !$user ) {
+				$user = new Client();
+				$user->setName( 'Inconus' );
+			}
+			
+			return $user;
+		}
 	}
 	

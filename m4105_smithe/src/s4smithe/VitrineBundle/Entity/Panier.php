@@ -41,9 +41,8 @@
 			if( key_exists($articleID, $this->articles) && $this->articles[ $articleID ]['qte'] > 1 ){
 				$this->articles[ $articleID ]['qte'] -= $qte;
 				
-			} else {
+			} else
 				unset( $this->articles[ $articleID ] );
-			}
 		}
 		
 		/**
@@ -72,8 +71,9 @@
 		public function getNbArticle(){
 			$nb = 0;
 			
-			foreach ($this->articles as $artice)
-				$nb += $artice['qte'];
+			foreach ( $this->articles as $article ) {
+				$nb += $article[ 'qte' ];
+			}
 			
 			return $nb;
 		}

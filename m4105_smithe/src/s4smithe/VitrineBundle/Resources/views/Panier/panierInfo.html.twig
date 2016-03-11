@@ -1,14 +1,9 @@
-<ul class="nav navbar-nav navbar-right">
-	<li>
-		{{ pseudo }}
-	</li>
-	<li>
-		<a id="panier" href="{{ path('s4smithe_vitrine_contenuPanier') }}" title="Panier de {{ total|number_format(2, ',', ' ') }}€ - {{ nbArticle }} article(s)">
-			<i class="glyphicon glyphicon-shopping-cart"></i>
-			<div>
-				<div class="badge">{{ total|number_format(2, ',', ' ') }}€</div>
-				<div>{{ nbArticle }} article(s)</div>
-			</div>
-		</a>
-	</li>
-</ul>
+<li >
+	<a id="panier" href="{{ path('s4smithe_vitrine_contenuPanier') }}" title="Panier de {{ total|number_format(2, ',', ' ') }}€ - {{ nbArticle }} article(s)" >
+		<i class="glyphicon glyphicon-shopping-cart" ></i >
+		<div >
+			<div class="badge" >{{ total|number_format(2, ',', ' ') }}€</div >
+			<div >{{ nbArticle }} article(s)</div >
+		</div >
+	</a >
+</li >

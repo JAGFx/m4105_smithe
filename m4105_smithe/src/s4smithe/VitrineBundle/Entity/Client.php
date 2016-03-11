@@ -2,13 +2,15 @@
 
 	namespace s4smithe\VitrineBundle\Entity;
 
+	use Doctrine\ORM\Mapping as ORM;
+
 	/**
 	 * Client
 	 */
 	class Client {
 
 		/**
-		 * @var int
+		 * @var integer
 		 */
 		private $id;
 
@@ -16,6 +18,11 @@
 		 * @var string
 		 */
 		private $name;
+
+		/**
+		 * @var string
+		 */
+		private $password;
 
 		/**
 		 * @var string
@@ -28,14 +35,21 @@
 		private $address;
 
 		/**
-		 * @var int
+		 * @var string
 		 */
 		private $tel;
 
 		/**
-		 * @var string
+		 * @var \DateTime
 		 */
 		private $dateBirthday;
+
+		/**
+		 * Constructor
+		 */
+		public function __construct() {
+			$this->commande = new \Doctrine\Common\Collections\ArrayCollection();
+		}
 
 		/**
 		 * Get id
@@ -65,6 +79,27 @@
 		 */
 		public function getName() {
 			return $this->name;
+		}
+
+		/**
+		 * Set password
+		 *
+		 * @param string $password
+		 * @return Client
+		 */
+		public function setPassword( $password ) {
+			$this->password = $password;
+
+			return $this;
+		}
+
+		/**
+		 * Get password
+		 *
+		 * @return string
+		 */
+		public function getPassword() {
+			return $this->password;
 		}
 
 		/**
@@ -112,7 +147,8 @@
 		/**
 		 * Set tel
 		 *
-		 * @param integer $tel
+		 * @param string $tel
+		 *
 		 * @return Client
 		 */
 		public function setTel($tel) {
@@ -124,7 +160,7 @@
 		/**
 		 * Get tel
 		 *
-		 * @return integer 
+		 * @return string 
 		 */
 		public function getTel() {
 			return $this->tel;
@@ -133,7 +169,8 @@
 		/**
 		 * Set dateBirthday
 		 *
-		 * @param string $dateBirthday
+		 * @param \DateTime $dateBirthday
+		 *
 		 * @return Client
 		 */
 		public function setDateBirthday($dateBirthday) {
@@ -145,7 +182,7 @@
 		/**
 		 * Get dateBirthday
 		 *
-		 * @return string 
+		 * @return \DateTime 
 		 */
 		public function getDateBirthday() {
 			return $this->dateBirthday;
@@ -154,73 +191,16 @@
 		/**
 		 * @var \Doctrine\Common\Collections\Collection
 		 */
-		private $commande;
+		private $commandes;
 
 		/**
-		 * Constructor
-		 */
-		public function __construct() {
-			$this->commande = new \Doctrine\Common\Collections\ArrayCollection();
-		}
-
-		/**
-		 * Add commande
+		 * Get commandes
 		 *
-		 * @param \s4smithe\VitrineBundle\Entity\Commande $commande
-		 * @return Client
+		 * @return \Doctrine\Common\Collections\Collection
 		 */
-		public function addCommande(\s4smithe\VitrineBundle\Entity\Commande $commande) {
-			$this->commande[] = $commande;
-
-			return $this;
-		}
-
-		/**
-		 * Remove commande
-		 *
-		 * @param \s4smithe\VitrineBundle\Entity\Commande $commande
-		 */
-		public function removeCommande(\s4smithe\VitrineBundle\Entity\Commande $commande) {
-			$this->commande->removeElement($commande);
-		}
-
-		/**
-		 * Get commande
-		 *
-		 * @return \Doctrine\Common\Collections\Collection 
-		 */
-		public function getCommande() {
-			return $this->commande;
-		}
-
-		public function __toString() { // renvoyer une chaîne qui identifie de manière unique l’entité
-			return $this->getName(); // si l’attribut Intitule est unique pour chaque catégorie...
-		}
-
-		/**
-		 * @var string
-		 */
-		private $password;
-
-		/**
-		 * Set password
-		 *
-		 * @param string $password
-		 * @return Client
-		 */
-		public function setPassword($password) {
-			$this->password = $password;
-
-			return $this;
-		}
-
-		/**
-		 * Get password
-		 *
-		 * @return string 
-		 */
-		public function getPassword() {
-			return $this->password;
+		public function getCommandes() {
+			return $this->commandes;
 		}
 
 	}
+	

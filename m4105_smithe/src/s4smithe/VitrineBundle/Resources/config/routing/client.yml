@@ -17,6 +17,16 @@ client_login:
     path:     /login
     defaults: { _controller: "s4smitheVitrineBundle:Client:login" }
     methods:  [GET, POST]
+    
+client_logout:
+    path:     /logout
+    defaults: { _controller: "s4smitheVitrineBundle:Client:logout" }
+    methods:  GET
+    
+client_listCommande:
+    path:     /listeComande
+    defaults: { _controller: "s4smitheVitrineBundle:Client:listeCommande" }
+    methods:  GET
 
 client_register:
     path:     /register

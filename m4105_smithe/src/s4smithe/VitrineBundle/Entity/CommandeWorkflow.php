@@ -27,6 +27,17 @@
 		 */
 		private $commande;
 
+		public function __construct(
+			\s4smithe\VitrineBundle\Entity\Commande $commande,
+			\s4smithe\VitrineBundle\Entity\Product $product,
+			$qte
+		) {
+			$this->setCommande( $commande );
+			$this->setProduct( $product );
+			$this->setQte( $qte );
+			$this->setPrix( $product->getPrice() );
+		}
+		
 		/**
 		 * Set qte
 		 *
@@ -75,7 +86,7 @@
 		 * @param \s4smithe\VitrineBundle\Entity\Product $product
 		 * @return CommandeWorkflow
 		 */
-		public function setProduct(\s4smithe\VitrineBundle\Entity\Product $product = null) {
+		public function setProduct( \s4smithe\VitrineBundle\Entity\Product $product ) {
 			$this->product = $product;
 
 			return $this;
@@ -112,3 +123,4 @@
 		}
 
 	}
+	

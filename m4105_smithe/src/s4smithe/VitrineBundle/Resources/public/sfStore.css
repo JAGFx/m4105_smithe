@@ -35,17 +35,19 @@
 		background: #2E3138; 
 		border-top: 2px #2E3138 solid;
 	}
-	header .navbar li > a{
+
+	header .navbar-nav > li > a {
 		padding: 19px 20px;
 		border-top: 2px transparent solid;
 		font-size: 1.2em;
 		color: #fff;
 		transition-duration: .1s;
 	}
-	header .navbar li > a:hover,
+
 	header .navbar-nav > .active > a,
 	header .navbar-nav > .active > a:hover,
 	header .navbar-nav > .active > a:focus { transition-duration: .3s; }
+
 	header nav #panier{
 		padding: 8px;
 		padding-left: 50px;
@@ -206,16 +208,19 @@
 	}
 	.badge.badge-blue .fa { font-size: .7em; }
 
-	#panierList { font-size: 1em; }
-	#panierList tr:first-child{ 
+	.tableCustum { font-size: 1em; }
+
+	.tableCustum tr:first-child {
 		color: #5fc7ed;
 		border-bottom: solid 2px #5fc7ed;
 		padding-bottom: 7px;
 		padding-top: 7px;
 		font-weight: bold;
 	}
-	#panierList tr:first-child > th:first-child { padding-left: 21px; }
-	#panierList tr:not(:first-child) > td{
+
+	.tableCustum tr:first-child > th:first-child { padding-left: 21px; }
+
+	.tableCustum tr:not(:first-child) > td {
 		padding-top: 7px;
 		padding-bottom: 7px;
 		background: #494e59;
@@ -223,23 +228,32 @@
 		vertical-align: middle;
 		border-bottom: solid 1px rgba(255, 255, 255, .1);
 	}
-	#panierList tr:nth-last-child(2) > td:not(:last-child) { border-color: rgba(255, 255, 255, .2); }
-	#panierList tr:nth-last-child(2) > td:nth-last-child(2){ border-color: #5fc7ed; }
-	#panierList tr:last-child > td{ border: 0; }
-	#panierList .qte { width: 90px; }
-	#panierList .subInfoPanier { font-style: italic; color: rgba(255, 255, 255, .4); font-size: .9em; }
-	#panierList .actionItem { width: 65px; }
-	#panierList .actionItem > a.badge.badge-blue{
+
+	.tableCustum tr:nth-last-child(2) > td:not(:last-child) { border-color: rgba(255, 255, 255, .2); }
+
+	.tableCustum tr:nth-last-child(2) > td:nth-last-child(2) { border-color: #5fc7ed; }
+
+	.tableCustum tr:last-child > td { border: 0; }
+
+	.tableCustum .qte { width: 90px; }
+
+	.tableCustum .subInfoPanier { font-style: italic; color: rgba(255, 255, 255, .4); font-size: .9em; }
+
+	.tableCustum .actionItem { width: 65px; }
+
+	.tableCustum .actionItem > a.badge.badge-blue {
 		background: #2E3138;
 		color: rgba(255, 255, 255, 0.3);
 		transition: all .1s ease-in;
 	}
-	#panierList .actionItem > a.badge.badge-blue:hover{
+
+	.tableCustum .actionItem > a.badge.badge-blue:hover {
 		background: #5fc7ed;
 		color: #1f1b1a;
 		transition: all .2s ease-in-out;
 	}
-	#panierList .total { color: #5fc7ed; }
+
+	.tableCustum .total { color: #5fc7ed; }
 	
 	
 	

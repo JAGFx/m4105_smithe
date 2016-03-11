@@ -1,3 +1,5 @@
+/m4105_smithe/.idea/*
+
 # Cache and logs (Symfony2)
 /m4105_smithe/app/cache/*
 /m4105_smithe/app/logs/*

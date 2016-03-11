@@ -1,3 +1,4 @@
+# Back-office
 s4smithe_vitrine_category:
     resource: "@s4smitheVitrineBundle/Resources/config/routing/category.yml"
     prefix:   /category
@@ -19,7 +20,7 @@ s4smithe_vitrine_commande:
         prefix:   /commande
 
 
-
+#Pages
 s4smithe_vitrine_homepage:
      path:     /accueil/{name}
      defaults: { _controller: s4smitheVitrineBundle:Default:index, name: Visiteur}
@@ -48,7 +49,7 @@ s4smithe_vitrine_articlesParMarque:
 
           
           
-          
+#Panier          
 s4smithe_vitrine_contenuPanier:
      path:     /panier/contenu
      defaults: { _controller: s4smitheVitrineBundle:Panier:contenuPanier}

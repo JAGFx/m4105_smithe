@@ -21,173 +21,231 @@
 
 	class PanierController extends Controller {
 
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
 		public function contenuPanierAction() {
 			$panier = $this->getSessionPanier();
 			$articles = array();
 			
-			if( !empty($panier->getArticles()) )
-				foreach ($panier->getArticles() as $item){
+			if ( !empty( $panier->getArticles() ) ) {
+				foreach ( $panier->getArticles() as $item ) {
 					$article = $this->getDoctrine()->getManager()
-						->getRepository('s4smitheVitrineBundle:Product')
-						->findOneById($item['id']);
+						->getRepository( 's4smitheVitrineBundle:Product' )
+						->findOneById( $item[ 'id' ] );
 					
 					$articles[] = array(
 						'article' => $article,
-						'qte' => $item['qte']
+						'qte'     => $item[ 'qte' ]
 					);
 				}
-						
-			return $this->render('s4smitheVitrineBundle:Panier:panier.html.twig', array(
-				'articles' => $articles,
-				'panier' => $panier,
-				'total' => $this->getTotalPanier()
-			));
+			}
+
+			return $this->render(
+				's4smitheVitrineBundle:Panier:panier.html.twig',
+				array(
+					'articles' => $articles,
+					'panier'   => $panier,
+					'total'    => $this->getTotalPanier()
+				)
+			);
 		}
-	
+
+		/**
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
 		public function emptyPanierAction() {
 			$panier = $this->getSessionPanier();
 			$panier->clearPanier();
 			
-			return $this->redirect($this->generateUrl('s4smithe_vitrine_contenuPanier'));
+			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
 		}
 		
+		/**
+		 * @param $articleId
+		 * @param $qte
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
 		public function ajouterUnArticleAction( $articleId, $qte ) {
 			$panier = $this->getSessionPanier();
 			
 			$panier->addArticle( $articleId, $qte );
 			
-			$this->setSessionPanier($panier);
+			$this->setSessionPanier( $panier );
 			
-			return $this->redirect($this->generateUrl('s4smithe_vitrine_contenuPanier'));
+			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
 		}
 		
+		/**
+		 * @param $articleId
+		 * @param $qte
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
 		public function enleverUnArticleAction( $articleId, $qte ) {
 			$panier = $this->getSessionPanier();
 			
 			$panier->removeOneArticle( $articleId, $qte );
 			
-			$this->setSessionPanier($panier);
+			$this->setSessionPanier( $panier );
 			
-			return $this->redirect($this->generateUrl('s4smithe_vitrine_contenuPanier'));
+			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
 		}
 		
+		/**
+		 * @param $articleId
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
 		public function enleverArticlesAction( $articleId ) {
 			$panier = $this->getSessionPanier();
 			
 			$panier->removeArticles( $articleId );
 			
-			$this->setSessionPanier($panier);
+			$this->setSessionPanier( $panier );
 			
-			return $this->redirect($this->generateUrl('s4smithe_vitrine_contenuPanier'));
+			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
 		}
 		
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
 		public function panierInfoHeaderAction() {
 			$panier = $this->getSessionPanier();
 			
-			$user = $this->findUser( $this->getSessionUser() );
+			$sessionUser = $this->getSessionUser();
+			$userConnected = ( $sessionUser >= 0 ) ? true : false;
 			
-			return $this->render('s4smitheVitrineBundle:Panier:panierInfo.html.twig', array(
-				'total' => $this->getTotalPanier(),
-				'nbArticle' =>$panier->getNbArticle(),
-				'pseudo' => $user->getName()
-			));
+			return $this->render(
+				's4smitheVitrineBundle:Panier:panierInfo.html.twig',
+				array(
+					'total'         => $this->getTotalPanier(),
+					'nbArticle'     => $panier->getNbArticle(),
+					'userConnected' => $userConnected
+				)
+			);
 		}
 		
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
+		// TODO: Fix bug ajout commandeWorklfow
 		public function validationAction() {
-			$commande = new Commande();
-			$commande->setDate( new \DateTime());
-			
+			// Création d'une commande pour l'Utilisateur
 			$user = $this->findUser( $this->getSessionUser() );
-			$commande->setClient( $user );
+			$commande = new Commande( $user );
 			
+			// Données panier
 			$panier = $this->getSessionPanier();
 			$articles = array();
 			$total = $this->getTotalPanier();
 			$nbArticles = $panier->getNbArticle();
 			
+			
 			$em = $this->getDoctrine()->getManager();
-			$em->persist($commande);
+			$em->persist( $commande );
 			$em->flush();
 			
-			if( !empty($panier->getArticles()) )
-				foreach ($panier->getArticles() as $item){
+			if ( !empty( $panier->getArticles() ) ) {
+				foreach ( $panier->getArticles() as $item ) {
+					// Objet Product récupérer avec l'ID de l'item
 					$article = $this->getDoctrine()->getManager()
-						->getRepository('s4smitheVitrineBundle:Product')
-						->findOneById($item['id']);
+						->getRepository( 's4smitheVitrineBundle:Product' )
+						->findOneById( $item[ 'id' ] );
 					
-					$ligneCommande = new CommandeWorkflow();
-					$ligneCommande->setCommande( $commande );
-					$ligneCommande->setProduct( $article );
-					$ligneCommande->setPrix( $article->getPrice() );
-					$ligneCommande->setQte( $item['qte'] );
+					// Création d'une ligne de commande
+					$ligneCommande = new CommandeWorkflow( $commande, $article, $item[ 'qte' ] );
 					
+					// Génération de chaque ligne pour la validation de la commande
 					$articles[] = array(
 						'article' => $article,
-						'qte' => $item['qte']
+						'qte'     => $item[ 'qte' ]
 					);
 					
-					var_dump($ligneCommande->getProduct()->getId());
+					//var_dump($ligneCommande->getProduct()->getId());
 					
 					
-					$em->persist($ligneCommande);
+					$em->persist( $ligneCommande );
 					$em->flush();
 				}
+			}
 			
+			// Création d'un nouveau panier vide => Commande validé
 			$this->setSessionPanier( new Panier() );
 			
-			return $this->render('s4smitheVitrineBundle:Panier:validation.html.twig', array(
-					'commande' => $commande,
-					'artiles' => $articles,
-					'total' => $total,
+			return $this->render(
+				's4smitheVitrineBundle:Panier:validation.html.twig',
+				array(
+					'commande'   => $commande,
+					'artiles'    => $articles,
+					'total'      => $total,
 					'nbArticles' => $nbArticles
-			));
+				)
+			);
 		}
 		
 		
-		
-		
-																																																																																																																																																																																																																																																																																																																																												
-		private function getSessionPanier(){
+		/**
+		 * @return mixed
+		 */
+		private function getSessionPanier() {
 			$session = $this->getRequest()->getSession();
 			
-			return $session->get('panier', new Panier() );
+			return $session->get( 'panier', new Panier() );
 		}
 		
-		private function getSessionUser(){
-			$session = $this->getRequest()->getSession();
-			
-			return $session->get('userId', '-1' );
-		}
-		
+		/**
+		 * @param $panier
+		 */
 		private function setSessionPanier( $panier ) {
 			$session = $this->getRequest()->getSession();
-			$session->set('panier', $panier);
+			$session->set( 'panier', $panier );
 		}
 		
-		private function getTotalPanier(){
+		/**
+		 * @return mixed
+		 */
+		private function getSessionUser() {
+			$session = $this->getRequest()->getSession();
+			
+			return $session->get( 'userId', '-1' );
+		}
+
+
+		/**
+		 * @return int
+		 */
+		private function getTotalPanier() {
 			$total = 0;
 			$panier = $this->getSessionPanier();
 			
-			if( !empty($panier->getArticles()) )
-				foreach ($panier->getArticles() as $item){
+			if ( !empty( $panier->getArticles() ) ) {
+				foreach ( $panier->getArticles() as $item ) {
 					$article = $this->getDoctrine()->getManager()
-						->getRepository('s4smitheVitrineBundle:Product')
-						->findOneById($item['id']);
+						->getRepository( 's4smitheVitrineBundle:Product' )
+						->findOneById( $item[ 'id' ] );
 					
-					$total += $article->getPrice() * $item['qte'];
+					$total += $article->getPrice() * $item[ 'qte' ];
 				}
+			}
 			
 			return $total;
 		}
 		
-		private function findUser($id){
+		/**
+		 * @param $id
+		 *
+		 * @return Client
+		 */
+		private function findUser( $id ) {
 			$user = $this->getDoctrine()->getManager()
-				->getRepository('s4smitheVitrineBundle:Client')
-				->findOneById($id);
+				->getRepository( 's4smitheVitrineBundle:Client' )
+				->findOneById( $id );
 			
-			if (!$user) {
+			if ( !$user ) {
 				$user = new Client();
-				$user->setName('Inconus');																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				
+				$user->setName( 'Inconus' );
 			}
 			
 			return $user;

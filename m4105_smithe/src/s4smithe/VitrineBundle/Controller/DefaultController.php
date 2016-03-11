@@ -14,8 +14,8 @@
 	namespace s4smithe\VitrineBundle\Controller;
 
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-	use Symfony\Component\BrowserKit\Response;
 	use s4smithe\VitrineBundle\Entity\Product;
+	use Symfony\Component\HttpFoundation\Response;
 
 	class DefaultController extends Controller {
 

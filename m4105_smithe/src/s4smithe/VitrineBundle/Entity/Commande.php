@@ -26,6 +26,12 @@
 		 * @var \s4smithe\VitrineBundle\Entity\Client
 		 */
 		private $client;
+		
+		public function __construct( \s4smithe\VitrineBundle\Entity\Client $client ) {
+			$this->setDate( new \DateTime() );
+			$this->setClient( $client );
+		}
+
 
 		/**
 		 * Get id
