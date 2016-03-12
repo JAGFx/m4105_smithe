@@ -1,0 +1,47 @@
+{% set namePage = "Mes Commandes" %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layout.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active">{{ namePage }}</li>
+{% endblock %}
+
+{% block content %}
+	
+	<div class="col-xs-12">
+		<table class="table table-responsive tableCustum">
+			
+			<tr>
+				<th>Commande</th><!--  Date + Client -->
+				<th class="text-center qte">ID</th>
+				<th class="text-center littleTD">Etat</th>
+				<th class="text-center littleTD">Prix TTC</th>
+				<th class="actionItem"></th>
+			</tr>
+
+			{% if commandes|length > 0 %}
+				{% for commande in commandes %}
+					<tr>
+						<td>
+							<div class="col-md-12">{{ commande.client.name }}</div>
+							<div class="col-md-12">
+								<span class="subInfoPanier">{{ commande.date|date('Y-m-d') }}</span>
+							</div>
+						</td>
+						<td class="text-center">{{ commande.id }}</td>
+						<td class="text-center">{% if commande.etat %}Valider{% else %}En Attente{% endif %}</td>
+						<td class="text-center">000.00€</td>
+						<td class="text-center actionItem">
+							<a href="{{ path('commande_show', { 'id': commande.id }) }}" class="badge badge-blue" title="Détail"><span class="fa fa-plus"></span></a>
+						</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<tr>
+					<td colspan="5"> Pas de commandes encore enregistrés</td>
+				</tr>
+			{% endif %}
+		</table>
+	</div>
+	
+{% endblock %}

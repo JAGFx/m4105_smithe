@@ -1,100 +1,92 @@
 <?php
 
-namespace s4smithe\VitrineBundle\Entity;
+	namespace s4smithe\VitrineBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+	/**
+	 * Category
+	 */
+	class Category {
 
-/**
- * Category
- */
-class Category
-{
-    /**
-     * @var integer
-     */
-    private $id;
+		/**
+		 * @var integer
+		 */
+		private $id;
 
-    /**
-     * @var string
-     */
-    private $name;
+		/**
+		 * @var string
+		 */
+		private $name;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $products;
+		/**
+		 * @var \Doctrine\Common\Collections\Collection
+		 */
+		private $products;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+		/**
+		 * Constructor
+		 */
+		public function __construct() {
+			$this->products = new \Doctrine\Common\Collections\ArrayCollection();
+		}
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+		/**
+		 * Get id
+		 *
+		 * @return integer 
+		 */
+		public function getId() {
+			return $this->id;
+		}
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Category
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
+		/**
+		 * Set name
+		 *
+		 * @param string $name
+		 * @return Category
+		 */
+		public function setName($name) {
+			$this->name = $name;
 
-        return $this;
-    }
+			return $this;
+		}
 
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+		/**
+		 * Get name
+		 *
+		 * @return string 
+		 */
+		public function getName() {
+			return $this->name;
+		}
 
-    /**
-     * Add products
-     *
-     * @param \s4smithe\VitrineBundle\Entity\Product $products
-     * @return Category
-     */
-    public function addProduct(\s4smithe\VitrineBundle\Entity\Product $products)
-    {
-        $this->products[] = $products;
+		/**
+		 * Add products
+		 *
+		 * @param \s4smithe\VitrineBundle\Entity\Product $products
+		 * @return Category
+		 */
+		public function addProduct(\s4smithe\VitrineBundle\Entity\Product $products) {
+			$this->products[] = $products;
 
-        return $this;
-    }
+			return $this;
+		}
 
-    /**
-     * Remove products
-     *
-     * @param \s4smithe\VitrineBundle\Entity\Product $products
-     */
-    public function removeProduct(\s4smithe\VitrineBundle\Entity\Product $products)
-    {
-        $this->products->removeElement($products);
-    }
+		/**
+		 * Remove products
+		 *
+		 * @param \s4smithe\VitrineBundle\Entity\Product $products
+		 */
+		public function removeProduct(\s4smithe\VitrineBundle\Entity\Product $products) {
+			$this->products->removeElement($products);
+		}
 
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-}
+		/**
+		 * Get products
+		 *
+		 * @return \Doctrine\Common\Collections\Collection 
+		 */
+		public function getProducts() {
+			return $this->products;
+		}
+
+	}
