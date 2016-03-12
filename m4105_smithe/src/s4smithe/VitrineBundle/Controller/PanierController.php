@@ -145,7 +145,6 @@
 			
 			$em = $this->getDoctrine()->getManager();
 			$em->persist( $commande );
-			$em->flush();
 			
 			if ( !empty( $panier->getArticles() ) ) {
 				foreach ( $panier->getArticles() as $item ) {
@@ -163,13 +162,12 @@
 						'qte'     => $item[ 'qte' ]
 					);
 					
-					//var_dump($ligneCommande->getProduct()->getId());
-					
-					
 					$em->persist( $ligneCommande );
-					$em->flush();
 				}
+
 			}
+
+			$em->flush();
 			
 			// Création d'un nouveau panier vide => Commande validé
 			$this->setSessionPanier( new Panier() );

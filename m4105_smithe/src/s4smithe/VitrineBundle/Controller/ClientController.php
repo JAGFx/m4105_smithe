@@ -110,7 +110,7 @@
 				$em->flush();
 
 				$this->setSessionUser( $client->getId() );
-				
+
 				return $this->redirectToRoute(
 					's4smithe_vitrine_homepage'
 				);
