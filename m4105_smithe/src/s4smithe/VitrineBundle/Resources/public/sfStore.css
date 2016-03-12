@@ -44,6 +44,15 @@
 		transition-duration: .1s;
 	}
 
+	header .navbar-nav > li.dropdown ul li a:hover { background: #5fc7ed; border-color: #fff; }
+
+	header .navbar-nav > li.dropdown ul li a {
+		padding:     10px 15px;
+		border-top:  0;
+		border-left: 2px transparent solid;
+	}
+
+	header .navbar li > a:hover,
 	header .navbar-nav > .active > a,
 	header .navbar-nav > .active > a:hover,
 	header .navbar-nav > .active > a:focus { transition-duration: .3s; }
@@ -254,10 +263,38 @@
 	}
 
 	.tableCustum .total { color: #5fc7ed; }
-	
-	
-	
-	
+
+	/*--------------------------------------------------------------------
+	---- Form
+	--------------------------------------------------------------------*/
+
+	.form-group,
+	.form-groupt:focus {
+		color:         #fff;
+		border:        0;
+		border-bottom: solid 1px #5fc7ed;
+	}
+
+	.form-group > label { font-size: 15px; }
+
+	.form-group input,
+	.form-group textarea,
+	.form-group select,
+	.form-group input:focus,
+	.form-group textarea:focus,
+	.form-group select:focus {
+		color:      #fff;
+		font-size:  14px;
+		background: none;
+		box-shadow: none;
+		padding:    0px 5px;
+		height:     35px;
+		background: #494e59;
+	}
+
+
+
+
 	
 	
 	

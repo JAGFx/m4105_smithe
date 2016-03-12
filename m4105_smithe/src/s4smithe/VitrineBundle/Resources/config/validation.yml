@@ -1,0 +1,38 @@
+# src/s4smithe/VitrineBundle/Resources/config/validation.yml
+s4smithe\VitrineBundle\Entity\Client:
+    properties:
+        name:
+            - NotBlank:
+                message: Le nom ne doit pas être vide.
+
+        password:
+            - NotBlank:
+                message: Le mot de passe ne doit pas être vide.
+
+            - Type: password
+
+        mail:
+            - NotBlank:
+                message: Le mot de passe ne doit pas être vide.
+
+            - Email:
+                message: L'email "{{ value }}" n'est pas un email valide.
+                checkMX: true
+
+        address:
+            - NotBlank:
+                message: L'adresse ne doit pas être vide.
+
+        tel:
+            - NotBlank:
+                message: L'adresse ne doit pas être vide.
+
+            - Regex:
+                pattern: '/^\+?\d{10,12}/'
+                message: Le numero de téléphone n'est pas valide. Ex: 0123456789 ou +33123456789.
+
+        dateBirthday:
+            - Date:
+                message: La date de naissance n'est pas valide.
+
+            - Type: \DateTime
