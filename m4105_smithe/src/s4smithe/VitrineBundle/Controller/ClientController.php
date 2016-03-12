@@ -151,7 +151,7 @@
 
 			$form->handleRequest( $request );
 
-			if ( $form->isSubmitted() && $form->isValid() ) {
+			if( $form->isSubmitted() ){
 				$user = $this->getDoctrine()->getManager()
 					->getRepository( 's4smitheVitrineBundle:Client' )
 					->findOneBy(
@@ -167,11 +167,9 @@
 					);
 				}
 
-
 				$this->setSessionUser( $user->getId() );
 
 				return $this->redirectToRoute( 's4smithe_vitrine_homepage' );
-
 			}
 
 			return $this->render(

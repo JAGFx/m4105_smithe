@@ -25,7 +25,7 @@ s4smithe\VitrineBundle\Entity\Client:
 
         tel:
             - NotBlank:
-                message: L'adresse ne doit pas être vide.
+                message: Le téléphone ne doit pas être vide.
 
             - Regex:
                 pattern: '/^\+?\d{10,12}/'

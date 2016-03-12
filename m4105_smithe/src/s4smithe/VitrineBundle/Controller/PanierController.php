@@ -13,11 +13,11 @@
 
 	namespace s4smithe\VitrineBundle\Controller;
 
-	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-	use s4smithe\VitrineBundle\Entity\Panier;
 	use s4smithe\VitrineBundle\Entity\Client;
 	use s4smithe\VitrineBundle\Entity\Commande;
 	use s4smithe\VitrineBundle\Entity\CommandeWorkflow;
+	use s4smithe\VitrineBundle\Entity\Panier;
+	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 	class PanierController extends Controller {
 
@@ -126,11 +126,11 @@
 				)
 			);
 		}
-		
+
+		// TODO: Fix bug ajout commandeWorklfow
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
-		// TODO: Fix bug ajout commandeWorklfow
 		public function validationAction() {
 			// Création d'une commande pour l'Utilisateur
 			$user = $this->findUser( $this->getSessionUser() );
@@ -202,12 +202,12 @@
 		}
 		
 		/**
-		 * @return mixed
+		 * @return int
 		 */
 		private function getSessionUser() {
 			$session = $this->getRequest()->getSession();
 			
-			return $session->get( 'userId', '-1' );
+			return $session->get( 'userId', -1 );
 		}
 
 

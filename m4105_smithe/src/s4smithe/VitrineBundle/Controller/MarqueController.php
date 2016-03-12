@@ -2,10 +2,9 @@
 
 	namespace s4smithe\VitrineBundle\Controller;
 
-	use Symfony\Component\HttpFoundation\Request;
-	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use s4smithe\VitrineBundle\Entity\Marque;
-	use s4smithe\VitrineBundle\Form\MarqueType;
+	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\HttpFoundation\Request;
 
 	/**
 	 * Marque controller.

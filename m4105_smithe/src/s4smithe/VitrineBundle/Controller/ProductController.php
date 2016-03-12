@@ -2,10 +2,9 @@
 
 	namespace s4smithe\VitrineBundle\Controller;
 
-	use Symfony\Component\HttpFoundation\Request;
-	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use s4smithe\VitrineBundle\Entity\Product;
-	use s4smithe\VitrineBundle\Form\ProductType;
+	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\HttpFoundation\Request;
 
 	/**
 	 * Product controller.

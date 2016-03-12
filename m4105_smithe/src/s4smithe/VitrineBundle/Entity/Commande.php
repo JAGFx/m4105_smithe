@@ -36,7 +36,7 @@
 		/**
 		 * Get id
 		 *
-		 * @return integer 
+		 * @return integer
 		 */
 		public function getId() {
 			return $this->id;
@@ -46,9 +46,10 @@
 		 * Set date
 		 *
 		 * @param \DateTime $date
+		 *
 		 * @return Commande
 		 */
-		public function setDate($date) {
+		public function setDate( $date ) {
 			$this->date = $date;
 
 			return $this;
@@ -57,7 +58,7 @@
 		/**
 		 * Get date
 		 *
-		 * @return \DateTime 
+		 * @return \DateTime
 		 */
 		public function getDate() {
 			return $this->date;
@@ -67,9 +68,10 @@
 		 * Set etat
 		 *
 		 * @param boolean $etat
+		 *
 		 * @return Commande
 		 */
-		public function setEtat($etat) {
+		public function setEtat( $etat ) {
 			$this->etat = $etat;
 
 			return $this;
@@ -78,7 +80,7 @@
 		/**
 		 * Get etat
 		 *
-		 * @return boolean 
+		 * @return boolean
 		 */
 		public function getEtat() {
 			return $this->etat;
@@ -88,9 +90,10 @@
 		 * Set client
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Client $client
+		 *
 		 * @return Commande
 		 */
-		public function setClient(\s4smithe\VitrineBundle\Entity\Client $client = null) {
+		public function setClient( \s4smithe\VitrineBundle\Entity\Client $client = null ) {
 			$this->client = $client;
 
 			return $this;
@@ -99,7 +102,7 @@
 		/**
 		 * Get client
 		 *
-		 * @return \s4smithe\VitrineBundle\Entity\Client 
+		 * @return \s4smithe\VitrineBundle\Entity\Client
 		 */
 		public function getClient() {
 			return $this->client;

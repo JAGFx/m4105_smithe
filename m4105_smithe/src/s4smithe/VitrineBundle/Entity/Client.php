@@ -2,8 +2,6 @@
 
 	namespace s4smithe\VitrineBundle\Entity;
 
-	use Doctrine\ORM\Mapping as ORM;
-
 	/**
 	 * Client
 	 */
@@ -54,7 +52,7 @@
 		/**
 		 * Get id
 		 *
-		 * @return integer 
+		 * @return integer
 		 */
 		public function getId() {
 			return $this->id;
@@ -64,9 +62,10 @@
 		 * Set name
 		 *
 		 * @param string $name
+		 *
 		 * @return Client
 		 */
-		public function setName($name) {
+		public function setName( $name ) {
 			$this->name = $name;
 
 			return $this;
@@ -75,7 +74,7 @@
 		/**
 		 * Get name
 		 *
-		 * @return string 
+		 * @return string
 		 */
 		public function getName() {
 			return $this->name;
@@ -85,6 +84,7 @@
 		 * Set password
 		 *
 		 * @param string $password
+		 *
 		 * @return Client
 		 */
 		public function setPassword( $password ) {
@@ -106,9 +106,10 @@
 		 * Set mail
 		 *
 		 * @param string $mail
+		 *
 		 * @return Client
 		 */
-		public function setMail($mail) {
+		public function setMail( $mail ) {
 			$this->mail = $mail;
 
 			return $this;
@@ -117,7 +118,7 @@
 		/**
 		 * Get mail
 		 *
-		 * @return string 
+		 * @return string
 		 */
 		public function getMail() {
 			return $this->mail;
@@ -127,9 +128,10 @@
 		 * Set address
 		 *
 		 * @param string $address
+		 *
 		 * @return Client
 		 */
-		public function setAddress($address) {
+		public function setAddress( $address ) {
 			$this->address = $address;
 
 			return $this;
@@ -138,7 +140,7 @@
 		/**
 		 * Get address
 		 *
-		 * @return string 
+		 * @return string
 		 */
 		public function getAddress() {
 			return $this->address;
@@ -151,7 +153,7 @@
 		 *
 		 * @return Client
 		 */
-		public function setTel($tel) {
+		public function setTel( $tel ) {
 			$this->tel = $tel;
 
 			return $this;
@@ -160,7 +162,7 @@
 		/**
 		 * Get tel
 		 *
-		 * @return string 
+		 * @return string
 		 */
 		public function getTel() {
 			return $this->tel;
@@ -173,7 +175,7 @@
 		 *
 		 * @return Client
 		 */
-		public function setDateBirthday($dateBirthday) {
+		public function setDateBirthday( $dateBirthday ) {
 			$this->dateBirthday = $dateBirthday;
 
 			return $this;
@@ -182,7 +184,7 @@
 		/**
 		 * Get dateBirthday
 		 *
-		 * @return \DateTime 
+		 * @return \DateTime
 		 */
 		public function getDateBirthday() {
 			return $this->dateBirthday;
@@ -202,5 +204,26 @@
 			return $this->commandes;
 		}
 
+
+		/**
+		 * Add commandes
+		 *
+		 * @param \s4smithe\VitrineBundle\Entity\Commande $commandes
+		 *
+		 * @return Client
+		 */
+		public function addCommande( \s4smithe\VitrineBundle\Entity\Commande $commandes ) {
+			$this->commandes[] = $commandes;
+
+			return $this;
+		}
+
+		/**
+		 * Remove commandes
+		 *
+		 * @param \s4smithe\VitrineBundle\Entity\Commande $commandes
+		 */
+		public function removeCommande( \s4smithe\VitrineBundle\Entity\Commande $commandes ) {
+			$this->commandes->removeElement( $commandes );
+		}
 	}
-	

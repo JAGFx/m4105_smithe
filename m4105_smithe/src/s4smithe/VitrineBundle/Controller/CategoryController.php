@@ -2,10 +2,9 @@
 
 	namespace s4smithe\VitrineBundle\Controller;
 
-	use Symfony\Component\HttpFoundation\Request;
-	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use s4smithe\VitrineBundle\Entity\Category;
-	use s4smithe\VitrineBundle\Form\CategoryType;
+	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\HttpFoundation\Request;
 
 	/**
 	 * Category controller.
