@@ -110,13 +110,10 @@
 				$em->flush();
 
 				$this->setSessionUser( $client->getId() );
-
-				var_dump( $form->isSubmitted() );
-				var_dump( $form->isValid() );
-
-				/*return $this->redirectToRoute(
+				
+				return $this->redirectToRoute(
 					's4smithe_vitrine_homepage'
-				);*/
+				);
 
 			}
 
