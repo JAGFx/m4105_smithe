@@ -6,7 +6,7 @@
 		Modification :
 			> 08/02/2016		Mise en place du name + mentions
 			> 12/02/2016		Ajout template
-/
+	
 		Ceci est le controlleur par défaut de l'application Vitrine
 	*/
 	
