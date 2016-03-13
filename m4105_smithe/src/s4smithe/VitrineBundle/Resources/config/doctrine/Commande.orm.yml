@@ -13,6 +13,11 @@ s4smithe\VitrineBundle\Entity\Commande:
         etat:
             type: boolean
 
+        prix:
+            type: float
+            options:
+                default: 0.0
+
     manyToOne:						 # Dans l’entité Product on ajoute un champ
         client:						  # category qui pointe vers une entité Category
             targetEntity: Client			# category_id sera, dans la table, le nom de la clé

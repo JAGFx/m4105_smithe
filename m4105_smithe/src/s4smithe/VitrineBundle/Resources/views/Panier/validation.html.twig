@@ -20,12 +20,13 @@
 
 {% block content %}
 	<div style="padding-left: 15px;">
-		<table class="table table-responsive" id="panierList">	
+		<table class="table table-responsive tableCustum" id="panierList" >
 			<tr>
 				<th>Article</th>
 				<th class="text-center qte">Qté</th>
 				<th class="text-center littleTD">Prix U. TTC</th>
 				<th class="text-center littleTD">Total TTC</th>
+				<td class="actionItem" ></td >
 			</tr>
 
 			{% if articles|length > 0 %}
@@ -41,6 +42,7 @@
 						<td class="text-center"><span class="badge badge-blue">x {{ item.qte }}</span></td>
 						<td class="text-center">{{ item.article.price|number_format(2, ',', ' ') }} €</td>
 						<td class="text-center">{{ (item.qte * item.article.price)|number_format(2, ',', ' ') }} €</td>
+						<td ></td >
 					</tr>
 				{% endfor %}
 				<tr>

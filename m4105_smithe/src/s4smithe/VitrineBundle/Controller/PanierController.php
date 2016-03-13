@@ -132,7 +132,6 @@
 			);
 		}
 
-		// TODO: Fix bug ajout commandeWorklfow
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
@@ -140,6 +139,7 @@
 			// Création d'une commande pour l'Utilisateur
 			$user = $this->findUser( $this->getSessionUser() );
 			$commande = new Commande( $user );
+			$prixCommande = 0;
 			
 			// Données panier
 			$panier = $this->getSessionPanier();
@@ -166,12 +166,14 @@
 						'article' => $article,
 						'qte'     => $item[ 'qte' ]
 					);
+					$prixCommande += $article->getPrice();
 					
 					$em->persist( $ligneCommande );
 				}
 
 			}
 
+			$commande->setPrix( $prixCommande );
 			$em->flush();
 			
 			// Création d'un nouveau panier vide => Commande validé
@@ -181,7 +183,7 @@
 				's4smitheVitrineBundle:Panier:validation.html.twig',
 				array(
 					'commande'   => $commande,
-					'artiles'    => $articles,
+					'articles'   => $articles,
 					'total'      => $total,
 					'nbArticles' => $nbArticles
 				)

@@ -27,9 +27,10 @@
 		 */
 		private $client;
 		
-		public function __construct( \s4smithe\VitrineBundle\Entity\Client $client ) {
+		public function __construct( \s4smithe\VitrineBundle\Entity\Client $client, $prix = null ) {
 			$this->setDate( new \DateTime() );
 			$this->setClient( $client );
+			$this->setPrix( $prix );
 		}
 
 
@@ -108,4 +109,31 @@
 			return $this->client;
 		}
 
+		/**
+		 * @var float
+		 */
+		private $prix;
+
+
+		/**
+		 * Set prix
+		 *
+		 * @param float $prix
+		 *
+		 * @return Commande
+		 */
+		public function setPrix( $prix ) {
+			$this->prix = $prix;
+
+			return $this;
+		}
+
+		/**
+		 * Get prix
+		 *
+		 * @return float
+		 */
+		public function getPrix() {
+			return $this->prix;
+		}
 	}

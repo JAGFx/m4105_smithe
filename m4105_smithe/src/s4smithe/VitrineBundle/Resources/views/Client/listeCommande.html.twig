@@ -20,22 +20,32 @@
 			</tr>
 
 			{% if commandes|length > 0 %}
+				{% set totalCommande = 0 %}
 				{% for commande in commandes %}
+					{% set totalCommande = totalCommande + commande.prix %}
 					<tr>
 						<td>
-							<div class="col-md-12">{{ commande.client.name }}</div>
+							<div class="col-md-12" >{{ commande.date|date('Y-m-d H:i:s') }}</div >
 							<div class="col-md-12">
-								<span class="subInfoPanier">{{ commande.date|date('Y-m-d') }}</span>
+								<span class="subInfoPanier" >{{ commande.client.name }}</span >
 							</div>
 						</td>
 						<td class="text-center">{{ commande.id }}</td>
 						<td class="text-center">{% if commande.etat %}Valider{% else %}En Attente{% endif %}</td>
-						<td class="text-center">000.00€</td>
+						<td class="text-center" >{{ commande.prix|number_format(2, ',', ' ') }} €</td >
 						<td class="text-center actionItem">
 							<a href="{{ path('commande_show', { 'id': commande.id }) }}" class="badge badge-blue" title="Détail"><span class="fa fa-plus"></span></a>
 						</td>
 					</tr>
 				{% endfor %}
+				<tr >
+					<td >
+						<span class="text-small" >{{ commandes|length }} commande(s) sur la période</span >
+					</td >
+					<td colspan="2" class="text-right" style="font-variant: small-caps;" >Total de Periode</td >
+					<td class="text-center total" >{{ totalCommande|number_format(2, ',', ' ') }} €</td >
+					<td ></td >
+				</tr >
 			{% else %}
 				<tr>
 					<td colspan="5"> Pas de commandes encore enregistrés</td>
