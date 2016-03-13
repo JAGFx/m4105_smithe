@@ -1,11 +1,16 @@
 <?php
 
-	namespace s4smithe\VitrineBundle\Form;
+	namespace s4smithe\VitrineBundle\Form\Type;
 
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\FormBuilderInterface;
 	use Symfony\Component\OptionsResolver\OptionsResolver;
 
+	/**
+	 * Class ClientType
+	 *
+	 * @package s4smithe\VitrineBundle\Form\Type
+	 */
 	class ClientType extends AbstractType {
 
 		/**
@@ -34,4 +39,3 @@
 		}
 
 	}
-	

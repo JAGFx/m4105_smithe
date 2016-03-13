@@ -101,7 +101,7 @@
 		 */
 		public function newAction( Request $request ) {
 			$client = new Client();
-			$form = $this->createForm( 's4smithe\VitrineBundle\Form\ClientType', $client );
+			$form = $this->createForm( 's4smithe\VitrineBundle\Form\Type\ClientType', $client );
 			$form->handleRequest( $request );
 
 			if ( $form->isSubmitted() && $form->isValid() ) {
@@ -234,7 +234,7 @@
 		 */
 		public function editAction( Request $request, Client $client ) {
 			$deleteForm = $this->createDeleteForm( $client );
-			$editForm = $this->createForm( 's4smithe\VitrineBundle\Form\ClientType', $client );
+			$editForm = $this->createForm( 's4smithe\VitrineBundle\Form\Type\ClientType', $client );
 			$editForm->handleRequest( $request );
 
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
@@ -276,4 +276,3 @@
 			return $this->redirectToRoute( 'client_index' );
 		}
 	}
-	

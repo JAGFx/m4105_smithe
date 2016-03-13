@@ -31,8 +31,10 @@
 		 *
 		 */
 		public function newAction(Request $request) {
-			$commande = new Commande();
-			$form = $this->createForm('s4smithe\VitrineBundle\Form\CommandeType', $commande);
+			$user = $this->findUser( $this->getSessionUser() );
+			$commande = new Commande( $user );
+
+			$form = $this->createForm('s4smithe\VitrineBundle\Form\Type\CommandeType', $commande);
 			$form->handleRequest($request);
 
 			if ($form->isSubmitted() && $form->isValid()) {
@@ -68,7 +70,7 @@
 		 */
 		public function editAction(Request $request, Commande $commande) {
 			$deleteForm = $this->createDeleteForm($commande);
-			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\CommandeType', $commande);
+			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\Type\CommandeType', $commande);
 			$editForm->handleRequest($request);
 
 			if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -118,5 +120,14 @@
 			;
 		}
 
+
+		/**
+		 * @return int
+		 */
+		private function getSessionUser() {
+			$session = $this->getRequest()->getSession();
+
+			return $session->get( 'userId', -1 );
+		}
+
 	}
-	

@@ -15,10 +15,15 @@
 
 	use s4smithe\VitrineBundle\Entity\Client;
 	use s4smithe\VitrineBundle\Entity\Commande;
-	use s4smithe\VitrineBundle\Entity\CommandeWorkflow;
+	use s4smithe\VitrineBundle\Entity\LigneCommande;
 	use s4smithe\VitrineBundle\Entity\Panier;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+	/**
+	 * Class PanierController
+	 *
+	 * @package s4smithe\VitrineBundle\Controller
+	 */
 	class PanierController extends Controller {
 
 		/**
@@ -154,7 +159,7 @@
 						->findOneById( $item[ 'id' ] );
 					
 					// Création d'une ligne de commande
-					$ligneCommande = new CommandeWorkflow( $commande, $article, $item[ 'qte' ] );
+					$ligneCommande = new LigneCommande( $commande, $article, $item[ 'qte' ] );
 					
 					// Génération de chaque ligne pour la validation de la commande
 					$articles[] = array(

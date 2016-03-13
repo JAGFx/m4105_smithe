@@ -32,7 +32,7 @@
 		 */
 		public function newAction(Request $request) {
 			$category = new Category();
-			$form = $this->createForm('s4smithe\VitrineBundle\Form\CategoryType', $category);
+			$form = $this->createForm('s4smithe\VitrineBundle\Form\Type\CategoryType', $category);
 			$form->handleRequest($request);
 
 			if ($form->isSubmitted() && $form->isValid()) {
@@ -68,7 +68,7 @@
 		 */
 		public function editAction(Request $request, Category $category) {
 			$deleteForm = $this->createDeleteForm($category);
-			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\CategoryType', $category);
+			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\Type\CategoryType', $category);
 			$editForm->handleRequest($request);
 
 			if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -104,6 +104,9 @@
 		}
 		
 		
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
 		public function listeCategorieAction() {
 			$categories = $this->findAllCtge();
 			
@@ -112,6 +115,9 @@
 			));
 		}
 		
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
 		public function listeCategorieFooterAction() {
 			$categories = $this->findAllCtge();
 			
@@ -120,6 +126,11 @@
 			));
 		}
 		
+		/**
+		 * @param $catId
+		 *
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
 		public function articlesParCategorieAction( $catId ) {
 			$catObj = $this->findCtge($catId);
 			
@@ -129,12 +140,9 @@
 		}
 		
 		
-		
-		
-		
-
-		
-		
+		/**
+		 * @return array
+		 */
 		private function findAllCtge(){
 			$ctges = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Category')
@@ -147,6 +155,11 @@
 			return $ctges;
 		}
 		
+		/**
+		 * @param $id
+		 *
+		 * @return mixed
+		 */
 		private function findCtge($id){
 			$ctge = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Category')
@@ -176,4 +189,3 @@
 		}
 
 	}
-	

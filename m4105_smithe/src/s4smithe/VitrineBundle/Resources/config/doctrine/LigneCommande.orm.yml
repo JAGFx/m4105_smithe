@@ -1,7 +1,7 @@
-s4smithe\VitrineBundle\Entity\CommandeWorkflow:
+s4smithe\VitrineBundle\Entity\LigneCommande:
     type: entity
-    table: commandeworkflow
-    repositoryClass: s4smithe\VitrineBundle\Repository\CommandeWorkflowRepository
+    table: lignecommande
+    repositoryClass: s4smithe\VitrineBundle\Repository\LigneCommandeRepository
     id:
         commande:
             associationKey: true
@@ -17,7 +17,7 @@ s4smithe\VitrineBundle\Entity\CommandeWorkflow:
     manyToOne:								 # Dans l’entité Product on ajoute un champ
         product:								# category qui pointe vers une entité Category
              targetEntity: Product						 # category_id sera, dans la table, le nom de la clé
-             inversedBy: commandeworkflows					 # étrangère qui référence le champ id d’une
+             inversedBy: lignesommandes					 # étrangère qui référence le champ id d’une
              joinColumn:								# Category
                  name: product_id
                  referencedColumnName: id
@@ -25,7 +25,7 @@ s4smithe\VitrineBundle\Entity\CommandeWorkflow:
                  
         commande:								# category qui pointe vers une entité Category
              targetEntity: Commande						 # category_id sera, dans la table, le nom de la clé
-             inversedBy: commandeworkflows					 # étrangère qui référence le champ id d’une
+             inversedBy: lignecommandes					 # étrangère qui référence le champ id d’une
              joinColumn:								# Category
                  name: commande_id
                  referencedColumnName: id

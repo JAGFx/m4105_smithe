@@ -3,9 +3,9 @@
 	namespace s4smithe\VitrineBundle\Entity;
 
 	/**
-	 * CommandeWorkflow
+	 * LigneCommande
 	 */
-	class CommandeWorkflow {
+	class LigneCommande {
 
 		/**
 		 * @var integer
@@ -27,6 +27,13 @@
 		 */
 		private $commande;
 
+		/**
+		 * LigneCommande constructor.
+		 *
+		 * @param Commande $commande
+		 * @param Product  $product
+		 * @param          $qte
+		 */
 		public function __construct(
 			\s4smithe\VitrineBundle\Entity\Commande $commande,
 			\s4smithe\VitrineBundle\Entity\Product $product,
@@ -42,7 +49,8 @@
 		 * Set qte
 		 *
 		 * @param integer $qte
-		 * @return CommandeWorkflow
+		 *
+*@return LigneCommande
 		 */
 		public function setQte($qte) {
 			$this->qte = $qte;
@@ -63,7 +71,8 @@
 		 * Set prix
 		 *
 		 * @param float $prix
-		 * @return CommandeWorkflow
+		 *
+*@return LigneCommande
 		 */
 		public function setPrix($prix) {
 			$this->prix = $prix;
@@ -84,7 +93,8 @@
 		 * Set product
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Product $product
-		 * @return CommandeWorkflow
+		 *
+*@return LigneCommande
 		 */
 		public function setProduct( \s4smithe\VitrineBundle\Entity\Product $product ) {
 			$this->product = $product;
@@ -105,7 +115,8 @@
 		 * Set commande
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Commande $commande
-		 * @return CommandeWorkflow
+		 *
+*@return LigneCommande
 		 */
 		public function setCommande(\s4smithe\VitrineBundle\Entity\Commande $commande) {
 			$this->commande = $commande;

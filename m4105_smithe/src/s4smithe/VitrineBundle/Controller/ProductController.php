@@ -32,7 +32,7 @@
 		 */
 		public function newAction(Request $request) {
 			$product = new Product();
-			$form = $this->createForm('s4smithe\VitrineBundle\Form\ProductType', $product);
+			$form = $this->createForm('s4smithe\VitrineBundle\Form\Type\ProductType', $product);
 			$form->handleRequest($request);
 
 			if ($form->isSubmitted() && $form->isValid()) {
@@ -68,7 +68,7 @@
 		 */
 		public function editAction(Request $request, Product $product) {
 			$deleteForm = $this->createDeleteForm($product);
-			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\ProductType', $product);
+			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\Type\ProductType', $product);
 			$editForm->handleRequest($request);
 
 			if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -119,4 +119,3 @@
 		}
 
 	}
-	

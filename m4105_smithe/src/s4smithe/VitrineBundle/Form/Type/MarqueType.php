@@ -1,6 +1,6 @@
 <?php
 
-	namespace s4smithe\VitrineBundle\Form;
+	namespace s4smithe\VitrineBundle\Form\Type;
 
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\FormBuilderInterface;

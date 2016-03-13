@@ -1,12 +1,17 @@
 <?php
 
-namespace s4smithe\VitrineBundle\Form;
+namespace s4smithe\VitrineBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CommandeType extends AbstractType
+/**
+ * Class ProductType
+ *
+ * @package s4smithe\VitrineBundle\Form\Type
+ */
+class ProductType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,9 +20,11 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', 'datetime')
-            ->add('etat')
-            ->add('client')
+            ->add('name')
+            ->add('price')
+            ->add('description')
+            ->add('category')
+            ->add('marque')
         ;
     }
     
@@ -27,7 +34,7 @@ class CommandeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 's4smithe\VitrineBundle\Entity\Commande'
+            'data_class' => 's4smithe\VitrineBundle\Entity\Product'
         ));
     }
 }

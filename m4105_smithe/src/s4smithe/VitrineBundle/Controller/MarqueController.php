@@ -32,7 +32,7 @@
 		 */
 		public function newAction(Request $request) {
 			$marque = new Marque();
-			$form = $this->createForm('s4smithe\VitrineBundle\Form\MarqueType', $marque);
+			$form = $this->createForm('s4smithe\VitrineBundle\Form\Type\MarqueType', $marque);
 			$form->handleRequest($request);
 
 			if ($form->isSubmitted() && $form->isValid()) {
@@ -68,7 +68,7 @@
 		 */
 		public function editAction(Request $request, Marque $marque) {
 			$deleteForm = $this->createDeleteForm($marque);
-			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\MarqueType', $marque);
+			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\Type\MarqueType', $marque);
 			$editForm->handleRequest($request);
 
 			if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -104,7 +104,9 @@
 		}
 		
 		
-		
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
 		public function listeMarqueAction() {
 			$marques = $this->findAllMarque();
 			
@@ -113,6 +115,9 @@
 			));
 		}
 
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
 		public function listeMarqueFooterAction() {
 			$marques = $this->findAllMarque( 5 );
 			
@@ -121,6 +126,11 @@
 			));
 		}
 		
+		/**
+		 * @param $markId
+		 *
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
 		public function articlesParMarqueAction( $markId ) {
 			$markObj = $this->findMarque($markId);
 			
@@ -130,7 +140,11 @@
 		}
 
 		
-		
+		/**
+		 * @param int $limit
+		 *
+		 * @return array
+		 */
 		private function findAllMarque( $limit = -1 ){
 			
 			$marque = $this->getDoctrine()->getManager()
@@ -144,6 +158,11 @@
 			return $marque;
 		}
 		
+		/**
+		 * @param $id
+		 *
+		 * @return mixed
+		 */
 		private function findMarque($id){
 			$mark = $this->getDoctrine()->getManager()
 				->getRepository('s4smitheVitrineBundle:Marque')
@@ -174,4 +193,3 @@
 		}
 
 	}
-	
