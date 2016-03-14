@@ -27,10 +27,9 @@
 		 */
 		private $client;
 		
-		public function __construct( \s4smithe\VitrineBundle\Entity\Client $client, $prix = null ) {
+		public function __construct( \s4smithe\VitrineBundle\Entity\Client $client ) {
 			$this->setDate( new \DateTime() );
 			$this->setClient( $client );
-			$this->setPrix( $prix );
 		}
 
 
@@ -110,30 +109,49 @@
 		}
 
 		/**
-		 * @var float
+		 * @var \Doctrine\Common\Collections\Collection
 		 */
-		private $prix;
+		private $lignesommandes;
 
 
 		/**
-		 * Set prix
+		 * Add lignesommandes
 		 *
-		 * @param float $prix
+		 * @param \s4smithe\VitrineBundle\Entity\LigneCommande $lignesommandes
 		 *
 		 * @return Commande
 		 */
-		public function setPrix( $prix ) {
-			$this->prix = $prix;
+		public function addLignesommande( \s4smithe\VitrineBundle\Entity\LigneCommande $lignesommandes ) {
+			$this->lignesommandes[] = $lignesommandes;
 
 			return $this;
 		}
 
 		/**
-		 * Get prix
+		 * Remove lignesommandes
 		 *
-		 * @return float
+		 * @param \s4smithe\VitrineBundle\Entity\LigneCommande $lignesommandes
 		 */
-		public function getPrix() {
-			return $this->prix;
+		public function removeLignesommande( \s4smithe\VitrineBundle\Entity\LigneCommande $lignesommandes ) {
+			$this->lignesommandes->removeElement( $lignesommandes );
+		}
+
+		/**
+		 * Get lignesommandes
+		 *
+		 * @return \Doctrine\Common\Collections\Collection
+		 */
+		public function getLignesommandes() {
+			return $this->lignesommandes;
+		}
+
+		public function getPrixCommande() {
+			$total = 0;
+
+			foreach ( $this->getLignesommandes() as $ligne ) {
+				$total += $ligne->getPrix();
+			}
+
+			return $total;
 		}
 	}

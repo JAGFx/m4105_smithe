@@ -155,56 +155,61 @@
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function validationAction() {
-			// Création d'une commande pour l'Utilisateur
-			$user = $this->findUser( $this->getSessionUser() );
-			$commande = new Commande( $user );
-			$prixCommande = 0;
-			
-			// Données panier
-			$panier = $this->getSessionPanier();
-			$articles = array();
-			$total = $this->getTotalPanier();
-			$nbArticles = $panier->getNbArticle();
-			
-			
-			$em = $this->getDoctrine()->getManager();
-			$em->persist( $commande );
+			// Utilisateur connecté
+			if ( $this->userLogged() ) {
+				// Création d'une commande pour l'Utilisateur
+				$user = $this->findUser( $this->getSessionUser() );
+				$commande = new Commande( $user );
 
-			foreach ( $panier->getArticles() as $item ) {
-				// Objet Product récupérer avec l'ID de l'item
-				$article = $this->getArticleObj( $item[ 'id' ] );
+				// Données panier
+				$panier = $this->getSessionPanier();
+				$articles = array();
 
-				// Création d'une ligne de commande
-				$ligneCommande = new LigneCommande( $commande, $article, $item[ 'qte' ] );
 
-				// Génération de chaque ligne pour la validation de la commande
-				$articles[] = array(
-					'article' => $article,
-					'qte'     => $item[ 'qte' ]
+				$em = $this->getDoctrine()->getManager();
+				$em->persist( $commande );
+
+				foreach ( $panier->getArticles() as $item ) {
+					// Objet Product récupérer avec l'ID de l'item
+					$article = $this->getArticleObj( $item[ 'id' ] );
+					$article->setStock( $article->getStock() - $item[ 'qte' ] );
+
+					// Création d'une ligne de commande
+					$ligneCommande = new LigneCommande( $commande, $article, $item[ 'qte' ] );
+					$commande->addLignesommande( $ligneCommande );
+
+					// Génération de chaque ligne pour la validation de la commande
+					$articles[] = array(
+						'article' => $article,
+						'qte'     => $item[ 'qte' ]
+					);
+
+					$em->persist( $article );
+					$em->persist( $ligneCommande );
+				}
+
+				$em->flush();
+
+				// Création d'un nouveau panier vide => Commande validé
+				$this->setSessionPanier( new Panier() );
+
+				return $this->render(
+					's4smitheVitrineBundle:Panier:validation.html.twig',
+					array(
+						'articles'   => $articles,
+						'total'      => $commande->getPrixCommande(),
+						'nbArticles' => $panier->getNbArticle()
+					)
 				);
-				$prixCommande += $article->getPrice();
 
-				$em->persist( $ligneCommande );
+				// Utilisateur non connecté
+			} else {
+				return $this->redirectToRoute( 'client_login' );
 			}
 
-			$commande->setPrix( $prixCommande );
-			$em->flush();
-			
-			// Création d'un nouveau panier vide => Commande validé
-			$this->setSessionPanier( new Panier() );
-			
-			return $this->render(
-				's4smitheVitrineBundle:Panier:validation.html.twig',
-				array(
-					'commande'   => $commande,
-					'articles'   => $articles,
-					'total'      => $total,
-					'nbArticles' => $nbArticles
-				)
-			);
 		}
-		
-		
+
+
 		/**
 		 * @return mixed
 		 */
@@ -227,7 +232,7 @@
 		 */
 		private function getSessionUser() {
 			$session = $this->getRequest()->getSession();
-			
+
 			return $session->get( 'userId', -1 );
 		}
 
@@ -279,5 +284,12 @@
 			}
 			
 			return $user;
+		}
+
+		/**
+		 * @return bool
+		 */
+		private function userLogged() {
+			return ( $this->getSessionUser() > 0 ) ? true : false;
 		}
 	}
