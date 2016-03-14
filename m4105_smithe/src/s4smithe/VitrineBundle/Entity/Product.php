@@ -40,7 +40,7 @@
 		/**
 		 * Get id
 		 *
-		 * @return integer 
+		 * @return integer
 		 */
 		public function getId() {
 			return $this->id;
@@ -50,9 +50,10 @@
 		 * Set name
 		 *
 		 * @param string $name
+		 *
 		 * @return Product
 		 */
-		public function setName($name) {
+		public function setName( $name ) {
 			$this->name = $name;
 
 			return $this;
@@ -61,7 +62,7 @@
 		/**
 		 * Get name
 		 *
-		 * @return string 
+		 * @return string
 		 */
 		public function getName() {
 			return $this->name;
@@ -71,9 +72,10 @@
 		 * Set price
 		 *
 		 * @param string $price
+		 *
 		 * @return Product
 		 */
-		public function setPrice($price) {
+		public function setPrice( $price ) {
 			$this->price = $price;
 
 			return $this;
@@ -82,7 +84,7 @@
 		/**
 		 * Get price
 		 *
-		 * @return string 
+		 * @return string
 		 */
 		public function getPrice() {
 			return $this->price;
@@ -92,9 +94,10 @@
 		 * Set description
 		 *
 		 * @param string $description
+		 *
 		 * @return Product
 		 */
-		public function setDescription($description) {
+		public function setDescription( $description ) {
 			$this->description = $description;
 
 			return $this;
@@ -103,7 +106,7 @@
 		/**
 		 * Get description
 		 *
-		 * @return string 
+		 * @return string
 		 */
 		public function getDescription() {
 			return $this->description;
@@ -113,9 +116,10 @@
 		 * Set category
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Category $category
+		 *
 		 * @return Product
 		 */
-		public function setCategory(\s4smithe\VitrineBundle\Entity\Category $category = null) {
+		public function setCategory( \s4smithe\VitrineBundle\Entity\Category $category = null ) {
 			$this->category = $category;
 
 			return $this;
@@ -124,7 +128,7 @@
 		/**
 		 * Get category
 		 *
-		 * @return \s4smithe\VitrineBundle\Entity\Category 
+		 * @return \s4smithe\VitrineBundle\Entity\Category
 		 */
 		public function getCategory() {
 			return $this->category;
@@ -134,9 +138,10 @@
 		 * Set marque
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Marque $marque
+		 *
 		 * @return Product
 		 */
-		public function setMarque(\s4smithe\VitrineBundle\Entity\Marque $marque = null) {
+		public function setMarque( \s4smithe\VitrineBundle\Entity\Marque $marque = null ) {
 			$this->marque = $marque;
 
 			return $this;
@@ -145,10 +150,44 @@
 		/**
 		 * Get marque
 		 *
-		 * @return \s4smithe\VitrineBundle\Entity\Marque 
+		 * @return \s4smithe\VitrineBundle\Entity\Marque
 		 */
 		public function getMarque() {
 			return $this->marque;
 		}
 
-}
+		/**
+		 * @var integer
+		 */
+		private $stock = 0;
+
+
+		/**
+		 * Set stock
+		 *
+		 * @param integer $stock
+		 *
+		 * @return Product
+		 */
+		public function setStock( $stock ) {
+			$this->stock = $stock;
+
+			return $this;
+		}
+
+		/**
+		 * Get stock
+		 *
+		 * @return integer
+		 */
+		public function getStock() {
+			return $this->stock;
+		}
+
+		/**
+		 * @return bool
+		 */
+		public function onStock() {
+			return ( $this->getStock() > 0 ) ? true : false;
+		}
+	}

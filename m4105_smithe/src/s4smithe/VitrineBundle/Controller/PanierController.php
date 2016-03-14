@@ -35,9 +35,7 @@
 			
 			if ( !empty( $panier->getArticles() ) ) {
 				foreach ( $panier->getArticles() as $item ) {
-					$article = $this->getDoctrine()->getManager()
-						->getRepository( 's4smitheVitrineBundle:Product' )
-						->findOneById( $item[ 'id' ] );
+					$article = $this->getArticleObj( $item[ 'id' ] );
 					
 					$articles[] = array(
 						'article' => $article,
@@ -75,10 +73,23 @@
 		public function ajouterUnArticleAction( $articleId, $qte ) {
 			$panier = $this->getSessionPanier();
 			
-			$panier->addArticle( $articleId, $qte );
+			$added = $panier->addArticle( $this->getArticleObj( $articleId ), $qte );
+			if ( $added ) {
+				$message = array(
+					'title'   => "Article ajouté",
+					'message' => 'L\'article à bien été ajoutét'
+				);
+			} else {
+				$message = array(
+					'title'   => "Ajout impossible",
+					'message' => 'Le stock de l\'article est insuffisant'
+				);
+			}
 			
 			$this->setSessionPanier( $panier );
-			
+
+			$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
+
 			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
 		}
 		
@@ -95,7 +106,11 @@
 			
 			$this->setSessionPanier( $panier );
 			
-			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
+			return $this->redirectToRoute(
+				's4smithe_vitrine_contenuPanier', array(
+					'message' => array()
+				)
+			);
 		}
 		
 		/**
@@ -110,7 +125,11 @@
 			
 			$this->setSessionPanier( $panier );
 			
-			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
+			return $this->redirectToRoute(
+				's4smithe_vitrine_contenuPanier', array(
+					'message' => array()
+				)
+			);
 		}
 		
 		/**
@@ -150,27 +169,22 @@
 			
 			$em = $this->getDoctrine()->getManager();
 			$em->persist( $commande );
-			
-			if ( !empty( $panier->getArticles() ) ) {
-				foreach ( $panier->getArticles() as $item ) {
-					// Objet Product récupérer avec l'ID de l'item
-					$article = $this->getDoctrine()->getManager()
-						->getRepository( 's4smitheVitrineBundle:Product' )
-						->findOneById( $item[ 'id' ] );
-					
-					// Création d'une ligne de commande
-					$ligneCommande = new LigneCommande( $commande, $article, $item[ 'qte' ] );
-					
-					// Génération de chaque ligne pour la validation de la commande
-					$articles[] = array(
-						'article' => $article,
-						'qte'     => $item[ 'qte' ]
-					);
-					$prixCommande += $article->getPrice();
-					
-					$em->persist( $ligneCommande );
-				}
 
+			foreach ( $panier->getArticles() as $item ) {
+				// Objet Product récupérer avec l'ID de l'item
+				$article = $this->getArticleObj( $item[ 'id' ] );
+
+				// Création d'une ligne de commande
+				$ligneCommande = new LigneCommande( $commande, $article, $item[ 'qte' ] );
+
+				// Génération de chaque ligne pour la validation de la commande
+				$articles[] = array(
+					'article' => $article,
+					'qte'     => $item[ 'qte' ]
+				);
+				$prixCommande += $article->getPrice();
+
+				$em->persist( $ligneCommande );
 			}
 
 			$commande->setPrix( $prixCommande );
@@ -215,6 +229,17 @@
 			$session = $this->getRequest()->getSession();
 			
 			return $session->get( 'userId', -1 );
+		}
+
+		/**
+		 * @param $id
+		 *
+		 * @return mixed
+		 */
+		private function getArticleObj( $id ) {
+			return $this->getDoctrine()->getManager()
+				->getRepository( 's4smitheVitrineBundle:Product' )
+				->findOneById( $id );
 		}
 
 
