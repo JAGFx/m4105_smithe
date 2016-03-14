@@ -226,4 +226,8 @@
 		public function removeCommande( \s4smithe\VitrineBundle\Entity\Commande $commandes ) {
 			$this->commandes->removeElement( $commandes );
 		}
+
+		public function __toString() {
+			return $this->getName();
+		}
 	}
