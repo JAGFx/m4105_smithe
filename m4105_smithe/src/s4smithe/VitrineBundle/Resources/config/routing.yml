@@ -1,4 +1,3 @@
-# Back-office
 s4smithe_vitrine_category:
     resource: "@s4smitheVitrineBundle/Resources/config/routing/category.yml"
     prefix:   /category
@@ -25,10 +24,7 @@ s4smithe_vitrine_panier:
         resource: "@s4smitheVitrineBundle/Resources/config/routing/panier.yml"
         prefix:   /panier
 
-#Back-office
-s4smithe_vitrine_mentions:
-     path:     /backoffice
-     defaults: { _controller: s4smitheVitrineBundle:Backoffice:index}
+
 
 
 #Pages
@@ -45,6 +41,11 @@ s4smithe_vitrine_mentions:
 s4smithe_vitrine_catalogue:
      path:     /catalogue
      defaults: { _controller: s4smitheVitrineBundle:Catalogue:index}
+
+#Back-office
+s4smithe_vitrine_backoffice:
+     path:     /backoffice
+     defaults: { _controller: s4smitheVitrineBundle:Backoffice:index}
      
 s4smithe_vitrine_articlesParCategorie:
      path:     /articlesParCategorie/{catId}

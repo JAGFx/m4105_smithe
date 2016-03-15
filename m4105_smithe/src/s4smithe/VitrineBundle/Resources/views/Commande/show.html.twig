@@ -23,7 +23,12 @@
 			</tr >
 			<tr >
 				<td >
-					<div class="col-md-12" >{{ commande.date|date('Y-m-d H:i:s') }}</div >
+					<div class="col-xs-12" >
+						{{ commande.client.name }}
+					</div >
+					<div class="col-md-12" >
+						<span class="subInfoPanier" >{{ commande.date|date('Y-m-d H:i:s') }}</span >
+					</div >
 				</td >
 				<td class="text-center" >{{ commande.id }}</td >
 				<td class="text-center" >{% if commande.etat %}Valider{% else %}En Attente{% endif %}</td >

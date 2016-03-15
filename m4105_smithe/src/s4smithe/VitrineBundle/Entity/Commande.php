@@ -2,6 +2,8 @@
 
 	namespace s4smithe\VitrineBundle\Entity;
 
+	use Doctrine\Common\Collections\ArrayCollection;
+
 	/**
 	 * Commande
 	 */
@@ -26,8 +28,14 @@
 		 * @var \s4smithe\VitrineBundle\Entity\Client
 		 */
 		private $client;
-		
+
+		/**
+		 * Commande constructor.
+		 *
+		 * @param Client $client
+		 */
 		public function __construct( \s4smithe\VitrineBundle\Entity\Client $client ) {
+			$this->lignesommandes = new ArrayCollection();
 			$this->setDate( new \DateTime() );
 			$this->setClient( $client );
 		}
@@ -145,6 +153,10 @@
 			return $this->lignesommandes;
 		}
 
+
+		/**
+		 * @return int
+		 */
 		public function getPrixCommande() {
 			$total = 0;
 
@@ -155,6 +167,9 @@
 			return $total;
 		}
 
+		/**
+		 * @return int
+		 */
 		public function getNbArticleCommande() {
 			$nb = 0;
 

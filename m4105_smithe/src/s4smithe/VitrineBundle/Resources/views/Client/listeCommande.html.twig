@@ -34,7 +34,7 @@
 						<td class="text-center">{% if commande.etat %}Valider{% else %}En Attente{% endif %}</td>
 						<td class="text-center" >{{ commande.PrixCommande|number_format(2, ',', ' ') }} €</td >
 						<td class="text-center actionItem">
-							<a href="{{ path('commande_show', { 'id': commande.id }) }}" class="badge badge-blue" title="Détail"><span class="fa fa-plus"></span></a>
+							<a href="{{ path('commande_detail', { 'id': commande.id }) }}" class="badge badge-blue" title="Détail" ><span class="fa fa-search" ></span ></a >
 						</td>
 					</tr>
 				{% endfor %}

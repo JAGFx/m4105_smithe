@@ -19,91 +19,111 @@
 		public function indexAction() {
 			$em = $this->getDoctrine()->getManager();
 
-			$commandes = $em->getRepository('s4smitheVitrineBundle:Commande')->findAll();
+			$commandes = $em->getRepository( 's4smitheVitrineBundle:Commande' )->findAll();
 
-			return $this->render('commande/index.html.twig', array(
+			return $this->render(
+				'commande/index.html.twig', array(
 					'commandes' => $commandes,
-			));
+				)
+			);
 		}
 
 		/**
 		 * Creates a new Commande entity.
 		 *
 		 */
-		public function newAction(Request $request) {
+		public function newAction( Request $request ) {
 			$user = $this->findUser( $this->getSessionUser() );
 			$commande = new Commande( $user );
 
-			$form = $this->createForm('s4smithe\VitrineBundle\Form\Type\CommandeType', $commande);
-			$form->handleRequest($request);
+			$form = $this->createForm( 's4smithe\VitrineBundle\Form\Type\CommandeType', $commande );
+			$form->handleRequest( $request );
 
-			if ($form->isSubmitted() && $form->isValid()) {
+			if ( $form->isSubmitted() && $form->isValid() ) {
 				$em = $this->getDoctrine()->getManager();
-				$em->persist($commande);
+				$em->persist( $commande );
 				$em->flush();
 
-				return $this->redirectToRoute('commande_show', array('id' => $commande->getId()));
+				return $this->redirectToRoute( 'commande_show', array( 'id' => $commande->getId() ) );
 			}
 
-			return $this->render('commande/new.html.twig', array(
+			return $this->render(
+				'commande/new.html.twig', array(
 					'commande' => $commande,
-					'form' => $form->createView(),
-			));
+					'form'     => $form->createView(),
+				)
+			);
 		}
 
 		/**
 		 * Finds and displays a Commande entity.
 		 *
 		 */
-		public function showAction(Commande $commande) {
-			$deleteForm = $this->createDeleteForm($commande);
+		public function showAction( Commande $commande ) {
+			$deleteForm = $this->createDeleteForm( $commande );
 
 			return $this->render(
 				's4smitheVitrineBundle:Commande:show.html.twig', array(
-					'commande' => $commande,
+					'commande'    => $commande,
 					'delete_form' => $deleteForm->createView(),
-			));
+				)
+			);
+		}
+
+		/**
+		 * @param Commande $commande
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+		 */
+		public function detailAction( Commande $commande ) {
+			if ( $commande->getClient()->getId() !== $this->getSessionUser() ) {
+				return $this->redirectToRoute( "s4smithe_vitrine_homepage" );
+			}
+
+			return $this->showAction( $commande );
 		}
 
 		/**
 		 * Displays a form to edit an existing Commande entity.
 		 *
 		 */
-		public function editAction(Request $request, Commande $commande) {
-			$deleteForm = $this->createDeleteForm($commande);
-			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\Type\CommandeType', $commande);
-			$editForm->handleRequest($request);
+		public function editAction( Request $request, Commande $commande ) {
+			$deleteForm = $this->createDeleteForm( $commande );
+			$editForm = $this->createForm( 's4smithe\VitrineBundle\Form\Type\CommandeType', $commande );
+			$editForm->handleRequest( $request );
 
-			if ($editForm->isSubmitted() && $editForm->isValid()) {
+			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
 				$em = $this->getDoctrine()->getManager();
-				$em->persist($commande);
+				$em->persist( $commande );
 				$em->flush();
 
-				return $this->redirectToRoute('commande_edit', array('id' => $commande->getId()));
+				return $this->redirectToRoute( 'commande_edit', array( 'id' => $commande->getId() ) );
 			}
 
-			return $this->render('commande/edit.html.twig', array(
-					'commande' => $commande,
-					'edit_form' => $editForm->createView(),
+			return $this->render(
+				'commande/edit.html.twig', array(
+					'commande'    => $commande,
+					'edit_form'   => $editForm->createView(),
 					'delete_form' => $deleteForm->createView(),
-			));
+				)
+			);
 		}
 
 		/**
 		 * Deletes a Commande entity.
 		 *
 		 */
-		public function deleteAction(Request $request, Commande $commande) {
-			$form = $this->createDeleteForm($commande);
-			$form->handleRequest($request);
+		public function deleteAction( Request $request, Commande $commande ) {
+			$form = $this->createDeleteForm( $commande );
+			$form->handleRequest( $request );
 
-			if ($form->isSubmitted() && $form->isValid()) {
+			if ( $form->isSubmitted() && $form->isValid() ) {
 				$em = $this->getDoctrine()->getManager();
-				$em->remove($commande);
+				$em->remove( $commande );
 				$em->flush();
 			}
 
-			return $this->redirectToRoute('commande_index');
+			return $this->redirectToRoute( 'commande_index' );
 		}
 
 		/**
@@ -113,12 +133,13 @@
 		 *
 		 * @return \Symfony\Component\Form\Form The form
 		 */
-		private function createDeleteForm(Commande $commande) {
+		private function createDeleteForm( Commande $commande ) {
 			return $this->createFormBuilder()
-					->setAction($this->generateUrl('commande_delete', array('id' => $commande->getId())))
-					->setMethod('DELETE')
-					->getForm()
-			;
+				->setAction(
+					$this->generateUrl( 'commande_delete', array( 'id' => $commande->getId() ) )
+				)
+				->setMethod( 'DELETE' )
+				->getForm();
 		}
 
 
