@@ -25,7 +25,7 @@
 
 	</head>
 	<body>
-		{% include "s4smitheVitrineBundle::header.html.twig" %}
+	{% include "s4smitheVitrineBundle:Default:header.html.twig" %}
 
 			<div class="container">
 				<ol class="breadcrumb">
@@ -42,14 +42,14 @@
 				</div>
 				<div class="col-md-9">
 					<div class="row">
-						<h3 id="masterTitle">{{ namePage }}</h3>
+						<h3 id="masterTitle" >{% block titlePage %}{{ namePage }}{% endblock %}</h3 >
 						{% block content %}
 						{% endblock %}
 					</div>
 				</div>
 			</div >
 
-		{% include "s4smitheVitrineBundle::footer.html.twig" %}
+	{% include "s4smitheVitrineBundle:Default:footer.html.twig" %}
 
 		<script src="{{ asset('bundles/s4smithevitrine/bootstrap/js/jquery-2.2.0.min.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('bundles/s4smithevitrine/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>

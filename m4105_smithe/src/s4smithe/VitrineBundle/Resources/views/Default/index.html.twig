@@ -14,21 +14,25 @@
 {% extends "s4smitheVitrineBundle::layout.html.twig" %}
 
 {% block linkFollowing %}
-	<li class="active">Categorie</li>
+	<li class="active" >Categorie</li >
 {% endblock %}
 
 {% block content %}
-	<div class="col-xs-12">
+	<div class="col-xs-12" >
 		<img class="img-responsive" style="margin: auto;" src="{{ asset('bundles/s4smithevitrine/images/sfshop.jpg') }}" alt="{{ sfNameShop }}" />
-	</div>
+	</div >
 	Bonjour à toi {{ name }} !
 	<ul >
 		<li >TODO Articles plus vendus</li >
 		<li >TODO Marque populaires</li >
 		<li ><s >TODO Stock des articles</s ></li >
 		<li ><s >TODO Prix Moment CMD dans Ligne commande</s ></li >
-		<li >TODO Détails commandes clients</li >
+		<li ><s >TODO Détails commandes clients</s ></li >
 		<li >TODO Design back-office</li >
 		<li >TODO Contraintes validité</li >
+		<li >TODO Ajout perso articles</li >
+		<li >TODO Images produits</li >
+		<li >TODO Form connexion</li >
+		<li >TODO Message utilisateur feedback</li >
 	</ul >
 {% endblock %}

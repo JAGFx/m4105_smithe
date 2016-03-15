@@ -132,32 +132,4 @@
 		public function getCommande() {
 			return $this->commande;
 		}
-
-		/**
-		 * @var string
-		 */
-		private $procuct;
-
-
-		/**
-		 * Set procuct
-		 *
-		 * @param string $procuct
-		 *
-		 * @return LigneCommande
-		 */
-		public function setProcuct( $procuct ) {
-			$this->procuct = $procuct;
-
-			return $this;
-		}
-
-		/**
-		 * Get procuct
-		 *
-		 * @return string
-		 */
-		public function getProcuct() {
-			return $this->procuct;
-		}
 	}

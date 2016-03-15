@@ -21,7 +21,8 @@
 
 			$categories = $em->getRepository('s4smitheVitrineBundle:Category')->findAll();
 
-			return $this->render('category/index.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Category:index.html.twig', array(
 					'categories' => $categories,
 			));
 		}
@@ -40,7 +41,7 @@
 				$em->persist($category);
 				$em->flush();
 
-				return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+				return $this->redirectToRoute( '', array( 'id' => $category->getId() ) );
 			}
 
 			return $this->render('category/new.html.twig', array(

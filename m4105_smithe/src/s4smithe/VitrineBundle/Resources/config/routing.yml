@@ -25,6 +25,11 @@ s4smithe_vitrine_panier:
         resource: "@s4smitheVitrineBundle/Resources/config/routing/panier.yml"
         prefix:   /panier
 
+#Back-office
+s4smithe_vitrine_mentions:
+     path:     /backoffice
+     defaults: { _controller: s4smitheVitrineBundle:Backoffice:index}
+
 
 #Pages
 s4smithe_vitrine_homepage:

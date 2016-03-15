@@ -154,4 +154,14 @@
 
 			return $total;
 		}
+
+		public function getNbArticleCommande() {
+			$nb = 0;
+
+			foreach ( $this->getLignesommandes() as $ligne ) {
+				$nb += $ligne->getQte();
+			}
+
+			return $nb;
+		}
 	}

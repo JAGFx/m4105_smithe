@@ -1,0 +1,71 @@
+{% set namePage = "Détail commande n°" ~ commande.id %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layout.html.twig" %}
+
+{% block titlePage %}
+	{{ parent() }}
+	{{ form_start(delete_form, { 'attr': {'class': 'form-inline visible-lg-inline'} }) }}
+	<button type="submit" title="Annuler la commande" class="btn btn-primary btn-sm" >Annuler</button >
+	{{ form_end(delete_form) }}
+{% endblock %}
+
+{% block linkFollowing %}
+	<li class="active" >Categorie</li >
+{% endblock %}
+
+{% block content %}
+	<div class="col-xs-12" >
+		<table class="table table-responsive tableCustum" >
+			<tr >
+				<th >Commande</th ><!--  Date + Client -->
+				<th class="text-center qte" >ID</th >
+				<th class="text-center littleTD" >Etat</th >
+			</tr >
+			<tr >
+				<td >
+					<div class="col-md-12" >{{ commande.date|date('Y-m-d H:i:s') }}</div >
+				</td >
+				<td class="text-center" >{{ commande.id }}</td >
+				<td class="text-center" >{% if commande.etat %}Valider{% else %}En Attente{% endif %}</td >
+			</tr >
+		</table >
+
+
+		<table class="table table-responsive tableCustum" >
+			<tr >
+				<th >Article</th >
+				<th class="text-center qte" >Qté</th >
+				<th class="text-center littleTD" >Prix U. TTC</th >
+				<th class="text-center littleTD" >Total TTC</th >
+			</tr >
+
+			{% if commande.lignesommandes|length > 0 %}
+				{% for item in commande.lignesommandes %}
+					<tr >
+						<td >
+							<div class="col-md-12" >{{ item.product.name }}</div >
+							<div class="col-md-12" >
+								<span class="subInfoPanier" >{{ item.product.category.name }}</span >
+								<span class="subInfoPanier" >- {{ item.product.marque.name }}</span >
+							</div >
+						</td >
+						<td class="text-center" ><span class="badge badge-blue" >x {{ item.qte }}</span ></td >
+						<td class="text-center" >{{ item.product.price|number_format(2, ',', ' ') }} €</td >
+						<td class="text-center" >{{ (item.qte * item.product.price)|number_format(2, ',', ' ') }} €</td >
+					</tr >
+				{% endfor %}
+				<tr >
+					<td >
+						<span class="text-small" >{{ commande.nbArticleCommande }} article(s) dans la commande</span >
+					</td >
+					<td colspan="2" class="text-right" style="font-variant: small-caps;" >Total du Panier</td >
+					<td class="text-center total" >{{ commande.prixCommande|number_format(2, ',', ' ') }} €</td >
+				</tr >
+			{% endif %}
+
+		</table >
+
+
+		<a href="{{ path('client_listCommande') }}" title="Retour à la liste" class="btn btn-default" >Retour</a >
+	</div >
+{% endblock %}

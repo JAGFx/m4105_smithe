@@ -20,6 +20,11 @@
 
 {% block content %}
 	<div style="padding-left: 15px;" >
+		{% for flashMessage in app.session.flashbag.get('message') %}
+			{{ flashMessage.title }}
+			{{ flashMessage.message }}
+		{% endfor %}
+
 		<table class="table table-responsive tableCustum" >
 			<tr >
 				<th >Article</th >
@@ -28,11 +33,6 @@
 				<th class="text-center littleTD" >Total TTC</th >
 				<th class="actionItem" ></th >
 			</tr >
-
-			{% for flashMessage in app.session.flashbag.get('message') %}
-				{{ flashMessage.title }}
-				{{ flashMessage.message }}
-			{% endfor %}
 
 			{% if articles|length > 0 %}
 				{% for item in articles %}
@@ -62,16 +62,6 @@
 					<td colspan="2" class="text-right" style="font-variant: small-caps;" >Total du Panier</td >
 					<td class="text-center total" >{{ total|number_format(2, ',', ' ') }} €</td >
 					<td ></td >
-				</tr >
-				<tr >
-					<td colspan="4" class="text-right" >
-						<a href="{{ path('s4smithe_vitrine_validationPanier') }}" title="Commander" class="btn btn-primary btn-sm" >Commander</a >
-					</td >
-					<td ></td >
-				</tr >
-			{% else %}
-				<tr >
-					<td colspan="5" > Pas d'article dans le panier</td >
 				</tr >
 			{% endif %}
 

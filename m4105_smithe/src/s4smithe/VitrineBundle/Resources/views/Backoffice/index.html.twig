@@ -1,0 +1,14 @@
+{% set namePage = "Backoffice" %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layoutBackOffice.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active" >Backoffice</li >
+{% endblock %}
+
+{% block content %}
+	<div class="col-xs-12" >
+		<img class="img-responsive" style="margin: auto;" src="{{ asset('bundles/s4smithevitrine/images/sfshop.jpg') }}" alt="{{ sfNameShop }}" />
+	</div >
+	Back-office
+{% endblock %}

@@ -58,7 +58,8 @@
 		public function showAction(Commande $commande) {
 			$deleteForm = $this->createDeleteForm($commande);
 
-			return $this->render('commande/show.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Commande:show.html.twig', array(
 					'commande' => $commande,
 					'delete_form' => $deleteForm->createView(),
 			));
