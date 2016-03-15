@@ -13,11 +13,6 @@ s4smithe\VitrineBundle\Entity\Commande:
         etat:
             type: boolean
 
-        prix:
-            type: float
-            options:
-                default: 0.0
-
     manyToOne:						 # Dans l’entité Product on ajoute un champ
         client:						  # category qui pointe vers une entité Category
             targetEntity: Client			# category_id sera, dans la table, le nom de la clé
@@ -25,3 +20,8 @@ s4smithe\VitrineBundle\Entity\Commande:
             joinColumn:					# Category
                 name: client_id
                 referencedColumnName: id
+
+    oneToMany:                        # Dans l’entité Category on ajoute un champ
+            lignesommandes:                     # products qui permet d’associer à une Category
+                 targetEntity: LigneCommande    # toutes les entités Products dont le champ
+                 mappedBy: commande       # category pointe vers cette entité.

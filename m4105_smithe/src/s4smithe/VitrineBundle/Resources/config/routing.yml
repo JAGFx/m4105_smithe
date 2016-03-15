@@ -20,6 +20,12 @@ s4smithe_vitrine_commande:
         prefix:   /commande
 
 
+# Panier
+s4smithe_vitrine_panier:
+        resource: "@s4smitheVitrineBundle/Resources/config/routing/panier.yml"
+        prefix:   /panier
+
+
 #Pages
 s4smithe_vitrine_homepage:
      path:     /accueil/{name}
@@ -47,42 +53,8 @@ s4smithe_vitrine_articlesParMarque:
      requirements:
           markId:	\d+
 
-          
-          
-#Panier          
-s4smithe_vitrine_contenuPanier:
-     path:     /panier/contenu
-     defaults: { _controller: s4smitheVitrineBundle:Panier:contenuPanier}
-     
-s4smithe_vitrine_addArticlePanier:
-     path:     /panier/addArticle/{articleId}/{qte}
-     defaults: { _controller: s4smitheVitrineBundle:Panier:ajouterUnArticle, articleId: 0, qte: 1}
-     requirements:
-          articleId: \d+
-          qte: \d+
-          
-s4smithe_vitrine_removeOneArticlePanier:
-     path:     /panier/removeOneArticle/{articleId}/{qte}
-     defaults: { _controller: s4smitheVitrineBundle:Panier:enleverUnArticle, articleId: 0, qte: 1}
-     requirements:
-          articleId: \d+
-          qte: \d+
 
-s4smithe_vitrine_removeArticlesPanier:
-     path:     /panier/removeArticles/{articleId}
-     defaults: { _controller: s4smitheVitrineBundle:Panier:enleverArticles, articleId: 0}
-     requirements:
-          articleId: \d+
 
-s4smithe_vitrine_emptyPanier:
-     path:     /panier/empty
-     defaults: { _controller: s4smitheVitrineBundle:Panier:emptyPanier}
-     
-s4smithe_vitrine_validationPanier:
-     path:     /panier/validation
-     defaults: { _controller: s4smitheVitrineBundle:Panier:validation}
-     
-     
 
 s4smithe_vitrine_manager:
      path:     /manager

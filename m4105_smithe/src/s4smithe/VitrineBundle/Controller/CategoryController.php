@@ -103,76 +103,6 @@
 			return $this->redirectToRoute('category_index');
 		}
 		
-		
-		/**
-		 * @return \Symfony\Component\HttpFoundation\Response
-		 */
-		public function listeCategorieAction() {
-			$categories = $this->findAllCtge();
-			
-			return $this->render('s4smitheVitrineBundle:Category:listeCategorie.html.twig', array(
-				'categories' => $categories
-			));
-		}
-		
-		/**
-		 * @return \Symfony\Component\HttpFoundation\Response
-		 */
-		public function listeCategorieFooterAction() {
-			$categories = $this->findAllCtge();
-			
-			return $this->render('s4smitheVitrineBundle:Category:listeCategorieFooter.html.twig', array(
-				'categories' => $categories
-			));
-		}
-		
-		/**
-		 * @param $catId
-		 *
-		 * @return \Symfony\Component\HttpFoundation\Response
-		 */
-		public function articlesParCategorieAction( $catId ) {
-			$catObj = $this->findCtge($catId);
-			
-			return $this->render('s4smitheVitrineBundle:Default:articlesParFiltre.html.twig', array(
-				'filter' => $catObj
-			));
-		}
-		
-		
-		/**
-		 * @return array
-		 */
-		private function findAllCtge(){
-			$ctges = $this->getDoctrine()->getManager()
-				->getRepository('s4smitheVitrineBundle:Category')
-				->findAllOrderedByName();
-			
-			if (!$ctges) {
-				throw $this->createNotFoundException('Produit non trouvé avec id ');
-			}
-			
-			return $ctges;
-		}
-		
-		/**
-		 * @param $id
-		 *
-		 * @return mixed
-		 */
-		private function findCtge($id){
-			$ctge = $this->getDoctrine()->getManager()
-				->getRepository('s4smitheVitrineBundle:Category')
-				->findOneById($id);
-			
-			if (!$ctge) {
-				throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
-			}
-			
-			return $ctge;
-		}
-		
-		
 		/**
 		 * Creates a form to delete a Category entity.
 		 *
@@ -186,6 +116,81 @@
 					->setMethod('DELETE')
 					->getForm()
 			;
+		}
+
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
+		public function listeCategorieAction() {
+			$categories = $this->findAllCtge();
+
+			return $this->render(
+				's4smitheVitrineBundle:Category:listeCategorie.html.twig', array(
+				'categories' => $categories
+			)
+			);
+		}
+
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
+		public function listeCategorieFooterAction() {
+			$categories = $this->findAllCtge();
+
+			return $this->render(
+				's4smitheVitrineBundle:Category:listeCategorieFooter.html.twig', array(
+				'categories' => $categories
+			)
+			);
+		}
+
+		/**
+		 * @param $catId
+		 *
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
+		public function articlesParCategorieAction( $catId ) {
+			$catObj = $this->findCtge( $catId );
+
+			return $this->render(
+				's4smitheVitrineBundle:Default:articlesParFiltre.html.twig', array(
+				'filter' => $catObj
+			)
+			);
+		}
+
+
+		/**
+		 * @return array
+		 */
+		private function findAllCtge() {
+			$ctges = $this->getDoctrine()->getManager()
+				->getRepository( 's4smitheVitrineBundle:Category' )
+				->findAllOrderedByName();
+
+			if ( !$ctges ) {
+				throw $this->createNotFoundException( 'Produit non trouvé avec id ' );
+			}
+
+			return $ctges;
+		}
+
+
+		/**
+		 * @param $id
+		 *
+		 * @return mixed
+		 */
+		private function findCtge( $id ) {
+			$ctge = $this->getDoctrine()->getManager()
+				->getRepository( 's4smitheVitrineBundle:Category' )
+				->findOneById( $id );
+
+			if ( !$ctge ) {
+				throw $this->createNotFoundException( 'Produit non trouvé avec id ' . $id );
+			}
+
+			return $ctge;
 		}
 
 	}

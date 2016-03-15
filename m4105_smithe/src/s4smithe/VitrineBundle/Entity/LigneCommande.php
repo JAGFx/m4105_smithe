@@ -50,9 +50,9 @@
 		 *
 		 * @param integer $qte
 		 *
-*@return LigneCommande
+		 * @return LigneCommande
 		 */
-		public function setQte($qte) {
+		public function setQte( $qte ) {
 			$this->qte = $qte;
 
 			return $this;
@@ -61,7 +61,7 @@
 		/**
 		 * Get qte
 		 *
-		 * @return integer 
+		 * @return integer
 		 */
 		public function getQte() {
 			return $this->qte;
@@ -72,9 +72,9 @@
 		 *
 		 * @param float $prix
 		 *
-*@return LigneCommande
+		 * @return LigneCommande
 		 */
-		public function setPrix($prix) {
+		public function setPrix( $prix ) {
 			$this->prix = $prix;
 
 			return $this;
@@ -83,7 +83,7 @@
 		/**
 		 * Get prix
 		 *
-		 * @return float 
+		 * @return float
 		 */
 		public function getPrix() {
 			return $this->prix;
@@ -94,7 +94,7 @@
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Product $product
 		 *
-*@return LigneCommande
+		 * @return LigneCommande
 		 */
 		public function setProduct( \s4smithe\VitrineBundle\Entity\Product $product ) {
 			$this->product = $product;
@@ -105,7 +105,7 @@
 		/**
 		 * Get product
 		 *
-		 * @return \s4smithe\VitrineBundle\Entity\Product 
+		 * @return \s4smithe\VitrineBundle\Entity\Product
 		 */
 		public function getProduct() {
 			return $this->product;
@@ -116,9 +116,9 @@
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Commande $commande
 		 *
-*@return LigneCommande
+		 * @return LigneCommande
 		 */
-		public function setCommande(\s4smithe\VitrineBundle\Entity\Commande $commande) {
+		public function setCommande( \s4smithe\VitrineBundle\Entity\Commande $commande ) {
 			$this->commande = $commande;
 
 			return $this;
@@ -127,7 +127,7 @@
 		/**
 		 * Get commande
 		 *
-		 * @return \s4smithe\VitrineBundle\Entity\Commande 
+		 * @return \s4smithe\VitrineBundle\Entity\Commande
 		 */
 		public function getCommande() {
 			return $this->commande;
