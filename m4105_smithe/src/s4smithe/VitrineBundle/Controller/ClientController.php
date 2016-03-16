@@ -245,6 +245,9 @@
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function userInfoHeaderAction() {
+			$sessionUser = $this->getSessionUser();
+			$user = $this->findUser( $sessionUser );
+
 			return $this->render(
 				's4smitheVitrineBundle:Client:userInfo.html.twig',
 				array(
