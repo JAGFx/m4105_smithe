@@ -18,4 +18,6 @@ s4smithe\VitrineBundle\Entity\Marque:
         products:                     # products qui permet d’associer à une Category
              targetEntity: Product    # toutes les entités Products dont le champ
              mappedBy: marque       # category pointe vers cette entité.
+             cascade: [ "persist", "remove" ]
+
     lifecycleCallbacks: {  }

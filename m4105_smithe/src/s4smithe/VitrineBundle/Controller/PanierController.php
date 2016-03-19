@@ -165,10 +165,7 @@
 				$panier = $this->getSessionPanier();
 				$articles = array();
 
-
 				$em = $this->getDoctrine()->getManager();
-				$em->persist( $commande );
-
 				foreach ( $panier->getArticles() as $item ) {
 					// Objet Product récupérer avec l'ID de l'item
 					$article = $this->getArticleObj( $item[ 'id' ] );
@@ -176,7 +173,7 @@
 
 					// Création d'une ligne de commande
 					$ligneCommande = new LigneCommande( $commande, $article, $item[ 'qte' ] );
-					$commande->addLignesommande( $ligneCommande );
+					$commande->addLignecommande( $ligneCommande );
 
 					// Génération de chaque ligne pour la validation de la commande
 					$articles[] = array(
@@ -185,9 +182,10 @@
 					);
 
 					$em->persist( $article );
-					$em->persist( $ligneCommande );
 				}
 
+				// Insertion dans la BDD
+				$em->persist( $commande );
 				$em->flush();
 
 				// Création d'un nouveau panier vide => Commande validé

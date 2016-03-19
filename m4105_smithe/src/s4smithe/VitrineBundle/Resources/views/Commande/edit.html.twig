@@ -1,0 +1,21 @@
+{% set namePage = "Commande n°" ~ commande.id %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layoutBackOffice.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active" >Commande</li >
+	<li >N°{{ commande.id }}</li >
+	<li >Edition</li >
+{% endblock %}
+
+{% block content %}
+	<div class="col-xs-12" >
+		{{ form_start(edit_form) }}
+		{{ form_widget(edit_form) }}
+		<button type="reset" title="Annuler" class="btn btn-sm btn-default" >Annuler</button >
+		<button type="submit" title="Editer" class="btn btn-sm btn-primary" >Editier</button >
+		{{ form_end(edit_form) }}
+
+		<a href="{{ path('marque_index') }}" title="Retour à la liste" class="btn btn-sm btn-default" >Retour</a >
+	</div >
+{% endblock %}

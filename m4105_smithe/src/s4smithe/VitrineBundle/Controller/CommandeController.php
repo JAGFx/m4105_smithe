@@ -2,6 +2,7 @@
 
 	namespace s4smithe\VitrineBundle\Controller;
 
+	use s4smithe\VitrineBundle\Entity\Client;
 	use s4smithe\VitrineBundle\Entity\Commande;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@
 			$commandes = $em->getRepository( 's4smitheVitrineBundle:Commande' )->findAll();
 
 			return $this->render(
-				'commande/index.html.twig', array(
+				's4smitheVitrineBundle:Commande:index.html.twig', array(
 					'commandes' => $commandes,
 				)
 			);
@@ -33,8 +34,7 @@
 		 *
 		 */
 		public function newAction( Request $request ) {
-			$user = $this->findUser( $this->getSessionUser() );
-			$commande = new Commande( $user );
+			$commande = new Commande();
 
 			$form = $this->createForm( 's4smithe\VitrineBundle\Form\Type\CommandeType', $commande );
 			$form->handleRequest( $request );
@@ -88,8 +88,14 @@
 		 *
 		 */
 		public function editAction( Request $request, Commande $commande ) {
-			$deleteForm = $this->createDeleteForm( $commande );
-			$editForm = $this->createForm( 's4smithe\VitrineBundle\Form\Type\CommandeType', $commande );
+
+			$editForm = $this->get( 'form.factory' )->createBuilder( 'form', $commande )
+				->add( 'date', 'datetime', array( 'read_only' => true ) )
+				->add( 'etat' )
+				->add( 'client', null, array( 'read_only' => true ) )
+				->getForm();
+
+			//$editForm = $this->createForm( 's4smithe\VitrineBundle\Form\Type\CommandeType', $commande );
 			$editForm->handleRequest( $request );
 
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
@@ -101,10 +107,9 @@
 			}
 
 			return $this->render(
-				'commande/edit.html.twig', array(
+				's4smitheVitrineBundle:Commande:edit.html.twig', array(
 					'commande'    => $commande,
 					'edit_form'   => $editForm->createView(),
-					'delete_form' => $deleteForm->createView(),
 				)
 			);
 		}
@@ -150,6 +155,24 @@
 			$session = $this->getRequest()->getSession();
 
 			return $session->get( 'userId', -1 );
+		}
+
+		/**
+		 * @param $id
+		 *
+		 * @return Client
+		 */
+		private function findUser( $id ) {
+			$user = $this->getDoctrine()->getManager()
+				->getRepository( 's4smitheVitrineBundle:Client' )
+				->findOneById( $id );
+
+			if ( !$user ) {
+				$user = new Client();
+				$user->setName( 'Inconus' );
+			}
+
+			return $user;
 		}
 
 	}

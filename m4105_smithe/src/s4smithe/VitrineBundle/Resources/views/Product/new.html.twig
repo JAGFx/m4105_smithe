@@ -1,0 +1,20 @@
+{% set namePage = "Article | Création" %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layoutBackOffice.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active" >Article</li >
+	<li >Création</li >
+{% endblock %}
+
+{% block content %}
+	<div class="col-xs-12" >
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		<button type="reset" title="Annuler" class="btn btn-sm btn-default" >Annuler</button >
+		<button type="submit" title="Créer" class="btn btn-sm btn-primary" >Créer</button >
+		{{ form_end(form) }}
+
+		<a href="{{ path('product_index') }}" title="Retour à la liste" class="btn btn-sm btn-default" >Retour</a >
+	</div >
+{% endblock %}

@@ -31,7 +31,7 @@
 					</div >
 				</td >
 				<td class="text-center" >{{ commande.id }}</td >
-				<td class="text-center" >{% if commande.etat %}Valider{% else %}En Attente{% endif %}</td >
+				<td class="text-center" >{% if commande.etat %}Validé{% else %}En Attente{% endif %}</td >
 			</tr >
 		</table >
 
@@ -44,8 +44,8 @@
 				<th class="text-center littleTD" >Total TTC</th >
 			</tr >
 
-			{% if commande.lignesommandes|length > 0 %}
-				{% for item in commande.lignesommandes %}
+			{% if commande.lignecommandes|length > 0 %}
+				{% for item in commande.lignecommandes %}
 					<tr >
 						<td >
 							<div class="col-md-12" >{{ item.product.name }}</div >

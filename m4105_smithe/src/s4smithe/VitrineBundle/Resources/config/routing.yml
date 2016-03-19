@@ -42,7 +42,6 @@ s4smithe_vitrine_catalogue:
      path:     /catalogue
      defaults: { _controller: s4smitheVitrineBundle:Catalogue:index}
 
-#Back-office
 s4smithe_vitrine_backoffice:
      path:     /backoffice
      defaults: { _controller: s4smitheVitrineBundle:Backoffice:index}
@@ -58,10 +57,3 @@ s4smithe_vitrine_articlesParMarque:
      defaults: { _controller: s4smitheVitrineBundle:Marque:articlesParMarque, markId: 0 }
      requirements:
           markId:	\d+
-
-
-
-
-s4smithe_vitrine_manager:
-     path:     /manager
-     defaults: { _controller: s4smitheVitrineBundle:Manager:index }

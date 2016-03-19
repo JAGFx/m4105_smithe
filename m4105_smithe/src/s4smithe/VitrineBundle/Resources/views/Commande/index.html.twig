@@ -1,0 +1,54 @@
+{% set namePage = "Listes des commandes" %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layout.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active" >{{ namePage }}</li >
+{% endblock %}
+
+{% block content %}
+
+	<div class="col-xs-12" >
+		<table class="table table-responsive tableCustum" >
+
+			<tr >
+				<th >Commande</th ><!--  Date + Client -->
+				<th class="text-center qte" >ID</th >
+				<th class="text-center littleTD" >Etat</th >
+				<th class="text-center littleTD" >Prix TTC</th >
+				<th class="actionItem" ></th >
+			</tr >
+
+			{% if commandes|length > 0 %}
+				{% set totalCommande = 0 %}
+				{% for commande in commandes %}
+					{% set totalCommande = totalCommande + commande.PrixCommande %}
+					<tr >
+						<td >
+							<div class="col-md-12" >{{ commande.client.name }}</div >
+							<div class="col-md-12" >
+								<span class="subInfoPanier" >{{ commande.date|date('Y-m-d H:i:s') }}</span >
+							</div >
+						</td >
+						<td class="text-center" >{{ commande.id }}</td >
+						<td class="text-center" >{% if commande.etat %}Validé{% else %}En Attente{% endif %}</td >
+						<td class="text-center" >{{ commande.PrixCommande|number_format(2, ',', ' ') }} €</td >
+						<td class="text-center actionItem" >
+							<a href="{{ path('commande_edit', { 'id': commande.id }) }}" class="badge badge-blue" title="Editer" ><span class="fa fa-pencil" ></span ></a >
+						</td >
+					</tr >
+				{% endfor %}
+				<tr >
+					<td colspan="5" >
+						<span class="text-small" >{{ commandes|length }} commande(s)</span >
+					</td >
+				</tr >
+			{% else %}
+				<tr >
+					<td colspan="5" > Pas de commandes encore enregistrés</td >
+				</tr >
+			{% endif %}
+		</table >
+	</div >
+
+{% endblock %}
