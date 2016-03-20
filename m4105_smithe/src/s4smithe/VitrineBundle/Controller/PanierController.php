@@ -76,11 +76,13 @@
 			$added = $panier->addArticle( $this->getArticleObj( $articleId ), $qte );
 			if ( $added ) {
 				$message = array(
+					'type'    => 'info',
 					'title'   => "Article ajouté",
 					'message' => 'L\'article à bien été ajoutét'
 				);
 			} else {
 				$message = array(
+					'type'    => 'warning',
 					'title'   => "Ajout impossible",
 					'message' => 'Le stock de l\'article est insuffisant'
 				);
@@ -252,15 +254,13 @@
 		private function getTotalPanier() {
 			$total = 0;
 			$panier = $this->getSessionPanier();
-			
-			if ( !empty( $panier->getArticles() ) ) {
-				foreach ( $panier->getArticles() as $item ) {
-					$article = $this->getDoctrine()->getManager()
-						->getRepository( 's4smitheVitrineBundle:Product' )
-						->findOneById( $item[ 'id' ] );
-					
-					$total += $article->getPrice() * $item[ 'qte' ];
-				}
+
+			foreach ( $panier->getArticles() as $item ) {
+				$article = $this->getDoctrine()->getManager()
+					->getRepository( 's4smitheVitrineBundle:Product' )
+					->findOneById( $item[ 'id' ] );
+
+				$total += $article->getPrice() * $item[ 'qte' ];
 			}
 			
 			return $total;

@@ -21,8 +21,7 @@
 {% block content %}
 	<div style="padding-left: 15px;" >
 		{% for flashMessage in app.session.flashbag.get('message') %}
-			{{ flashMessage.title }}
-			{{ flashMessage.message }}
+			{% include "s4smitheVitrineBundle:Default:flashMessage.html.twig" %}
 		{% endfor %}
 
 		<table class="table table-responsive tableCustum" >
