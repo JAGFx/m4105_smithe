@@ -89,10 +89,11 @@
 		 */
 		public function editAction( Request $request, Commande $commande ) {
 
-			$editForm = $this->get( 'form.factory' )->createBuilder( 'form', $commande )
-				->add( 'date', 'datetime', array( 'read_only' => true ) )
+
+			$editForm = $this->createFormBuilder( $commande )
+				->add( 'date', 'datetime', array( 'read_only' => true, 'disabled' => true ) )
 				->add( 'etat' )
-				->add( 'client', null, array( 'read_only' => true ) )
+				->add( 'client', null, array( 'read_only' => true, 'disabled' => true ) )
 				->getForm();
 
 			//$editForm = $this->createForm( 's4smithe\VitrineBundle\Form\Type\CommandeType', $commande );

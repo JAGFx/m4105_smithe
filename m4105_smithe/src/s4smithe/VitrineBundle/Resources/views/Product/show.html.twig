@@ -27,7 +27,7 @@
 				<td class="text-center" >{{ product.category.name }}</td >
 				<td class="text-center" >{{ product.id }}</td >
 				<td class="text-center actionItem" rowspan="2" >
-					<a href="{{ path('marque_edit', { 'id': product.id }) }}" class="badge badge-blue" title="Editer" ><span class="fa fa-pencil" ></span ></a >
+					<a href="{{ path('product_edit', { 'id': product.id }) }}" class="badge badge-blue" title="Editer" ><span class="fa fa-pencil" ></span ></a >
 					{{ form_start(delete_form, { 'attr': {'class': 'form-inline visible-lg-inline'} }) }}
 					<button type="submit" title="Supprimer" class="badge badge-blue" >
 						<span class="fa fa-times" ></span ></button >
