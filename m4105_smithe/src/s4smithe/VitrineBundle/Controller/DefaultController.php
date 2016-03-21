@@ -18,9 +18,14 @@
 	class DefaultController extends Controller {
 
 		public function indexAction($name) {
+
+			/*$listProductPop = $this->getDoctrine()->getManager()
+				->getRepository( 's4smitheVitrineBundle:Product' )
+				->findAllBetterSales();*/
 			
 			return $this->render('s4smitheVitrineBundle:Default:index.html.twig', array(
-				'name' => $name
+				'name' => $name,
+				//'listProductPop' => $listProductPop
 			));
 		}
 		
