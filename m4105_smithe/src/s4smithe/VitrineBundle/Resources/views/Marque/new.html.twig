@@ -1,9 +1,9 @@
-{% set namePage = "Catégorie | Création" %}
+{% set namePage = "Marque | Création" %}
 {% set typePage = namePage %}
 {% extends "s4smitheVitrineBundle::layoutBackOffice.html.twig" %}
 
 {% block linkFollowing %}
-	<li class="active" >Categories</li >
+	<li class="active" >Marque</li >
 	<li >Création</li >
 {% endblock %}
 
@@ -15,6 +15,6 @@
 		<button type="submit" title="Créer" class="btn btn-sm btn-primary" >Créer</button >
 		{{ form_end(form) }}
 
-		<a href="{{ path('category_index') }}" title="Retour à la liste" class="btn btn-sm btn-default" >Retour</a >
+		<a href="{{ path('marque_index') }}" title="Retour à la liste" class="btn btn-sm btn-default" >Retour</a >
 	</div >
 {% endblock %}

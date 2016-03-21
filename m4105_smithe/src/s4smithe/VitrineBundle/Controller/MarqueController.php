@@ -21,7 +21,8 @@
 
 			$marques = $em->getRepository('s4smitheVitrineBundle:Marque')->findAll();
 
-			return $this->render('marque/index.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Marque:index.html.twig', array(
 					'marques' => $marques,
 			));
 		}
@@ -43,7 +44,8 @@
 				return $this->redirectToRoute('marque_show', array('id' => $marque->getId()));
 			}
 
-			return $this->render('marque/new.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Marque:new.html.twig', array(
 					'marque' => $marque,
 					'form' => $form->createView(),
 			));
@@ -56,7 +58,8 @@
 		public function showAction(Marque $marque) {
 			$deleteForm = $this->createDeleteForm($marque);
 
-			return $this->render('marque/show.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Marque:show.html.twig', array(
 					'marque' => $marque,
 					'delete_form' => $deleteForm->createView(),
 			));
@@ -79,7 +82,8 @@
 				return $this->redirectToRoute('marque_edit', array('id' => $marque->getId()));
 			}
 
-			return $this->render('marque/edit.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Marque:edit.html.twig', array(
 					'marque' => $marque,
 					'edit_form' => $editForm->createView(),
 					'delete_form' => $deleteForm->createView(),

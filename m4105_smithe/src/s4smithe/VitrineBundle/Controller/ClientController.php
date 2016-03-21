@@ -109,10 +109,9 @@
 			if ( !$this->userLogged() ) {
 				$client = new Client();
 
-				$form = $this->get( 'form.factory' )->createBuilder( 'form', $client )
-					->add( 'mail', 'email', array( 'label' => 'E-mail' ) )
-					->add( 'password', 'password', array( 'label' => 'Mot de passe' ) )
-					->getForm();
+				$form = $this->createForm(
+					's4smithe\VitrineBundle\Form\Type\ClientLoginType', $client
+				);
 
 				$form->handleRequest( $request );
 
@@ -128,27 +127,26 @@
 
 					if ( !$user ) {
 						throw $this->createNotFoundException(
-							'Utilisateur non reconnus ' . $user->getName()
+							'Client non reconnus:  ' . $client->getName()
 						);
 					}
 
 					$this->setSessionUser( $user->getId() );
-
 					return $this->redirectToRoute( 'client_listCommande' );
 				}
 
 				return $this->render(
 					's4smitheVitrineBundle:Client:login.html.twig',
 					array(
-						'name'   => 'Authentification',
 						'client' => $client,
 						'form'   => $form->createView(),
 					)
 				);
 
 				// Utilisateur connecté
-			} else
-				return $this->redirectToRoute( 'client_listCommande');
+			} else {
+				return $this->redirectToRoute( 'client_listCommande' );
+			}
 
 		}
 
@@ -251,8 +249,7 @@
 			return $this->render(
 				's4smitheVitrineBundle:Client:userInfo.html.twig',
 				array(
-					'userConnected' => $this->userLogged(),
-					'pseudo'        => $user->getName()
+					'pseudo' => $user->getName()
 				)
 			);
 		}

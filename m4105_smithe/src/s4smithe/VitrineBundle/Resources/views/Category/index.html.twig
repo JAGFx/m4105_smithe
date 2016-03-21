@@ -1,39 +1,43 @@
-{% extends 'base.html.twig' %}
+{% set namePage = "Catégorie" %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layoutBackOffice.html.twig" %}
 
-{% block body %}
-	<h1 >Category list</h1 >
+{% block linkFollowing %}
+	<li class="active" >Categories</li >
+{% endblock %}
 
-	<table >
-		<thead >
-		<tr >
-			<th >Id</th >
-			<th >Name</th >
-			<th >Actions</th >
-		</tr >
-		</thead >
-		<tbody >
-		{% for category in categories %}
+{% block content %}
+	<div class="col-xs-12" >
+		<table class="table table-responsive tableCustum" >
 			<tr >
-				<td ><a href="{{ path('category_show', { 'id': category.id }) }}" >{{ category.id }}</a ></td >
-				<td >{{ category.name }}</td >
-				<td >
-					<ul >
-						<li >
-							<a href="{{ path('category_show', { 'id': category.id }) }}" >show</a >
-						</li >
-						<li >
-							<a href="{{ path('category_edit', { 'id': category.id }) }}" >edit</a >
-						</li >
-					</ul >
-				</td >
+				<th >Nom</th >
+				<th class="text-center qte" >ID</th >
+				<th class="actionItem" ></th >
 			</tr >
-		{% endfor %}
-		</tbody >
-	</table >
+			{% set nbCat = 0 %}
+			{% for category in categories %}
+				{% set nbCat = nbCat + 1 %}
+				<tr >
+					<td >
+						<div class="col-xs-12" >
+							{{ category.name }}
+						</div >
+					</td >
+					<td class="text-center" >
+						<a href="{{ path('category_show', { 'id': category.id }) }}" >{{ category.id }}</a >
+					</td >
+					<td class="text-center actionItem" >
+						<a href="{{ path('category_show', { 'id': category.id }) }}" class="badge badge-blue" title="Détail" ><span class="fa fa-search" ></span ></a >
+						<a href="{{ path('category_edit', { 'id': category.id }) }}" class="badge badge-blue" title="Editer" ><span class="fa fa-pencil" ></span ></a >
+					</td >
+				</tr >
+			{% endfor %}
+			<tr >
+				<td colspan="3" ><span class="text-small" >{{ nbCat }} catégorie(s)</span ></td >
+			</tr >
+		</table >
 
-	<ul >
-		<li >
-			<a href="{{ path('category_new') }}" >Create a new entry</a >
-		</li >
-	</ul >
+
+		<a href="{{ path('category_new') }}" title="Retour à la liste" class="btn btn-primary btn-sm" >Créer une catégorie</a >
+	</div >
 {% endblock %}

@@ -2,6 +2,8 @@
 
 	namespace s4smithe\VitrineBundle\Entity;
 
+	use Doctrine\Common\Collections\ArrayCollection;
+
 	/**
 	 * Commande
 	 */
@@ -26,8 +28,14 @@
 		 * @var \s4smithe\VitrineBundle\Entity\Client
 		 */
 		private $client;
-		
-		public function __construct( \s4smithe\VitrineBundle\Entity\Client $client ) {
+
+		/**
+		 * Commande constructor.
+		 *
+		 * @param Client $client
+		 */
+		public function __construct( \s4smithe\VitrineBundle\Entity\Client $client = null ) {
+			$this->lignesommandes = new ArrayCollection();
 			$this->setDate( new \DateTime() );
 			$this->setClient( $client );
 		}
@@ -111,57 +119,65 @@
 		/**
 		 * @var \Doctrine\Common\Collections\Collection
 		 */
-		private $lignesommandes;
+		private $lignecommandes;
 
 
 		/**
-		 * Add lignesommandes
+		 * Add lignecommandes
 		 *
-		 * @param \s4smithe\VitrineBundle\Entity\LigneCommande $lignesommandes
+		 * @param \s4smithe\VitrineBundle\Entity\LigneCommande $lignecommandes
 		 *
 		 * @return Commande
 		 */
-		public function addLignesommande( \s4smithe\VitrineBundle\Entity\LigneCommande $lignesommandes ) {
-			$this->lignesommandes[] = $lignesommandes;
+		public function addLignecommande( \s4smithe\VitrineBundle\Entity\LigneCommande $lignecommandes ) {
+			$this->lignecommandes[] = $lignecommandes;
 
 			return $this;
 		}
 
 		/**
-		 * Remove lignesommandes
+		 * Remove lignecommandes
 		 *
-		 * @param \s4smithe\VitrineBundle\Entity\LigneCommande $lignesommandes
+		 * @param \s4smithe\VitrineBundle\Entity\LigneCommande $lignecommandes
 		 */
-		public function removeLignesommande( \s4smithe\VitrineBundle\Entity\LigneCommande $lignesommandes ) {
-			$this->lignesommandes->removeElement( $lignesommandes );
+		public function removeLignecommande( \s4smithe\VitrineBundle\Entity\LigneCommande $lignecommandes ) {
+			$this->lignecommandes->removeElement( $lignecommandes );
 		}
 
 		/**
-		 * Get lignesommandes
+		 * Get lignecommandes
 		 *
 		 * @return \Doctrine\Common\Collections\Collection
 		 */
-		public function getLignesommandes() {
-			return $this->lignesommandes;
+		public function getLignecommandes() {
+			return $this->lignecommandes;
 		}
 
+
+		/**
+		 * @return int
+		 */
 		public function getPrixCommande() {
 			$total = 0;
 
-			foreach ( $this->getLignesommandes() as $ligne ) {
-				$total += $ligne->getPrix();
+			foreach ( $this->getLignecommandes() as $ligne ) {
+				$total += $ligne->getPrix() * $ligne->getQte();
 			}
 
 			return $total;
 		}
 
+		/**
+		 * @return int
+		 */
 		public function getNbArticleCommande() {
 			$nb = 0;
 
-			foreach ( $this->getLignesommandes() as $ligne ) {
+			foreach ( $this->getLignecommandes() as $ligne ) {
 				$nb += $ligne->getQte();
 			}
 
 			return $nb;
 		}
+
 	}

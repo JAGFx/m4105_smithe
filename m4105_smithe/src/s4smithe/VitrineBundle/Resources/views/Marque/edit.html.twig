@@ -1,10 +1,10 @@
-{% set namePage = category.name %}
+{% set namePage = marque.name %}
 {% set typePage = namePage %}
 {% extends "s4smitheVitrineBundle::layoutBackOffice.html.twig" %}
 
 {% block linkFollowing %}
-	<li class="active" >Categories</li >
-	<li >{{ category.name }}</li >
+	<li class="active" >Marques</li >
+	<li >{{ marque.name }}</li >
 	<li >Edition</li >
 {% endblock %}
 
@@ -13,10 +13,10 @@
 		{{ form_start(edit_form) }}
 		{{ form_widget(edit_form) }}
 		<button type="reset" title="Annuler" class="btn btn-sm btn-default" >Annuler</button >
-		<button type="submit" title="Créer" class="btn btn-sm btn-primary" >Editier</button >
+		<button type="submit" title="Editer" class="btn btn-sm btn-primary" >Editier</button >
 		{{ form_end(edit_form) }}
 
-		<a href="{{ path('category_index') }}" title="Retour à la liste" class="btn btn-sm btn-default" >Retour</a >
+		<a href="{{ path('marque_index') }}" title="Retour à la liste" class="btn btn-sm btn-default" >Retour</a >
 		{{ form_start(delete_form, { 'attr': {'class': 'form-inline visible-lg-inline'} }) }}
 		<button type="submit" title="Supprimer" class="btn btn-sm btn-primary" >Supprimer</button >
 		{{ form_end(delete_form) }}

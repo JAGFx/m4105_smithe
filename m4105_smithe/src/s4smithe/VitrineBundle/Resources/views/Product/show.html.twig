@@ -1,0 +1,48 @@
+{% set namePage = product.name %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layoutBackOffice.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active" >Articles</li >
+	<li >{{ product.name }}</li >
+{% endblock %}
+
+{% block content %}
+	<div class="col-xs-12" >
+		<table class="table table-responsive tableCustum" >
+			<tr >
+				<th >Article</th >
+				<th class="text-center" >Marque</th >
+				<th class="text-center" >Categorie</th >
+				<th class="text-center qte" >ID</th >
+				<th class="actionItem" ></th >
+			</tr >
+			<tr >
+				<td >
+					<div class="col-xs-12" >
+						{{ product.name }}
+					</div >
+				</td >
+				<td class="text-center" >{{ product.marque.name }}</td >
+				<td class="text-center" >{{ product.category.name }}</td >
+				<td class="text-center" >{{ product.id }}</td >
+				<td class="text-center actionItem" rowspan="2" >
+					<a href="{{ path('product_edit', { 'id': product.id }) }}" class="badge badge-blue" title="Editer" ><span class="fa fa-pencil" ></span ></a >
+					{{ form_start(delete_form, { 'attr': {'class': 'form-inline visible-lg-inline'} }) }}
+					<button type="submit" title="Supprimer" class="badge badge-blue" >
+						<span class="fa fa-times" ></span ></button >
+					{{ form_end(delete_form) }}
+				</td >
+			</tr >
+			<tr >
+				<td colspan="4" >
+					<div class="col-xs-12" >
+						<span class="subInfoPanier" >{{ product.description }}</span >
+					</div >
+				</td >
+			</tr >
+		</table >
+
+		<a href="{{ path('product_index') }}" title="Retour à la liste" class="btn btn-sm btn-default" >Retour</a >
+	</div >
+{% endblock %}

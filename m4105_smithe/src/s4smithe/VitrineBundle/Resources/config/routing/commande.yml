@@ -8,6 +8,11 @@ commande_show:
     defaults: { _controller: "s4smitheVitrineBundle:Commande:show" }
     methods:  GET
 
+commande_detail:
+    path:     /{id}/detail
+    defaults: { _controller: "s4smitheVitrineBundle:Commande:detail" }
+    methods:  GET
+
 commande_new:
     path:     /new
     defaults: { _controller: "s4smitheVitrineBundle:Commande:new" }

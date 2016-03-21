@@ -1,0 +1,43 @@
+{% set namePage = "Marque" %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layoutBackOffice.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active" >Marques</li >
+{% endblock %}
+
+{% block content %}
+	<div class="col-xs-12" >
+		<table class="table table-responsive tableCustum" >
+			<tr >
+				<th >Nom</th >
+				<th class="text-center qte" >ID</th >
+				<th class="actionItem" ></th >
+			</tr >
+			{% set nbMark = 0 %}
+			{% for marque in marques %}
+				{% set nbMark = nbMark + 1 %}
+				<tr >
+					<td >
+						<div class="col-xs-12" >
+							{{ marque.name }}
+						</div >
+					</td >
+					<td class="text-center" >
+						<a href="{{ path('marque_show', { 'id': marque.id }) }}" >{{ marque.id }}</a >
+					</td >
+					<td class="text-center actionItem" >
+						<a href="{{ path('marque_show', { 'id': marque.id }) }}" class="badge badge-blue" title="Détail" ><span class="fa fa-search" ></span ></a >
+						<a href="{{ path('marque_edit', { 'id': marque.id }) }}" class="badge badge-blue" title="Editer" ><span class="fa fa-pencil" ></span ></a >
+					</td >
+				</tr >
+			{% endfor %}
+			<tr >
+				<td colspan="3" ><span class="text-small" >{{ nbMark }} marque(s)</span ></td >
+			</tr >
+		</table >
+
+
+		<a href="{{ path('category_new') }}" title="Retour à la liste" class="btn btn-primary btn-sm" >Créer une marque</a >
+	</div >
+{% endblock %}

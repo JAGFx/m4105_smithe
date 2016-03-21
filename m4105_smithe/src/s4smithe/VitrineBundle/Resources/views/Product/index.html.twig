@@ -1,0 +1,51 @@
+{% set namePage = "Articles" %}
+{% set typePage = namePage %}
+{% extends "s4smitheVitrineBundle::layoutBackOffice.html.twig" %}
+
+{% block linkFollowing %}
+	<li class="active" >Articles</li >
+{% endblock %}
+
+{% block content %}
+	<div class="col-xs-12" >
+		<table class="table table-responsive tableCustum" >
+			<tr >
+				<th >Article</th >
+				<th class="text-center qte" >ID</th >
+				<th class="text-center qte" >Qté</th >
+				<th class="text-center littleTD" >Prix</th >
+				<th class="actionItem" ></th >
+			</tr >
+			{% set nbProd = 0 %}
+			{% for product in products %}
+				{% set nbProd = nbProd + 1 %}
+				<tr >
+					<td >
+						<div class="col-xs-12" >{{ product.name }} </div >
+						<div class="col-xs-12" >
+							<span class="subInfoPanier" >{{ product.category.name }}</span >
+							<span class="subInfoPanier" > - {{ product.marque.name }}</span >
+						</div >
+					</td >
+					<td class="text-center" >
+						<a href="{{ path('product_show', { 'id': product.id }) }}" >{{ product.id }}</a >
+					</td >
+					<td class="text-center" ><span class="badge badge-blue" >x {{ product.stock }}</span ></td >
+					<td class="text-center" >
+						{{ product.price|number_format(2, ',', ' ') }} €
+					</td >
+					<td class="text-center actionItem" >
+						<a href="{{ path('product_show', { 'id': product.id }) }}" class="badge badge-blue" title="Détail" ><span class="fa fa-search" ></span ></a >
+						<a href="{{ path('product_edit', { 'id': product.id }) }}" class="badge badge-blue" title="Editer" ><span class="fa fa-pencil" ></span ></a >
+					</td >
+				</tr >
+			{% endfor %}
+			<tr >
+				<td colspan="5" ><span class="text-small" >{{ nbProd }} produit(s)</span ></td >
+			</tr >
+		</table >
+
+
+		<a href="{{ path('product_new') }}" title="Retour à la liste" class="btn btn-primary btn-sm" >Créer un article</a >
+	</div >
+{% endblock %}

@@ -21,7 +21,8 @@
 
 			$products = $em->getRepository('s4smitheVitrineBundle:Product')->findAll();
 
-			return $this->render('product/index.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Product:index.html.twig', array(
 					'products' => $products,
 			));
 		}
@@ -43,7 +44,8 @@
 				return $this->redirectToRoute('product_show', array('id' => $product->getId()));
 			}
 
-			return $this->render('product/new.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Product:new.html.twig', array(
 					'product' => $product,
 					'form' => $form->createView(),
 			));
@@ -56,7 +58,8 @@
 		public function showAction(Product $product) {
 			$deleteForm = $this->createDeleteForm($product);
 
-			return $this->render('product/show.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Product:show.html.twig', array(
 					'product' => $product,
 					'delete_form' => $deleteForm->createView(),
 			));
@@ -79,7 +82,8 @@
 				return $this->redirectToRoute('product_edit', array('id' => $product->getId()));
 			}
 
-			return $this->render('product/edit.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Product:edit.html.twig', array(
 					'product' => $product,
 					'edit_form' => $editForm->createView(),
 					'delete_form' => $deleteForm->createView(),

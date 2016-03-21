@@ -21,8 +21,7 @@
 {% block content %}
 	<div style="padding-left: 15px;" >
 		{% for flashMessage in app.session.flashbag.get('message') %}
-			{{ flashMessage.title }}
-			{{ flashMessage.message }}
+			{% include "s4smitheVitrineBundle:Default:flashMessage.html.twig" %}
 		{% endfor %}
 
 		<table class="table table-responsive tableCustum" >
@@ -63,8 +62,16 @@
 					<td class="text-center total" >{{ total|number_format(2, ',', ' ') }} €</td >
 					<td ></td >
 				</tr >
+			{% else %}
+				<tr >
+					<td colspan="5" > Pas d'article dans le panier</td >
+				</tr >
 			{% endif %}
 
 		</table >
+
+		{% if app.session.get('userId') > 0 %}
+			<a href="{{ path('s4smithe_vitrine_validationPanier') }}" title="Commander" class="btn btn-primary btn-sm" >Commander</a >
+		{% endif %}
 	</div >
 {% endblock %}

@@ -44,7 +44,8 @@
 				return $this->redirectToRoute( '', array( 'id' => $category->getId() ) );
 			}
 
-			return $this->render('category/new.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Category:new.html.twig', array(
 					'category' => $category,
 					'form' => $form->createView(),
 			));
@@ -57,7 +58,8 @@
 		public function showAction(Category $category) {
 			$deleteForm = $this->createDeleteForm($category);
 
-			return $this->render('category/show.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Category:show.html.twig', array(
 					'category' => $category,
 					'delete_form' => $deleteForm->createView(),
 			));
@@ -80,7 +82,8 @@
 				return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
 			}
 
-			return $this->render('category/edit.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Category:edit.html.twig', array(
 					'category' => $category,
 					'edit_form' => $editForm->createView(),
 					'delete_form' => $deleteForm->createView(),

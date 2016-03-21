@@ -1,36 +1,34 @@
 <?php
 
-namespace s4smithe\VitrineBundle\Form\Type;
+	namespace s4smithe\VitrineBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+	use Symfony\Component\Form\AbstractType;
+	use Symfony\Component\Form\FormBuilderInterface;
+	use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Class CategoryType
- *
- * @package s4smithe\VitrineBundle\Form\Type
- */
-class CategoryType extends AbstractType
-{
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('name')
-        ;
-    }
-    
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 's4smithe\VitrineBundle\Entity\Category'
-        ));
-    }
-}
+	/**
+	 * Class CategoryType
+	 *
+	 * @package s4smithe\VitrineBundle\Form\Type
+	 */
+	class CategoryType extends AbstractType {
+		/**
+		 * @param FormBuilderInterface $builder
+		 * @param array                $options
+		 */
+		public function buildForm( FormBuilderInterface $builder, array $options ) {
+			$builder
+				->add( 'name', null, array( 'label' => 'Nom' ) );
+		}
+
+		/**
+		 * @param OptionsResolver $resolver
+		 */
+		public function configureOptions( OptionsResolver $resolver ) {
+			$resolver->setDefaults(
+				array(
+					'data_class' => 's4smithe\VitrineBundle\Entity\Category'
+				)
+			);
+		}
+	}

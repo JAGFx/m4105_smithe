@@ -14,7 +14,7 @@
 {% extends "s4smitheVitrineBundle::layout.html.twig" %}
 
 {% block linkFollowing %}
-	<li class="active" >Categorie</li >
+	<li class="active" >Accueil</li >
 {% endblock %}
 
 {% block content %}
@@ -22,17 +22,21 @@
 		<img class="img-responsive" style="margin: auto;" src="{{ asset('bundles/s4smithevitrine/images/sfshop.jpg') }}" alt="{{ sfNameShop }}" />
 	</div >
 	Bonjour à toi {{ name }} !
-	<ul >
-		<li >TODO Articles plus vendus</li >
-		<li >TODO Marque populaires</li >
-		<li ><s >TODO Stock des articles</s ></li >
-		<li ><s >TODO Prix Moment CMD dans Ligne commande</s ></li >
-		<li ><s >TODO Détails commandes clients</s ></li >
-		<li >TODO Design back-office</li >
-		<li >TODO Contraintes validité</li >
-		<li >TODO Ajout perso articles</li >
-		<li >TODO Images produits</li >
-		<li >TODO Form connexion</li >
-		<li >TODO Message utilisateur feedback</li >
+	<ul style="list-style: none;" >
+		<li ><span class="glyphicon glyphicon-unchecked" ></span > TODO Articles plus vendus</li >
+		<li ><span class="glyphicon glyphicon-unchecked" ></span > TODO Marque populaires</li >
+		<li class="checkItem" ><span class="glyphicon glyphicon-check" ></span > <s >TODO Stock des articles</s ></li >
+		<li class="checkItem" ><span class="glyphicon glyphicon-check" ></span >
+			<s >TODO Prix Moment CMD dans Ligne commande</s ></li >
+		<li class="checkItem" ><span class="glyphicon glyphicon-check" ></span > <s >TODO Détails commandes clients</s >
+		</li >
+		<li class="checkItem" ><span class="glyphicon glyphicon-check" ></span > <s >TODO Design back-office</s ></li >
+		<li ><span class="glyphicon glyphicon-unchecked" ></span > TODO Contraintes validité</li >
+		<li ><span class="glyphicon glyphicon-unchecked" ></span > TODO Ajout perso articles</li >
+		<li ><span class="glyphicon glyphicon-unchecked" ></span > TODO Images produits</li >
+		<li class="checkItem" ><span class="glyphicon glyphicon-check" ></span > <s >TODO Form connexion</s ></li >
+		<li ><span class="glyphicon glyphicon-unchecked" ></span > TODO Message utilisateur feedback</li >
+		<li class="checkItem" ><span class="glyphicon glyphicon-check" ></span > <s >TODO Custum alert design</s ></li >
+		<li ><span class="glyphicon glyphicon-unchecked" ></span > TODO Color custum alert</li >
 	</ul >
 {% endblock %}

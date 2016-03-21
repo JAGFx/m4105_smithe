@@ -17,7 +17,6 @@ s4smithe\VitrineBundle\Entity\LigneCommande:
     manyToOne:								 # Dans l’entité Product on ajoute un champ
         product:								# category qui pointe vers une entité Category
              targetEntity: Product						 # category_id sera, dans la table, le nom de la clé
-             inversedBy: lignesommandes					 # étrangère qui référence le champ id d’une
              joinColumn:								# Category
                  name: product_id
                  referencedColumnName: id

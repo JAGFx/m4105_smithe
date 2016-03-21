@@ -25,16 +25,16 @@
 					{% set totalCommande = totalCommande + commande.PrixCommande %}
 					<tr>
 						<td>
-							<div class="col-md-12" >{{ commande.date|date('Y-m-d H:i:s') }}</div >
+							<div class="col-md-12" >{{ commande.client.name }}</div >
 							<div class="col-md-12">
-								<span class="subInfoPanier" >{{ commande.client.name }}</span >
+								<span class="subInfoPanier" >{{ commande.date|date('Y-m-d H:i:s') }}</span >
 							</div>
 						</td>
 						<td class="text-center">{{ commande.id }}</td>
-						<td class="text-center">{% if commande.etat %}Valider{% else %}En Attente{% endif %}</td>
+						<td class="text-center" >{% if commande.etat %}Validé{% else %}En Attente{% endif %}</td >
 						<td class="text-center" >{{ commande.PrixCommande|number_format(2, ',', ' ') }} €</td >
 						<td class="text-center actionItem">
-							<a href="{{ path('commande_show', { 'id': commande.id }) }}" class="badge badge-blue" title="Détail"><span class="fa fa-plus"></span></a>
+							<a href="{{ path('commande_detail', { 'id': commande.id }) }}" class="badge badge-blue" title="Détail" ><span class="fa fa-search" ></span ></a >
 						</td>
 					</tr>
 				{% endfor %}
