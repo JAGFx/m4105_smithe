@@ -18,17 +18,28 @@
 		}
 
 		public function findAllBetterSales() {
-			return $this->getEntityManager()
-				->createQuery(
-					'SELECT p FROM (
-						SELECT a.id id AS id, count(*) AS cnt
-						FROM s4smitheVitrineBundle:LigneCommande a
-						GROUP BY a.product_id
-						ORDER BY cnt ) pop
-				      NATURAL JOIN s4smitheVitrineBundle:Product'
-				)
-				->setMaxResults( 5 )
-				->getResult();
+			$stmt = $this->getEntityManager()->getConnection()->prepare(
+				'SELECT p.id
+				FROM (
+					SELECT l.product_id AS id, SUM(l.qte) AS cnt
+					FROM lignecommande l
+					GROUP BY l.product_id
+					ORDER BY cnt DESC ) popu
+				NATURAL JOIN product p
+				LIMIT 5'
+			);
+
+			$stmt->execute();
+			$productIDs = $stmt->fetchAll();
+			$products = [ ];
+
+			foreach ( $productIDs as $id ) {
+				$products[] = $this->getEntityManager()
+					->getRepository( 's4smitheVitrineBundle:Product' )
+					->findOneById( $id );
+			}
+
+			return $products;
 
 			// SELECT * FROM ( SELECT l.product_id AS id, count(*) AS cnt FROM lignecommande l GROUP BY l.product_id ORDER BY cnt ) pop NATURAL JOIN product ORDER BY name LIMIT 5
 		}

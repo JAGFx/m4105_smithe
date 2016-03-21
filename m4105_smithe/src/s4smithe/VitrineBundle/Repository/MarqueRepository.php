@@ -11,17 +11,37 @@
 	 * repository methods below.
 	 */
 	class MarqueRepository extends EntityRepository {
-		public function findAllOrderedByName( $limit = -1 ) {
+		public function findAllOrderedByName() {
+			return $this->getEntityManager()
+				->createQuery( 'SELECT p FROM s4smitheVitrineBundle:Marque p ORDER BY p.name' )
+				->getResult();
 			
-			if( $limit <= 0 ) 
-				return $this->getEntityManager()
-					->createQuery('SELECT p FROM s4smitheVitrineBundle:Marque p ORDER BY p.name')
-					->getResult();
-			else 
-				return $this->getEntityManager()
-					->createQuery('SELECT p FROM s4smitheVitrineBundle:Marque p ORDER BY p.name')
-					->setMaxResults( $limit )
-					->getResult();
-			
+		}
+
+		public function findAllPopular() {
+			$stmt = $this->getEntityManager()->getConnection()->prepare(
+				'SELECT p.marque_id
+				FROM (
+					SELECT l.product_id AS id, SUM(l.qte) AS cnt
+					FROM lignecommande l
+					GROUP BY l.product_id
+					ORDER BY cnt DESC ) popu
+				NATURAL JOIN product p
+				LIMIT 5'
+			);
+
+			$stmt->execute();
+			$marqueIDs = $stmt->fetchAll();
+			$marques = [ ];
+
+			foreach ( $marqueIDs as $id ) {
+				$marques[] = $this->getEntityManager()
+					->getRepository( 's4smitheVitrineBundle:Marque' )
+					->findOneById( $id );
+			}
+
+			return $marques;
+
+			// SELECT * FROM ( SELECT l.product_id AS id, count(*) AS cnt FROM lignecommande l GROUP BY l.product_id ORDER BY cnt ) pop NATURAL JOIN product ORDER BY name LIMIT 5
 		}
 	}

@@ -19,92 +19,96 @@
 		public function indexAction() {
 			$em = $this->getDoctrine()->getManager();
 
-			$marques = $em->getRepository('s4smitheVitrineBundle:Marque')->findAll();
+			$marques = $em->getRepository( 's4smitheVitrineBundle:Marque' )->findAll();
 
 			return $this->render(
 				's4smitheVitrineBundle:Marque:index.html.twig', array(
 					'marques' => $marques,
-			));
+				)
+			);
 		}
 
 		/**
 		 * Creates a new Marque entity.
 		 *
 		 */
-		public function newAction(Request $request) {
+		public function newAction( Request $request ) {
 			$marque = new Marque();
-			$form = $this->createForm('s4smithe\VitrineBundle\Form\Type\MarqueType', $marque);
-			$form->handleRequest($request);
+			$form = $this->createForm( 's4smithe\VitrineBundle\Form\Type\MarqueType', $marque );
+			$form->handleRequest( $request );
 
-			if ($form->isSubmitted() && $form->isValid()) {
+			if ( $form->isSubmitted() && $form->isValid() ) {
 				$em = $this->getDoctrine()->getManager();
-				$em->persist($marque);
+				$em->persist( $marque );
 				$em->flush();
 
-				return $this->redirectToRoute('marque_show', array('id' => $marque->getId()));
+				return $this->redirectToRoute( 'marque_show', array( 'id' => $marque->getId() ) );
 			}
 
 			return $this->render(
 				's4smitheVitrineBundle:Marque:new.html.twig', array(
 					'marque' => $marque,
-					'form' => $form->createView(),
-			));
+					'form'   => $form->createView(),
+				)
+			);
 		}
 
 		/**
 		 * Finds and displays a Marque entity.
 		 *
 		 */
-		public function showAction(Marque $marque) {
-			$deleteForm = $this->createDeleteForm($marque);
+		public function showAction( Marque $marque ) {
+			$deleteForm = $this->createDeleteForm( $marque );
 
 			return $this->render(
 				's4smitheVitrineBundle:Marque:show.html.twig', array(
-					'marque' => $marque,
+					'marque'      => $marque,
 					'delete_form' => $deleteForm->createView(),
-			));
+				)
+			);
 		}
 
 		/**
 		 * Displays a form to edit an existing Marque entity.
 		 *
 		 */
-		public function editAction(Request $request, Marque $marque) {
-			$deleteForm = $this->createDeleteForm($marque);
-			$editForm = $this->createForm('s4smithe\VitrineBundle\Form\Type\MarqueType', $marque);
-			$editForm->handleRequest($request);
+		public function editAction( Request $request, Marque $marque ) {
+			$deleteForm = $this->createDeleteForm( $marque );
+			$editForm = $this->createForm( 's4smithe\VitrineBundle\Form\Type\MarqueType', $marque );
+			$editForm->handleRequest( $request );
 
-			if ($editForm->isSubmitted() && $editForm->isValid()) {
+			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
 				$em = $this->getDoctrine()->getManager();
-				$em->persist($marque);
+				$em->persist( $marque );
 				$em->flush();
 
-				return $this->redirectToRoute('marque_edit', array('id' => $marque->getId()));
+				return $this->redirectToRoute( 'marque_edit', array( 'id' => $marque->getId() ) );
 			}
 
 			return $this->render(
 				's4smitheVitrineBundle:Marque:edit.html.twig', array(
-					'marque' => $marque,
-					'edit_form' => $editForm->createView(),
+					'marque'      => $marque,
+					'edit_form'   => $editForm->createView(),
 					'delete_form' => $deleteForm->createView(),
-			));
+				)
+			);
 		}
 
 		/**
 		 * Deletes a Marque entity.
 		 *
 		 */
-		public function deleteAction(Request $request, Marque $marque) {
-			$form = $this->createDeleteForm($marque);
-			$form->handleRequest($request);
+		public function deleteAction( Request $request, Marque $marque ) {
+			$form = $this->createDeleteForm( $marque );
+			$form->handleRequest( $request );
 
-			if ($form->isSubmitted() && $form->isValid()) {
+			if ( $form->isSubmitted() && $form->isValid() ) {
 				$em = $this->getDoctrine()->getManager();
-				$em->remove($marque);
+				$em->remove( $marque );
 				$em->flush();
 			}
 
-			return $this->redirectToRoute('marque_index');
+			return $this->redirectToRoute( 'marque_index' );
 		}
 		
 		
@@ -114,20 +118,24 @@
 		public function listeMarqueAction() {
 			$marques = $this->findAllMarque();
 			
-			return $this->render('s4smitheVitrineBundle:Marque:listeMarque.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Marque:listeMarque.html.twig', array(
 				'marques' => $marques
-			));
+				)
+			);
 		}
 
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function listeMarqueFooterAction() {
-			$marques = $this->findAllMarque( 5 );
+			$marques = $this->findAllPopular();
 			
-			return $this->render('s4smitheVitrineBundle:Marque:listeMarquesFooter.html.twig', array(
+			return $this->render(
+				's4smitheVitrineBundle:Marque:listeMarquesFooter.html.twig', array(
 				'marques' => $marques
-			));
+				)
+			);
 		}
 		
 		/**
@@ -136,11 +144,13 @@
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function articlesParMarqueAction( $markId ) {
-			$markObj = $this->findMarque($markId);
-			
-			return $this->render('s4smitheVitrineBundle:Default:articlesParFiltre.html.twig', array(
+			$markObj = $this->findMarque( $markId );
+
+			return $this->render(
+				's4smitheVitrineBundle:Default:articlesParFiltre.html.twig', array(
 				'filter' => $markObj
-			));
+				)
+			);
 		}
 
 		
@@ -149,17 +159,30 @@
 		 *
 		 * @return array
 		 */
-		private function findAllMarque( $limit = -1 ){
+		private function findAllMarque() {
 			
-			$marque = $this->getDoctrine()->getManager()
-				->getRepository('s4smitheVitrineBundle:Marque')
-				->findAllOrderedByName( $limit );
+			$marques = $this->getDoctrine()->getManager()
+				->getRepository( 's4smitheVitrineBundle:Marque' )
+				->findAllOrderedByName();
 			
-			if (!$marque) {
-				throw $this->createNotFoundException('Produit non trouvé avec id ');
+			if ( !$marques ) {
+				throw $this->createNotFoundException( 'Produit non trouvé avec id ' );
 			}
 			
-			return $marque;
+			return $marques;
+		}
+
+		private function findAllPopular() {
+
+			$marques = $this->getDoctrine()->getManager()
+				->getRepository( 's4smitheVitrineBundle:Marque' )
+				->findAllPopular();
+
+			if ( !$marques ) {
+				throw $this->createNotFoundException( 'Produit non trouvé avec id ' );
+			}
+
+			return $marques;
 		}
 		
 		/**
@@ -167,18 +190,17 @@
 		 *
 		 * @return mixed
 		 */
-		private function findMarque($id){
+		private function findMarque( $id ) {
 			$mark = $this->getDoctrine()->getManager()
-				->getRepository('s4smitheVitrineBundle:Marque')
-				->findOneById($id);
+				->getRepository( 's4smitheVitrineBundle:Marque' )
+				->findOneById( $id );
 			
-			if (!$mark) {
-				throw $this->createNotFoundException('Produit non trouvé avec id ' . $id);
+			if ( !$mark ) {
+				throw $this->createNotFoundException( 'Produit non trouvé avec id ' . $id );
 			}
 			
 			return $mark;
 		}
-		
 		
 		
 		/**
@@ -188,12 +210,11 @@
 		 *
 		 * @return \Symfony\Component\Form\Form The form
 		 */
-		private function createDeleteForm(Marque $marque) {
+		private function createDeleteForm( Marque $marque ) {
 			return $this->createFormBuilder()
-					->setAction($this->generateUrl('marque_delete', array('id' => $marque->getId())))
-					->setMethod('DELETE')
-					->getForm()
-			;
+				->setAction( $this->generateUrl( 'marque_delete', array( 'id' => $marque->getId() ) ) )
+				->setMethod( 'DELETE' )
+				->getForm();
 		}
 
 	}

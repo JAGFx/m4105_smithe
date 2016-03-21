@@ -19,13 +19,13 @@
 
 		public function indexAction($name) {
 
-			/*$listProductPop = $this->getDoctrine()->getManager()
+			$listProductPop = $this->getDoctrine()->getManager()
 				->getRepository( 's4smitheVitrineBundle:Product' )
-				->findAllBetterSales();*/
+				->findAllBetterSales();
 			
 			return $this->render('s4smitheVitrineBundle:Default:index.html.twig', array(
-				'name' => $name,
-				//'listProductPop' => $listProductPop
+				'name'           => $name,
+				'listProductPop' => $listProductPop
 			));
 		}
 		

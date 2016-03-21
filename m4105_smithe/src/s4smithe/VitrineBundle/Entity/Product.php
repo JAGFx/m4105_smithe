@@ -7,6 +7,8 @@
 	 */
 	class Product {
 
+		const PATH_IMAGE = 'images/products/';
+
 		/**
 		 * @var integer
 		 */
@@ -189,5 +191,9 @@
 		 */
 		public function onStock() {
 			return ( $this->getStock() > 0 ) ? true : false;
+		}
+
+		public function getPathImage() {
+			return \s4smithe\VitrineBundle\Entity\Product::PATH_IMAGE . $this->getId() . '.jpg';
 		}
 	}
