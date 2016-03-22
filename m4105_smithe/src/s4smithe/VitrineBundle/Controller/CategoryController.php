@@ -41,7 +41,7 @@
 				$em->persist($category);
 				$em->flush();
 
-				return $this->redirectToRoute( '', array( 'id' => $category->getId() ) );
+				return $this->redirectToRoute( 'category_show', array( 'id' => $category->getId() ) );
 			}
 
 			return $this->render(

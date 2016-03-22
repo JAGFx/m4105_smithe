@@ -45,8 +45,8 @@
 				});
 			}
 		};
-		
 
-		$('#panier').tooltip();
+
+		$( '[data-toggle="tooltip"]' ).tooltip();
 		//$("#contentArticles").setHeightAllElem({child: ".thumbnail"});
 	});

@@ -36,3 +36,64 @@ s4smithe\VitrineBundle\Entity\Client:
                 message: La date de naissance n'est pas valide.
 
             - Type: \DateTime
+
+
+s4smithe\VitrineBundle\Entity\Product:
+    properties:
+        name:
+            - NotBlank:
+                message: Le nom ne doit pas être vide.
+
+        price:
+            - NotBlank:
+                message: Le prix ne doit pas être vide.
+
+            - Type: scalar
+
+            - Range:
+                min: 0.0
+                minMessage: Le nombre doit être strictement positif.
+
+        stock:
+            - Type: int
+
+            - Range:
+                min: 0
+                minMessage: Le nombre doit être strictement positif.
+
+        description:
+            - NotBlank:
+                message: La description ne doit pas être vide.
+
+        category:
+            - NotBlank:
+                message: Le produit doit avoir une catégoire.
+
+        marque:
+            - NotBlank:
+                message: Le produit doit avoir une marque.
+
+
+s4smithe\VitrineBundle\Entity\Marque:
+    properties:
+        name:
+            - NotBlank:
+                message: Le nom ne doit pas être vide.
+
+            - Length:
+                min: 5
+                max: 100
+                minMessage: Le nom doit comporter au moins 5 caractères.
+                maxMessage: Le nom ne doit pas exceder 100 caractères.
+
+s4smithe\VitrineBundle\Entity\Category:
+    properties:
+        name:
+            - NotBlank:
+                message: Le nom ne doit pas être vide.
+
+            - Length:
+                min: 5
+                max: 100
+                minMessage: Le nom doit comporter au moins 5 caractères.
+                maxMessage: Le nom ne doit pas exceder 100 caractères.

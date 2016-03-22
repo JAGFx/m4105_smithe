@@ -5,7 +5,7 @@
 			<h4 class="labelThumb">
 				<span class="label label-primary">{{ item.price|number_format(2, ',', ' ') }} €</span><!--
 				--><div class="addCart">
-					<a class="btn btn-primary btn-sm" href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.id}) }}" title="Ajouter au panier">
+					<a class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="{% if item.onStock %}En stock{% else %}Hors stock{% endif %}" href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.id}) }}" title="Ajouter au panier" {% if not item.onStock %}disabled{% endif %}>
 						<span class="fa fa-cart-arrow-down"></span>
 					</a>
 				</div>

@@ -194,6 +194,8 @@
 		}
 
 		public function getPathImage() {
-			return \s4smithe\VitrineBundle\Entity\Product::PATH_IMAGE . $this->getId() . '.jpg';
+			//return \s4smithe\VitrineBundle\Entity\Product::PATH_IMAGE . $this->getId() . '.jpg';'
+			return \s4smithe\VitrineBundle\Entity\Product::PATH_IMAGE . 'noImg.jpg';
+
 		}
 	}

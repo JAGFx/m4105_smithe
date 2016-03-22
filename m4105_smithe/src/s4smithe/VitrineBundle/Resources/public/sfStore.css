@@ -12,6 +12,8 @@
 
 	body > .container { margin-bottom: 15px; }
 
+	h4.mainpage { margin-top: 30px; margin-bottom: 15px; }
+
 	.checkItem { color: #A5A5A5; }
 
 	/*--------------------------------------------------------------------
@@ -138,8 +140,9 @@
 	}
 
 	.thumbnail:hover {
-		box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.52);
+		box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
 		border:     1px solid rgba(255, 255, 255, 0.36);
+		cursor:     pointer;
 		transition: all .2s ease-in-out;
 	}
 	.thumbnail .cover { position: relative; overflow: hidden; }
@@ -340,39 +343,39 @@
 		font-style: italic;
 		padding:    0 15px 15px 15px;
 		margin:     0;
-		color:      #EFEFEF;
+		color:      #ebebeb;
 	}
 
 	/* ------------------------------------------- Alert - Succes */
 	.messageForm .alert.alert-cust-success > .ico { background: #5CB85C; }
 
-	.messageForm .alert.alert-cust-success > .info { background: rgba(92, 184, 92, .2); }
+	.messageForm .alert.alert-cust-success > .info { background: #494E59; }
 
 	.messageForm .alert.alert-cust-success > .info > h4 { color: #5CB85C; }
 
 	/* ------------------------------------------- Alert - Info */
-	.messageForm .alert.alert-cust-info > .ico { background: #3498DB; }
+	.messageForm .alert.alert-cust-info > .ico { background: #5FC7ED; }
 
-	.messageForm .alert.alert-cust-info > .info { background: rgba(52, 152, 219, .2); }
+	.messageForm .alert.alert-cust-info > .info { background: #494E59; }
 
-	.messageForm .alert.alert-cust-info > .info > h4 { color: #3498DB; }
+	.messageForm .alert.alert-cust-info > .info > h4 { color: #5FC7ED; }
 
 	/* ------------------------------------------- Alert - Warning */
 	.messageForm .alert.alert-cust-warning > .ico { background: #f0ad4e; }
 
-	.messageForm .alert.alert-cust-warning > .info { background: rgba(240, 173, 78, .2); }
+	.messageForm .alert.alert-cust-warning > .info { background: #494E59; }
 
 	.messageForm .alert.alert-cust-warning > .info > h4 { color: #f0ad4e; }
 
 	/* ------------------------------------------- Alert - Danger / Error */
 	.messageForm .alert.alert-cust-danger > .ico,
-	.messageForm .alert.alert-cust-error > .ico { background: #D9534F; }
+	.messageForm .alert.alert-cust-error > .ico { background: #ff0700; }
 
 	.messageForm .alert.alert-cust-danger > .info,
-	.messageForm .alert.alert-cust-error > .info { background: rgba(217, 83, 79, .2); }
+	.messageForm .alert.alert-cust-error > .info { background: #494E59; }
 
 	.messageForm .alert.alert-cust-danger > .info > h4,
-	.messageForm .alert.alert-cust-error > .info > h4 { color: #D9534F; }
+	.messageForm .alert.alert-cust-error > .info > h4 { color: #ff0700; }
 
 
 
