@@ -193,9 +193,10 @@
 			return ( $this->getStock() > 0 ) ? true : false;
 		}
 
+		/**
+		 * @return string
+		 */
 		public function getPathImage() {
-			//return \s4smithe\VitrineBundle\Entity\Product::PATH_IMAGE . $this->getId() . '.jpg';'
-			return \s4smithe\VitrineBundle\Entity\Product::PATH_IMAGE . 'noImg.jpg';
-
+			return \s4smithe\VitrineBundle\Entity\Product::PATH_IMAGE . $this->getId() . '.jpg';
 		}
 	}
