@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : MarqueRepository.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 04/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Repository pour l'entitée Marque
+	 */
+
 	namespace s4smithe\VitrineBundle\Repository;
 
 	use Doctrine\ORM\EntityRepository;
@@ -11,6 +20,9 @@
 	 * repository methods below.
 	 */
 	class MarqueRepository extends EntityRepository {
+		/**
+		 * @return array
+		 */
 		public function findAllOrderedByName() {
 			return $this->getEntityManager()
 				->createQuery( 'SELECT p FROM s4smitheVitrineBundle:Marque p ORDER BY p.name' )
@@ -18,6 +30,10 @@
 			
 		}
 
+		/**
+		 * @return array
+		 * @throws \Doctrine\DBAL\DBALException
+		 */
 		public function findAllPopular() {
 			$stmt = $this->getEntityManager()->getConnection()->prepare(
 				'SELECT p.marque_id

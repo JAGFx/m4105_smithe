@@ -1,9 +1,23 @@
 <?php
 
+	/*
+	 * Fichier : Panier.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 03/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Entitée Panier
+	 */
+
 	namespace s4smithe\VitrineBundle\Entity;
 
 	/**
 	 * Panier
+	 */
+	/**
+	 * Class Panier
+	 *
+	 * @package s4smithe\VitrineBundle\Entity
 	 */
 	class Panier {
 
@@ -64,6 +78,9 @@
 			}
 		}
 		
+		/**
+		 *
+		 */
 		public function clearPanier() {
 			unset( $this->articles );
 		}
@@ -77,6 +94,9 @@
 			return $this->articles;
 		}
 		
+		/**
+		 * @return int
+		 */
 		public function getNbArticle() {
 			$nb = 0;
 			

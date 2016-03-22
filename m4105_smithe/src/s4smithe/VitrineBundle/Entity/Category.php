@@ -1,9 +1,23 @@
 <?php
 
+	/*
+	 * Fichier : Category.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 16/02/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Entitée Catégorie
+	 */
+
 	namespace s4smithe\VitrineBundle\Entity;
 
 	/**
 	 * Category
+	 */
+	/**
+	 * Class Category
+	 *
+	 * @package s4smithe\VitrineBundle\Entity
 	 */
 	class Category {
 
@@ -89,6 +103,9 @@
 			return $this->products;
 		}
 
+		/**
+		 * @return string
+		 */
 		public function __toString() {
 			return $this->getName();
 		}

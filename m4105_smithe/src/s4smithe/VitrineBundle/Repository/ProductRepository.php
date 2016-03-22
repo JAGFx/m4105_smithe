@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : ProductRepository.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 04/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Repository pour l'entitée Product
+	 */
+
 	namespace s4smithe\VitrineBundle\Repository;
 	use Doctrine\ORM\EntityRepository;
 
@@ -11,12 +20,19 @@
 	 */
 	class ProductRepository extends EntityRepository {
 
+		/**
+		 * @return array
+		 */
 		public function findAllOrderedByName() {
 			return $this->getEntityManager()
 					->createQuery('SELECT p FROM s4smitheVitrineBundle:Product p ORDER BY p.name ASC')
 					->getResult();
 		}
 
+		/**
+		 * @return array
+		 * @throws \Doctrine\DBAL\DBALException
+		 */
 		public function findAllBetterSales() {
 			$stmt = $this->getEntityManager()->getConnection()->prepare(
 				'SELECT p.id

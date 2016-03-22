@@ -1,9 +1,23 @@
 <?php
+	/*
+	 * Fichier : Category.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 20/02/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Entitée Client
+	 */
+
 
 	namespace s4smithe\VitrineBundle\Entity;
 
 	/**
 	 * Client
+	 */
+	/**
+	 * Class Client
+	 *
+	 * @package s4smithe\VitrineBundle\Entity
 	 */
 	class Client {
 
@@ -227,6 +241,9 @@
 			$this->commandes->removeElement( $commandes );
 		}
 
+		/**
+		 * @return string
+		 */
 		public function __toString() {
 			return $this->getName();
 		}

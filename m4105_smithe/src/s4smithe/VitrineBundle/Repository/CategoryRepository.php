@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : CategoryRepository.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 04/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Repository pour l'entitée Category
+	 */
+
 	namespace s4smithe\VitrineBundle\Repository;
 	use Doctrine\ORM\EntityRepository;
 
@@ -11,6 +20,9 @@
 	 */
 	class CategoryRepository extends EntityRepository {
 
+		/**
+		 * @return array
+		 */
 		public function findAllOrderedByName() {
 			return $this->getEntityManager()
 					->createQuery( 'SELECT c FROM s4smitheVitrineBundle:Category c ORDER BY c.name ASC')

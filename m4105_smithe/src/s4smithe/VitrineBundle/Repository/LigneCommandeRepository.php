@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : LigneCommandeRepository.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 20/02/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Repository pour l'entitée LigneCommande
+	 */
+
 	namespace s4smithe\VitrineBundle\Repository;
 
 	use Doctrine\ORM\EntityRepository;

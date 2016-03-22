@@ -1,9 +1,23 @@
 <?php
 
+	/*
+	 * Fichier : Marque.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 04/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Entitée Marque
+	 */
+
 	namespace s4smithe\VitrineBundle\Entity;
 
 	/**
 	 * Marque
+	 */
+	/**
+	 * Class Marque
+	 *
+	 * @package s4smithe\VitrineBundle\Entity
 	 */
 	class Marque {
 
@@ -89,6 +103,9 @@
 			return $this->products;
 		}
 
+		/**
+		 * @return string
+		 */
 		public function __toString() { // renvoyer une chaîne qui identifie de manière unique l’entité
 			return $this->getName(); // si l’attribut Intitule est unique pour chaque catégorie...
 		}

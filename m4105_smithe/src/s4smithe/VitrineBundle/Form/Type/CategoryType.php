@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : CategoryType.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 08/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Form builder pour l'entitée Category
+	 */
+
 	namespace s4smithe\VitrineBundle\Form\Type;
 
 	use Symfony\Component\Form\AbstractType;

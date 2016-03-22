@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : Product.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 16/02/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Entitée Product
+	 */
+
 	namespace s4smithe\VitrineBundle\Entity;
 
 	/**

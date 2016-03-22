@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : MarqueController.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 04/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Controôleur pour la gestion des entitiés Marques
+	 */
+
 	namespace s4smithe\VitrineBundle\Controller;
 
 	use s4smithe\VitrineBundle\Entity\Marque;
@@ -172,6 +181,9 @@
 			return $marques;
 		}
 
+		/**
+		 * @return array
+		 */
 		private function findAllPopular() {
 
 			$marques = $this->getDoctrine()->getManager()

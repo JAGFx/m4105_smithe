@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : BackofficeController.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 15/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Controôleur pour la gestion du Back-office
+	 */
+
 	namespace s4smithe\VitrineBundle\Controller;
 
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,8 +19,9 @@
 	 * @package s4smithe\VitrineBundle\Controller
 	 */
 	class BackofficeController extends Controller {
+
 		/**
-		 * @param $name
+		 * Page d'accueil du Back-office
 		 *
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */

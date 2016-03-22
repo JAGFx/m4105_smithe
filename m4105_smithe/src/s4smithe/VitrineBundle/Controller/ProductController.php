@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : ProductController.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 08/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Controôleur pour la gestion des entitées Products (Artilces)
+	 */
+
 	namespace s4smithe\VitrineBundle\Controller;
 
 	use s4smithe\VitrineBundle\Entity\Product;

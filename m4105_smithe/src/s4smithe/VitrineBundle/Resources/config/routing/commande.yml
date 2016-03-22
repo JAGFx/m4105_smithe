@@ -1,29 +1,47 @@
+# --------------------------------------- #
+# ---------- Commande ---------- #
+# --------------------------------------- #
+
+
+
+# ---------- CRUD ----------
+
+# -- Liste All
 commande_index:
     path:     /
     defaults: { _controller: "s4smitheVitrineBundle:Commande:index" }
     methods:  GET
 
+# -- Détails
 commande_show:
     path:     /{id}/show
     defaults: { _controller: "s4smitheVitrineBundle:Commande:show" }
     methods:  GET
 
-commande_detail:
-    path:     /{id}/detail
-    defaults: { _controller: "s4smitheVitrineBundle:Commande:detail" }
-    methods:  GET
-
+# -- Création
 commande_new:
     path:     /new
     defaults: { _controller: "s4smitheVitrineBundle:Commande:new" }
     methods:  [GET, POST]
 
+# -- Edition
 commande_edit:
     path:     /{id}/edit
     defaults: { _controller: "s4smitheVitrineBundle:Commande:edit" }
     methods:  [GET, POST]
 
+# -- Suppression
 commande_delete:
     path:     /{id}/delete
     defaults: { _controller: "s4smitheVitrineBundle:Commande:delete" }
     methods:  DELETE
+
+
+
+# ---------- Application ----------
+
+# -- Détails pour le Client
+commande_detail:
+    path:     /{id}/detail
+    defaults: { _controller: "s4smitheVitrineBundle:Commande:detail" }
+    methods:  GET

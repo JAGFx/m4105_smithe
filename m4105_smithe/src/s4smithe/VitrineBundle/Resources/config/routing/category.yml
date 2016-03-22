@@ -1,23 +1,34 @@
+# ----------------------------------- #
+# ---------- Category ---------- #
+# ----------------------------------- #
+
+# ---------- CRUD ----------
+
+# -- Liste All
 category_index:
     path:     /
     defaults: { _controller: "s4smitheVitrineBundle:Category:index" }
     methods:  GET
 
+# -- Détails
 category_show:
     path:     /{id}/show
     defaults: { _controller: "s4smitheVitrineBundle:Category:show" }
     methods:  GET
 
+# -- Création
 category_new:
     path:     /new
     defaults: { _controller: "s4smitheVitrineBundle:Category:new" }
     methods:  [GET, POST]
 
+# -- Edition
 category_edit:
     path:     /{id}/edit
     defaults: { _controller: "s4smitheVitrineBundle:Category:edit" }
     methods:  [GET, POST]
 
+# -- Suppression
 category_delete:
     path:     /{id}/delete
     defaults: { _controller: "s4smitheVitrineBundle:Category:delete" }

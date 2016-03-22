@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : LigneCommande.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 20/02/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Entitée LigneCommande
+	 */
+
 	namespace s4smithe\VitrineBundle\Entity;
 
 	/**

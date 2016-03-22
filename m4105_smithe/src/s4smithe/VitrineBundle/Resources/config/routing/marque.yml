@@ -1,23 +1,36 @@
+# --------------------------------- #
+# ---------- Marque ---------- #
+# --------------------------------- #
+
+
+
+# ---------- CRUD ----------
+
+# -- Liste All
 marque_index:
     path:     /
     defaults: { _controller: "s4smitheVitrineBundle:Marque:index" }
     methods:  GET
 
+# -- Détails
 marque_show:
     path:     /{id}/show
     defaults: { _controller: "s4smitheVitrineBundle:Marque:show" }
     methods:  GET
 
+# -- Création
 marque_new:
     path:     /new
     defaults: { _controller: "s4smitheVitrineBundle:Marque:new" }
     methods:  [GET, POST]
 
+# -- Edition
 marque_edit:
     path:     /{id}/edit
     defaults: { _controller: "s4smitheVitrineBundle:Marque:edit" }
     methods:  [GET, POST]
 
+# -- Suppression
 marque_delete:
     path:     /{id}/delete
     defaults: { _controller: "s4smitheVitrineBundle:Marque:delete" }

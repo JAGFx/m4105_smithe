@@ -1,25 +1,31 @@
+# ---------- IMPORT ----------
+
+# -- Catégorie
 s4smithe_vitrine_category:
     resource: "@s4smitheVitrineBundle/Resources/config/routing/category.yml"
     prefix:   /category
 
+# -- Client
 s4smithe_vitrine_client:
         resource: "@s4smitheVitrineBundle/Resources/config/routing/client.yml"
         prefix:   /client
 
+# -- Produit
 s4smithe_vitrine_product:
         resource: "@s4smitheVitrineBundle/Resources/config/routing/product.yml"
         prefix:   /product
 
+# -- Marque
 s4smithe_vitrine_marque:
         resource: "@s4smitheVitrineBundle/Resources/config/routing/marque.yml"
         prefix:   /marque
 
+# -- Commande
 s4smithe_vitrine_commande:
         resource: "@s4smitheVitrineBundle/Resources/config/routing/commande.yml"
         prefix:   /commande
 
-
-# Panier
+# -- Panier
 s4smithe_vitrine_panier:
         resource: "@s4smitheVitrineBundle/Resources/config/routing/panier.yml"
         prefix:   /panier
@@ -27,31 +33,38 @@ s4smithe_vitrine_panier:
 
 
 
-#Pages
+# ---------- PAGES ----------
+
+# -- Aaccueil
 s4smithe_vitrine_homepage:
      path:     /accueil/{name}
      defaults: { _controller: s4smitheVitrineBundle:Default:index, name: Visiteur}
      requirements:
           name:	\w+
-    
+
+# -- Mentions
 s4smithe_vitrine_mentions:
      path:     /mentions
      defaults: { _controller: s4smitheVitrineBundle:Default:mentions}
-     
+
+# -- Catalogue
 s4smithe_vitrine_catalogue:
      path:     /catalogue
      defaults: { _controller: s4smitheVitrineBundle:Catalogue:index}
 
+# -- Back-office
 s4smithe_vitrine_backoffice:
      path:     /backoffice
      defaults: { _controller: s4smitheVitrineBundle:Backoffice:index}
-     
+
+# -- Vue des Articles par Catégorie
 s4smithe_vitrine_articlesParCategorie:
      path:     /articlesParCategorie/{catId}
      defaults: { _controller: s4smitheVitrineBundle:Category:articlesParCategorie, catId: 0 }
      requirements:
           catId:	\d+
 
+# -- Vue des Articles par Marque
 s4smithe_vitrine_articlesParMarque:
      path:     /articlesParMarque/{markId}
      defaults: { _controller: s4smitheVitrineBundle:Marque:articlesParMarque, markId: 0 }

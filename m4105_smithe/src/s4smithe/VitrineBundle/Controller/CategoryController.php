@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : CategoryController.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 08/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Controôleur pour la gestion des entitiés Catégories
+	 */
+
 	namespace s4smithe\VitrineBundle\Controller;
 
 	use s4smithe\VitrineBundle\Entity\Category;
@@ -15,6 +24,7 @@
 		/**
 		 * Lists all Category entities.
 		 *
+		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function indexAction() {
 			$em = $this->getDoctrine()->getManager();
@@ -30,6 +40,9 @@
 		/**
 		 * Creates a new Category entity.
 		 *
+		 * @param Request $request
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
 		 */
 		public function newAction(Request $request) {
 			$category = new Category();
@@ -54,6 +67,9 @@
 		/**
 		 * Finds and displays a Category entity.
 		 *
+		 * @param Category $category
+		 *
+		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function showAction(Category $category) {
 			$deleteForm = $this->createDeleteForm($category);
@@ -68,6 +84,10 @@
 		/**
 		 * Displays a form to edit an existing Category entity.
 		 *
+		 * @param Request  $request
+		 * @param Category $category
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
 		 */
 		public function editAction(Request $request, Category $category) {
 			$deleteForm = $this->createDeleteForm($category);
@@ -93,6 +113,10 @@
 		/**
 		 * Deletes a Category entity.
 		 *
+		 * @param Request  $request
+		 * @param Category $category
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function deleteAction(Request $request, Category $category) {
 			$form = $this->createDeleteForm($category);
@@ -123,6 +147,8 @@
 		}
 
 		/**
+		 * Liste des catégories
+		 *
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function listeCategorieAction() {
@@ -136,6 +162,8 @@
 		}
 
 		/**
+		 * Liste des categories pour le footer
+		 *
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function listeCategorieFooterAction() {

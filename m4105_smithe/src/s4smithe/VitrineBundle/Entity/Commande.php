@@ -1,5 +1,14 @@
 <?php
 
+	/*
+	 * Fichier : Commande.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 19/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Entitée Commande
+	 */
+
 	namespace s4smithe\VitrineBundle\Entity;
 
 	use Doctrine\Common\Collections\ArrayCollection;

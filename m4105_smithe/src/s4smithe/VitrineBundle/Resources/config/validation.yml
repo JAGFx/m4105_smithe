@@ -1,4 +1,6 @@
 # src/s4smithe/VitrineBundle/Resources/config/validation.yml
+
+# ---------- Client ----------
 s4smithe\VitrineBundle\Entity\Client:
     properties:
         name:
@@ -38,6 +40,8 @@ s4smithe\VitrineBundle\Entity\Client:
             - Type: \DateTime
 
 
+
+# ---------- Product ----------
 s4smithe\VitrineBundle\Entity\Product:
     properties:
         name:
@@ -74,6 +78,8 @@ s4smithe\VitrineBundle\Entity\Product:
                 message: Le produit doit avoir une marque.
 
 
+
+# ---------- Marque ----------
 s4smithe\VitrineBundle\Entity\Marque:
     properties:
         name:
@@ -86,6 +92,9 @@ s4smithe\VitrineBundle\Entity\Marque:
                 minMessage: Le nom doit comporter au moins 5 caractères.
                 maxMessage: Le nom ne doit pas exceder 100 caractères.
 
+
+
+# ---------- Category ----------
 s4smithe\VitrineBundle\Entity\Category:
     properties:
         name:

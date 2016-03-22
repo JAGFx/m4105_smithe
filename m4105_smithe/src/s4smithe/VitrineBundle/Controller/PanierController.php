@@ -1,14 +1,12 @@
 <?php
 	/*
-		Fichier : DefaultController.php
-		Auteur : Camille Persson
-		Creation : 08/02/2016
-		Modification :
-			> 08/02/2016		Mise en place du name + mentions
-			> 12/02/2016		Ajout template
-/
-		Ceci est le controlleur par défaut de l'application Vitrine
-	*/
+	 * Fichier : PanierController.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 03/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Controôleur pour la gestion du Panier
+	 */
 	
 
 	namespace s4smithe\VitrineBundle\Controller;

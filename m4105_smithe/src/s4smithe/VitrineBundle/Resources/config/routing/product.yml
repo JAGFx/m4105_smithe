@@ -1,23 +1,36 @@
+# --------------------------------- #
+# ---------- Product ---------- #
+# --------------------------------- #
+
+
+
+# ---------- CRUD ----------
+
+# -- Liste All
 product_index:
     path:     /
     defaults: { _controller: "s4smitheVitrineBundle:Product:index" }
     methods:  GET
 
+# -- Détails
 product_show:
     path:     /{id}/show
     defaults: { _controller: "s4smitheVitrineBundle:Product:show" }
     methods:  GET
 
+# -- Création
 product_new:
     path:     /new
     defaults: { _controller: "s4smitheVitrineBundle:Product:new" }
     methods:  [GET, POST]
 
+# -- Edition
 product_edit:
     path:     /{id}/edit
     defaults: { _controller: "s4smitheVitrineBundle:Product:edit" }
     methods:  [GET, POST]
 
+# -- Suppression
 product_delete:
     path:     /{id}/delete
     defaults: { _controller: "s4smitheVitrineBundle:Product:delete" }

@@ -1,8 +1,17 @@
-#Panier
+# ------------------------------- #
+# ---------- Panier----------- #
+# ------------------------------- #
+
+
+
+# ---------- Application ----------
+
+# -- Liste contenue
 s4smithe_vitrine_contenuPanier:
      path:     /contenu
      defaults: { _controller: s4smitheVitrineBundle:Panier:contenuPanier}
 
+# -- Ajout d'Article
 s4smithe_vitrine_addArticlePanier:
      path:     /addArticle/{articleId}/{qte}
      defaults: { _controller: s4smitheVitrineBundle:Panier:ajouterUnArticle, articleId: 0, qte: 1}
@@ -10,6 +19,7 @@ s4smithe_vitrine_addArticlePanier:
           articleId: \d+
           qte: \d+
 
+# -- Retirer un Articles
 s4smithe_vitrine_removeOneArticlePanier:
      path:     /removeOneArticle/{articleId}/{qte}
      defaults: { _controller: s4smitheVitrineBundle:Panier:enleverUnArticle, articleId: 0, qte: 1}
@@ -17,16 +27,20 @@ s4smithe_vitrine_removeOneArticlePanier:
           articleId: \d+
           qte: \d+
 
+# -- Retirer l'Article
 s4smithe_vitrine_removeArticlesPanier:
      path:     /removeArticles/{articleId}
      defaults: { _controller: s4smitheVitrineBundle:Panier:enleverArticles, articleId: 0}
      requirements:
           articleId: \d+
 
+# -- Vider
 s4smithe_vitrine_emptyPanier:
      path:     /empty
      defaults: { _controller: s4smitheVitrineBundle:Panier:emptyPanier}
 
+# -- Validation du Panier => Commande
+# TODO Forward action to CommandeController
 s4smithe_vitrine_validationPanier:
      path:     /validation
      defaults: { _controller: s4smitheVitrineBundle:Panier:validation}

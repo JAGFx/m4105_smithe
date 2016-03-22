@@ -1,5 +1,15 @@
 <?php
 
+
+	/*
+	 * Fichier : CommandeController.php
+	 * Auteur: SMITH Emmanuel
+	 * Création: 19/03/2016
+	 * Modification: 22/03/2016
+	 *
+	 * Controôleur pour la gestion des entitiés Commandes
+	 */
+
 	namespace s4smithe\VitrineBundle\Controller;
 
 	use s4smithe\VitrineBundle\Entity\Commande;

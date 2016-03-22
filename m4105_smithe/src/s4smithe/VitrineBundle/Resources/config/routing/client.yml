@@ -1,45 +1,66 @@
+# ------------------------------ #
+# ---------- Client ---------- #
+# ------------------------------ #
+
+
+
+# ---------- CRUD ----------
+
+# -- Liste All
 client_index:
     path:     /
     defaults: { _controller: "s4smitheVitrineBundle:Client:index" }
     methods:  GET
 
+# -- Détails
 client_show:
     path:     /{id}/show
     defaults: { _controller: "s4smitheVitrineBundle:Client:show" }
     methods:  GET
 
+# -- Création
 client_new:
     path:     /new
     defaults: { _controller: "s4smitheVitrineBundle:Client:new" }
     methods:  [GET, POST]
-    
-client_login:
-    path:     /login
-    defaults: { _controller: "s4smitheVitrineBundle:Client:login" }
-    methods:  [GET, POST]
-    
-client_logout:
-    path:     /logout
-    defaults: { _controller: "s4smitheVitrineBundle:Client:logout" }
-    methods:  GET
-    
-client_listCommande:
-    path:     /listeComande
-    defaults: { _controller: "s4smitheVitrineBundle:Client:listeCommande" }
-    methods:  GET
 
-client_register:
-    path:     /register
-    defaults: { _controller: "s4smitheVitrineBundle:Client:new" }
-    methods:  [GET, POST]
-
-
+# -- Edition
 client_edit:
     path:     /{id}/edit
     defaults: { _controller: "s4smitheVitrineBundle:Client:edit" }
     methods:  [GET, POST]
 
+# -- Suppression
 client_delete:
     path:     /{id}/delete
     defaults: { _controller: "s4smitheVitrineBundle:Client:delete" }
     methods:  DELETE
+
+
+
+
+# ---------- Application ----------
+
+# -- Inscription
+client_register:
+    path:     /register
+    defaults: { _controller: "s4smitheVitrineBundle:Client:new" }
+    methods:  [GET, POST]
+
+# -- Connexion
+client_login:
+    path:     /login
+    defaults: { _controller: "s4smitheVitrineBundle:Client:login" }
+    methods:  [GET, POST]
+
+# -- Déconnexion
+client_logout:
+    path:     /logout
+    defaults: { _controller: "s4smitheVitrineBundle:Client:logout" }
+    methods:  GET
+
+# -- Vue des Commandes
+client_listCommande:
+    path:     /listeComande
+    defaults: { _controller: "s4smitheVitrineBundle:Client:listeCommande" }
+    methods:  GET
