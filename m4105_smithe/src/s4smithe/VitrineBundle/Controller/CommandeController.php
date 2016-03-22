@@ -2,7 +2,6 @@
 
 	namespace s4smithe\VitrineBundle\Controller;
 
-	use s4smithe\VitrineBundle\Entity\Client;
 	use s4smithe\VitrineBundle\Entity\Commande;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use Symfony\Component\HttpFoundation\Request;
@@ -96,7 +95,6 @@
 				->add( 'client', null, array( 'read_only' => true, 'disabled' => true ) )
 				->getForm();
 
-			//$editForm = $this->createForm( 's4smithe\VitrineBundle\Form\Type\CommandeType', $commande );
 			$editForm->handleRequest( $request );
 
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
@@ -156,24 +154,6 @@
 			$session = $this->getRequest()->getSession();
 
 			return $session->get( 'userId', -1 );
-		}
-
-		/**
-		 * @param $id
-		 *
-		 * @return Client
-		 */
-		private function findUser( $id ) {
-			$user = $this->getDoctrine()->getManager()
-				->getRepository( 's4smitheVitrineBundle:Client' )
-				->findOneById( $id );
-
-			if ( !$user ) {
-				$user = new Client();
-				$user->setName( 'Inconus' );
-			}
-
-			return $user;
 		}
 
 	}
