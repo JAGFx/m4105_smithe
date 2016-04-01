@@ -4,7 +4,7 @@
 	 * Fichier : MarqueController.php
 	 * Auteur: SMITH Emmanuel
 	 * Création: 04/03/2016
-	 * Modification: 22/03/2016
+	 * Modification: 01/04/2016
 	 *
 	 * Controôleur pour la gestion des entitiés Marques
 	 */
@@ -156,7 +156,7 @@
 			$markObj = $this->findMarque( $markId );
 
 			return $this->render(
-				's4smitheVitrineBundle:Default:articlesParFiltre.html.twig', array(
+				's4smitheVitrineBundle:Product:articlesParFiltre.html.twig', array(
 				'filter' => $markObj
 				)
 			);

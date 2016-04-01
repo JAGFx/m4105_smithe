@@ -4,7 +4,7 @@
 	 * Fichier : ProductController.php
 	 * Auteur: SMITH Emmanuel
 	 * Création: 08/03/2016
-	 * Modification: 22/03/2016
+	 * Modification: 01/04/2016
 	 *
 	 * Controôleur pour la gestion des entitées Products (Artilces)
 	 */
@@ -13,6 +13,7 @@
 
 	use s4smithe\VitrineBundle\Entity\Product;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\Form\Extension\Core\Type\FileType;
 	use Symfony\Component\HttpFoundation\Request;
 
 	/**
@@ -43,6 +44,8 @@
 		public function newAction(Request $request) {
 			$product = new Product();
 			$form = $this->createForm('s4smithe\VitrineBundle\Form\Type\ProductType', $product);
+			$form->add( 'brochure', FileType::class, array( 'label' => 'Image' ) );
+
 			$form->handleRequest($request);
 
 			if ($form->isSubmitted() && $form->isValid()) {

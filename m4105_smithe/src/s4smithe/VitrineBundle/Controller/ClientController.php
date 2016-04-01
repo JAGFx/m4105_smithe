@@ -4,7 +4,7 @@
 	 * Fichier : ClientController.php
 	 * Auteur: SMITH Emmanuel
 	 * Création: 08/03/2016
-	 * Modification: 22/03/2016
+	 * Modification: 01/04/2016
 	 *
 	 * Controôleur pour la gestion des entitiés Clients
 	 */
@@ -240,12 +240,17 @@
 		public function listeCommandeAction() {
 			$user = $this->findUser( $this->getSessionUser() );
 
-			return $this->render(
-				's4smitheVitrineBundle:Client:listeCommande.html.twig',
-				array(
-					'commandes' => $user->getCommandes()
-				)
-			);
+			if ( $this->userLogged() ) {
+				return $this->render(
+					's4smitheVitrineBundle:Client:listeCommande.html.twig',
+					array(
+						'commandes' => $user->getCommandes()
+					)
+				);
+
+			} else {
+				return $this->redirectToRoute( 's4smithe_vitrine_homepage' );
+			}
 		}
 
 		/**
@@ -288,7 +293,7 @@
 		private function getSessionUser() {
 			$session = $this->getRequest()->getSession();
 
-			return $session->get( 'userId', '-1' );
+			return $session->get( 'userId', -1 );
 		}
 
 		/**
@@ -303,7 +308,7 @@
 		 * @return bool
 		 */
 		private function userLogged() {
-			return ( $this->getSessionUser() > 0 ) ? true : false;
+			return ( $this->getSessionUser() > 0 || empty( $this->getSessionUser() ) ) ? true : false;
 		}
 
 	}

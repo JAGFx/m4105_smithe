@@ -1,3 +1,14 @@
+{#
+
+	  Fichier : /Marque/listeMarque.html.twig
+	  Auteur: SMITH Emmanuel
+	  Création: 04/03/2016
+	  Modification: 01/04/16
+
+	  Liste l'enemble des marques pour les pages
+
+#}
+
 {% for mark in marques %}
 	<a href="{{ path('s4smithe_vitrine_articlesParMarque', {markId: mark.id}) }}" class="list-group-item">{{ mark.name }}</a>
 {% endfor %}

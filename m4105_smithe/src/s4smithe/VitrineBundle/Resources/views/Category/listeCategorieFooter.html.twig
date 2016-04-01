@@ -1,3 +1,14 @@
+{#
+
+	  Fichier : /Category/listeCategorieFooter.html.twig
+	  Auteur: SMITH Emmanuel
+	  Création: 08/03/2016
+	  Modification: 01/04/16
+
+	  Liste l'ensemble des catégories disponoble et dans la BDD pour le FOOTER
+
+#}
+
 {% for cat in categories %}
 	<li><a href="{{ path('s4smithe_vitrine_articlesParCategorie', {catId: cat.id}) }}">{{ cat.name }}</a></li>
 {% endfor %}

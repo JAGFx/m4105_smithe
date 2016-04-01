@@ -4,7 +4,7 @@
 	 * Fichier : CategoryController.php
 	 * Auteur: SMITH Emmanuel
 	 * Création: 08/03/2016
-	 * Modification: 22/03/2016
+	 * Modification: 01/04/2016
 	 *
 	 * Controôleur pour la gestion des entitiés Catégories
 	 */
@@ -185,7 +185,7 @@
 			$catObj = $this->findCtge( $catId );
 
 			return $this->render(
-				's4smitheVitrineBundle:Default:articlesParFiltre.html.twig', array(
+				's4smitheVitrineBundle:Product:articlesParFiltre.html.twig', array(
 				'filter' => $catObj
 			)
 			);

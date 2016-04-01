@@ -24,7 +24,7 @@
 		/**
 		 * @var integer
 		 */
-		private $id;
+		private $id = -1;
 
 		/**
 		 * @var string
