@@ -48,5 +48,6 @@
 
 
 		$( '[data-toggle="tooltip"]' ).tooltip();
+		$( '[type="checkbox"]' ).addClass( 'styled' );
 		//$("#contentArticles").setHeightAllElem({child: ".thumbnail"});
 	});

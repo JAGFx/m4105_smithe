@@ -91,6 +91,14 @@
 				$em->persist( $marque );
 				$em->flush();
 
+				$message = array(
+					'type'    => 'success',
+					'title'   => "Marque modifié",
+					'message' => 'La marque à bien été modifiée'
+				);
+
+				$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
+
 				return $this->redirectToRoute( 'marque_edit', array( 'id' => $marque->getId() ) );
 			}
 

@@ -48,6 +48,13 @@ s4smithe\VitrineBundle\Entity\Product:
             - NotBlank:
                 message: Le nom ne doit pas être vide.
 
+        file:
+            - Image:
+                allowLandscape: false
+                allowPortrait: false
+                mimeTypesMessage: Le fichier n'est pas supporté
+                maxSize: 6000000
+
         price:
             - NotBlank:
                 message: Le prix ne doit pas être vide.

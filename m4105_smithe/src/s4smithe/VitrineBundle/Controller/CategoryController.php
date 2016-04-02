@@ -99,6 +99,14 @@
 				$em->persist($category);
 				$em->flush();
 
+				$message = array(
+					'type'    => 'success',
+					'title'   => "Catégorie modifié",
+					'message' => 'La catégorie à bien été modifiée'
+				);
+
+				$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
+
 				return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
 			}
 

@@ -21,6 +21,10 @@
 
 {% block content %}
 	<div class="col-xs-12" >
+		{% for flashMessage in app.session.flashbag.get('message') %}
+			{% include "s4smitheVitrineBundle:Default:flashMessage.html.twig" %}
+		{% endfor %}
+
 		{{ form_start(edit_form) }}
 		{{ form_widget(edit_form) }}
 		<button type="reset" title="Annuler" class="btn btn-sm btn-default" >Annuler</button >
@@ -31,5 +35,11 @@
 		{{ form_start(delete_form, { 'attr': {'class': 'form-inline visible-lg-inline'} }) }}
 		<button type="submit" title="Supprimer" class="btn btn-sm btn-primary" >Supprimer</button >
 		{{ form_end(delete_form) }}
+
+		{% if product.image is not empty %}
+			{{ form_start(delete_image_form, { 'attr': {'class': 'form-inline visible-lg-inline'} }) }}
+			<button type="submit" title="Supprimer l'image" class="btn btn-sm btn-primary" >Supprimer l'image</button >
+			{{ form_end(delete_image_form) }}
+		{% endif %}
 	</div >
 {% endblock %}

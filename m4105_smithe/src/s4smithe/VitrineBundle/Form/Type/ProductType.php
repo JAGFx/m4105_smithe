@@ -12,6 +12,8 @@
 	namespace s4smithe\VitrineBundle\Form\Type;
 
 	use Symfony\Component\Form\AbstractType;
+	use Symfony\Component\Form\Extension\Core\Type\FileType;
+	use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 	use Symfony\Component\Form\FormBuilderInterface;
 	use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,7 +30,11 @@
 		public function buildForm( FormBuilderInterface $builder, array $options ) {
 			$builder
 				->add( 'name', null, array( 'label' => 'Nom' ) )
-				->add( 'price', null, array( 'label' => 'Prix Unitaire' ) )
+				->add( 'file', FileType::class, array( 'label' => 'Photo', 'required' => false ) )
+				->add(
+					'price', MoneyType::class,
+					array( 'label' => 'Prix Unitaire', 'grouping' => true )
+				)
 				->add( 'stock', null, array( 'label' => 'Quantité en stock' ) )
 				->add( 'description', null, array( 'label' => 'Description' ) )
 				->add( 'category', null, array( 'label' => 'Catégorie associé' ) )
