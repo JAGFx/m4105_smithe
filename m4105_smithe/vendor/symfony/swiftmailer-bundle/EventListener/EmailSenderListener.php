@@ -12,11 +12,11 @@
 namespace Symfony\Bundle\SwiftmailerBundle\EventListener;
 
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\IntrospectableContainerInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Sends emails for the memory spool.

@@ -19,11 +19,12 @@
 
 namespace Doctrine\ORM\Tools\Console\Command\ClearCache;
 
+use Doctrine\Common\Cache\ApcCache;
+use Doctrine\Common\Cache\XcacheCache;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Doctrine\Common\Cache\ApcCache;
 
 /**
  * Command to clear the result cache of the various cache drivers.
@@ -88,6 +89,12 @@ EOT
             throw new \LogicException("Cannot clear APC Cache from Console, its shared in the Webserver memory and not accessible from the CLI.");
         }
 
+        if ( $cacheDriver instanceof XcacheCache ) {
+            throw new \LogicException(
+                    "Cannot clear XCache Cache from Console, its shared in the Webserver memory and not accessible from the CLI."
+            );
+        }
+        
         $output->writeln('Clearing ALL Result cache entries');
 
         $result  = $cacheDriver->deleteAll();

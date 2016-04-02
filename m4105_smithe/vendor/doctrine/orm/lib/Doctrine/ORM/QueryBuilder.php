@@ -21,7 +21,6 @@ namespace Doctrine\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
-
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\QueryExpressionVisitor;
 
@@ -48,7 +47,7 @@ class QueryBuilder
     /**
      * The EntityManager used by this QueryBuilder.
      *
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $_em;
 
@@ -95,7 +94,7 @@ class QueryBuilder
      *
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
-    private $parameters = array();
+    private $parameters;
 
     /**
      * The index of the first result to retrieve.
@@ -119,11 +118,37 @@ class QueryBuilder
     private $joinRootAliases = array();
 
     /**
+     * Whether to use second level cache, if available.
+     *
+     * @var boolean
+     */
+    protected $cacheable = false;
+
+    /**
+     * Second level cache region name.
+     *
+     * @var string|null
+     */
+    protected $cacheRegion;
+
+    /**
+     * Second level query cache mode.
+     *
+     * @var integer|null
+     */
+    protected $cacheMode;
+
+    /**
+     * @var integer
+     */
+    protected $lifetime = 0;
+
+    /**
      * Initializes a new <tt>QueryBuilder</tt> that uses the given <tt>EntityManager</tt>.
      *
-     * @param EntityManager $em The EntityManager to use.
+     * @param EntityManagerInterface $em The EntityManager to use.
      */
-    public function __construct(EntityManager $em)
+    public function __construct( EntityManagerInterface $em )
     {
         $this->_em = $em;
         $this->parameters = new ArrayCollection();
@@ -149,6 +174,85 @@ class QueryBuilder
     public function expr()
     {
         return $this->_em->getExpressionBuilder();
+    }
+
+    /**
+     *
+     * Enable/disable second level query (result) caching for this query.
+     *
+     * @param boolean $cacheable
+     *
+     * @return \Doctrine\ORM\AbstractQuery This query instance.
+     */
+    public function setCacheable( $cacheable ) {
+        $this->cacheable = (boolean) $cacheable;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean TRUE if the query results are enable for second level cache, FALSE otherwise.
+     */
+    public function isCacheable() {
+        return $this->cacheable;
+    }
+
+    /**
+     * @param string $cacheRegion
+     *
+     * @return \Doctrine\ORM\AbstractQuery This query instance.
+     */
+    public function setCacheRegion( $cacheRegion ) {
+        $this->cacheRegion = (string) $cacheRegion;
+
+        return $this;
+    }
+
+    /**
+     * Obtain the name of the second level query cache region in which query results will be stored
+     *
+     * @return The cache region name; NULL indicates the default region.
+     */
+    public function getCacheRegion() {
+        return $this->cacheRegion;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getLifetime() {
+        return $this->lifetime;
+    }
+
+    /**
+     * Sets the life-time for this query into second level cache.
+     *
+     * @param integer $lifetime
+     *
+     * @return \Doctrine\ORM\AbstractQuery This query instance.
+     */
+    public function setLifetime( $lifetime ) {
+        $this->lifetime = (integer) $lifetime;
+
+        return $this;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getCacheMode() {
+        return $this->cacheMode;
+    }
+
+    /**
+     * @param integer $cacheMode
+     *
+     * @return \Doctrine\ORM\AbstractQuery This query instance.
+     */
+    public function setCacheMode( $cacheMode ) {
+        $this->cacheMode = (integer) $cacheMode;
+
+        return $this;
     }
 
     /**
@@ -187,7 +291,7 @@ class QueryBuilder
      * <code>
      *     $qb = $em->createQueryBuilder()
      *         ->select('u')
-     *         ->from('User', 'u')
+     *         ->from('User', 'u');
      *     echo $qb->getDql(); // SELECT u FROM User u
      * </code>
      *
@@ -236,11 +340,28 @@ class QueryBuilder
     public function getQuery()
     {
         $parameters = clone $this->parameters;
-
-        return $this->_em->createQuery($this->getDQL())
+        $query = $this->_em->createQuery( $this->getDQL() )
             ->setParameters($parameters)
             ->setFirstResult($this->_firstResult)
-            ->setMaxResults($this->_maxResults);
+                ->setMaxResults( $this->_maxResults );
+
+        if ( $this->lifetime ) {
+            $query->setLifetime( $this->lifetime );
+        }
+
+        if ( $this->cacheMode ) {
+            $query->setCacheMode( $this->cacheMode );
+        }
+
+        if ( $this->cacheable ) {
+            $query->setCacheable( $this->cacheable );
+        }
+
+        if ( $this->cacheRegion ) {
+            $query->setCacheRegion( $this->cacheRegion );
+        }
+
+        return $query;
     }
 
     /**
@@ -283,12 +404,18 @@ class QueryBuilder
      * </code>
      *
      * @deprecated Please use $qb->getRootAliases() instead.
+     * @throws RuntimeException
      *
      * @return string
      */
     public function getRootAlias()
     {
         $aliases = $this->getRootAliases();
+
+        if ( !isset( $aliases[ 0 ] ) ) {
+            throw new \RuntimeException( 'No alias was set before invoking getRootAlias().' );
+        }
+
         return $aliases[0];
     }
 
@@ -323,6 +450,25 @@ class QueryBuilder
         }
 
         return $aliases;
+    }
+
+    /**
+     * Gets all the aliases that have been used in the query.
+     * Including all select root aliases and join aliases
+     *
+     * <code>
+     *     $qb = $em->createQueryBuilder()
+     *         ->select('u')
+     *         ->from('User', 'u')
+     *         ->join('u.articles','a';
+     *
+     *     $qb->getAllAliases(); // array('u','a')
+     * </code>
+     *
+     * @return array
+     */
+    public function getAllAliases() {
+        return array_merge( $this->getRootAliases(), array_keys( $this->joinRootAliases ) );
     }
 
     /**
@@ -538,7 +684,13 @@ class QueryBuilder
             );
         }
 
-        $isMultiple = is_array($this->_dqlParts[$dqlPartName]);
+        $isMultiple = is_array( $this->_dqlParts[ $dqlPartName ] )
+                && !( $dqlPartName == 'join' && !$append );
+
+        // Allow adding any part retrieved from self::getDQLParts().
+        if ( is_array( $dqlPart ) && $dqlPartName != 'join' ) {
+            $dqlPart = reset( $dqlPart );
+        }
 
         // This is introduced for backwards compatibility reasons.
         // TODO: Remove for 3.0
@@ -655,7 +807,7 @@ class QueryBuilder
      * <code>
      *     $qb = $em->createQueryBuilder()
      *         ->delete('User', 'u')
-     *         ->where('u.id = :user_id');
+     *         ->where('u.id = :user_id')
      *         ->setParameter('user_id', 1);
      * </code>
      *
@@ -709,7 +861,7 @@ class QueryBuilder
      * <code>
      *     $qb = $em->createQueryBuilder()
      *         ->select('u')
-     *         ->from('User', 'u')
+     *         ->from('User', 'u');
      * </code>
      *
      * @param string $from    The class name.
@@ -721,6 +873,49 @@ class QueryBuilder
     public function from($from, $alias, $indexBy = null)
     {
         return $this->add('from', new Expr\From($from, $alias, $indexBy), true);
+    }
+
+    /**
+     * Updates a query root corresponding to an entity setting its index by. This method is intended to be used with
+     * EntityRepository->createQueryBuilder(), which creates the initial FROM clause and do not allow you to update it
+     * setting an index by.
+     *
+     * <code>
+     *     $qb = $userRepository->createQueryBuilder('u')
+     *         ->indexBy('u', 'u.id');
+     *
+     *     // Is equivalent to...
+     *
+     *     $qb = $em->createQueryBuilder()
+     *         ->select('u')
+     *         ->from('User', 'u', 'u.id');
+     * </code>
+     *
+     * @param string $alias   The root alias of the class.
+     * @param string $indexBy The index for the from.
+     *
+     * @return QueryBuilder This QueryBuilder instance.
+     *
+     * @throws Query\QueryException
+     */
+    public function indexBy( $alias, $indexBy ) {
+        $rootAliases = $this->getRootAliases();
+
+        if ( !in_array( $alias, $rootAliases ) ) {
+            throw new Query\QueryException(
+                    sprintf( 'Specified root alias %s must be set before invoking indexBy().', $alias )
+            );
+        }
+
+        foreach ( $this->_dqlParts[ 'from' ] as &$fromClause ) {
+            if ( $fromClause->getAlias() !== $alias ) {
+                continue;
+            }
+
+            $fromClause = new Expr\From( $fromClause->getFrom(), $fromClause->getAlias(), $indexBy );
+        }
+
+        return $this;
     }
 
     /**
@@ -892,7 +1087,7 @@ class QueryBuilder
      *
      * @see where()
      */
-    public function andWhere($where)
+    public function andWhere()
     {
         $args  = func_get_args();
         $where = $this->getDQLPart('where');
@@ -925,7 +1120,7 @@ class QueryBuilder
      *
      * @see where()
      */
-    public function orWhere($where)
+    public function orWhere()
     {
         $args  = func_get_args();
         $where = $this->getDqlPart('where');
@@ -967,8 +1162,8 @@ class QueryBuilder
      *     $qb = $em->createQueryBuilder()
      *         ->select('u')
      *         ->from('User', 'u')
-     *         ->groupBy('u.lastLogin');
-     *         ->addGroupBy('u.createdAt')
+     *         ->groupBy('u.lastLogin')
+     *         ->addGroupBy('u.createdAt');
      * </code>
      *
      * @param string $groupBy The grouping expression.
@@ -1084,11 +1279,15 @@ class QueryBuilder
      * @param Criteria $criteria
      *
      * @return QueryBuilder
+     * @throws Query\QueryException
      */
-    public function addCriteria(Criteria $criteria)
-    {
-        $rootAlias = $this->getRootAlias();
-        $visitor = new QueryExpressionVisitor($rootAlias);
+    public function addCriteria( Criteria $criteria ) {
+        $allAliases = $this->getAllAliases();
+        if ( !isset( $allAliases[ 0 ] ) ) {
+            throw new Query\QueryException( 'No aliases are set before invoking addCriteria().' );
+        }
+
+        $visitor = new QueryExpressionVisitor( $this->getAllAliases() );
 
         if ($whereExpression = $criteria->getWhereExpression()) {
             $this->andWhere($visitor->dispatch($whereExpression));
@@ -1098,8 +1297,21 @@ class QueryBuilder
         }
 
         if ($criteria->getOrderings()) {
-            foreach ($criteria->getOrderings() as $sort => $order) {
-                $this->addOrderBy($rootAlias . '.' . $sort, $order);
+            foreach ( $criteria->getOrderings() as $sort => $order ) {
+
+                $hasValidAlias = false;
+                foreach ( $allAliases as $alias ) {
+                    if ( strpos( $sort . '.', $alias . '.' ) === 0 ) {
+                        $hasValidAlias = true;
+                        break;
+                    }
+                }
+
+                if ( !$hasValidAlias ) {
+                    $sort = $allAliases[ 0 ] . '.' . $sort;
+                }
+
+                $this->addOrderBy( $sort, $order );
             }
         }
 

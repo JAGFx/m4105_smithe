@@ -12,8 +12,8 @@
 namespace Symfony\Component\Form\Tests\Extension\Core\EventListener;
 
 use Symfony\Component\Form\ChoiceList\ArrayKeyChoiceList;
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Extension\Core\EventListener\FixRadioInputListener;
+use Symfony\Component\Form\FormEvent;
 
 /**
  * @group legacy

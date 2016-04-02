@@ -13,13 +13,13 @@ namespace Symfony\Component\DependencyInjection\Loader;
 
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Config\Util\XmlUtils;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Alias;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\ExpressionLanguage\Expression;
 
 /**
@@ -247,6 +247,15 @@ class XmlFileLoader extends FileLoader
                 }
                 // keep not normalized key for BC too
                 $parameters[$name] = XmlUtils::phpize($node->nodeValue);
+            }
+
+            if ( '' === $tag->getAttribute( 'name' ) ) {
+                throw new InvalidArgumentException(
+                        sprintf(
+                                'The tag name for service "%s" in %s must be a non-empty string.',
+                                (string) $service->getAttribute( 'id' ), $file
+                        )
+                );
             }
 
             $definition->addTag($tag->getAttribute('name'), $parameters);

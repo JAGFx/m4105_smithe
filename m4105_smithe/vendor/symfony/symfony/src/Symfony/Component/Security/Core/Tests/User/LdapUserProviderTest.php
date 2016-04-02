@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Security\Core\Tests\User;
 
-use Symfony\Component\Security\Core\User\LdapUserProvider;
 use Symfony\Component\Ldap\Exception\ConnectionException;
+use Symfony\Component\Security\Core\User\LdapUserProvider;
 
 /**
  * @requires extension ldap

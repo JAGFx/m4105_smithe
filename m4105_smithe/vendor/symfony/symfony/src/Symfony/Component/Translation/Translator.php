@@ -11,11 +11,11 @@
 
 namespace Symfony\Component\Translation;
 
-use Symfony\Component\Translation\Loader\LoaderInterface;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
-use Symfony\Component\Config\ConfigCacheInterface;
-use Symfony\Component\Config\ConfigCacheFactoryInterface;
 use Symfony\Component\Config\ConfigCacheFactory;
+use Symfony\Component\Config\ConfigCacheFactoryInterface;
+use Symfony\Component\Config\ConfigCacheInterface;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Symfony\Component\Translation\Loader\LoaderInterface;
 
 /**
  * Translator.
@@ -428,6 +428,9 @@ EOF
             }
 
             $fallbackCatalogue = new MessageCatalogue($fallback, $this->catalogues[$fallback]->all());
+            foreach ( $this->catalogues[ $fallback ]->getResources() as $resource ) {
+                $fallbackCatalogue->addResource( $resource );
+            }
             $current->addFallbackCatalogue($fallbackCatalogue);
             $current = $fallbackCatalogue;
         }

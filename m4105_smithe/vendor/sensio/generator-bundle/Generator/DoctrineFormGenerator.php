@@ -11,9 +11,9 @@
 
 namespace Sensio\Bundle\GeneratorBundle\Generator;
 
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
  * Generates a form class based on a Doctrine entity.

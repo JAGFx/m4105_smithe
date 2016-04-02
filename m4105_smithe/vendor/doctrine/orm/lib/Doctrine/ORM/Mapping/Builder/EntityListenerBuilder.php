@@ -19,9 +19,9 @@
 
 namespace Doctrine\ORM\Mapping\Builder;
 
-use Doctrine\ORM\Mapping\MappingException;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Events;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\MappingException;
 
 /**
  * Builder for entity listeners.

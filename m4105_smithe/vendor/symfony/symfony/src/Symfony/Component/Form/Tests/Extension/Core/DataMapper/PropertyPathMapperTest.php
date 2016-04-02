@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Form\Tests\Extension\Core\DataMapper;
 
+use Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper;
 use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\Form\FormConfigInterface;
-use Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper;
 
 class PropertyPathMapperTest extends \PHPUnit_Framework_TestCase
 {

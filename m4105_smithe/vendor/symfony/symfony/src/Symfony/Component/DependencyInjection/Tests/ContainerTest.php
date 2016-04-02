@@ -11,11 +11,11 @@
 
 namespace Symfony\Component\DependencyInjection\Tests;
 
-use Symfony\Component\DependencyInjection\Scope;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\Exception\InactiveScopeException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\DependencyInjection\Scope;
 
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
@@ -190,6 +190,13 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $c->enterScope('foo');
         $c->set('scoped_synchronized_foo', $bar = new \stdClass(), 'foo');
         $this->assertTrue($c->synchronized, '->set() calls synchronize*Service() if it is defined for the service');
+    }
+
+    public function testSetReplacesAlias() {
+        $c = new ProjectServiceContainer();
+
+        $c->set( 'alias', $foo = new \stdClass() );
+        $this->assertSame( $foo, $c->get( 'alias' ), '->set() replaces an existing alias' );
     }
 
     public function testGet()

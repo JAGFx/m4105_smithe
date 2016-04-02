@@ -19,11 +19,11 @@
 
 namespace Doctrine\ORM\Tools\Pagination;
 
-use Doctrine\ORM\Query\Parser;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Query;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Parser;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * The paginator can handle various complex scenarios with DQL.
@@ -160,12 +160,14 @@ class Paginator implements \Countable, \IteratorAggregate
             $whereInQuery->setHint(WhereInWalker::HINT_PAGINATOR_ID_COUNT, count($ids));
             $whereInQuery->setFirstResult(null)->setMaxResults(null);
             $whereInQuery->setParameter(WhereInWalker::PAGINATOR_ID_ALIAS, $ids);
+            $whereInQuery->setCacheable( $this->query->isCacheable() );
 
             $result = $whereInQuery->getResult($this->query->getHydrationMode());
         } else {
             $result = $this->cloneQuery($this->query)
                 ->setMaxResults($length)
                 ->setFirstResult($offset)
+                    ->setCacheable( $this->query->isCacheable() )
                 ->getResult($this->query->getHydrationMode())
             ;
         }
@@ -186,6 +188,7 @@ class Paginator implements \Countable, \IteratorAggregate
         $cloneQuery = clone $query;
 
         $cloneQuery->setParameters(clone $query->getParameters());
+        $cloneQuery->setCacheable( false );
 
         foreach ($query->getHints() as $name => $value) {
             $cloneQuery->setHint($name, $value);

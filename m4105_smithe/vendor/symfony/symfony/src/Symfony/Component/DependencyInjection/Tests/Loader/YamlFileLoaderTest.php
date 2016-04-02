@@ -11,14 +11,14 @@
 
 namespace Symfony\Component\DependencyInjection\Tests\Loader;
 
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\IniFileLoader;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use Symfony\Component\Config\Loader\LoaderResolver;
-use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\ExpressionLanguage\Expression;
 
 class YamlFileLoaderTest extends \PHPUnit_Framework_TestCase
@@ -282,6 +282,24 @@ class YamlFileLoaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+     * @expectedExceptionMessageRegExp /The tag name for service ".+" in .+ must be a non-empty string/
+     */
+    public function testTagWithEmptyNameThrowsException() {
+        $loader = new YamlFileLoader( new ContainerBuilder(), new FileLocator( self::$fixturesPath . '/yaml' ) );
+        $loader->load( 'tag_name_empty_string.yml' );
+    }
+
+    /**
+     * @expectedException \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+     * @expectedExceptionMessageREgExp /The tag name for service "\.+" must be a non-empty string/
+     */
+    public function testTagWithNonStringNameThrowsException() {
+        $loader = new YamlFileLoader( new ContainerBuilder(), new FileLocator( self::$fixturesPath . '/yaml' ) );
+        $loader->load( 'tag_name_no_string.yml' );
+    }
+
+    /**
+     * @expectedException \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
      */
     public function testTypesNotArray()
     {
@@ -315,5 +333,14 @@ class YamlFileLoaderTest extends \PHPUnit_Framework_TestCase
         $loader->load('services23.yml');
 
         $this->assertTrue($container->getDefinition('bar_service')->isAutowired());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+     * @expectedExceptionMessage The value of the "decorates" option for the "bar" service must be the id of the service without the "@" prefix (replace "@foo" with "foo").
+     */
+    public function testDecoratedServicesWithWrongSyntaxThrowsException() {
+        $loader = new YamlFileLoader( new ContainerBuilder(), new FileLocator( self::$fixturesPath . '/yaml' ) );
+        $loader->load( 'bad_decorates.yml' );
     }
 }

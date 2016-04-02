@@ -11,13 +11,13 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Tests\Command;
 
+use Symfony\Bundle\FrameworkBundle\Command\RouterDebugCommand;
+use Symfony\Bundle\FrameworkBundle\Command\RouterMatchCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Bundle\FrameworkBundle\Command\RouterMatchCommand;
-use Symfony\Bundle\FrameworkBundle\Command\RouterDebugCommand;
+use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\RequestContext;
 
 class RouterMatchCommandTest extends \PHPUnit_Framework_TestCase
 {

@@ -11,10 +11,10 @@
 
 namespace Symfony\Component\DependencyInjection\Tests\ParameterBag;
 
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 use Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 class ParameterBagTest extends \PHPUnit_Framework_TestCase
 {

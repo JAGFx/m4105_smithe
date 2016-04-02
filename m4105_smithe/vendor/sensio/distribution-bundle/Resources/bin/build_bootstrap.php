@@ -10,9 +10,9 @@
  * file that was distributed with this source code.
  */
 
-use Sensio\Bundle\DistributionBundle\Composer\ScriptHandler;
+    use Sensio\Bundle\DistributionBundle\Composer\ScriptHandler;
 
-if (PHP_SAPI !== 'cli') {
+    if ( PHP_SAPI !== 'cli' ) {
     echo 'Warning: '.__FILE__.' should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
 }
 

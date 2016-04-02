@@ -11,11 +11,11 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Tests\Templating\Helper;
 
+use Symfony\Bundle\FrameworkBundle\Templating\Helper\SessionHelper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
-use Symfony\Bundle\FrameworkBundle\Templating\Helper\SessionHelper;
 
 class SessionHelperTest extends \PHPUnit_Framework_TestCase
 {

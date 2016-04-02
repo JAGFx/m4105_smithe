@@ -11,11 +11,11 @@
 
 namespace Sensio\Bundle\DistributionBundle\Composer;
 
+use Composer\Script\CommandEvent;
 use Symfony\Component\ClassLoader\ClassCollectionLoader;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Process\PhpExecutableFinder;
-use Composer\Script\CommandEvent;
+use Symfony\Component\Process\Process;
 
 /**
  * @author Jordi Boggiano <j.boggiano@seld.be>

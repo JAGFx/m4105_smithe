@@ -11,8 +11,8 @@
 
 namespace Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class AddConstraintValidatorsPass implements CompilerPassInterface
 {
@@ -27,6 +27,8 @@ class AddConstraintValidatorsPass implements CompilerPassInterface
             if (isset($attributes[0]['alias'])) {
                 $validators[$attributes[0]['alias']] = $id;
             }
+
+            $validators[ $container->getDefinition( $id )->getClass() ] = $id;
         }
 
         $container->getDefinition('validator.validator_factory')->replaceArgument(1, $validators);

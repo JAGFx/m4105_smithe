@@ -11,11 +11,11 @@
 
 namespace Symfony\Component\EventDispatcher\Debug;
 
+use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Psr\Log\LoggerInterface;
 
 /**
  * Collects some data about event listeners.
@@ -235,12 +235,12 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
     private function preProcess($eventName)
     {
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
-            $this->dispatcher->removeListener($eventName, $listener);
             $info = $this->getListenerInfo($listener, $eventName);
             $name = isset($info['class']) ? $info['class'] : $info['type'];
             $wrappedListener = new WrappedListener($listener, $name, $this->stopwatch, $this);
             $this->wrappedListeners[$eventName][] = $wrappedListener;
-            $this->dispatcher->addListener($eventName, $wrappedListener);
+            $this->dispatcher->removeListener( $eventName, $listener );
+            $this->dispatcher->addListener( $eventName, $wrappedListener, $info[ 'priority' ] );
         }
     }
 
@@ -253,8 +253,9 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
                 continue;
             }
             // Unwrap listener
+            $priority = $this->getListenerPriority( $eventName, $listener );
             $this->dispatcher->removeListener($eventName, $listener);
-            $this->dispatcher->addListener($eventName, $listener->getWrappedListener());
+            $this->dispatcher->addListener( $eventName, $listener->getWrappedListener(), $priority );
 
             $info = $this->getListenerInfo($listener->getWrappedListener(), $eventName);
             if ($listener->wasCalled()) {

@@ -20,8 +20,8 @@
 namespace Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection;
 
 use Doctrine\Common\Inflector\Inflector;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
 /**
  * Cache provider loader

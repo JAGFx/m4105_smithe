@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\DependencyInjection\Tests;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class CrossCheckTest extends \PHPUnit_Framework_TestCase
 {

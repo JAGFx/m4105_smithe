@@ -12,8 +12,8 @@
 namespace Symfony\Bundle\SecurityBundle\DependencyInjection\Security\UserProvider;
 
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -52,7 +52,9 @@ class LdapFactory implements UserProviderFactoryInterface
                 ->scalarNode('search_dn')->end()
                 ->scalarNode('search_password')->end()
                 ->arrayNode('default_roles')
-                    ->beforeNormalization()->ifString()->then(function($v) { return preg_split('/\s*,\s*/', $v); })->end()
+                ->beforeNormalization()->ifString()->then(
+                        function ( $v ) { return preg_split( '/\s*,\s*/', $v ); }
+                )->end()
                     ->requiresAtLeastOneElement()
                     ->prototype('scalar')->end()
                 ->end()

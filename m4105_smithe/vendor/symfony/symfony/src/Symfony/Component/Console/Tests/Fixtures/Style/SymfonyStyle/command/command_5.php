@@ -1,10 +1,10 @@
 <?php
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Tests\Style\SymfonyStyleWithForcedLineLength;
+    use Symfony\Component\Console\Input\InputInterface;
+    use Symfony\Component\Console\Output\OutputInterface;
+    use Symfony\Component\Console\Tests\Style\SymfonyStyleWithForcedLineLength;
 
-//Ensure has proper line ending before outputing a text block like with SymfonyStyle::listing() or SymfonyStyle::text()
+    //Ensure has proper line ending before outputing a text block like with SymfonyStyle::listing() or SymfonyStyle::text()
 return function (InputInterface $input, OutputInterface $output) {
     $output = new SymfonyStyleWithForcedLineLength($input, $output);
 

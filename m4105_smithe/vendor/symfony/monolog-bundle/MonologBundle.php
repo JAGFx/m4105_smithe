@@ -11,12 +11,14 @@
 
 namespace Symfony\Bundle\MonologBundle;
 
-use Symfony\Bundle\MonologBundle\DependencyInjection\Compiler\AddSwiftMailerTransportPass;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Bundle\MonologBundle\DependencyInjection\Compiler\LoggerChannelPass;
-use Symfony\Bundle\MonologBundle\DependencyInjection\Compiler\DebugHandlerPass;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\HandlerInterface;
 use Symfony\Bundle\MonologBundle\DependencyInjection\Compiler\AddProcessorsPass;
+use Symfony\Bundle\MonologBundle\DependencyInjection\Compiler\AddSwiftMailerTransportPass;
+use Symfony\Bundle\MonologBundle\DependencyInjection\Compiler\DebugHandlerPass;
+use Symfony\Bundle\MonologBundle\DependencyInjection\Compiler\LoggerChannelPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Bundle.
@@ -33,5 +35,15 @@ class MonologBundle extends Bundle
         $container->addCompilerPass(new DebugHandlerPass($channelPass));
         $container->addCompilerPass(new AddProcessorsPass());
         $container->addCompilerPass(new AddSwiftMailerTransportPass());
+    }
+
+    /**
+     * @internal
+     */
+    public static function includeStacktraces( HandlerInterface $handler ) {
+        $formatter = $handler->getFormatter();
+        if ( $formatter instanceof LineFormatter ) {
+            $formatter->includeStacktraces();
+        }
     }
 }

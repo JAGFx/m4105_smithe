@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Locale\Tests;
 
-use Symfony\Component\Locale\Locale;
 use Symfony\Component\Intl\Util\IntlTestHelper;
+use Symfony\Component\Locale\Locale;
 
 /**
  * Test case for the {@link Locale} class.

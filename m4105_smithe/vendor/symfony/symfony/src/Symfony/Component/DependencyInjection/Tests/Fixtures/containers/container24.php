@@ -1,9 +1,8 @@
 <?php
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
+	use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-$container = new ContainerBuilder();
+	$container = new ContainerBuilder();
 
 $container
     ->register('foo', 'Foo')

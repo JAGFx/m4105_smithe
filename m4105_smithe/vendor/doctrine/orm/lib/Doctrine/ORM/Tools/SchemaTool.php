@@ -19,18 +19,17 @@
 
 namespace Doctrine\ORM\Tools;
 
-use Doctrine\ORM\ORMException;
-use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Schema\Comparator;
+use Doctrine\DBAL\Schema\Index;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\Visitor\DropSchemaSqlCollector;
 use Doctrine\DBAL\Schema\Visitor\RemoveNamespacedAssets;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Internal\CommitOrderCalculator;
-use Doctrine\ORM\Tools\Event\GenerateSchemaTableEventArgs;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
+use Doctrine\ORM\Tools\Event\GenerateSchemaTableEventArgs;
 
 /**
  * The SchemaTool is a tool to create/drop/update database schemas based on
@@ -124,8 +123,8 @@ class SchemaTool
     private function processingNotRequired($class, array $processedClasses)
     {
         return (
-            isset($processedClasses[$class->name]) ||
-            $class->isMappedSuperclass ||
+            isset($processedClasses[$class->name]) || $class->isMappedSuperclass || $class->isEmbeddedClass
+            ||
             ($class->isInheritanceTypeSingleTable() && $class->name != $class->rootEntityName)
         );
     }
@@ -265,13 +264,36 @@ class SchemaTool
 
             if (isset($class->table['indexes'])) {
                 foreach ($class->table['indexes'] as $indexName => $indexData) {
-                    $table->addIndex($indexData['columns'], is_numeric($indexName) ? null : $indexName);
+                    if ( !isset( $indexData[ 'flags' ] ) ) {
+                        $indexData[ 'flags' ] = array();
+                    }
+
+                    $table->addIndex(
+                            $indexData[ 'columns' ], is_numeric( $indexName ) ? null : $indexName,
+                            (array) $indexData[ 'flags' ],
+                            isset( $indexData[ 'options' ] ) ? $indexData[ 'options' ] : array()
+                    );
                 }
             }
 
             if (isset($class->table['uniqueConstraints'])) {
                 foreach ($class->table['uniqueConstraints'] as $indexName => $indexData) {
-                    $table->addUniqueIndex($indexData['columns'], is_numeric($indexName) ? null : $indexName);
+                    $uniqIndex = new Index(
+                            $indexName, $indexData[ 'columns' ], true, false, [ ],
+                            isset( $indexData[ 'options' ] ) ? $indexData[ 'options' ] : [ ]
+                    );
+
+                    foreach ( $table->getIndexes() as $tableIndexName => $tableIndex ) {
+                        if ( $tableIndex->isFullfilledBy( $uniqIndex ) ) {
+                            $table->dropIndex( $tableIndexName );
+                            break;
+                        }
+                    }
+
+                    $table->addUniqueIndex(
+                            $indexData[ 'columns' ], is_numeric( $indexName ) ? null : $indexName,
+                            isset( $indexData[ 'options' ] ) ? $indexData[ 'options' ] : array()
+                    );
                 }
             }
 
@@ -484,7 +506,7 @@ class SchemaTool
             $foreignClass = $this->em->getClassMetadata($mapping['targetEntity']);
 
             if ($mapping['type'] & ClassMetadata::TO_ONE && $mapping['isOwningSide']) {
-                $primaryKeyColumns = $uniqueConstraints = array(); // PK is unnecessary for this relation-type
+                $primaryKeyColumns = array(); // PK is unnecessary for this relation-type
 
                 $this->gatherRelationJoinColumns(
                     $mapping['joinColumns'],
@@ -492,14 +514,9 @@ class SchemaTool
                     $foreignClass,
                     $mapping,
                     $primaryKeyColumns,
-                    $uniqueConstraints,
                     $addedFks,
                     $blacklistedFks
                 );
-
-                foreach ($uniqueConstraints as $indexName => $unique) {
-                    $table->addUniqueIndex($unique['columns'], is_numeric($indexName) ? null : $indexName);
-                }
             } elseif ($mapping['type'] == ClassMetadata::ONE_TO_MANY && $mapping['isOwningSide']) {
                 //... create join table, one-many through join table supported later
                 throw ORMException::notSupported();
@@ -511,7 +528,7 @@ class SchemaTool
                     $this->quoteStrategy->getJoinTableName($mapping, $foreignClass, $this->platform)
                 );
 
-                $primaryKeyColumns = $uniqueConstraints = array();
+                $primaryKeyColumns = array();
 
                 // Build first FK constraint (relation table => source table)
                 $this->gatherRelationJoinColumns(
@@ -520,7 +537,6 @@ class SchemaTool
                     $class,
                     $mapping,
                     $primaryKeyColumns,
-                    $uniqueConstraints,
                     $addedFks,
                     $blacklistedFks
                 );
@@ -532,16 +548,11 @@ class SchemaTool
                     $foreignClass,
                     $mapping,
                     $primaryKeyColumns,
-                    $uniqueConstraints,
                     $addedFks,
                     $blacklistedFks
                 );
 
                 $theJoinTable->setPrimaryKey($primaryKeyColumns);
-
-                foreach ($uniqueConstraints as $indexName => $unique) {
-                    $theJoinTable->addUniqueIndex($unique['columns'], is_numeric($indexName) ? null : $indexName);
-                }
             }
         }
     }
@@ -592,7 +603,6 @@ class SchemaTool
      * @param ClassMetadata $class
      * @param array         $mapping
      * @param array         $primaryKeyColumns
-     * @param array         $uniqueConstraints
      * @param array         $addedFks
      * @param array         $blacklistedFks
      *
@@ -606,7 +616,6 @@ class SchemaTool
         $class,
         $mapping,
         &$primaryKeyColumns,
-        &$uniqueConstraints,
         &$addedFks,
         &$blacklistedFks
     ) {
@@ -614,6 +623,7 @@ class SchemaTool
         $foreignColumns     = array();
         $fkOptions          = array();
         $foreignTableName   = $this->quoteStrategy->getTableName($class, $this->platform);
+        $uniqueConstraints = array();
 
         foreach ($joinColumns as $joinColumn) {
 
@@ -681,6 +691,12 @@ class SchemaTool
             if (isset($joinColumn['onDelete'])) {
                 $fkOptions['onDelete'] = $joinColumn['onDelete'];
             }
+        }
+
+        // Prefer unique constraints over implicit simple indexes created for foreign keys.
+        // Also avoids index duplication.
+        foreach ( $uniqueConstraints as $indexName => $unique ) {
+            $theJoinTable->addUniqueIndex( $unique[ 'columns' ], is_numeric( $indexName ) ? null : $indexName );
         }
 
         $compositeName = $theJoinTable->getName().'.'.implode('', $localColumns);

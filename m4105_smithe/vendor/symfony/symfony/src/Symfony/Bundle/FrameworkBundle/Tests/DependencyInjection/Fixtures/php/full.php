@@ -54,8 +54,8 @@ $container->loadFromExtension('framework', array(
         'paths' => array('%kernel.root_dir%/Fixtures/translations'),
     ),
     'validation' => array(
-        'enabled' => true,
-        'cache' => 'apc',
+            'enabled' => true,
+            'cache'   => 'validator.mapping.cache.doctrine.apc',
     ),
     'annotations' => array(
         'cache' => 'file',

@@ -11,8 +11,8 @@
 
 namespace Symfony\Bundle\TwigBundle\Tests\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Bundle\TwigBundle\DependencyInjection\Compiler\TwigLoaderPass;
+use Symfony\Component\DependencyInjection\Definition;
 
 class TwigLoaderPassTest extends \PHPUnit_Framework_TestCase
 {

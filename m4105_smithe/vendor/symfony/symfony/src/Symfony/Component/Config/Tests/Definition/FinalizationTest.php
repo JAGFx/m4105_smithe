@@ -12,8 +12,8 @@
 namespace Symfony\Component\Config\Tests\Definition;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Definition\NodeInterface;
+use Symfony\Component\Config\Definition\Processor;
 
 class FinalizationTest extends \PHPUnit_Framework_TestCase
 {

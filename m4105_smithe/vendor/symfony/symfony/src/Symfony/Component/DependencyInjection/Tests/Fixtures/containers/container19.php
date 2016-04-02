@@ -1,9 +1,9 @@
 <?php
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
+	use Symfony\Component\DependencyInjection\ContainerBuilder;
+	use Symfony\Component\DependencyInjection\Definition;
 
-require_once __DIR__.'/../includes/classes.php';
+	require_once __DIR__ . '/../includes/classes.php';
 
 $container = new ContainerBuilder();
 

@@ -14,18 +14,19 @@ namespace Symfony\Component\DependencyInjection\Tests;
 require_once __DIR__.'/Fixtures/includes/classes.php';
 require_once __DIR__.'/Fixtures/includes/ProjectExtension.php';
 
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Config\Resource\ResourceInterface;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 use Symfony\Component\DependencyInjection\Exception\InactiveScopeException;
+use Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Scope;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\ExpressionLanguage\Expression;
 
 class ContainerBuilderTest extends \PHPUnit_Framework_TestCase
@@ -51,9 +52,14 @@ class ContainerBuilderTest extends \PHPUnit_Framework_TestCase
 
         try {
             $builder->getDefinition('baz');
-            $this->fail('->getDefinition() throws an InvalidArgumentException if the service definition does not exist');
-        } catch (\InvalidArgumentException $e) {
-            $this->assertEquals('The service definition "baz" does not exist.', $e->getMessage(), '->getDefinition() throws an InvalidArgumentException if the service definition does not exist');
+            $this->fail(
+                    '->getDefinition() throws a ServiceNotFoundException if the service definition does not exist'
+            );
+        } catch ( ServiceNotFoundException $e ) {
+            $this->assertEquals(
+                    'You have requested a non-existent service "baz".', $e->getMessage(),
+                    '->getDefinition() throws a ServiceNotFoundException if the service definition does not exist'
+            );
         }
     }
 
@@ -102,9 +108,12 @@ class ContainerBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = new ContainerBuilder();
         try {
             $builder->get('foo');
-            $this->fail('->get() throws an InvalidArgumentException if the service does not exist');
-        } catch (\InvalidArgumentException $e) {
-            $this->assertEquals('The service definition "foo" does not exist.', $e->getMessage(), '->get() throws an InvalidArgumentException if the service does not exist');
+            $this->fail( '->get() throws a ServiceNotFoundException if the service does not exist' );
+        } catch ( ServiceNotFoundException $e ) {
+            $this->assertEquals(
+                    'You have requested a non-existent service "foo".', $e->getMessage(),
+                    '->get() throws a ServiceNotFoundException if the service does not exist'
+            );
         }
 
         $this->assertNull($builder->get('foo', ContainerInterface::NULL_ON_INVALID_REFERENCE), '->get() returns null if the service does not exist and NULL_ON_INVALID_REFERENCE is passed as a second argument');
@@ -251,6 +260,15 @@ class ContainerBuilderTest extends \PHPUnit_Framework_TestCase
         $aliases = $builder->getAliases();
         $this->assertTrue(isset($aliases['bar']));
         $this->assertTrue(isset($aliases['foobar']));
+    }
+
+    public function testSetReplacesAlias() {
+        $builder = new ContainerBuilder();
+        $builder->setAlias( 'alias', 'aliased' );
+        $builder->set( 'aliased', new \stdClass() );
+
+        $builder->set( 'alias', $foo = new \stdClass() );
+        $this->assertSame( $foo, $builder->get( 'alias' ), '->set() replaces an existing alias' );
     }
 
     public function testAddGetCompilerPass()

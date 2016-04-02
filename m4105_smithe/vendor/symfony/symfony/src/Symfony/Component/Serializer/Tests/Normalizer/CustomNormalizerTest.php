@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Serializer\Tests\Normalizer;
 
-use Symfony\Component\Serializer\Tests\Fixtures\ScalarDummy;
 use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Tests\Fixtures\ScalarDummy;
 
 class CustomNormalizerTest extends \PHPUnit_Framework_TestCase
 {

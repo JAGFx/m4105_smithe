@@ -15,9 +15,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderAdapter;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -94,9 +94,10 @@ class CsrfValidationListener implements EventSubscriberInterface
     public function preSubmit(FormEvent $event)
     {
         $form = $event->getForm();
-        $data = $event->getData();
 
         if ($form->isRoot() && $form->getConfig()->getOption('compound')) {
+            $data = $event->getData();
+
             if (!isset($data[$this->fieldName]) || !$this->tokenManager->isTokenValid(new CsrfToken($this->tokenId, $data[$this->fieldName]))) {
                 $errorMessage = $this->errorMessage;
 
@@ -109,10 +110,9 @@ class CsrfValidationListener implements EventSubscriberInterface
 
             if (is_array($data)) {
                 unset($data[$this->fieldName]);
+                $event->setData( $data );
             }
         }
-
-        $event->setData($data);
     }
 
     /**

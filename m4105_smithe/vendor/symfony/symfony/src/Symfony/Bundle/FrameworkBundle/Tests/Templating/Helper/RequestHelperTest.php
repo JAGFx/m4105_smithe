@@ -11,9 +11,9 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Tests\Templating\Helper;
 
+use Symfony\Bundle\FrameworkBundle\Templating\Helper\RequestHelper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Bundle\FrameworkBundle\Templating\Helper\RequestHelper;
 
 class RequestHelperTest extends \PHPUnit_Framework_TestCase
 {

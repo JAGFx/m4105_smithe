@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Polyfill\Php70 as p;
+    use Symfony\Polyfill\Php70 as p;
 
-if (PHP_VERSION_ID < 70000) {
+    if ( PHP_VERSION_ID < 70000 ) {
     if (!function_exists('intdiv')) {
         function intdiv($dividend, $divisor) { return p\Php70::intdiv($dividend, $divisor); }
     }

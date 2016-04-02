@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Security\Core\Tests\Authentication\Provider;
 
-use Symfony\Component\Security\Core\Encoder\PlaintextPasswordEncoder;
 use Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider;
+use Symfony\Component\Security\Core\Encoder\PlaintextPasswordEncoder;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class DaoAuthenticationProviderTest extends \PHPUnit_Framework_TestCase

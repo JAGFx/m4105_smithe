@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Polyfill\Mbstring as p;
+    use Symfony\Polyfill\Mbstring as p;
 
-if (!function_exists('mb_strlen')) {
+    if ( !function_exists( 'mb_strlen' ) ) {
     define('MB_CASE_UPPER', 0);
     define('MB_CASE_LOWER', 1);
     define('MB_CASE_TITLE', 2);

@@ -11,11 +11,11 @@
 
 namespace Symfony\Component\Security\Http\Tests\RememberMe;
 
-use Symfony\Component\Security\Http\RememberMe\RememberMeServicesInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Http\RememberMe\RememberMeServicesInterface;
 use Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices;
 
 class TokenBasedRememberMeServicesTest extends \PHPUnit_Framework_TestCase
@@ -172,9 +172,8 @@ class TokenBasedRememberMeServicesTest extends \PHPUnit_Framework_TestCase
     {
         $service = $this->getService(null, array('name' => 'foo', 'path' => '/foo', 'domain' => 'foodomain.foo'));
         $request = new Request();
-        $response = new Response();
 
-        $service->loginFail($request, $response);
+        $service->loginFail( $request );
 
         $cookie = $request->attributes->get(RememberMeServicesInterface::COOKIE_ATTR_NAME);
         $this->assertTrue($cookie->isCleared());

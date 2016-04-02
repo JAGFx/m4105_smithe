@@ -11,18 +11,26 @@
 
 namespace Symfony\Component\Security\Http\Tests\RememberMe;
 
-use Symfony\Component\Security\Http\RememberMe\RememberMeServicesInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\Authentication\RememberMe\PersistentToken;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\Security\Http\RememberMe\PersistentTokenBasedRememberMeServices;
-use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
+use Symfony\Component\Security\Core\Authentication\RememberMe\PersistentToken;
 use Symfony\Component\Security\Core\Exception\CookieTheftException;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Http\RememberMe\PersistentTokenBasedRememberMeServices;
+use Symfony\Component\Security\Http\RememberMe\RememberMeServicesInterface;
 
 class PersistentTokenBasedRememberMeServicesTest extends \PHPUnit_Framework_TestCase
 {
+    public static function setUpBeforeClass() {
+        try {
+            random_bytes( 1 );
+        } catch ( \Exception $e ) {
+            throw new \PHPUnit_Framework_SkippedTestError( $e->getMessage() );
+        }
+    }
+
     public function testAutoLoginReturnsNullWhenNoCookie()
     {
         $service = $this->getService(null, array('name' => 'foo'));

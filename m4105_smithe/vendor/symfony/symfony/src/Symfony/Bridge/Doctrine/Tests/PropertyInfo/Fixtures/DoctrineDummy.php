@@ -11,12 +11,6 @@
 
 namespace Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures;
 
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\ManyToMany;
-use Doctrine\ORM\Mapping\ManyToOne;
-
 /**
  * @Entity
  *
@@ -69,6 +63,11 @@ class DoctrineDummy
      * @Column(type="binary")
      */
     private $binary;
+
+    /**
+     * @Column(type="custom_foo")
+     */
+    private $customFoo;
 
     public $notMapped;
 }

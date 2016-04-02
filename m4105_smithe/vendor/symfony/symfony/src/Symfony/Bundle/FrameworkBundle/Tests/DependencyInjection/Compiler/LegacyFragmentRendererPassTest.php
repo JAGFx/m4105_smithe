@@ -11,9 +11,9 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection\Compiler;
 
+use Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\FragmentRendererPass;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\FragmentRendererPass;
 
 /**
  * @group legacy

@@ -11,11 +11,11 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Tests\Command;
 
+use Symfony\Bundle\FrameworkBundle\Command\TranslationUpdateCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Bundle\FrameworkBundle\Command\TranslationUpdateCommand;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\DependencyInjection;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel;
 
 class TranslationUpdateCommandTest extends \PHPUnit_Framework_TestCase
@@ -28,6 +28,15 @@ class TranslationUpdateCommandTest extends \PHPUnit_Framework_TestCase
         $tester = $this->createCommandTester($this->getContainer(array('foo' => 'foo')));
         $tester->execute(array('command' => 'translation:update', 'locale' => 'en', 'bundle' => 'foo', '--dump-messages' => true, '--clean' => true));
         $this->assertRegExp('/foo/', $tester->getDisplay());
+        $this->assertRegExp( '/2 messages were successfully extracted/', $tester->getDisplay() );
+    }
+
+    public function testWriteMessages() {
+        $tester = $this->createCommandTester( $this->getContainer( array( 'foo' => 'foo' ) ) );
+        $tester->execute(
+                array( 'command' => 'translation:update', 'locale' => 'en', 'bundle' => 'foo', '--force' => true )
+        );
+        $this->assertRegExp( '/Translation files were successfully updated./', $tester->getDisplay() );
     }
 
     protected function setUp()

@@ -20,11 +20,11 @@
 
 namespace Doctrine\Bundle\DoctrineCacheBundle\Tests\DependencyInjection;
 
-use Doctrine\Bundle\DoctrineCacheBundle\Tests\TestCase;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Compiler\ResolveDefinitionTemplatesPass;
 use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\DoctrineCacheExtension;
+use Doctrine\Bundle\DoctrineCacheBundle\Tests\TestCase;
+use Symfony\Component\DependencyInjection\Compiler\ResolveDefinitionTemplatesPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @group Extension

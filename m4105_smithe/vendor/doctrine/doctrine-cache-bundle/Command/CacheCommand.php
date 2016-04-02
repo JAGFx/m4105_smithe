@@ -2,10 +2,10 @@
 
 namespace Doctrine\Bundle\DoctrineCacheBundle\Command;
 
+use Doctrine\Common\Cache\Cache;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\Cache\Cache;
 
 /**
  * Base cache command.

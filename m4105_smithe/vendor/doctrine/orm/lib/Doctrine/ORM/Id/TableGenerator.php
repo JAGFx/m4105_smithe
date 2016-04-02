@@ -70,9 +70,12 @@ class TableGenerator extends AbstractIdGenerator
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    public function generate(EntityManager $em, $entity)
+    public function generate(
+            EntityManager $em,
+            $entity
+    )
     {
         if ($this->_maxValue === null || $this->_nextValue == $this->_maxValue) {
             // Allocate new values

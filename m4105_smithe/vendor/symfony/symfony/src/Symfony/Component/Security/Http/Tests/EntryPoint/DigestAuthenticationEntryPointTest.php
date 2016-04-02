@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Security\Http\Tests\EntryPoint;
 
-use Symfony\Component\Security\Http\EntryPoint\DigestAuthenticationEntryPoint;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\NonceExpiredException;
+use Symfony\Component\Security\Http\EntryPoint\DigestAuthenticationEntryPoint;
 
 class DigestAuthenticationEntryPointTest extends \PHPUnit_Framework_TestCase
 {

@@ -14,10 +14,10 @@
 
 namespace Doctrine\Bundle\DoctrineBundle\Command\Proxy;
 
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\Tools\Console\Command\ClearCache\MetadataCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Command to clear the metadata cache of the various cache drivers.

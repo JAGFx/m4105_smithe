@@ -14,10 +14,10 @@
 
 namespace Doctrine\Bundle\DoctrineBundle\Command\Proxy;
 
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\Tools\Console\Command\SchemaTool\DropCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Command to drop the database schema for a set of classes based on their mappings.

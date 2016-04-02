@@ -21,8 +21,8 @@ namespace Doctrine\ORM\Query\AST\Functions;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
-use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\QueryException;
+use Doctrine\ORM\Query\SqlWalker;
 
 /**
  * "IDENTITY" "(" SingleValuedAssociationPathExpression {"," string} ")"
@@ -82,7 +82,7 @@ class IdentityFunction extends FunctionNode
             }
         }
 
-        //The table with the relation may be a subclass, so get the table name from the association definition
+        // The table with the relation may be a subclass, so get the table name from the association definition
         $tableName = $sqlWalker->getEntityManager()->getClassMetadata($assoc['sourceEntity'])->getTableName();
 
         $tableAlias = $sqlWalker->getSQLTableAlias($tableName, $dqlAlias);

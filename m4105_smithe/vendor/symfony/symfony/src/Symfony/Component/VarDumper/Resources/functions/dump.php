@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Component\VarDumper\VarDumper;
+    use Symfony\Component\VarDumper\VarDumper;
 
-if (!function_exists('dump')) {
+    if ( !function_exists( 'dump' ) ) {
     /**
      * @author Nicolas Grekas <p@tchwork.com>
      */

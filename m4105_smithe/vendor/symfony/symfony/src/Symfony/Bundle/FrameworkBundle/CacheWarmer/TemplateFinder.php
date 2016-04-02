@@ -11,10 +11,10 @@
 
 namespace Symfony\Bundle\FrameworkBundle\CacheWarmer;
 
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Templating\TemplateNameParserInterface;
 
 /**
  * Finds all the templates.

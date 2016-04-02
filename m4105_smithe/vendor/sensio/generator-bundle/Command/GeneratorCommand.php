@@ -11,10 +11,10 @@
 
 namespace Sensio\Bundle\GeneratorBundle\Command;
 
-use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Sensio\Bundle\GeneratorBundle\Generator\Generator;
 use Sensio\Bundle\GeneratorBundle\Command\Helper\QuestionHelper;
+use Sensio\Bundle\GeneratorBundle\Generator\Generator;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
  * Base class for generator commands.

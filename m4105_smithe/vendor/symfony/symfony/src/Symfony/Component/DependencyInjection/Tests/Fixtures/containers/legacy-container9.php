@@ -2,11 +2,10 @@
 
 require_once __DIR__.'/../includes/classes.php';
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\ExpressionLanguage\Expression;
+    use Symfony\Component\DependencyInjection\ContainerBuilder;
+    use Symfony\Component\DependencyInjection\Reference;
 
-$container = new ContainerBuilder();
+    $container = new ContainerBuilder();
 $container->
     register('foo', 'Bar\FooClass')->
     addTag('foo', array('foo' => 'foo'))->

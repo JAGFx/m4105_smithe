@@ -19,10 +19,9 @@
 
 namespace Doctrine\ORM\Decorator;
 
-use Doctrine\DBAL\LockMode;
-use Doctrine\ORM\Query\ResultSetMapping;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Persistence\ObjectManagerDecorator;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * Base class for EntityManager decorators
@@ -176,7 +175,7 @@ abstract class EntityManagerDecorator extends ObjectManagerDecorator implements 
     /**
      * {@inheritdoc}
      */
-    public function find($entityName, $id, $lockMode = LockMode::NONE, $lockVersion = null)
+    public function find( $entityName, $id, $lockMode = null, $lockVersion = null )
     {
         return $this->wrapped->find($entityName, $id, $lockMode, $lockVersion);
     }
@@ -267,5 +266,12 @@ abstract class EntityManagerDecorator extends ObjectManagerDecorator implements 
     public function hasFilters()
     {
         return $this->wrapped->hasFilters();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCache() {
+        return $this->wrapped->getCache();
     }
 }

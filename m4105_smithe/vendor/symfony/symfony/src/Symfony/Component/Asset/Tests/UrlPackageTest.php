@@ -11,11 +11,11 @@
 
 namespace Symfony\Component\Asset\Tests;
 
-use Symfony\Component\Asset\UrlPackage;
-use Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy;
-use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 use Symfony\Component\Asset\Exception\InvalidArgumentException;
 use Symfony\Component\Asset\Exception\LogicException;
+use Symfony\Component\Asset\UrlPackage;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
+use Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy;
 
 class UrlPackageTest extends \PHPUnit_Framework_TestCase
 {

@@ -11,8 +11,8 @@
 
 namespace Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter;
 
-use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Managers converters.

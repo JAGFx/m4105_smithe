@@ -12,15 +12,15 @@
 namespace Symfony\Component\HttpKernel\EventListener;
 
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\ConsoleEvents;
+use Symfony\Component\Console\Event\ConsoleEvent;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Console\ConsoleEvents;
-use Symfony\Component\Console\Event\ConsoleEvent;
-use Symfony\Component\Console\Output\ConsoleOutputInterface;
 
 /**
  * Configures errors and exceptions handlers.
@@ -93,7 +93,9 @@ class DebugHandlersListener implements EventSubscriberInterface
         }
         if (!$this->exceptionHandler) {
             if ($event instanceof KernelEvent) {
-                $this->exceptionHandler = array($event->getKernel(), 'terminateWithException');
+                if ( method_exists( $event->getKernel(), 'terminateWithException' ) ) {
+                    $this->exceptionHandler = array( $event->getKernel(), 'terminateWithException' );
+                }
             } elseif ($event instanceof ConsoleEvent && $app = $event->getCommand()->getApplication()) {
                 $output = $event->getOutput();
                 if ($output instanceof ConsoleOutputInterface) {

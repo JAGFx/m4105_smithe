@@ -11,10 +11,10 @@
 
 namespace Symfony\Bundle\TwigBundle\Controller;
 
-use Symfony\Component\HttpKernel\Exception\FlattenException;
-use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\FlattenException;
+use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
 /**
  * ExceptionController renders error or exception pages for a given

@@ -11,10 +11,10 @@
 
 namespace Sensio\Bundle\GeneratorBundle\Generator;
 
+use Doctrine\Common\Inflector\Inflector;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Doctrine\Common\Inflector\Inflector;
 
 /**
  * Generates a CRUD controller.

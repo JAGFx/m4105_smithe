@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Polyfill\Php56 as p;
+    use Symfony\Polyfill\Php56 as p;
 
-if (PHP_VERSION_ID < 50600) {
+    if ( PHP_VERSION_ID < 50600 ) {
     if (!function_exists('hash_equals')) {
         function hash_equals($knownString, $userInput) { return p\Php56::hash_equals($knownString, $userInput); }
     }

@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\RuntimeException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
@@ -93,7 +93,7 @@ class EmailValidator extends ConstraintValidator
             return;
         }
 
-        $host = substr($value, strpos($value, '@') + 1);
+        $host = substr( $value, strrpos( $value, '@' ) + 1 );
 
         // Check for host DNS resource records
         if ($constraint->checkMX) {

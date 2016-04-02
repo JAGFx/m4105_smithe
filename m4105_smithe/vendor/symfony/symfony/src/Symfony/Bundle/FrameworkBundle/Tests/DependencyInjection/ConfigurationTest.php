@@ -66,6 +66,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             array(array(), array()),
             array(array('10.0.0.0/8'), array('10.0.0.0/8')),
             array(array('::ffff:0:0/96'), array('::ffff:0:0/96')),
+                array( array( '0.0.0.0/0' ), array( '0.0.0.0/0' ) ),
         );
     }
 
@@ -167,9 +168,9 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'strict_email' => false,
             ),
             'annotations' => array(
-                'cache' => 'file',
-                'file_cache_dir' => '%kernel.cache_dir%/annotations',
-                'debug' => '%kernel.debug%',
+                    'cache'          => 'file',
+                    'file_cache_dir' => '%kernel.cache_dir%/annotations',
+                    'debug'          => true,
             ),
             'serializer' => array(
                 'enabled' => false,

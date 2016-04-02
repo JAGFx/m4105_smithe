@@ -14,12 +14,12 @@
 
 namespace Doctrine\Bundle\DoctrineBundle\Command\Proxy;
 
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\Tools\Console\Command\ConvertMappingCommand;
 use Doctrine\ORM\Tools\Export\Driver\XmlExporter;
 use Doctrine\ORM\Tools\Export\Driver\YamlExporter;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Convert Doctrine ORM metadata mapping information between the various supported

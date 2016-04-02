@@ -34,18 +34,23 @@
 }
 
 .sf-toolbarreset {
-    background-color: #222;
-    bottom: 0;
-    box-shadow: 0 -1px 0px rgba(0, 0, 0, 0.2);
-    color: #EEE;
-    font: 11px Arial, sans-serif;
-    left: 0;
-    margin: 0;
-    padding: 0 36px 0 0;
-    position: fixed;
-    right: 0;
-    text-align: left;
-    z-index: 99999;
+    background-color:        #222;
+    bottom:                  0;
+    box-shadow:              0 -1px 0px rgba(0, 0, 0, 0.2);
+    color:                   #EEE;
+    font:                    11px Arial, sans-serif;
+    left:                    0;
+    margin:                  0;
+    padding:                 0 36px 0 0;
+    position:                fixed;
+    right:                   0;
+    text-align:              left;
+    text-transform:          none;
+    z-index:                 99999;
+
+    /* neutralize the aliasing defined by external CSS styles */
+    -webkit-font-smoothing:  subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
 }
 .sf-toolbarreset abbr {
     border: dashed #777;
@@ -53,13 +58,11 @@
 }
 .sf-toolbarreset svg,
 .sf-toolbarreset img {
-    max-height: 20px;
-    max-width: 20px;
+    height: 20px;
 }
 
 .sf-toolbarreset .hide-button {
     background: #444;
-    cursor: pointer;
     display: block;
     position: absolute;
     top: 0;
@@ -290,7 +293,8 @@
     color: #F5F5F5;
 }
 .sf-toolbar-ajax-requests {
-    width: 100%;
+    table-layout: auto;
+    width:        100%;
 }
 .sf-toolbar-ajax-requests td {
     background-color: #444;
@@ -423,9 +427,6 @@
     .sf-toolbar-block .sf-toolbar-icon img,
     .sf-toolbar-block .sf-toolbar-icon svg {
         top: 6px;
-    }
-    .sf-toolbar-block-config:hover .sf-toolbar-info {
-        right: 0;
     }
     .sf-toolbar-block-time .sf-toolbar-icon svg,
     .sf-toolbar-block-memory .sf-toolbar-icon svg {

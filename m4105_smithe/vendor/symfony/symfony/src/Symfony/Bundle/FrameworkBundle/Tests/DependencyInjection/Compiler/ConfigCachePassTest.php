@@ -11,8 +11,8 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\ConfigCachePass;
+use Symfony\Component\DependencyInjection\Reference;
 
 class ConfigCachePassTest extends \PHPUnit_Framework_TestCase
 {

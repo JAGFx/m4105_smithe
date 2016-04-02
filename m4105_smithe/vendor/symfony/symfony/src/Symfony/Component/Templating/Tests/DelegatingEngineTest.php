@@ -12,8 +12,8 @@
 namespace Symfony\Component\Templating\Tests;
 
 use Symfony\Component\Templating\DelegatingEngine;
-use Symfony\Component\Templating\StreamingEngineInterface;
 use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\Templating\StreamingEngineInterface;
 
 class DelegatingEngineTest extends \PHPUnit_Framework_TestCase
 {
@@ -66,10 +66,7 @@ class DelegatingEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamRequiresStreamingEngine()
     {
-        $engine = $this->getEngineMock('template.php', true);
-        $engine->expects($this->never())->method('stream');
-
-        $delegatingEngine = new DelegatingEngine(array($engine));
+        $delegatingEngine = new DelegatingEngine( array( new TestEngine() ) );
         $delegatingEngine->stream('template.php', array('foo' => 'bar'));
     }
 
@@ -154,4 +151,19 @@ class DelegatingEngineTest extends \PHPUnit_Framework_TestCase
 
 interface MyStreamingEngine extends StreamingEngineInterface, EngineInterface
 {
+}
+
+class TestEngine implements EngineInterface {
+    public function render( $name, array $parameters = array() ) {
+    }
+
+    public function exists( $name ) {
+    }
+
+    public function supports( $name ) {
+        return true;
+    }
+
+    public function stream() {
+    }
 }

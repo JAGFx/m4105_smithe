@@ -21,9 +21,8 @@ namespace Doctrine\ORM\Query\Exec;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;
-
-use Doctrine\ORM\Query\ParameterTypeInferer;
 use Doctrine\ORM\Query\AST;
+use Doctrine\ORM\Query\ParameterTypeInferer;
 
 /**
  * Executes the SQL statements for bulk DQL UPDATE statements on classes in
@@ -62,11 +61,11 @@ class MultiTableUpdateExecutor extends AbstractSqlExecutor
     /**
      * Initializes a new <tt>MultiTableUpdateExecutor</tt>.
      *
+     * Internal note: Any SQL construction and preparation takes place in the constructor for
+     *                best performance. With a query cache the executor will be cached.
+     *
      * @param \Doctrine\ORM\Query\AST\Node  $AST The root AST node of the DQL query.
      * @param \Doctrine\ORM\Query\SqlWalker $sqlWalker The walker used for SQL generation from the AST.
-     *
-     * @internal Any SQL construction and preparation takes place in the constructor for
-     *           best performance. With a query cache the executor will be cached.
      */
     public function __construct(AST\Node $AST, $sqlWalker)
     {

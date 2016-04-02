@@ -19,14 +19,14 @@
 
 namespace Doctrine\ORM\Query\Exec;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Cache\QueryCacheProfile;
+use Doctrine\DBAL\Connection;
 
 /**
  * Base class for SQL statement executors.
  *
  * @author      Roman Borschel <roman@code-factory.org>
- * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @license     http://www.opensource.org/licenses/mit-license.php MIT
  * @link        http://www.doctrine-project.org
  * @since       2.0
  * @todo Rename: AbstractSQLExecutor

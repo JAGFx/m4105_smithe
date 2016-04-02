@@ -11,9 +11,6 @@
 
 namespace Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures;
 
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Id;
-
 /**
  * @Entity
  *

@@ -11,11 +11,11 @@
 
 namespace Sensio\Bundle\FrameworkExtraBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Alias;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Alias;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * SensioFrameworkExtraExtension.
@@ -31,6 +31,12 @@ class SensioFrameworkExtraExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        if ( !empty( $config[ 'templating' ][ 'controller_patterns' ] ) ) {
+            $container
+                    ->getDefinition( 'sensio_framework_extra.view.guesser' )
+                    ->addArgument( $config[ 'templating' ][ 'controller_patterns' ] );
+        }
 
         $annotationsToLoad = array();
 

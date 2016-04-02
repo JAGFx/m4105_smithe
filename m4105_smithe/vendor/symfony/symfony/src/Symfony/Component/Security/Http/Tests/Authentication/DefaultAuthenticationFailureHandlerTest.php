@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Security\Http\Tests\Authentication;
 
-use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler;
 
 class DefaultAuthenticationFailureHandlerTest extends \PHPUnit_Framework_TestCase
 {

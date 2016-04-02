@@ -11,11 +11,11 @@
 
 namespace Symfony\Bundle\SecurityBundle\DataCollector;
 
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use Symfony\Component\Security\Core\Role\RoleInterface;
 use Symfony\Component\Security\Http\Logout\LogoutUrlGenerator;
 
@@ -89,7 +89,7 @@ class SecurityDataCollector extends DataCollector
                 if (null !== $this->logoutUrlGenerator) {
                     $logoutUrl = $this->logoutUrlGenerator->getLogoutPath();
                 }
-            } catch(\Exception $e) {
+            } catch ( \Exception $e ) {
                 // fail silently when the logout URL cannot be generated
             }
 

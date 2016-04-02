@@ -12,8 +12,8 @@
 namespace Symfony\Bridge\Twig\Tests\Extension;
 
 use Symfony\Bridge\Twig\Extension\DumpExtension;
-use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\VarDumper;
 
 class DumpExtensionTest extends \PHPUnit_Framework_TestCase
 {

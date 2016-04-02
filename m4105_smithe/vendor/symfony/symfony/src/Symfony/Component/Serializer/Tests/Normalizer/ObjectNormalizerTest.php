@@ -12,16 +12,16 @@
 namespace Symfony\Component\Serializer\Tests\Normalizer;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Tests\Fixtures\CircularReferenceDummy;
-use Symfony\Component\Serializer\Tests\Fixtures\SiblingHolder;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Symfony\Component\Serializer\Tests\Fixtures\GroupDummy;
+use Symfony\Component\Serializer\Tests\Fixtures\SiblingHolder;
 
 /**
  * @author Kévin Dunglas <dunglas@gmail.com>
@@ -197,7 +197,8 @@ class ObjectNormalizerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(array(
             'bar' => 'bar',
-        ), $this->normalizer->normalize($obj, null, array('groups' => array('c'))));
+        ), $this->normalizer->normalize( $obj, null, array( ObjectNormalizer::GROUPS => array( 'c' ) ) )
+        );
 
         $this->assertEquals(array(
             'symfony' => 'symfony',
@@ -206,7 +207,8 @@ class ObjectNormalizerTest extends \PHPUnit_Framework_TestCase
             'bar' => 'bar',
             'kevin' => 'kevin',
             'coopTilleuls' => 'coopTilleuls',
-        ), $this->normalizer->normalize($obj, null, array('groups' => array('a', 'c'))));
+        ), $this->normalizer->normalize( $obj, null, array( ObjectNormalizer::GROUPS => array( 'a', 'c' ) ) )
+        );
     }
 
     public function testGroupsDenormalize()
@@ -224,7 +226,7 @@ class ObjectNormalizerTest extends \PHPUnit_Framework_TestCase
             $toNormalize,
             'Symfony\Component\Serializer\Tests\Fixtures\GroupDummy',
             null,
-            array('groups' => array('a'))
+                array( ObjectNormalizer::GROUPS => array( 'a' ) )
         );
         $this->assertEquals($obj, $normalized);
 
@@ -234,7 +236,7 @@ class ObjectNormalizerTest extends \PHPUnit_Framework_TestCase
             $toNormalize,
             'Symfony\Component\Serializer\Tests\Fixtures\GroupDummy',
             null,
-            array('groups' => array('a', 'b'))
+                array( ObjectNormalizer::GROUPS => array( 'a', 'b' ) )
         );
         $this->assertEquals($obj, $normalized);
     }
@@ -268,7 +270,9 @@ class ObjectNormalizerTest extends \PHPUnit_Framework_TestCase
                 'foo_bar' => '@dunglas',
                 'symfony' => '@coopTilleuls',
             ),
-            $this->normalizer->normalize($obj, null, array('groups' => array('name_converter')))
+                $this->normalizer->normalize(
+                        $obj, null, array( ObjectNormalizer::GROUPS => array( 'name_converter' ) )
+                )
         );
     }
 
@@ -289,7 +293,9 @@ class ObjectNormalizerTest extends \PHPUnit_Framework_TestCase
                 'foo_bar' => '@dunglas',
                 'symfony' => '@coopTilleuls',
                 'coop_tilleuls' => 'les-tilleuls.coop',
-            ), 'Symfony\Component\Serializer\Tests\Fixtures\GroupDummy', null, array('groups' => array('name_converter')))
+            ), 'Symfony\Component\Serializer\Tests\Fixtures\GroupDummy', null,
+                    array( ObjectNormalizer::GROUPS => array( 'name_converter' ) )
+            )
         );
     }
 

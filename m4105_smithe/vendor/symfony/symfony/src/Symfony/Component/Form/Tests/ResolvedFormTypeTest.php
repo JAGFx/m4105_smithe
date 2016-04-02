@@ -11,10 +11,10 @@
 
 namespace Symfony\Component\Form\Tests;
 
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeExtensionInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\ResolvedFormType;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

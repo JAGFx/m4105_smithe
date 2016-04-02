@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\BrowserKit\Tests;
 
-use Symfony\Component\BrowserKit\CookieJar;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\BrowserKit\CookieJar;
 use Symfony\Component\BrowserKit\Response;
 
 class CookieJarTest extends \PHPUnit_Framework_TestCase

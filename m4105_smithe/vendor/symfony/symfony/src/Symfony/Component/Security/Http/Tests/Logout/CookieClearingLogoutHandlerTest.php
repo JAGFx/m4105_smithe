@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Security\Http\Tests\Logout;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Logout\CookieClearingLogoutHandler;
 
 class CookieClearingLogoutHandlerTest extends \PHPUnit_Framework_TestCase

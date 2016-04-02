@@ -1,9 +1,9 @@
 <?php
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Scope;
+    use Symfony\Component\DependencyInjection\ContainerBuilder;
+    use Symfony\Component\DependencyInjection\Scope;
 
-$container = new ContainerBuilder();
+    $container = new ContainerBuilder();
 $container->addScope(new Scope('request'));
 $container->
     register('foo', 'FooClass')->

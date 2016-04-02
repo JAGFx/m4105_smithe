@@ -11,10 +11,10 @@
 
 namespace Symfony\Bridge\Doctrine\Tests\Security\User;
 
+use Doctrine\ORM\Tools\SchemaTool;
+use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
 use Symfony\Bridge\Doctrine\Test\DoctrineTestHelper;
 use Symfony\Bridge\Doctrine\Tests\Fixtures\User;
-use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
-use Doctrine\ORM\Tools\SchemaTool;
 
 class EntityUserProviderTest extends \PHPUnit_Framework_TestCase
 {

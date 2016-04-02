@@ -1,8 +1,8 @@
 <?php
 
-use Symfony\Component\Console\Command\Command;
+    use Symfony\Component\Console\Command\Command;
 
-class Foo4Command extends Command
+    class Foo4Command extends Command
 {
     protected function configure()
     {

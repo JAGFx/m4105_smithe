@@ -11,10 +11,10 @@
 
 namespace Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter;
 
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use DateTime;
 
 /**
  * Convert DateTime instances from request attribute variable.

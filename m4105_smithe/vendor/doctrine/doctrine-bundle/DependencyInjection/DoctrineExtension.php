@@ -14,18 +14,18 @@
 
 namespace Doctrine\Bundle\DoctrineBundle\DependencyInjection;
 
+use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\CacheProviderLoader;
+use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\SymfonyBridgeAdapter;
 use Doctrine\ORM\Version;
-use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Bridge\Doctrine\DependencyInjection\AbstractDoctrineExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Bridge\Doctrine\DependencyInjection\AbstractDoctrineExtension;
-use Symfony\Component\Config\FileLocator;
-use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\SymfonyBridgeAdapter;
-use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\CacheProviderLoader;
 
 /**
  * DoctrineExtension is an extension for the Doctrine DBAL and ORM library.

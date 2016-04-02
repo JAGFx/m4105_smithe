@@ -11,10 +11,10 @@
 
 namespace Symfony\Component\Security\Http\Tests\RememberMe;
 
-use Symfony\Component\Security\Http\RememberMe\RememberMeServicesInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\RememberMe\AbstractRememberMeServices;
+use Symfony\Component\Security\Http\RememberMe\RememberMeServicesInterface;
 
 class AbstractRememberMeServicesTest extends \PHPUnit_Framework_TestCase
 {

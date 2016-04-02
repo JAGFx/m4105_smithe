@@ -13,8 +13,8 @@
 
 namespace Doctrine\ORM\Tools\Pagination;
 
-use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\AST\SelectStatement;
+use Doctrine\ORM\Query\SqlWalker;
 
 /**
  * Wraps the query in order to accurately count the root objects.
@@ -96,7 +96,8 @@ class CountOutputWalker extends SqlWalker
             throw new \RuntimeException("Cannot count query which selects two FROM components, cannot make distinction");
         }
 
-        $rootAlias      = $from[0]->rangeVariableDeclaration->aliasIdentificationVariable;
+        $fromRoot = reset( $from );
+        $rootAlias = $fromRoot->rangeVariableDeclaration->aliasIdentificationVariable;
         $rootClass      = $this->queryComponents[$rootAlias]['metadata'];
         $rootIdentifier = $rootClass->identifier;
 

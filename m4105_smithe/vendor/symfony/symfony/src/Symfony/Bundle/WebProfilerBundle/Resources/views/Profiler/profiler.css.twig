@@ -115,7 +115,8 @@ button {
     font-size: 12px;
 }
 .btn-sm svg {
-    height: 16px;
+    height:         16px;
+    width:          16px;
     vertical-align: middle;
 }
 .btn-link {
@@ -435,8 +436,9 @@ tr.status-warning td {
     color: #CCC;
 }
 #header h1 svg {
-    height: 40px;
-    margin-top: -4px;
+    height:         40px;
+    width:          40px;
+    margin-top:     -4px;
     vertical-align: middle;
 }
 #header h1 svg path {
@@ -544,7 +546,7 @@ tr.status-warning td {
     margin-left: 5px;
 }
 #sidebar #sidebar-shortcuts .btn {
-    padding: .5em .6em;
+    padding: .5em;
 }
 
 {# Sidebar Search
@@ -586,8 +588,9 @@ tr.status-warning td {
 {# Sidebar Menu
    ------------------------------------------------------------------------- #}
 #menu-profiler {
-    margin: 0;
-    padding: 0;
+    margin:          0;
+    padding:         0;
+    list-style-type: none;
 }
 #menu-profiler li {
     position: relative;
@@ -618,6 +621,12 @@ tr.status-warning td {
     top: 8px;
     width: 50px;
     text-align: center;
+}
+
+#menu-profiler .label .icon img,
+#menu-profiler .label .icon svg {
+    height:    24px;
+    max-width: 24px;
 }
 #menu-profiler li a .label .icon svg path {
     fill: #DDD;

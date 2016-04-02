@@ -11,10 +11,10 @@
 
 namespace Sensio\Bundle\FrameworkExtraBundle\Routing;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as FrameworkExtraBundleRoute;
 use Symfony\Component\Routing\Loader\AnnotationClassLoader;
 use Symfony\Component\Routing\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as FrameworkExtraBundleRoute;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * AnnotatedRouteControllerLoader is an implementation of AnnotationClassLoader

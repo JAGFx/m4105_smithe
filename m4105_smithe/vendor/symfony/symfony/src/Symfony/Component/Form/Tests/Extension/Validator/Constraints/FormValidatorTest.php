@@ -11,16 +11,17 @@
 
 namespace Symfony\Component\Form\Tests\Extension\Validator\Constraints;
 
-use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Extension\Validator\Constraints\Form;
 use Symfony\Component\Form\Extension\Validator\Constraints\FormValidator;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\SubmitButtonBuilder;
-use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Validator\ExecutionContextInterface;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 use Symfony\Component\Validator\Validation;
 
@@ -172,6 +173,18 @@ class FormValidatorTest extends AbstractConstraintValidatorTest
         $this->expectNoValidate();
 
         $this->validator->validate($form, new Form());
+
+        $this->assertNoViolation();
+    }
+
+    public function testMissingConstraintIndex() {
+        $object = new \stdClass();
+        $form = new FormBuilder( 'name', '\stdClass', $this->dispatcher, $this->factory );
+        $form = $form->setData( $object )->getForm();
+
+        $this->expectValidateAt( 0, 'data', $object, 'Default' );
+
+        $this->validator->validate( $form, new Form() );
 
         $this->assertNoViolation();
     }
@@ -616,8 +629,11 @@ class FormValidatorTest extends AbstractConstraintValidatorTest
 
         $context->expects($this->never())
             ->method('addViolation');
-        $context->expects($this->never())
-            ->method('addViolationAt');
+
+        if ( $context instanceof ExecutionContextInterface ) {
+            $context->expects( $this->never() )
+                    ->method( 'addViolationAt' );
+        }
 
         $this->validator->initialize($context);
         $this->validator->validate($form, new Form());

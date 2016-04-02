@@ -20,10 +20,10 @@
 
 namespace Doctrine\Bundle\DoctrineCacheBundle\Tests\DependencyInjection;
 
+use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\CacheProviderLoader;
+use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\SymfonyBridgeAdapter;
 use Doctrine\Bundle\DoctrineCacheBundle\Tests\TestCase;
 use Symfony\Component\DependencyInjection\Definition;
-use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\SymfonyBridgeAdapter;
-use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\CacheProviderLoader;
 
 /**
  * @group Extension

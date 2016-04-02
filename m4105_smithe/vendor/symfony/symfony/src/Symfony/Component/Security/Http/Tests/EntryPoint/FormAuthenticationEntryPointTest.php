@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Security\Http\Tests\EntryPoint;
 
-use Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint;
 
 class FormAuthenticationEntryPointTest extends \PHPUnit_Framework_TestCase
 {

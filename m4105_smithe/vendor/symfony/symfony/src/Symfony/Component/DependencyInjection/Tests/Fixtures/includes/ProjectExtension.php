@@ -1,10 +1,10 @@
 <?php
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+    use Symfony\Component\DependencyInjection\ContainerBuilder;
+    use Symfony\Component\DependencyInjection\Definition;
+    use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-class ProjectExtension implements ExtensionInterface
+    class ProjectExtension implements ExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $configuration)
     {

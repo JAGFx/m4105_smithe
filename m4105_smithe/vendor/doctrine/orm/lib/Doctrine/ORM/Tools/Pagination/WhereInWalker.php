@@ -18,18 +18,18 @@
 namespace Doctrine\ORM\Tools\Pagination;
 
 use Doctrine\ORM\Query\AST\ArithmeticExpression;
-use Doctrine\ORM\Query\AST\SimpleArithmeticExpression;
-use Doctrine\ORM\Query\TreeWalkerAdapter;
-use Doctrine\ORM\Query\AST\SelectStatement;
-use Doctrine\ORM\Query\AST\PathExpression;
-use Doctrine\ORM\Query\AST\InExpression;
-use Doctrine\ORM\Query\AST\NullComparisonExpression;
-use Doctrine\ORM\Query\AST\InputParameter;
-use Doctrine\ORM\Query\AST\ConditionalPrimary;
-use Doctrine\ORM\Query\AST\ConditionalTerm;
 use Doctrine\ORM\Query\AST\ConditionalExpression;
 use Doctrine\ORM\Query\AST\ConditionalFactor;
+use Doctrine\ORM\Query\AST\ConditionalPrimary;
+use Doctrine\ORM\Query\AST\ConditionalTerm;
+use Doctrine\ORM\Query\AST\InExpression;
+use Doctrine\ORM\Query\AST\InputParameter;
+use Doctrine\ORM\Query\AST\NullComparisonExpression;
+use Doctrine\ORM\Query\AST\PathExpression;
+use Doctrine\ORM\Query\AST\SelectStatement;
+use Doctrine\ORM\Query\AST\SimpleArithmeticExpression;
 use Doctrine\ORM\Query\AST\WhereClause;
+use Doctrine\ORM\Query\TreeWalkerAdapter;
 
 /**
  * Replaces the whereClause of the AST with a WHERE id IN (:foo_1, :foo_2) equivalent.
@@ -71,30 +71,28 @@ class WhereInWalker extends TreeWalkerAdapter
      */
     public function walkSelectStatement(SelectStatement $AST)
     {
-        $rootComponents = array();
-        foreach ($this->_getQueryComponents() as $dqlAlias => $qComp) {
-            $isParent = array_key_exists('parent', $qComp)
-                && $qComp['parent'] === null
-                && $qComp['nestingLevel'] == 0
-            ;
-            if ($isParent) {
-                $rootComponents[] = array($dqlAlias => $qComp);
-            }
-        }
-        if (count($rootComponents) > 1) {
+        $queryComponents = $this->_getQueryComponents();
+        // Get the root entity and alias from the AST fromClause
+        $from = $AST->fromClause->identificationVariableDeclarations;
+
+        if ( count( $from ) > 1 ) {
             throw new \RuntimeException("Cannot count query which selects two FROM components, cannot make distinction");
         }
-        $root                = reset($rootComponents);
-        $parentName          = key($root);
-        $parent              = current($root);
-        $identifierFieldName = $parent['metadata']->getSingleIdentifierFieldName();
+
+        $fromRoot = reset( $from );
+        $rootAlias = $fromRoot->rangeVariableDeclaration->aliasIdentificationVariable;
+        $rootClass = $queryComponents[ $rootAlias ][ 'metadata' ];
+        $identifierFieldName = $rootClass->getSingleIdentifierFieldName();
 
         $pathType = PathExpression::TYPE_STATE_FIELD;
-        if (isset($parent['metadata']->associationMappings[$identifierFieldName])) {
+        if ( isset( $rootClass->associationMappings[ $identifierFieldName ] ) ) {
             $pathType = PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION;
         }
 
-        $pathExpression       = new PathExpression(PathExpression::TYPE_STATE_FIELD | PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION, $parentName, $identifierFieldName);
+        $pathExpression = new PathExpression(
+                PathExpression::TYPE_STATE_FIELD | PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION, $rootAlias,
+                $identifierFieldName
+        );
         $pathExpression->type = $pathType;
 
         $count = $this->_getQuery()->getHint(self::HINT_PAGINATOR_ID_COUNT);

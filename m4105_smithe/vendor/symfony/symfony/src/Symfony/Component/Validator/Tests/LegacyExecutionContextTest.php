@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Validator\Tests;
 
-use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\ConstraintValidatorFactory;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;

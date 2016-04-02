@@ -11,14 +11,14 @@
 
 namespace Sensio\Bundle\GeneratorBundle\Command;
 
-use Sensio\Bundle\GeneratorBundle\Generator\DoctrineEntityGenerator;
-use Sensio\Bundle\GeneratorBundle\Command\Helper\QuestionHelper;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\Console\Question\Question;
 use Doctrine\DBAL\Types\Type;
+use Sensio\Bundle\GeneratorBundle\Command\Helper\QuestionHelper;
+use Sensio\Bundle\GeneratorBundle\Generator\DoctrineEntityGenerator;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Initializes a Doctrine entity inside a bundle.

@@ -20,8 +20,6 @@
 
 namespace Doctrine\Bundle\DoctrineCacheBundle\Tests\Functional;
 
-use Doctrine\Bundle\DoctrineCacheBundle\Tests\FunctionalTestCase;
-
 /**
  * @group Functional
  * @group Void

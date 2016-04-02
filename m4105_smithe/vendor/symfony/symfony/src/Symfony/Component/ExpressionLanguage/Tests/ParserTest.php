@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\ExpressionLanguage\Tests;
 
-use Symfony\Component\ExpressionLanguage\Parser;
 use Symfony\Component\ExpressionLanguage\Lexer;
 use Symfony\Component\ExpressionLanguage\Node;
+use Symfony\Component\ExpressionLanguage\Parser;
 
 class ParserTest extends \PHPUnit_Framework_TestCase
 {

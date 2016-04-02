@@ -11,8 +11,8 @@
 
 namespace Sensio\Bundle\FrameworkExtraBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>

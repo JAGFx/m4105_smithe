@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Routing\Loader;
 
-use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Config\Resource\DirectoryResource;
+use Symfony\Component\Routing\RouteCollection;
 
 /**
  * AnnotationDirectoryLoader loads routing information from annotations set
@@ -66,12 +66,16 @@ class AnnotationDirectoryLoader extends AnnotationFileLoader
      */
     public function supports($resource, $type = null)
     {
+        if ( !is_string( $resource ) ) {
+            return false;
+        }
+        
         try {
             $path = $this->locator->locate($resource);
         } catch (\Exception $e) {
             return false;
         }
 
-        return is_string($resource) && is_dir($path) && (!$type || 'annotation' === $type);
+        return is_dir( $path ) && ( !$type || 'annotation' === $type );
     }
 }

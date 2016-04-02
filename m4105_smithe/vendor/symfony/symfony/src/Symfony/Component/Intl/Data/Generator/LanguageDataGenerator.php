@@ -11,11 +11,11 @@
 
 namespace Symfony\Component\Intl\Data\Generator;
 
+use Symfony\Component\Intl\Data\Bundle\Compiler\GenrbCompiler;
 use Symfony\Component\Intl\Data\Bundle\Reader\BundleReaderInterface;
 use Symfony\Component\Intl\Data\Util\ArrayAccessibleResourceBundle;
 use Symfony\Component\Intl\Data\Util\LocaleScanner;
 use Symfony\Component\Intl\Exception\RuntimeException;
-use Symfony\Component\Intl\Data\Bundle\Compiler\GenrbCompiler;
 
 /**
  * The rule for compiling the language bundle.
@@ -32,55 +32,57 @@ class LanguageDataGenerator extends AbstractDataGenerator
      * @var array
      */
     private static $preferredAlpha2ToAlpha3Mapping = array(
-        'ak' => 'aka',
-        'ar' => 'ara',
-        'ay' => 'aym',
-        'az' => 'aze',
-        'bo' => 'bod',
-        'cr' => 'cre',
-        'cs' => 'ces',
-        'cy' => 'cym',
-        'de' => 'deu',
-        'el' => 'ell',
-        'et' => 'est',
-        'eu' => 'eus',
-        'fa' => 'fas',
-        'ff' => 'ful',
-        'fr' => 'fra',
-        'gn' => 'grn',
-        'hy' => 'hye',
-        'ik' => 'ipk',
-        'is' => 'isl',
-        'iu' => 'iku',
-        'ka' => 'kat',
-        'kr' => 'kau',
-        'kg' => 'kon',
-        'kv' => 'kom',
-        'ku' => 'kur',
-        'lv' => 'lav',
-        'mg' => 'mlg',
-        'mi' => 'mri',
-        'mk' => 'mkd',
-        'mn' => 'mon',
-        'ms' => 'msa',
-        'my' => 'mya',
-        'nb' => 'nob',
-        'ne' => 'nep',
-        'nl' => 'nld',
-        'oj' => 'oji',
-        'om' => 'orm',
-        'or' => 'ori',
-        'ps' => 'pus',
-        'qu' => 'que',
-        'ro' => 'ron',
-        'sc' => 'srd',
-        'sk' => 'slk',
-        'sq' => 'sqi',
-        'sw' => 'swa',
-        'uz' => 'uzb',
-        'yi' => 'yid',
-        'za' => 'zha',
-        'zh' => 'zho',
+            'ak' => 'aka',
+            'ar' => 'ara',
+            'ay' => 'aym',
+            'az' => 'aze',
+            'bo' => 'bod',
+            'cr' => 'cre',
+            'cs' => 'ces',
+            'cy' => 'cym',
+            'de' => 'deu',
+            'el' => 'ell',
+            'et' => 'est',
+            'eu' => 'eus',
+            'fa' => 'fas',
+            'ff' => 'ful',
+            'fr' => 'fra',
+            'gn' => 'grn',
+            'hy' => 'hye',
+            'hr' => 'hrv',
+            'ik' => 'ipk',
+            'is' => 'isl',
+            'iu' => 'iku',
+            'ka' => 'kat',
+            'kr' => 'kau',
+            'kg' => 'kon',
+            'kv' => 'kom',
+            'ku' => 'kur',
+            'lv' => 'lav',
+            'mg' => 'mlg',
+            'mi' => 'mri',
+            'mk' => 'mkd',
+            'mn' => 'mon',
+            'ms' => 'msa',
+            'my' => 'mya',
+            'nb' => 'nob',
+            'ne' => 'nep',
+            'nl' => 'nld',
+            'oj' => 'oji',
+            'om' => 'orm',
+            'or' => 'ori',
+            'ps' => 'pus',
+            'qu' => 'que',
+            'ro' => 'ron',
+            'sc' => 'srd',
+            'sk' => 'slk',
+            'sq' => 'sqi',
+            'sr' => 'srp',
+            'sw' => 'swa',
+            'uz' => 'uzb',
+            'yi' => 'yid',
+            'za' => 'zha',
+            'zh' => 'zho',
     );
 
     /**
@@ -133,8 +135,6 @@ class LanguageDataGenerator extends AbstractDataGenerator
 
             return $data;
         }
-
-        return;
     }
 
     /**
@@ -142,7 +142,6 @@ class LanguageDataGenerator extends AbstractDataGenerator
      */
     protected function generateDataForRoot(BundleReaderInterface $reader, $tempDir)
     {
-        return;
     }
 
     /**
@@ -167,10 +166,13 @@ class LanguageDataGenerator extends AbstractDataGenerator
 
     private function generateAlpha2ToAlpha3Mapping(ArrayAccessibleResourceBundle $metadataBundle)
     {
-        $aliases = $metadataBundle['languageAlias'];
+        // Data structure has changed in ICU 5.5 from "languageAlias" to "alias->language"
+        $aliases = $metadataBundle[ 'languageAlias' ] ?: $metadataBundle[ 'alias' ][ 'language' ];
         $alpha2ToAlpha3 = array();
 
         foreach ($aliases as $alias => $language) {
+            // $language is a string before ICU 5.5
+            $language = is_string( $language ) ? $language : $language[ 'replacement' ];
             if (2 === strlen($language) && 3 === strlen($alias)) {
                 if (isset(self::$preferredAlpha2ToAlpha3Mapping[$language])) {
                     // Validate to prevent typos
@@ -184,12 +186,15 @@ class LanguageDataGenerator extends AbstractDataGenerator
                     }
 
                     $alpha3 = self::$preferredAlpha2ToAlpha3Mapping[$language];
+                    $alpha2 = is_string(
+                            $aliases[ $alpha3 ]
+                    ) ? $aliases[ $alpha3 ] : $aliases[ $alpha3 ][ 'replacement' ];
 
-                    if ($language !== $aliases[$alpha3]) {
+                    if ( $language !== $alpha2 ) {
                         throw new RuntimeException(
                             'The statically set three-letter mapping '.$alpha3.' '.
                             'for the language code '.$language.' seems to be '.
-                            'an alias for '.$aliases[$alpha3].'. Wrong mapping?'
+                            'an alias for ' . $alpha2 . '. Wrong mapping?'
                         );
                     }
 

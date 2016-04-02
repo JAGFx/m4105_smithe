@@ -11,11 +11,11 @@
 
 namespace Symfony\Component\DependencyInjection\Tests\Compiler;
 
-use Symfony\Component\DependencyInjection\Scope;
 use Symfony\Component\DependencyInjection\Compiler\CheckReferenceValidityPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Scope;
 
 class CheckReferenceValidityPassTest extends \PHPUnit_Framework_TestCase
 {

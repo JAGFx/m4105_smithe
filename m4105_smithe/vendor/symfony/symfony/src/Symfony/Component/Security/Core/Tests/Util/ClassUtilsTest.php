@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\Security\Core\Tests\Util
 {
+
     use Symfony\Component\Security\Core\Util\ClassUtils;
 
     /**

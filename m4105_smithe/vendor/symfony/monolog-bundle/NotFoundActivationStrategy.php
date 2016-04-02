@@ -12,8 +12,8 @@
 namespace Symfony\Bundle\MonologBundle;
 
 use Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Activation strategy that ignores 404s for certain URLs

@@ -12,9 +12,9 @@
 namespace Symfony\Component\Console\Tests\Helper;
 
 use Symfony\Component\Console\Formatter\OutputFormatter;
-use Symfony\Component\Console\Helper\QuestionHelper;
-use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\FormatterHelper;
+use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
@@ -133,6 +133,33 @@ class QuestionHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('AcmeDemoBundle', $dialog->ask($this->createInputInterfaceMock(), $this->createOutputInterface(), $question));
         $this->assertEquals('AsseticBundle', $dialog->ask($this->createInputInterfaceMock(), $this->createOutputInterface(), $question));
         $this->assertEquals('FooBundle', $dialog->ask($this->createInputInterfaceMock(), $this->createOutputInterface(), $question));
+    }
+
+    public function testAskWithAutocompleteWithNonSequentialKeys() {
+        if ( !$this->hasSttyAvailable() ) {
+            $this->markTestSkipped( '`stty` is required to test autocomplete functionality' );
+        }
+
+        // <UP ARROW><UP ARROW><NEWLINE><DOWN ARROW><DOWN ARROW><NEWLINE>
+        $inputStream = $this->getInputStream( "\033[A\033[A\n\033[B\033[B\n" );
+
+        $dialog = new QuestionHelper();
+        $dialog->setInputStream( $inputStream );
+        $dialog->setHelperSet( new HelperSet( array( new FormatterHelper() ) ) );
+
+        $question = new ChoiceQuestion(
+                'Please select a bundle', array( 1 => 'AcmeDemoBundle', 4 => 'AsseticBundle' )
+        );
+        $question->setMaxAttempts( 1 );
+
+        $this->assertEquals(
+                'AcmeDemoBundle',
+                $dialog->ask( $this->createInputInterfaceMock(), $this->createOutputInterface(), $question )
+        );
+        $this->assertEquals(
+                'AsseticBundle',
+                $dialog->ask( $this->createInputInterfaceMock(), $this->createOutputInterface(), $question )
+        );
     }
 
     public function testAskHiddenResponse()
@@ -351,6 +378,9 @@ class QuestionHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('not yet', $dialog->ask($this->createInputInterfaceMock(false), $this->createOutputInterface(), $question));
     }
 
+    /**
+     * @requires function mb_strwidth
+     */
     public function testChoiceOutputFormattingQuestionForUtf8Keys()
     {
         $question = 'Lorem ipsum?';

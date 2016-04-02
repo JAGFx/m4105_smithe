@@ -12,9 +12,9 @@
 namespace Symfony\Component\Asset;
 
 use Symfony\Component\Asset\Context\ContextInterface;
-use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 use Symfony\Component\Asset\Exception\InvalidArgumentException;
 use Symfony\Component\Asset\Exception\LogicException;
+use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
  * Package that adds a base URL to asset URLs in addition to a version.
@@ -108,15 +108,15 @@ class UrlPackage extends Package
      * Determines which base URL to use for the given path.
      *
      * Override this method to change the default distribution strategy.
-     * This method should always return the same base URL for a given path.
+     * This method should always return the same base URL index for a given path.
      *
      * @param string $path
      *
-     * @return string The base URL for the given path
+     * @return int The base URL index for the given path
      */
     protected function chooseBaseUrl($path)
     {
-        return fmod(hexdec(substr(hash('sha256', $path), 0, 10)), count($this->baseUrls));
+        return (int) fmod( hexdec( substr( hash( 'sha256', $path ), 0, 10 ) ), count( $this->baseUrls ) );
     }
 
     private function getSslUrls($urls)

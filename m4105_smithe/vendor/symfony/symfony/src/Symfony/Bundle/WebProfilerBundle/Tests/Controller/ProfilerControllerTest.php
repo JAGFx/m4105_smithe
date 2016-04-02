@@ -12,8 +12,8 @@
 namespace Symfony\Bundle\WebProfilerBundle\Tests\Controller;
 
 use Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class ProfilerControllerTest extends \PHPUnit_Framework_TestCase
 {
@@ -62,8 +62,6 @@ class ProfilerControllerTest extends \PHPUnit_Framework_TestCase
                 if ('found' == $token) {
                     return new Profile($token);
                 }
-
-                return;
             }))
         ;
 

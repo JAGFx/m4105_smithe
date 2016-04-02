@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Form\Tests;
 
+use Symfony\Component\Form\Extension\Csrf\CsrfExtension;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\Extension\Csrf\CsrfExtension;
 
 abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormIntegrationTestCase
 {
@@ -547,6 +547,28 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
         );
     }
 
+    public function testSelectWithSizeBiggerThanOneCanBeRequired() {
+        $form = $this->factory->createNamed(
+                'name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', null, array(
+                        'choices'           => array( 'a', 'b' ),
+                        'choices_as_values' => true,
+                        'multiple'          => false,
+                        'expanded'          => false,
+                        'attr'              => array( 'size' => 2 ),
+                )
+        );
+
+        $this->assertWidgetMatchesXpath(
+                $form->createView(), array(),
+                '/select
+    [@name="name"]
+    [@required="required"]
+    [@size="2"]
+    [count(./option)=2]
+'
+        );
+    }
+
     public function testSingleChoiceWithoutTranslation()
     {
         $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', '&a', array(
@@ -991,11 +1013,12 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
     public function testSingleChoiceExpandedWithoutTranslation()
     {
         $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', '&a', array(
-            'choices' => array('Choice&A' => '&a', 'Choice&B' => '&b'),
-            'choices_as_values' => true,
-            'multiple' => false,
-            'expanded' => true,
-            'choice_translation_domain' => false,
+                'choices'                   => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
+                'choices_as_values'         => true,
+                'multiple'                  => false,
+                'expanded'                  => true,
+                'choice_translation_domain' => false,
+                'placeholder'               => 'Placeholder&Not&Translated',
         ));
 
         $this->assertWidgetMatchesXpath($form->createView(), array(),
@@ -1041,11 +1064,12 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
     public function testSingleChoiceExpandedWithPlaceholder()
     {
         $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', '&a', array(
-            'choices' => array('Choice&A' => '&a', 'Choice&B' => '&b'),
-            'choices_as_values' => true,
-            'multiple' => false,
-            'expanded' => true,
-            'placeholder' => 'Test&Me',
+                'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
+                'choices_as_values' => true,
+                'multiple'          => false,
+                'expanded'          => true,
+                'placeholder'       => 'Test&Me',
+                'required'          => false,
         ));
 
         $this->assertWidgetMatchesXpath($form->createView(), array(),
@@ -1067,12 +1091,13 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
     public function testSingleChoiceExpandedWithPlaceholderWithoutTranslation()
     {
         $form = $this->factory->createNamed('name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', '&a', array(
-            'choices' => array('Choice&A' => '&a', 'Choice&B' => '&b'),
-            'choices_as_values' => true,
-            'multiple' => false,
-            'expanded' => true,
-            'translation_domain' => false,
-            'placeholder' => 'Placeholder&Not&Translated',
+                'choices'                   => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
+                'choices_as_values'         => true,
+                'multiple'                  => false,
+                'expanded'                  => true,
+                'required'                  => false,
+                'choice_translation_domain' => false,
+                'placeholder'               => 'Placeholder&Not&Translated',
         ));
 
         $this->assertWidgetMatchesXpath($form->createView(), array(),
@@ -2350,7 +2375,10 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
         $html = $this->renderWidget($form->createView());
 
         // compare plain HTML to check the whitespace
-        $this->assertSame('<input type="text" id="text" name="text" disabled="disabled" required="required" readonly="readonly" maxlength="10" pattern="\d+" class="foobar" data-foo="bar" value="value" />', $html);
+        $this->assertSame(
+                '<input type="text" id="text" name="text" readonly="readonly" disabled="disabled" required="required" maxlength="10" pattern="\d+" class="foobar" data-foo="bar" value="value" />',
+                $html
+        );
     }
 
     public function testWidgetAttributeNameRepeatedIfTrue()

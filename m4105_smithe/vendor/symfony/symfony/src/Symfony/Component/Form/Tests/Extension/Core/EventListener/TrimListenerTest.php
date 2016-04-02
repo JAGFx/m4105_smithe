@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Form\Tests\Extension\Core\EventListener;
 
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Extension\Core\EventListener\TrimListener;
+use Symfony\Component\Form\FormEvent;
 
 class TrimListenerTest extends \PHPUnit_Framework_TestCase
 {

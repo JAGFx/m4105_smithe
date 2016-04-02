@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Config\Tests;
 
-use Symfony\Component\Config\Tests\Resource\ResourceStub;
 use Symfony\Component\Config\ResourceCheckerConfigCache;
+use Symfony\Component\Config\Tests\Resource\ResourceStub;
 
 class ResourceCheckerConfigCacheTest extends \PHPUnit_Framework_TestCase
 {

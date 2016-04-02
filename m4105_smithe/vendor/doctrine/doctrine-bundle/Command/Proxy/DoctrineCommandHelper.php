@@ -13,9 +13,9 @@
  */
 namespace Doctrine\Bundle\DoctrineBundle\Command\Proxy;
 
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 /**
  * Provides some helper and convenience methods to configure doctrine commands in the context of bundles

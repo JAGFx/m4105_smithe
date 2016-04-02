@@ -19,13 +19,13 @@
 
 namespace Doctrine\ORM\Mapping\Driver;
 
-use Doctrine\Common\Persistence\Mapping\Driver\MappingDriver;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\Mapping\Driver\MappingDriver;
 use Doctrine\Common\Util\Inflector;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\SchemaException;
 use Doctrine\DBAL\Schema\Table;
-use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Mapping\MappingException;
@@ -390,10 +390,10 @@ class DatabaseDriver implements MappingDriver
     private function buildFieldMapping($tableName, Column $column)
     {
         $fieldMapping = array(
-            'fieldName'  => $this->getFieldNameForColumn($tableName, $column->getName(), false),
-            'columnName' => $column->getName(),
-            'type'       => strtolower((string) $column->getType()),
-            'nullable'   => ( ! $column->getNotNull()),
+                'fieldName'  => $this->getFieldNameForColumn( $tableName, $column->getName(), false ),
+                'columnName' => $column->getName(),
+                'type'       => $column->getType()->getName(),
+                'nullable'   => ( !$column->getNotNull() ),
         );
 
         // Type specific elements
@@ -407,7 +407,7 @@ class DatabaseDriver implements MappingDriver
             case Type::STRING:
             case Type::TEXT:
                 $fieldMapping['length'] = $column->getLength();
-                $fieldMapping['fixed']  = $column->getFixed();
+                $fieldMapping[ 'options' ][ 'fixed' ] = $column->getFixed();
                 break;
 
             case Type::DECIMAL:
@@ -419,18 +419,18 @@ class DatabaseDriver implements MappingDriver
             case Type::INTEGER:
             case Type::BIGINT:
             case Type::SMALLINT:
-                $fieldMapping['unsigned'] = $column->getUnsigned();
+                $fieldMapping[ 'options' ][ 'unsigned' ] = $column->getUnsigned();
                 break;
         }
 
         // Comment
         if (($comment = $column->getComment()) !== null) {
-            $fieldMapping['comment'] = $comment;
+            $fieldMapping[ 'options' ][ 'comment' ] = $comment;
         }
 
         // Default
         if (($default = $column->getDefault()) !== null) {
-            $fieldMapping['default'] = $default;
+            $fieldMapping[ 'options' ][ 'default' ] = $default;
         }
 
         return $fieldMapping;

@@ -11,9 +11,10 @@
 
 namespace Symfony\Component\Console\Helper;
 
+use Symfony\Component\Console\Exception\LogicException;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Exception\LogicException;
 
 /**
  * The Progress class provides helpers to display progress output.
@@ -194,6 +195,10 @@ class ProgressHelper extends Helper
      */
     public function start(OutputInterface $output, $max = null)
     {
+        if ( $output instanceof ConsoleOutputInterface ) {
+            $output = $output->getErrorOutput();
+        }
+
         $this->startTime = time();
         $this->current = 0;
         $this->max = (int) $max;

@@ -11,15 +11,15 @@
 
 namespace Sensio\Bundle\GeneratorBundle\Generator;
 
-use Sensio\Bundle\GeneratorBundle\Model\EntityGeneratorResult;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Util\Inflector;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Tools\EntityGenerator;
 use Doctrine\ORM\Tools\EntityRepositoryGenerator;
 use Doctrine\ORM\Tools\Export\ClassMetadataExporter;
-use Doctrine\Common\Util\Inflector;
+use Sensio\Bundle\GeneratorBundle\Model\EntityGeneratorResult;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
  * Generates a Doctrine entity class based on its name, fields and format.
@@ -63,7 +63,7 @@ class DoctrineEntityGenerator extends Generator
             throw new \RuntimeException(sprintf('Entity "%s" already exists.', $entityClass));
         }
 
-        $class = new ClassMetadataInfo($entityClass);
+        $class = new ClassMetadataInfo( $entityClass, $config->getNamingStrategy() );
         $class->customRepositoryClassName = str_replace('\\Entity\\', '\\Repository\\', $entityClass).'Repository';
         $class->mapField(array('fieldName' => 'id', 'type' => 'integer', 'id' => true));
         $class->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_AUTO);

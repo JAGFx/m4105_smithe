@@ -1,10 +1,10 @@
 <?php
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Tests\Style\SymfonyStyleWithForcedLineLength;
+    use Symfony\Component\Console\Input\InputInterface;
+    use Symfony\Component\Console\Output\OutputInterface;
+    use Symfony\Component\Console\Tests\Style\SymfonyStyleWithForcedLineLength;
 
-//Ensure questions do not output anything when input is non-interactive
+    //Ensure questions do not output anything when input is non-interactive
 return function (InputInterface $input, OutputInterface $output) {
     $output = new SymfonyStyleWithForcedLineLength($input, $output);
     $output->title('Title');

@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Security\Http\Tests;
 
-use Symfony\Component\Security\Http\FirewallMap;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\FirewallMap;
 
 class FirewallMapTest extends \PHPUnit_Framework_TestCase
 {

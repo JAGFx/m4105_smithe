@@ -9,26 +9,26 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Component\Intl\Data\Bundle\Reader\JsonBundleReader;
-use Symfony\Component\Intl\Data\Bundle\Writer\JsonBundleWriter;
-use Symfony\Component\Intl\Data\Generator\CurrencyDataGenerator;
-use Symfony\Component\Intl\Data\Generator\GeneratorConfig;
-use Symfony\Component\Intl\Data\Generator\LanguageDataGenerator;
-use Symfony\Component\Intl\Data\Generator\LocaleDataGenerator;
-use Symfony\Component\Intl\Data\Generator\RegionDataGenerator;
-use Symfony\Component\Intl\Data\Generator\ScriptDataGenerator;
-use Symfony\Component\Intl\Data\Provider\LanguageDataProvider;
-use Symfony\Component\Intl\Data\Provider\RegionDataProvider;
-use Symfony\Component\Intl\Data\Provider\ScriptDataProvider;
-use Symfony\Component\Intl\Intl;
-use Symfony\Component\Intl\Data\Bundle\Compiler\GenrbCompiler;
-use Symfony\Component\Intl\Data\Bundle\Reader\BundleEntryReader;
-use Symfony\Component\Intl\Locale;
-use Symfony\Component\Intl\Util\IcuVersion;
-use Symfony\Component\Intl\Util\SvnRepository;
-use Symfony\Component\Filesystem\Filesystem;
+    use Symfony\Component\Filesystem\Filesystem;
+    use Symfony\Component\Intl\Data\Bundle\Compiler\GenrbCompiler;
+    use Symfony\Component\Intl\Data\Bundle\Reader\BundleEntryReader;
+    use Symfony\Component\Intl\Data\Bundle\Reader\JsonBundleReader;
+    use Symfony\Component\Intl\Data\Bundle\Writer\JsonBundleWriter;
+    use Symfony\Component\Intl\Data\Generator\CurrencyDataGenerator;
+    use Symfony\Component\Intl\Data\Generator\GeneratorConfig;
+    use Symfony\Component\Intl\Data\Generator\LanguageDataGenerator;
+    use Symfony\Component\Intl\Data\Generator\LocaleDataGenerator;
+    use Symfony\Component\Intl\Data\Generator\RegionDataGenerator;
+    use Symfony\Component\Intl\Data\Generator\ScriptDataGenerator;
+    use Symfony\Component\Intl\Data\Provider\LanguageDataProvider;
+    use Symfony\Component\Intl\Data\Provider\RegionDataProvider;
+    use Symfony\Component\Intl\Data\Provider\ScriptDataProvider;
+    use Symfony\Component\Intl\Intl;
+    use Symfony\Component\Intl\Locale;
+    use Symfony\Component\Intl\Util\IcuVersion;
+    use Symfony\Component\Intl\Util\SvnRepository;
 
-require_once __DIR__.'/common.php';
+    require_once __DIR__ . '/common.php';
 require_once __DIR__.'/autoload.php';
 
 $argc = $_SERVER['argc'];

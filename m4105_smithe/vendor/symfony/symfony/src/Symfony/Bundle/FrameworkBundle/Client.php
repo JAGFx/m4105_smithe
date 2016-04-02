@@ -11,14 +11,14 @@
 
 namespace Symfony\Bundle\FrameworkBundle;
 
+use Symfony\Component\BrowserKit\CookieJar;
+use Symfony\Component\BrowserKit\History;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\HttpKernel\Client as BaseClient;
-use Symfony\Component\HttpKernel\Profiler\Profile as HttpProfile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\BrowserKit\History;
-use Symfony\Component\BrowserKit\CookieJar;
+use Symfony\Component\HttpKernel\Client as BaseClient;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\HttpKernel\Profiler\Profile as HttpProfile;
 
 /**
  * Client simulates a browser and makes requests to a Kernel object.
@@ -42,7 +42,7 @@ class Client extends BaseClient
     /**
      * Returns the container.
      *
-     * @return ContainerInterface
+     * @return ContainerInterface|null Returns null when the Kernel has been shutdown or not started yet
      */
     public function getContainer()
     {

@@ -2,10 +2,10 @@
 
 namespace Sensio\Bundle\FrameworkExtraBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\DependencyInjection\Compiler\AddParamConverterPass;
 use Sensio\Bundle\FrameworkExtraBundle\DependencyInjection\Compiler\LegacyPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /*
  * This file is part of the Symfony framework.

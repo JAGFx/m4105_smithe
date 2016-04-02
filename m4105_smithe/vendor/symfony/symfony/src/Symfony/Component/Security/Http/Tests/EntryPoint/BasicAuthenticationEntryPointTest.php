@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Security\Http\Tests\EntryPoint;
 
-use Symfony\Component\Security\Http\EntryPoint\BasicAuthenticationEntryPoint;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Http\EntryPoint\BasicAuthenticationEntryPoint;
 
 class BasicAuthenticationEntryPointTest extends \PHPUnit_Framework_TestCase
 {

@@ -11,10 +11,10 @@
 
 namespace Symfony\Bridge\Doctrine\Form\ChoiceList;
 
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\DBAL\Connection;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\DBAL\Connection;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
  * Loads entities using a {@link QueryBuilder} instance.
@@ -105,6 +105,17 @@ class ORMQueryBuilderLoader implements EntityLoaderInterface
             // databases such as PostgreSQL fail.
             $values = array_values(array_filter($values, function ($v) {
                 return (string) $v === (string) (int) $v;
+                    }
+                    )
+            );
+        } elseif ( 'guid' === $metadata->getTypeOfField( $identifier ) ) {
+            $parameterType = Connection::PARAM_STR_ARRAY;
+
+            // Like above, but we just filter out empty strings.
+            $values = array_values(
+                    array_filter(
+                            $values, function ( $v ) {
+                        return (string) $v !== '';
             }));
         } else {
             $parameterType = Connection::PARAM_STR_ARRAY;

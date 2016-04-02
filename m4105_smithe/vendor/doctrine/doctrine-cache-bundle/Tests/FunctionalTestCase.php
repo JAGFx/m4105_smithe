@@ -19,10 +19,10 @@
 
 namespace Doctrine\Bundle\DoctrineCacheBundle\Tests;
 
+use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\DoctrineCacheExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Doctrine\Bundle\DoctrineCacheBundle\DependencyInjection\DoctrineCacheExtension;
 
 class FunctionalTestCase extends TestCase
 {
@@ -51,8 +51,18 @@ class FunctionalTestCase extends TestCase
 
         $container->registerExtension($loader);
         $this->loadFromFile($container, $file);
+        $this->overrideContainer( $container );
         $container->compile();
 
         return $container;
+    }
+
+    /**
+     * Override this hook in your functional TestCase to customize the container
+     *
+     * @param ContainerBuilder $container
+     */
+    protected function overrideContainer( ContainerBuilder $container ) {
+
     }
 }

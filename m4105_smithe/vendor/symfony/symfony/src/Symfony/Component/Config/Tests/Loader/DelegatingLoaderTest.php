@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Config\Tests\Loader;
 
-use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderResolver;
 
 class DelegatingLoaderTest extends \PHPUnit_Framework_TestCase
 {

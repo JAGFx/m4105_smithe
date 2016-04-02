@@ -17,10 +17,19 @@
  * <http://www.doctrine-project.org>.
  */
 
-use Symfony\Component\Console\Helper\HelperSet;
-use Doctrine\ORM\Tools\Console\ConsoleRunner;
+    use Doctrine\ORM\Tools\Console\ConsoleRunner;
+    use Symfony\Component\Console\Helper\HelperSet;
 
-(@include_once __DIR__ . '/../vendor/autoload.php') || @include_once __DIR__ . '/../../../autoload.php';
+    $autoloadFiles = array(
+            __DIR__ . '/../vendor/autoload.php',
+            __DIR__ . '/../../../autoload.php'
+    );
+
+    foreach ( $autoloadFiles as $autoloadFile ) {
+        if ( file_exists( $autoloadFile ) ) {
+            require_once $autoloadFile;
+        }
+    }
 
 $directories = array(getcwd(), getcwd() . DIRECTORY_SEPARATOR . 'config');
 

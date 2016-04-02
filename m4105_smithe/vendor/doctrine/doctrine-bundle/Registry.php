@@ -14,11 +14,11 @@
 
 namespace Doctrine\Bundle\DoctrineBundle;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
-use Doctrine\ORM\ORMException;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMException;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * References all Doctrine connections and entity managers in a given Container.

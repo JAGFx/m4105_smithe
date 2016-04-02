@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Component\Intl\DateFormatter\IntlDateFormatter as BaseIntlDateFormatter;
+	use Symfony\Component\Intl\DateFormatter\IntlDateFormatter as BaseIntlDateFormatter;
 
-/**
+	/**
  * Stub implementation for the IntlDateFormatter class of the intl extension.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>

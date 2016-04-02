@@ -11,17 +11,17 @@
 
 namespace Symfony\Component\DependencyInjection\Loader;
 
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use Symfony\Component\Config\Resource\FileResource;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Parser as YamlParser;
-use Symfony\Component\ExpressionLanguage\Expression;
 
 /**
  * YamlFileLoader loads YAML files service definitions.
@@ -281,6 +281,12 @@ class YamlFileLoader extends FileLoader
                     throw new InvalidArgumentException(sprintf('A "tags" entry is missing a "name" key for service "%s" in %s.', $id, $file));
                 }
 
+                if ( !is_string( $tag[ 'name' ] ) || '' === $tag[ 'name' ] ) {
+                    throw new InvalidArgumentException(
+                            sprintf( 'The tag name for service "%s" in %s must be a non-empty string.', $id, $file )
+                    );
+                }
+
                 $name = $tag['name'];
                 unset($tag['name']);
 
@@ -295,6 +301,15 @@ class YamlFileLoader extends FileLoader
         }
 
         if (isset($service['decorates'])) {
+            if ( '' !== $service[ 'decorates' ] && '@' === $service[ 'decorates' ][ 0 ] ) {
+                throw new InvalidArgumentException(
+                        sprintf(
+                                'The value of the "decorates" option for the "%s" service must be the id of the service without the "@" prefix (replace "%s" with "%s").',
+                                $id, $service[ 'decorates' ], substr( $service[ 'decorates' ], 1 )
+                        )
+                );
+            }
+
             $renameId = isset($service['decoration_inner_name']) ? $service['decoration_inner_name'] : null;
             $priority = isset($service['decoration_priority']) ? $service['decoration_priority'] : 0;
             $definition->setDecoratedService($service['decorates'], $renameId, $priority);

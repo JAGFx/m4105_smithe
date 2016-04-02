@@ -2,8 +2,8 @@
 
 namespace Doctrine\Bundle\DoctrineCacheBundle\Tests\Functional\Command;
 
-use Symfony\Component\Console\Tester\CommandTester;
 use Doctrine\Bundle\DoctrineCacheBundle\Command\ContainsCommand;
+use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * Functional test for delete command.

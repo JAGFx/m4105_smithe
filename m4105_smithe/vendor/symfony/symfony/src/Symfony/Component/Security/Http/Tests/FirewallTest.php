@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Security\Http\Tests;
 
-use Symfony\Component\Security\Http\Firewall;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Security\Http\Firewall;
 
 class FirewallTest extends \PHPUnit_Framework_TestCase
 {

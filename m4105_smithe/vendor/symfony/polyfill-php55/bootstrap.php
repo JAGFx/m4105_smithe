@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Polyfill\Php55 as p;
+    use Symfony\Polyfill\Php55 as p;
 
-if (PHP_VERSION_ID < 50500) {
+    if ( PHP_VERSION_ID < 50500 ) {
     if (!function_exists('boolval')) {
         function boolval($val) { return p\Php55::boolval($val); }
     }

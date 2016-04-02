@@ -2,11 +2,10 @@
 
 namespace Doctrine\Bundle\DoctrineCacheBundle\Tests\Functional\Command;
 
-use Doctrine\Bundle\DoctrineCacheBundle\Tests\FunctionalTestCase;
-use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Doctrine\Common\Cache\Cache;
 use Doctrine\Bundle\DoctrineCacheBundle\Command\CacheCommand;
+use Doctrine\Bundle\DoctrineCacheBundle\Tests\FunctionalTestCase;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Tester\CommandTester;
 
 class CommandTestCase extends FunctionalTestCase
 {

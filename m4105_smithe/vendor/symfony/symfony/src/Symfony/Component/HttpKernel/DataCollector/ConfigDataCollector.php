@@ -11,10 +11,10 @@
 
 namespace Symfony\Component\HttpKernel\DataCollector;
 
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * ConfigDataCollector.
@@ -59,23 +59,23 @@ class ConfigDataCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->data = array(
-            'app_name' => $this->name,
-            'app_version' => $this->version,
-            'token' => $response->headers->get('X-Debug-Token'),
-            'symfony_version' => Kernel::VERSION,
-            'symfony_state' => 'unknown',
-            'name' => isset($this->kernel) ? $this->kernel->getName() : 'n/a',
-            'env' => isset($this->kernel) ? $this->kernel->getEnvironment() : 'n/a',
-            'debug' => isset($this->kernel) ? $this->kernel->isDebug() : 'n/a',
-            'php_version' => PHP_VERSION,
-            'xdebug_enabled' => extension_loaded('xdebug'),
-            'eaccel_enabled' => extension_loaded('eaccelerator') && ini_get('eaccelerator.enable'),
-            'apc_enabled' => extension_loaded('apc') && ini_get('apc.enabled'),
-            'xcache_enabled' => extension_loaded('xcache') && ini_get('xcache.cacher'),
-            'wincache_enabled' => extension_loaded('wincache') && ini_get('wincache.ocenabled'),
-            'zend_opcache_enabled' => extension_loaded('Zend OPcache') && ini_get('opcache.enable'),
-            'bundles' => array(),
-            'sapi_name' => php_sapi_name(),
+                'app_name'             => $this->name,
+                'app_version'          => $this->version,
+                'token'                => $response->headers->get( 'X-Debug-Token' ),
+                'symfony_version'      => Kernel::VERSION,
+                'symfony_state'        => 'unknown',
+                'name'                 => isset( $this->kernel ) ? $this->kernel->getName() : 'n/a',
+                'env'                  => isset( $this->kernel ) ? $this->kernel->getEnvironment() : 'n/a',
+                'debug'                => isset( $this->kernel ) ? $this->kernel->isDebug() : 'n/a',
+                'php_version'          => PHP_VERSION,
+                'xdebug_enabled'       => extension_loaded( 'xdebug' ),
+                'eaccel_enabled'       => extension_loaded( 'eaccelerator' ) && ini_get( 'eaccelerator.enable' ),
+                'apc_enabled'          => extension_loaded( 'apc' ) && ini_get( 'apc.enabled' ),
+                'xcache_enabled'       => extension_loaded( 'xcache' ) && ini_get( 'xcache.cacher' ),
+                'wincache_enabled'     => extension_loaded( 'wincache' ) && ini_get( 'wincache.ocenabled' ),
+                'zend_opcache_enabled' => extension_loaded( 'Zend OPcache' ) && ini_get( 'opcache.enable' ),
+                'bundles'              => array(),
+                'sapi_name'            => PHP_SAPI,
         );
 
         if (isset($this->kernel)) {

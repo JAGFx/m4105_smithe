@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\Form\Tests;
 
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormBuilder;
 
 abstract class AbstractFormTest extends \PHPUnit_Framework_TestCase
 {
