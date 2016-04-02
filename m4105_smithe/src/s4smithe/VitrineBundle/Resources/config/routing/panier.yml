@@ -40,7 +40,6 @@ s4smithe_vitrine_emptyPanier:
      defaults: { _controller: s4smitheVitrineBundle:Panier:emptyPanier}
 
 # -- Validation du Panier => Commande
-# TODO Forward action to CommandeController
 s4smithe_vitrine_validationPanier:
      path:     /validation
      defaults: { _controller: s4smitheVitrineBundle:Panier:validation}

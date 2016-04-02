@@ -1,42 +1,21 @@
-##############################################
-#### Configuration relatif à l'URL
+SetEnv PHP_VER 5_6
+SetEnv REGISTER_GLOBALS 0
+SetEnv SESSION_USE_TRANS_SID 0
+SetEnv SHORT_OPEN_TAGS 0
+SetEnv MAGIC_QUOTES 0
+SetEnv SESSION_AUTOSTART 0
+SetEnv ZEND_OPTIMIZER 1
 
-		Options -Indexes
-
-        # Neutralisation des fausses URL
-        RedirectMatch gone ^/_vti.*
-        RedirectMatch gone ^/MSOffice.*
-        RedirectMatch gone ^[-_a-z0-9/\.]*//.*
-        RedirectMatch gone ^.*/etc/passwd.*
-
-        # FILTRE CONTRE XSS, REDIRECTIONS HTTP, base64_encode, VARIABLE PHP GLOBALS VIA URL, MODIFIER VARIABLE _REQUEST VIA URL, TEST DE FAILLE PHP, INJECTION SQL SIMPLEs
-        RewriteEngine On
-        RewriteCond %{REQUEST_METHOD} (GET|POST) [NC]
-        RewriteCond %{QUERY_STRING} ^(.*)(%3C|<)/?script(.*)$ [NC,OR]
-        RewriteCond %{QUERY_STRING} ^(.*)(%3D|=)?javascript(%3A|:)(.*)$ [NC,OR]
-        RewriteCond %{QUERY_STRING} ^(.*)document\.location\.href(.*)$ [OR]
-        RewriteCond %{QUERY_STRING} ^(.*)(%3D|=)http(%3A|:)(/|%2F){2}(.*)$ [NC,OR] ## ATTENTION A CETTE REGLE. ELLE PEUT CASSER CERTAINES REDIRECTIONS RESSEMBLANT A: http://www.truc.fr/?r=http://www.google.fr ##
-        RewriteCond %{QUERY_STRING} ^(.*)base64_encode(.*)$ [OR]
-        RewriteCond %{QUERY_STRING} ^(.*)GLOBALS(=|[|%[0-9A-Z]{0,2})(.*)$ [OR]
-        RewriteCond %{QUERY_STRING} ^(.*)_REQUEST(=|[|%[0-9A-Z]{0,2})(.*)$ [OR]
-        RewriteCond %{QUERY_STRING} ^(.*)(SELECT(%20|\+)|UNION(%20|\+)ALL|INSERT(%20|\+)|DELETE(%20|\+)|CHAR\(|UPDATE(%20|\+)|REPLACE(%20|\+)|LIMIT(%20|\+))(.*)$ [NC]
-        RewriteRule (.*) - [F]
+ # --
+	Options +FollowSymlinks
+	Options -Multiviews
+	
+# Impossible de lister les fichier depuis un navigateur
+	Options -Indexes
 		
-		#RewriteCond %{REQUEST_FILENAME} !-f
-		#RewriteRule ^(.*)$ web/$1 [QSA,L]
-		#RewriteRule ^$ web/ [QSA,L]
-
-        # Empêcher l’exécution de tout script PHP, Perl, CGI
-        #OPTIONS -ExecCGI  -Indexes
-
-        # Définie PHP Register_Globals en OFF
-        SetEnv REGISTER_GLOBALS 0
-
-        # --
-        Options +FollowSymlinks
-        Options -Multiviews
-
-#
-#
-        #ErrorDocument 404 common/data/errorsHTTP.php
-        #ErrorDocument 403 common/data/errorsHTTP.php
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /sfshop/web/
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteRule ^(.*)$ web/$1 [QSA,L]
+</IfModule>
