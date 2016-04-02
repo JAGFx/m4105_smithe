@@ -1,11 +1,12 @@
-{# 
-	Fichier : header.html.twing
-	Auteur : Emmanuel SMITH
-	Creation : 12/02/2016
-	Modification :
-		> 12/02/2016		Mise en place du header pour le Template
+{#
 
-	Entête par défaut des toutes les pages
+	  Fichier : /Backoffice/header.html.twig
+	  Auteur: SMITH Emmanuel
+	  Création: 15/03/2016
+	  Modification: 01/04/16
+
+	  Entete des vues pour le backoffice (Tâches CRUD)
+
 #}
 
 {% block header %}
@@ -20,7 +21,7 @@
 						<span class="icon-bar" ></span >
 						<span class="icon-bar" ></span >
 					</button >
-					<a class="navbar-brand" href="{{ path('s4smithe_vitrine_homepage') }}" >
+					<a class="navbar-brand" href="{{ path('s4smithe_vitrine_backoffice') }}" >
 						<img src="{{ asset('bundles/s4smithevitrine/images/sfshop.jpg') }}" width="145" alt="{{ sfNameShop }}" />
 					</a >
 				</div >
