@@ -550,12 +550,12 @@ abstract class AbstractLayoutTest extends \Symfony\Component\Form\Test\FormInteg
     public function testSelectWithSizeBiggerThanOneCanBeRequired() {
         $form = $this->factory->createNamed(
                 'name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', null, array(
-                        'choices'           => array( 'a', 'b' ),
-                        'choices_as_values' => true,
-                        'multiple'          => false,
-                        'expanded'          => false,
-                        'attr'              => array( 'size' => 2 ),
-                )
+                'choices'           => array( 'a', 'b' ),
+                'choices_as_values' => true,
+                'multiple'          => false,
+                'expanded'          => false,
+                'attr'              => array( 'size' => 2 ),
+        )
         );
 
         $this->assertWidgetMatchesXpath(

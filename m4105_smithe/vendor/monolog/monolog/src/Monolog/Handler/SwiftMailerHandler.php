@@ -51,7 +51,7 @@ class SwiftMailerHandler extends MailHandler
      * @param  string $content formatted email body to be sent
      * @param  array  $records Log records that formed the content
      *
-     * @return \Swift_Message
+*@return \Swift_Message
      */
     protected function buildMessage($content, array $records)
     {

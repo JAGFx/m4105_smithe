@@ -534,7 +534,7 @@ bar: 1
 EOF;
 
                 return array(
-                        'yaml-tag'  => array( $yamlTag ),
+                        'yaml-tag' => array( $yamlTag ),
                         'local-tag' => array( $localTag ),
                 );
         }

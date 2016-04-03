@@ -19,7 +19,7 @@
 
 namespace Doctrine\ORM\Event;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class that holds event arguments for a preInsert/preUpdate event.
@@ -39,11 +39,11 @@ class PreUpdateEventArgs extends LifecycleEventArgs
     /**
      * Constructor.
      *
-     * @param object                 $entity
-     * @param EntityManagerInterface $em
-     * @param array                  $changeSet
+     * @param object        $entity
+     * @param EntityManager $em
+     * @param array         $changeSet
      */
-    public function __construct( $entity, EntityManagerInterface $em, array &$changeSet )
+    public function __construct( $entity, EntityManager $em, array &$changeSet )
     {
         parent::__construct($entity, $em);
 

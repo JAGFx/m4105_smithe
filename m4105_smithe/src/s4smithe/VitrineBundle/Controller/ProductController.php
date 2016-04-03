@@ -51,22 +51,11 @@
 			$form->handleRequest( $request );
 
 			if ( $form->isSubmitted() && $form->isValid() ) {
+				// Upload de l'image
+				$this->uploadImage( $product );
+
+				// Insertion DB
 				$em = $this->getDoctrine()->getManager();
-
-				$file = $product->getFile();
-
-				if ( !empty( $file ) ) {
-					$em->persist( $product );
-					$fileName = $product->getId() . '.' . $file->guessExtension();
-
-					$imageDir = $this->container->getParameter(
-							'kernel.root_dir'
-						) . ProductController::PATH_UPLOAD;
-					$file->move( $imageDir, $fileName );
-
-					$product->setImage( $fileName );
-				}
-
 				$em->persist( $product );
 				$em->flush();
 
@@ -99,29 +88,24 @@
 		/**
 		 * Displays a form to edit an existing Product entity.
 		 *
+		 * @param Request $request
+		 * @param Product $product
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
 		 */
 		public function editAction( Request $request, Product $product ) {
 			$deleteForm = $this->createDeleteForm( $product );
 			$deleteImageForm = $this->createDeleteImageForm( $product );
+
 			$editForm = $this->createForm( 's4smithe\VitrineBundle\Form\Type\ProductType', $product );
 			$editForm->handleRequest( $request );
 
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
+				// Upload de l'image
+				$this->uploadImage( $product );
+
+				// Edition DB
 				$em = $this->getDoctrine()->getManager();
-
-				$file = $product->getFile();
-
-				if ( !empty( $file ) ) {
-					$fileName = $product->getId() . '.' . $file->guessExtension();
-
-					$imageDir = $this->container->getParameter(
-							'kernel.root_dir'
-						) . ProductController::PATH_UPLOAD;
-					$file->move( $imageDir, $fileName );
-
-					$product->setImage( $fileName );
-				}
-
 				$em->persist( $product );
 				$em->flush();
 
@@ -149,18 +133,20 @@
 		/**
 		 * Deletes a Product entity.
 		 *
+		 * @param Request $request
+		 * @param Product $product
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function deleteAction( Request $request, Product $product ) {
 			$form = $this->createDeleteForm( $product );
 			$form->handleRequest( $request );
 
 			if ( $form->isSubmitted() && $form->isValid() ) {
-				$fs = new Filesystem();
-				$image = $this->container->getParameter(
-						'kernel.root_dir'
-					) . ProductController::PATH_UPLOAD . '/' . $product->getImage();
-				$fs->remove( array( $image ) );
+				// Suppression image
+				$this->deleteImage( $product );
 
+				// Suppression DB
 				$em = $this->getDoctrine()->getManager();
 				$em->remove( $product );
 				$em->flush();
@@ -182,12 +168,10 @@
 			if ( $form->isSubmitted() && $form->isValid() ) {
 
 				if ( !empty( $product->getImage() ) ) {
-					$fs = new Filesystem();
-					$image = $this->container->getParameter(
-							'kernel.root_dir'
-						) . ProductController::PATH_UPLOAD . '/' . $product->getImage();
-					$fs->remove( array( $image ) );
+					// Suppression image
+					$this->deleteImage( $product );
 
+					// MAJ DB
 					$em = $this->getDoctrine()->getManager();
 					$product->setImage();
 					$em->flush();
@@ -235,4 +219,33 @@
 				->getForm();
 		}
 
+
+		/**
+		 * @param Product $product
+		 */
+		private function uploadImage( Product $product ) {
+			$file = $product->getFile();
+
+			if ( !empty( $file ) ) {
+				$fileName = $product->getId() . '.' . $file->guessExtension();
+
+				$imageDir = $this->container->getParameter(
+						'kernel.root_dir'
+					) . ProductController::PATH_UPLOAD;
+				$file->move( $imageDir, $fileName );
+
+				$product->setImage( $fileName );
+			}
+		}
+
+		/**
+		 * @param Product $product
+		 */
+		private function deleteImage( Product $product ) {
+			$fs = new Filesystem();
+			$image = $this->container->getParameter(
+					'kernel.root_dir'
+				) . ProductController::PATH_UPLOAD . '/' . $product->getImage();
+			$fs->remove( array( $image ) );
+		}
 	}

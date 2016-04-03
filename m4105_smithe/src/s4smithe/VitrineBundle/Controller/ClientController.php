@@ -4,7 +4,7 @@
 	 * Fichier : ClientController.php
 	 * Auteur: SMITH Emmanuel
 	 * Création: 08/03/2016
-	 * Modification: 01/04/2016
+	 * Modification: 03/04/2016
 	 *
 	 * Controôleur pour la gestion des entitiés Clients
 	 */
@@ -124,6 +124,7 @@
 
 				$form->handleRequest( $request );
 
+				// Pas de vérification avec isValid() du aux contraintes de validation pour Client.
 				if ( $form->isSubmitted() ) {
 					$user = $this->getDoctrine()->getManager()
 						->getRepository( 's4smitheVitrineBundle:Client' )
@@ -134,14 +135,19 @@
 							)
 						);
 
-					if ( !$user ) {
-						throw $this->createNotFoundException(
-							'Client non reconnus:  ' . $client->getName()
-						);
+					if ( $user ) {
+						$this->setSessionUser( $user->getId() );
+
+						return $this->redirectToRoute( 'client_listCommande' );
 					}
 
-					$this->setSessionUser( $user->getId() );
-					return $this->redirectToRoute( 'client_listCommande' );
+					$message = array(
+						'type'    => 'warning',
+						'title'   => "Connexion imposssible",
+						'message' => 'Les informations fournis ne permetent pas la connexion'
+					);
+
+					$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
 				}
 
 				return $this->render(
@@ -256,12 +262,12 @@
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
-		public function userInfoHeaderAction() {
+		public function userInfoMenuAction() {
 			$sessionUser = $this->getSessionUser();
 			$user = $this->findUser( $sessionUser );
 
 			return $this->render(
-				's4smitheVitrineBundle:Client:userInfo.html.twig',
+				's4smitheVitrineBundle:Client:userInfoMenu.html.twig',
 				array(
 					'pseudo' => $user->getName()
 				)

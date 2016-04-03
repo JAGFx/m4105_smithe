@@ -105,8 +105,8 @@ class ORMQueryBuilderLoader implements EntityLoaderInterface
             // databases such as PostgreSQL fail.
             $values = array_values(array_filter($values, function ($v) {
                 return (string) $v === (string) (int) $v;
-                    }
-                    )
+            }
+            )
             );
         } elseif ( 'guid' === $metadata->getTypeOfField( $identifier ) ) {
             $parameterType = Connection::PARAM_STR_ARRAY;

@@ -45,16 +45,16 @@ class TemplateNameParserTest extends TestCase
     /**
      * @dataProvider parseProvider
      */
-        public function testParse( $name, $logicalName, $path, $ref )
+    public function testParse( $name, $logicalName, $path, $ref )
     {
         $template = $this->parser->parse($name);
 
-            $this->assertSame( $ref->getLogicalName(), $template->getLogicalName() );
-            $this->assertSame( $logicalName, $template->getLogicalName() );
-            $this->assertSame( $path, $template->getPath() );
+        $this->assertSame( $ref->getLogicalName(), $template->getLogicalName() );
+        $this->assertSame( $logicalName, $template->getLogicalName() );
+        $this->assertSame( $path, $template->getPath() );
     }
 
-        public function parseProvider()
+    public function parseProvider()
     {
         return array(
                 array(

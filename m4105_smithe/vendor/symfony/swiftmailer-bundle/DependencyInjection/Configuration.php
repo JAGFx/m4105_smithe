@@ -93,22 +93,22 @@ class Configuration implements ConfigurationInterface
                 ->beforeNormalization()
                 ->ifTrue(
                         function ( $v ) {
-                                return array_key_exists( 'delivery_address', $v ) && null === $v[ 'delivery_address' ];
+                            return array_key_exists( 'delivery_address', $v ) && null === $v[ 'delivery_address' ];
                         }
                 )
                 ->then(
                         function ( $v ) {
-                                @trigger_error(
-                                        'The swiftmailer.delivery_address configuration key is deprecated since version 2.3.10 and will be removed in 3.0. Use the swiftmailer.delivery_addresses configuration key instead (or remove the empty setting)',
-                                        E_USER_DEPRECATED
-                                );
-                                unset( $v[ 'delivery_address' ] );
+                            @trigger_error(
+                                    'The swiftmailer.delivery_address configuration key is deprecated since version 2.3.10 and will be removed in 3.0. Use the swiftmailer.delivery_addresses configuration key instead (or remove the empty setting)',
+                                    E_USER_DEPRECATED
+                            );
+                            unset( $v[ 'delivery_address' ] );
 
-                                if ( !isset( $v[ 'delivery_addresses' ] ) ) {
-                                        $v[ 'delivery_addresses' ] = array();
-                                }
+                            if ( !isset( $v[ 'delivery_addresses' ] ) ) {
+                                $v[ 'delivery_addresses' ] = array();
+                            }
 
-                                return $v;
+                            return $v;
                         }
                 )
                 ->end()

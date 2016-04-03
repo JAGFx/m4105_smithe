@@ -174,10 +174,10 @@ class JsonFormatter extends NormalizerFormatter
         }
 
         $data = array(
-                'class'   => get_class( $e ),
+                'class' => get_class( $e ),
                 'message' => $e->getMessage(),
-                'code'    => $e->getCode(),
-                'file'    => $e->getFile() . ':' . $e->getLine(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile() . ':' . $e->getLine(),
         );
 
         if ( $this->includeStacktraces ) {

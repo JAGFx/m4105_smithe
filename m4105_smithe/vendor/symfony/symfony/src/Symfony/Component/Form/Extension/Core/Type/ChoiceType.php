@@ -436,13 +436,13 @@ class ChoiceType extends AbstractType
         $resolver->setAllowedTypes('preferred_choices', array('array', '\Traversable', 'callable', 'string', 'Symfony\Component\PropertyAccess\PropertyPath'));
         $resolver->setAllowedTypes(
                 'group_by', array(
-                        'null',
-                        'array',
-                        '\Traversable',
-                        'callable',
-                        'string',
-                        'Symfony\Component\PropertyAccess\PropertyPath'
-                )
+                'null',
+                'array',
+                '\Traversable',
+                'callable',
+                'string',
+                'Symfony\Component\PropertyAccess\PropertyPath'
+        )
         );
     }
 

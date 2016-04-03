@@ -28,7 +28,7 @@ class Util
      *
      * @param  resource $ch curl handler
      *
-     * @throws \RuntimeException
+*@throws \RuntimeException
      */
     public static function execute($ch, $retries = 5, $closeAfterDone = true)
     {

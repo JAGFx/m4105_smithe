@@ -47,7 +47,6 @@ class NativeMailerHandler extends MailHandler
 
     /**
      * The wordwrap length for the message
-     *
      * @var int
      */
     protected $maxColumnWidth;
@@ -103,7 +102,6 @@ class NativeMailerHandler extends MailHandler
      * Add parameters to the message
      *
      * @param  string|array $parameters Custom added parameters
-     *
      * @return self
      */
     public function addParameter($parameters)

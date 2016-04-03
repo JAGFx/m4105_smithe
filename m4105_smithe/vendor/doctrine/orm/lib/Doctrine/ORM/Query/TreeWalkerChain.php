@@ -34,7 +34,7 @@ class TreeWalkerChain implements TreeWalker
      *
      * @var TreeWalker[]
      */
-    private $_walkers;
+    private $_walkers = array();
 
     /**
      * The original Query.
@@ -89,7 +89,6 @@ class TreeWalkerChain implements TreeWalker
         $this->_query = $query;
         $this->_parserResult = $parserResult;
         $this->_queryComponents = $queryComponents;
-        $this->_walkers = new TreeWalkerChainIterator( $this, $query, $parserResult );
     }
 
     /**
@@ -101,7 +100,7 @@ class TreeWalkerChain implements TreeWalker
      */
     public function addTreeWalker($walkerClass)
     {
-        $this->_walkers[] = $walkerClass;
+        $this->_walkers[] = new $walkerClass( $this->_query, $this->_parserResult, $this->_queryComponents );
     }
 
     /**

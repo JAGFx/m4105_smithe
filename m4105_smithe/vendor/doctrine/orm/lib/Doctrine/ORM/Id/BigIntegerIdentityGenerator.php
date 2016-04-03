@@ -48,7 +48,7 @@ class BigIntegerIdentityGenerator extends AbstractIdGenerator
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function generate(EntityManager $em, $entity)
     {
@@ -56,7 +56,7 @@ class BigIntegerIdentityGenerator extends AbstractIdGenerator
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isPostInsertGenerator()
     {

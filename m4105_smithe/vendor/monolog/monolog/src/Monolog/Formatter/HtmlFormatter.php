@@ -66,7 +66,6 @@ class HtmlFormatter extends NormalizerFormatter
      *
      * @param  string $title Text to be in the h1
      * @param  int    $level Error level
-     *
      * @return string
      */
     private function addTitle($title, $level)

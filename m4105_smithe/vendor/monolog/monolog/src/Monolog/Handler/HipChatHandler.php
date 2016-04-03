@@ -186,7 +186,7 @@ class HipChatHandler extends SocketHandler
      *
      * @param  int $level
      *
-     * @return string
+*@return string
      */
     protected function getAlertColor($level)
     {

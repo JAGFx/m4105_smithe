@@ -152,20 +152,20 @@ class NormalizerFormatter implements FormatterInterface
      * @param  mixed $data
      * @param  bool  $ignoreErrors
      *
-     * @throws \RuntimeException if encoding fails and errors are not ignored
+*@throws \RuntimeException if encoding fails and errors are not ignored
      * @return string
      */
     protected function toJson($data, $ignoreErrors = false)
     {
         // suppress json_encode errors since it's twitchy with some inputs
         if ($ignoreErrors) {
-            return @$this->jsonEncode( $data );
+            return @$this->jsonEncode( $data);
         }
 
-        $json = $this->jsonEncode( $data );
+        $json = $this->jsonEncode( $data);
 
         if ( $json === false ) {
-            $json = $this->handleJsonError( json_last_error(), $data );
+            $json = $this->handleJsonError( json_last_error(), $data);
         }
 
         return $json;
@@ -174,14 +174,14 @@ class NormalizerFormatter implements FormatterInterface
     /**
      * @param  mixed $data
      *
-     * @return string JSON encoded data or null on failure
+*@return string JSON encoded data or null on failure
      */
     private function jsonEncode( $data ) {
         if ( version_compare( PHP_VERSION, '5.4.0', '>=' ) ) {
-            return json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+            return json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
 
-        return json_encode( $data );
+        return json_encode( $data);
     }
 
     /**
@@ -195,23 +195,23 @@ class NormalizerFormatter implements FormatterInterface
      * @param  int   $code return code of json_last_error function
      * @param  mixed $data data that was meant to be encoded
      *
-     * @throws \RuntimeException if failure can't be corrected
+*@throws \RuntimeException if failure can't be corrected
      * @return string            JSON encoded data after error correction
      */
     private function handleJsonError( $code, $data ) {
         if ( $code !== JSON_ERROR_UTF8 ) {
-            $this->throwEncodeError( $code, $data );
+            $this->throwEncodeError( $code, $data);
         }
 
         if ( is_string( $data ) ) {
             $this->detectAndCleanUtf8( $data );
         } elseif ( is_array( $data ) ) {
-            array_walk_recursive( $data, array( $this, 'detectAndCleanUtf8' ) );
+            array_walk_recursive( $data, array( $this, 'detectAndCleanUtf8'));
         } else {
-            $this->throwEncodeError( $code, $data );
+            $this->throwEncodeError( $code, $data);
         }
 
-        $json = $this->jsonEncode( $data );
+        $json = $this->jsonEncode( $data);
 
         if ($json === false) {
             $this->throwEncodeError(json_last_error(), $data);
@@ -226,7 +226,7 @@ class NormalizerFormatter implements FormatterInterface
      * @param  int   $code return code of json_last_error function
      * @param  mixed $data data that was meant to be encoded
      *
-     * @throws \RuntimeException
+*@throws \RuntimeException
      */
     private function throwEncodeError($code, $data)
     {
@@ -247,7 +247,7 @@ class NormalizerFormatter implements FormatterInterface
                 $msg = 'Unknown error';
         }
 
-        throw new \RuntimeException( 'JSON encoding failed: ' . $msg . '. Encoding: ' . var_export( $data, true ) );
+        throw new \RuntimeException( 'JSON encoding failed: ' . $msg . '. Encoding: ' . var_export( $data, true));
     }
 
     /**
@@ -264,11 +264,10 @@ class NormalizerFormatter implements FormatterInterface
      * can be used as a callback for array_walk_recursive.
      *
      * @param mixed &$data Input to check and convert if needed
-     *
      * @private
      */
     public function detectAndCleanUtf8( &$data ) {
-        if ( is_string( $data ) && !preg_match( '//u', $data ) ) {
+        if ( is_string( $data ) && !preg_match( '//u', $data)) {
             $data = preg_replace_callback(
                     '/[\x80-\xFF]+/',
                     function ( $m ) { return utf8_encode( $m[ 0 ] ); },

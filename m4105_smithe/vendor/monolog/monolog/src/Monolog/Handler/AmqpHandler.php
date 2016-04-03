@@ -109,23 +109,23 @@ class AmqpHandler extends AbstractProcessingHandler
      *
      * @param  array $record
      *
-     * @return string
+*@return string
      */
     private function getRoutingKey( array $record ) {
         $routingKey = sprintf(
                 '%s.%s',
                 // TODO 2.0 remove substr call
                 substr( $record[ 'level_name' ], 0, 4 ),
-                $record[ 'channel' ]
+                $record[ 'channel']
         );
 
-        return strtolower( $routingKey );
+        return strtolower( $routingKey);
     }
 
     /**
      * @param  string $data
      *
-     * @return AMQPMessage
+*@return AMQPMessage
      */
     private function createAmqpMessage( $data ) {
         return new AMQPMessage(

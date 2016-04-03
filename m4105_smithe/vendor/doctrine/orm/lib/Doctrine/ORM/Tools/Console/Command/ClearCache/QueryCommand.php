@@ -20,7 +20,6 @@
 namespace Doctrine\ORM\Tools\Console\Command\ClearCache;
 
 use Doctrine\Common\Cache\ApcCache;
-use Doctrine\Common\Cache\XcacheCache;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -88,12 +87,7 @@ EOT
         if ($cacheDriver instanceof ApcCache) {
             throw new \LogicException("Cannot clear APC Cache from Console, its shared in the Webserver memory and not accessible from the CLI.");
         }
-        if ( $cacheDriver instanceof XcacheCache ) {
-            throw new \LogicException(
-                    "Cannot clear XCache Cache from Console, its shared in the Webserver memory and not accessible from the CLI."
-            );
-        }
-        
+
         $output->write('Clearing ALL Query cache entries' . PHP_EOL);
 
         $result  = $cacheDriver->deleteAll();

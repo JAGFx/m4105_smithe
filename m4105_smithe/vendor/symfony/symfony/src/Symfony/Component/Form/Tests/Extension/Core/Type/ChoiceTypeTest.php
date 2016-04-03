@@ -159,9 +159,9 @@ class ChoiceTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
     public function testChoiceListWithScalarValues() {
         $view = $this->factory->create(
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', null, array(
-                        'choices'           => $this->scalarChoices,
-                        'choices_as_values' => true,
-                )
+                'choices'           => $this->scalarChoices,
+                'choices_as_values' => true,
+        )
         )->createView();
 
         $this->assertSame( '1', $view->vars[ 'choices' ][ 0 ]->value );
@@ -184,9 +184,9 @@ class ChoiceTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
     public function testChoiceListWithScalarValuesAndFalseAsPreSetData() {
         $view = $this->factory->create(
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', false, array(
-                        'choices'           => $this->scalarChoices,
-                        'choices_as_values' => true,
-                )
+                'choices'           => $this->scalarChoices,
+                'choices_as_values' => true,
+        )
         )->createView();
 
         $this->assertTrue(
@@ -198,10 +198,10 @@ class ChoiceTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
     public function testExpandedChoiceListWithScalarValues() {
         $view = $this->factory->create(
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', null, array(
-                        'choices'           => $this->scalarChoices,
-                        'choices_as_values' => true,
-                        'expanded'          => true,
-                )
+                'choices'           => $this->scalarChoices,
+                'choices_as_values' => true,
+                'expanded'          => true,
+        )
         )->createView();
 
         $this->assertFalse( $view->children[ 0 ]->vars[ 'checked' ], 'True value should not be pre selected' );
@@ -212,10 +212,10 @@ class ChoiceTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
     public function testExpandedChoiceListWithScalarValuesAndFalseAsPreSetData() {
         $view = $this->factory->create(
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', false, array(
-                        'choices'           => $this->scalarChoices,
-                        'choices_as_values' => true,
-                        'expanded'          => true,
-                )
+                'choices'           => $this->scalarChoices,
+                'choices_as_values' => true,
+                'expanded'          => true,
+        )
         )->createView();
 
         $this->assertSame( '1', $view->vars[ 'choices' ][ 0 ]->value );
@@ -286,16 +286,16 @@ class ChoiceTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
     public function testPlaceholderWithBooleanChoices() {
         $form = $this->factory->create(
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', null, array(
-                        'multiple'          => false,
-                        'expanded'          => false,
-                        'required'          => false,
-                        'choices'           => array(
-                                'Yes' => true,
-                                'No'  => false,
-                        ),
-                        'placeholder'       => 'Select an option',
-                        'choices_as_values' => true,
-                )
+                'multiple'          => false,
+                'expanded'          => false,
+                'required'          => false,
+                'choices'           => array(
+                        'Yes' => true,
+                        'No'  => false,
+                ),
+                'placeholder'       => 'Select an option',
+                'choices_as_values' => true,
+        )
         );
 
         $view = $form->createView();
@@ -312,16 +312,16 @@ class ChoiceTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
     public function testPlaceholderWithBooleanChoicesWithFalseAsPreSetData() {
         $form = $this->factory->create(
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', false, array(
-                        'multiple'          => false,
-                        'expanded'          => false,
-                        'required'          => false,
-                        'choices'           => array(
-                                'Yes' => true,
-                                'No'  => false,
-                        ),
-                        'placeholder'       => 'Select an option',
-                        'choices_as_values' => true,
-                )
+                'multiple'          => false,
+                'expanded'          => false,
+                'required'          => false,
+                'choices'           => array(
+                        'Yes' => true,
+                        'No'  => false,
+                ),
+                'placeholder'       => 'Select an option',
+                'choices_as_values' => true,
+        )
         );
 
         $view = $form->createView();
@@ -338,16 +338,16 @@ class ChoiceTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
     public function testPlaceholderWithExpandedBooleanChoices() {
         $form = $this->factory->create(
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', null, array(
-                        'multiple'          => false,
-                        'expanded'          => true,
-                        'required'          => false,
-                        'choices'           => array(
-                                'Yes' => true,
-                                'No'  => false,
-                        ),
-                        'placeholder'       => 'Select an option',
-                        'choices_as_values' => true,
-                )
+                'multiple'          => false,
+                'expanded'          => true,
+                'required'          => false,
+                'choices'           => array(
+                        'Yes' => true,
+                        'No'  => false,
+                ),
+                'placeholder'       => 'Select an option',
+                'choices_as_values' => true,
+        )
         );
 
         $this->assertTrue( isset( $form[ 'placeholder' ] ), 'Placeholder should be set' );
@@ -364,16 +364,16 @@ class ChoiceTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
     public function testPlaceholderWithExpandedBooleanChoicesAndWithFalseAsPreSetData() {
         $form = $this->factory->create(
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', false, array(
-                        'multiple'          => false,
-                        'expanded'          => true,
-                        'required'          => false,
-                        'choices'           => array(
-                                'Yes' => true,
-                                'No'  => false,
-                        ),
-                        'placeholder'       => 'Select an option',
-                        'choices_as_values' => true,
-                )
+                'multiple'          => false,
+                'expanded'          => true,
+                'required'          => false,
+                'choices'           => array(
+                        'Yes' => true,
+                        'No'  => false,
+                ),
+                'placeholder'       => 'Select an option',
+                'choices_as_values' => true,
+        )
         );
 
         $this->assertTrue( isset( $form[ 'placeholder' ] ), 'Placeholder should be set' );
@@ -1948,13 +1948,13 @@ class ChoiceTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
     ) {
         $form = $this->factory->create(
                 'choice', null, array(
-                        'multiple'    => $multiple,
-                        'expanded'    => $expanded,
-                        'required'    => $required,
-                        'placeholder' => $placeholder,
-                        'empty_value' => $emptyValue,
-                        'choices'     => $this->choices,
-                )
+                'multiple'    => $multiple,
+                'expanded'    => $expanded,
+                'required'    => $required,
+                'placeholder' => $placeholder,
+                'empty_value' => $emptyValue,
+                'choices'     => $this->choices,
+        )
         );
         $view = $form->createView();
 

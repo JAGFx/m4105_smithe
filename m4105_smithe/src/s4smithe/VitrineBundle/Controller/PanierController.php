@@ -3,7 +3,7 @@
 	 * Fichier : PanierController.php
 	 * Auteur: SMITH Emmanuel
 	 * Création: 03/03/2016
-	 * Modification: 22/03/2016
+	 * Modification: 03/04/2016
 	 *
 	 * Controôleur pour la gestion du Panier
 	 */
@@ -76,7 +76,7 @@
 				$message = array(
 					'type'    => 'info',
 					'title'   => "Article ajouté",
-					'message' => 'L\'article à bien été ajoutét'
+					'message' => 'L\'article à bien été ajouté'
 				);
 			} else {
 				$message = array(
@@ -135,14 +135,14 @@
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
-		public function panierInfoHeaderAction() {
+		public function panierInfoMenuAction() {
 			$panier = $this->getSessionPanier();
 			
 			$sessionUser = $this->getSessionUser();
 			$userConnected = ( $sessionUser >= 0 ) ? true : false;
 			
 			return $this->render(
-				's4smitheVitrineBundle:Panier:panierInfo.html.twig',
+				's4smitheVitrineBundle:Panier:panierInfoMenu.html.twig',
 				array(
 					'total'         => $this->getTotalPanier(),
 					'nbArticle'     => $panier->getNbArticle(),
@@ -167,6 +167,7 @@
 
 				$em = $this->getDoctrine()->getManager();
 				foreach ( $panier->getArticles() as $item ) {
+					
 					// Objet Product récupérer avec l'ID de l'item
 					$article = $this->getArticleObj( $item[ 'id' ] );
 					$article->setStock( $article->getStock() - $item[ 'qte' ] );

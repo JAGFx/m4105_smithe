@@ -248,8 +248,8 @@ class MonologExtension extends Extension
                 // elastica client new definition
                 $elasticaClient = new Definition('%monolog.elastica.client.class%');
                 $elasticaClientArguments = array(
-                        'host'      => $handler[ 'elasticsearch' ][ 'host' ],
-                        'port'      => $handler[ 'elasticsearch' ][ 'port' ],
+                        'host' => $handler[ 'elasticsearch' ][ 'host' ],
+                        'port' => $handler[ 'elasticsearch' ][ 'port' ],
                         'transport' => $handler[ 'elasticsearch' ][ 'transport' ],
                 );
 
@@ -261,7 +261,7 @@ class MonologExtension extends Extension
                                             'Authorization ' => 'Basic ' . base64_encode(
                                                             $handler[ 'elasticsearch' ][ 'user' ] . ':' . $handler[ 'elasticsearch' ][ 'password' ]
                                                     )
-                                    )
+                            )
                             )
                     );
                 }
@@ -306,9 +306,9 @@ class MonologExtension extends Extension
             ));
             $definition->addMethodCall(
                     'setFilenameFormat', array(
-                            $handler[ 'filename_format' ],
-                            $handler[ 'date_format' ],
-                    )
+                    $handler[ 'filename_format' ],
+                    $handler[ 'date_format' ],
+            )
             );
             break;
 

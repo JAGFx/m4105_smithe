@@ -235,12 +235,12 @@ abstract class AbstractBootstrap3LayoutTest extends AbstractLayoutTest
     public function testSelectWithSizeBiggerThanOneCanBeRequired() {
         $form = $this->factory->createNamed(
                 'name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', null, array(
-                        'choices'           => array( 'a', 'b' ),
-                        'choices_as_values' => true,
-                        'multiple'          => false,
-                        'expanded'          => false,
-                        'attr'              => array( 'size' => 2 ),
-                )
+                'choices'           => array( 'a', 'b' ),
+                'choices_as_values' => true,
+                'multiple'          => false,
+                'expanded'          => false,
+                'attr'              => array( 'size' => 2 ),
+        )
         );
 
         $this->assertWidgetMatchesXpath(
@@ -722,12 +722,12 @@ abstract class AbstractBootstrap3LayoutTest extends AbstractLayoutTest
     public function testSingleChoiceExpandedWithLabelsAsFalse() {
         $form = $this->factory->createNamed(
                 'name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', '&a', array(
-                        'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
-                        'choices_as_values' => true,
-                        'choice_label'      => false,
-                        'multiple'          => false,
-                        'expanded'          => true,
-                )
+                'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
+                'choices_as_values' => true,
+                'choice_label'      => false,
+                'multiple'          => false,
+                'expanded'          => true,
+        )
         );
 
         $this->assertWidgetMatchesXpath(
@@ -759,18 +759,18 @@ abstract class AbstractBootstrap3LayoutTest extends AbstractLayoutTest
     public function testSingleChoiceExpandedWithLabelsSetByCallable() {
         $form = $this->factory->createNamed(
                 'name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', '&a', array(
-                        'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b', 'Choice&C' => '&c' ),
-                        'choices_as_values' => true,
-                        'choice_label'      => function ( $choice, $label, $value ) {
-                            if ( '&b' === $choice ) {
-                                return false;
-                            }
+                'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b', 'Choice&C' => '&c' ),
+                'choices_as_values' => true,
+                'choice_label'      => function ( $choice, $label, $value ) {
+                    if ( '&b' === $choice ) {
+                        return false;
+                    }
 
-                            return 'label.' . $value;
-                        },
-                        'multiple'          => false,
-                        'expanded'          => true,
-                )
+                    return 'label.' . $value;
+                },
+                'multiple'          => false,
+                'expanded'          => true,
+        )
         );
 
         $this->assertWidgetMatchesXpath(
@@ -812,14 +812,14 @@ abstract class AbstractBootstrap3LayoutTest extends AbstractLayoutTest
     public function testSingleChoiceExpandedWithLabelsSetFalseByCallable() {
         $form = $this->factory->createNamed(
                 'name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', '&a', array(
-                        'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
-                        'choices_as_values' => true,
-                        'choice_label'      => function () {
-                            return false;
-                        },
-                        'multiple'          => false,
-                        'expanded'          => true,
-                )
+                'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
+                'choices_as_values' => true,
+                'choice_label'      => function () {
+                    return false;
+                },
+                'multiple'          => false,
+                'expanded'          => true,
+        )
         );
 
         $this->assertWidgetMatchesXpath(
@@ -1104,12 +1104,12 @@ abstract class AbstractBootstrap3LayoutTest extends AbstractLayoutTest
     public function testMultipleChoiceExpandedWithLabelsAsFalse() {
         $form = $this->factory->createNamed(
                 'name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array( '&a' ), array(
-                        'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
-                        'choices_as_values' => true,
-                        'choice_label'      => false,
-                        'multiple'          => true,
-                        'expanded'          => true,
-                )
+                'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
+                'choices_as_values' => true,
+                'choice_label'      => false,
+                'multiple'          => true,
+                'expanded'          => true,
+        )
         );
 
         $this->assertWidgetMatchesXpath(
@@ -1141,18 +1141,18 @@ abstract class AbstractBootstrap3LayoutTest extends AbstractLayoutTest
     public function testMultipleChoiceExpandedWithLabelsSetByCallable() {
         $form = $this->factory->createNamed(
                 'name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array( '&a' ), array(
-                        'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b', 'Choice&C' => '&c' ),
-                        'choices_as_values' => true,
-                        'choice_label'      => function ( $choice, $label, $value ) {
-                            if ( '&b' === $choice ) {
-                                return false;
-                            }
+                'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b', 'Choice&C' => '&c' ),
+                'choices_as_values' => true,
+                'choice_label'      => function ( $choice, $label, $value ) {
+                    if ( '&b' === $choice ) {
+                        return false;
+                    }
 
-                            return 'label.' . $value;
-                        },
-                        'multiple'          => true,
-                        'expanded'          => true,
-                )
+                    return 'label.' . $value;
+                },
+                'multiple'          => true,
+                'expanded'          => true,
+        )
         );
 
         $this->assertWidgetMatchesXpath(
@@ -1194,14 +1194,14 @@ abstract class AbstractBootstrap3LayoutTest extends AbstractLayoutTest
     public function testMultipleChoiceExpandedWithLabelsSetFalseByCallable() {
         $form = $this->factory->createNamed(
                 'name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array( '&a' ), array(
-                        'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
-                        'choices_as_values' => true,
-                        'choice_label'      => function () {
-                            return false;
-                        },
-                        'multiple'          => true,
-                        'expanded'          => true,
-                )
+                'choices'           => array( 'Choice&A' => '&a', 'Choice&B' => '&b' ),
+                'choices_as_values' => true,
+                'choice_label'      => function () {
+                    return false;
+                },
+                'multiple'          => true,
+                'expanded'          => true,
+        )
         );
 
         $this->assertWidgetMatchesXpath(

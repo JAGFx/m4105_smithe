@@ -67,7 +67,14 @@ class SequenceGenerator extends AbstractIdGenerator implements Serializable
     }
 
     /**
-     * {@inheritDoc}
+     * Generates an ID for the given entity.
+     *
+     * @param EntityManager $em
+     * @param object        $entity
+     *
+     * @return integer The generated value.
+     *
+     * @override
      */
     public function generate(EntityManager $em, $entity)
     {

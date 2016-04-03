@@ -774,11 +774,11 @@ class EntityTypeTest extends TypeTestCase
 
         $field = $this->factory->createNamed(
                 'name', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', null, array(
-                        'em'           => 'default',
-                        'class'        => self::SINGLE_IDENT_CLASS,
-                        'choice_label' => 'name',
-                        'choice_value' => 'name',
-                )
+                'em'           => 'default',
+                'class'        => self::SINGLE_IDENT_CLASS,
+                'choice_label' => 'name',
+                'choice_value' => 'name',
+        )
         );
 
         $field->submit( 'Bar' );
@@ -802,13 +802,13 @@ class EntityTypeTest extends TypeTestCase
 
         $field = $this->factory->createNamed(
                 'name', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', null, array(
-                        'em'           => 'default',
-                        'class'        => self::ITEM_GROUP_CLASS,
-                        'choice_label' => 'name',
-                        'choice_value' => function ( GroupableEntity $entity ) {
-                            return $entity->groupName . '/' . $entity->name;
-                        },
-                )
+                'em'           => 'default',
+                'class'        => self::ITEM_GROUP_CLASS,
+                'choice_label' => 'name',
+                'choice_value' => function ( GroupableEntity $entity ) {
+                    return $entity->groupName . '/' . $entity->name;
+                },
+        )
         );
 
         $field->submit( 'BooGroup/Bar' );
@@ -832,10 +832,10 @@ class EntityTypeTest extends TypeTestCase
 
         $field = $this->factory->createNamed(
                 'name', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', null, array(
-                        'em'           => 'default',
-                        'class'        => self::SINGLE_IDENT_CLASS,
-                        'choice_label' => 'name',
-                )
+                'em'           => 'default',
+                'class'        => self::SINGLE_IDENT_CLASS,
+                'choice_label' => 'name',
+        )
         );
 
         $this->em->clear();

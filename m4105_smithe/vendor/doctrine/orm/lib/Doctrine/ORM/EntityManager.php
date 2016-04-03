@@ -132,11 +132,6 @@ use Exception;
     private $filterCollection;
 
     /**
-     * @var \Doctrine\ORM\Cache The second level cache regions API.
-     */
-    private $cache;
-
-    /**
      * Creates a new EntityManager that operates on the given database connection
      * and uses the given Configuration and EventManager implementations.
      *
@@ -164,12 +159,6 @@ use Exception;
             $config->getProxyNamespace(),
             $config->getAutoGenerateProxyClasses()
         );
-
-        if ( $config->isSecondLevelCacheEnabled() ) {
-            $cacheConfig = $config->getSecondLevelCacheConfiguration();
-            $cacheFactory = $cacheConfig->getCacheFactory();
-            $this->cache = $cacheFactory->createCache( $this );
-        }
     }
 
     /**
@@ -208,13 +197,6 @@ use Exception;
     public function beginTransaction()
     {
         $this->conn->beginTransaction();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCache() {
-        return $this->cache;
     }
 
     /**
@@ -269,11 +251,11 @@ use Exception;
      * MyProject\Domain\User
      * sales:PriceRequest
      *
-     * Internal note: Performance-sensitive method.
-     *
      * @param string $className
      *
      * @return \Doctrine\ORM\Mapping\ClassMetadata
+     *
+     * @internal Performance-sensitive method.
      */
     public function getClassMetadata($className)
     {
@@ -358,13 +340,10 @@ use Exception;
     /**
      * Finds an Entity by its identifier.
      *
-     * @param string       $entityName  The class name of the entity to find.
-     * @param mixed        $id          The identity of the entity to find.
-     * @param integer|null $lockMode    One of the \Doctrine\DBAL\LockMode::* constants
-     *                                  or NULL if no specific lock mode should be used
-     *                                  during the search.
-     * @param integer|null $lockVersion The version of the entity to find when using
-     *                                  optimistic locking.
+     * @param string       $entityName
+     * @param mixed        $id
+     * @param integer      $lockMode
+     * @param integer|null $lockVersion
      *
      * @return object|null The entity instance or NULL if the entity can not be found.
      *
@@ -373,26 +352,20 @@ use Exception;
      * @throws TransactionRequiredException
      * @throws ORMException
      */
-    public function find( $entityName, $id, $lockMode = null, $lockVersion = null )
+    public function find( $entityName, $id, $lockMode = LockMode::NONE, $lockVersion = null )
     {
         $class = $this->metadataFactory->getMetadataFor(ltrim($entityName, '\\'));
 
-        if ( !is_array( $id ) ) {
-            if ( $class->isIdentifierComposite ) {
-                throw ORMInvalidArgumentException::invalidCompositeIdentifier();
-            }
+        if ( is_object( $id ) && $this->metadataFactory->hasMetadataFor( ClassUtils::getClass( $id ) ) ) {
+            $id = $this->unitOfWork->getSingleIdentifierValue( $id );
 
-            $id = array($class->identifier[0] => $id);
+            if ( $id === null ) {
+                throw ORMInvalidArgumentException::invalidIdentifierBindingEntity();
+            }
         }
 
-        foreach ( $id as $i => $value ) {
-            if ( is_object( $value ) && $this->metadataFactory->hasMetadataFor( ClassUtils::getClass( $value ) ) ) {
-                $id[ $i ] = $this->unitOfWork->getSingleIdentifierValue( $value );
-
-                if ( $id[ $i ] === null ) {
-                    throw ORMInvalidArgumentException::invalidIdentifierBindingEntity();
-                }
-            }
+        if ( !is_array( $id ) ) {
+            $id = array($class->identifier[0] => $id);
         }
 
         $sortedId = array();
@@ -403,11 +376,6 @@ use Exception;
             }
 
             $sortedId[$identifier] = $id[$identifier];
-            unset( $id[ $identifier ] );
-        }
-
-        if ( $id ) {
-            throw ORMException::unrecognizedIdentifierFields( $class->name, array_keys( $id ) );
         }
 
         $unitOfWork = $this->getUnitOfWork();
@@ -418,14 +386,13 @@ use Exception;
                 return null;
             }
 
-            switch ( true ) {
-                case LockMode::OPTIMISTIC === $lockMode:
+            switch ( $lockMode ) {
+                case LockMode::OPTIMISTIC:
                     $this->lock($entity, $lockMode, $lockVersion);
                     break;
 
-                case LockMode::NONE === $lockMode:
-                case LockMode::PESSIMISTIC_READ === $lockMode:
-                case LockMode::PESSIMISTIC_WRITE === $lockMode:
+                case LockMode::PESSIMISTIC_READ:
+                case LockMode::PESSIMISTIC_WRITE:
                     $persister = $unitOfWork->getEntityPersister($class->name);
                     $persister->refresh($sortedId, $entity, $lockMode);
                     break;
@@ -436,8 +403,11 @@ use Exception;
 
         $persister = $unitOfWork->getEntityPersister($class->name);
 
-        switch ( true ) {
-            case LockMode::OPTIMISTIC === $lockMode:
+        switch ( $lockMode ) {
+            case LockMode::NONE:
+                return $persister->load( $sortedId );
+
+            case LockMode::OPTIMISTIC:
                 if ( ! $class->isVersioned) {
                     throw OptimisticLockException::notVersioned($class->name);
                 }
@@ -448,17 +418,12 @@ use Exception;
 
                 return $entity;
 
-            case LockMode::NONE === $lockMode:
-            case LockMode::PESSIMISTIC_READ === $lockMode:
-            case LockMode::PESSIMISTIC_WRITE === $lockMode:
+            default:
                 if ( ! $this->getConnection()->isTransactionActive()) {
                     throw TransactionRequiredException::transactionRequired();
                 }
 
                 return $persister->load($sortedId, null, null, array(), $lockMode);
-
-            default:
-                return $persister->loadById( $sortedId );
         }
     }
 

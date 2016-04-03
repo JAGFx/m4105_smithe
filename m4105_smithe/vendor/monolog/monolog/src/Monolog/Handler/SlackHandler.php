@@ -80,7 +80,7 @@ class SlackHandler extends SocketHandler
      * @param  bool        $useShortAttachment     Whether the the context/extra messages added to Slack as attachments are in a short style
      * @param  bool        $includeContextAndExtra Whether the attachment should include context and extra data
      *
-     * @throws MissingExtensionException If no OpenSSL PHP extension configured
+*@throws MissingExtensionException If no OpenSSL PHP extension configured
      */
     public function __construct($token, $channel, $username = 'Monolog', $useAttachment = true, $iconEmoji = null, $level = Logger::CRITICAL, $bubble = true, $useShortAttachment = false, $includeContextAndExtra = false)
     {
@@ -147,8 +147,8 @@ class SlackHandler extends SocketHandler
 
         if ($this->useAttachment) {
             $attachment = array(
-                    'fallback' => $record['message'],
-                    'color'    => $this->getAttachmentColor($record['level']),
+                    'fallback' => $record[ 'message' ],
+                    'color'    => $this->getAttachmentColor( $record[ 'level' ] ),
                     'fields'   => array(),
             );
 
@@ -160,7 +160,7 @@ class SlackHandler extends SocketHandler
                 $attachment['text'] = $record['message'];
                 $attachment['fields'][] = array(
                         'title' => 'Level',
-                        'value' => $record['level_name'],
+                        'value' => $record[ 'level_name' ],
                         'short' => true,
                 );
             }
@@ -170,7 +170,7 @@ class SlackHandler extends SocketHandler
                     if ($this->useShortAttachment) {
                         $attachment['fields'][] = array(
                                 'title' => "Extra",
-                                'value' => $this->stringify($record['extra']),
+                                'value' => $this->stringify( $record[ 'extra' ] ),
                                 'short' => $this->useShortAttachment,
                         );
                     } else {
@@ -189,7 +189,7 @@ class SlackHandler extends SocketHandler
                     if ($this->useShortAttachment) {
                         $attachment['fields'][] = array(
                                 'title' => "Context",
-                                'value' => $this->stringify($record['context']),
+                                'value' => $this->stringify( $record[ 'context' ] ),
                                 'short' => $this->useShortAttachment,
                         );
                     } else {
@@ -244,7 +244,7 @@ class SlackHandler extends SocketHandler
         parent::write($record);
         $res = $this->getResource();
         if ( is_resource( $res ) ) {
-            @fread( $res, 2048 );
+            @fread( $res, 2048);
         }
         $this->closeSocket();
     }
@@ -275,7 +275,7 @@ class SlackHandler extends SocketHandler
      *
      * @param  array $fields
      *
-     * @return string
+*@return string
      */
     protected function stringify($fields)
     {

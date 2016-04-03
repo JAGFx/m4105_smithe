@@ -665,10 +665,10 @@ abstract class Kernel implements KernelInterface, TerminableInterface
 
         $content = $dumper->dump(
                 array(
-                        'class'      => $class,
+                        'class' => $class,
                         'base_class' => $baseClass,
-                        'file'       => $cache->getPath(),
-                        'debug'      => $this->debug
+                        'file' => $cache->getPath(),
+                        'debug' => $this->debug
                 )
         );
 

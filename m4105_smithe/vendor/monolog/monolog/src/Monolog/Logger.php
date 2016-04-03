@@ -169,7 +169,6 @@ class Logger implements LoggerInterface
      * Pushes a handler on to the stack.
      *
      * @param  HandlerInterface $handler
-     *
      * @return $this
      */
     public function pushHandler(HandlerInterface $handler)
@@ -199,7 +198,6 @@ class Logger implements LoggerInterface
      * If a map is passed, keys will be ignored.
      *
      * @param  HandlerInterface[] $handlers
-     *
      * @return $this
      */
     public function setHandlers(array $handlers)
@@ -224,7 +222,6 @@ class Logger implements LoggerInterface
      * Adds a processor on to the stack.
      *
      * @param  callable $callback
-     *
      * @return $this
      */
     public function pushProcessor($callback)
@@ -283,7 +280,7 @@ class Logger implements LoggerInterface
      * @param  string $message The log message
      * @param  array  $context The log context
      *
-     * @return Boolean Whether the record has been processed
+*@return Boolean Whether the record has been processed
      */
     public function addRecord($level, $message, array $context = array())
     {
@@ -298,11 +295,11 @@ class Logger implements LoggerInterface
         reset( $this->handlers );
         while ( $handler = current( $this->handlers ) ) {
             if ( $handler->isHandling( array( 'level' => $level ) ) ) {
-                $handlerKey = key( $this->handlers );
+                $handlerKey = key( $this->handlers);
                 break;
             }
 
-            next( $this->handlers );
+            next( $this->handlers);
         }
 
         if (null === $handlerKey) {
@@ -314,11 +311,11 @@ class Logger implements LoggerInterface
         }
 
         if ( $this->microsecondTimestamps ) {
-            $ts = \DateTime::createFromFormat( 'U.u', sprintf( '%.6F', microtime( true ) ), static::$timezone );
+            $ts = \DateTime::createFromFormat( 'U.u', sprintf( '%.6F', microtime( true ) ), static::$timezone);
         } else {
-            $ts = new \DateTime( null, static::$timezone );
+            $ts = new \DateTime( null, static::$timezone);
         }
-        $ts->setTimezone( static::$timezone );
+        $ts->setTimezone( static::$timezone);
 
         $record = array(
                 'message'    => (string) $message,
@@ -339,7 +336,7 @@ class Logger implements LoggerInterface
                 break;
             }
 
-            next( $this->handlers );
+            next( $this->handlers);
         }
 
         return true;
@@ -456,7 +453,7 @@ class Logger implements LoggerInterface
      *
      * @param  int $level
      *
-     * @return string
+*@return string
      */
     public static function getLevelName($level)
     {
@@ -487,7 +484,7 @@ class Logger implements LoggerInterface
      *
      * @param  int $level
      *
-     * @return Boolean
+*@return Boolean
      */
     public function isHandling($level)
     {

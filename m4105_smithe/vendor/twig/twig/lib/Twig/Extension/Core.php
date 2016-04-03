@@ -356,10 +356,9 @@ class Twig_Extension_Core extends Twig_Extension
                                             'class'         => 'Twig_Node_Expression_Binary_Power',
                                             'associativity' => Twig_ExpressionParser::OPERATOR_RIGHT
                     ),
-                    '??'          => array(
-                            'precedence'    => 300,
-                            'class'         => 'Twig_Node_Expression_NullCoalesce',
-                            'associativity' => Twig_ExpressionParser::OPERATOR_RIGHT
+                    '??'          => array( 'precedence'    => 300,
+                                            'class'         => 'Twig_Node_Expression_NullCoalesce',
+                                            'associativity' => Twig_ExpressionParser::OPERATOR_RIGHT
                     ),
             ),
         );

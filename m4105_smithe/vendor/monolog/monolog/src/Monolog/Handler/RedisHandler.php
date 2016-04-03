@@ -68,7 +68,6 @@ class RedisHandler extends AbstractProcessingHandler
      * Writes the record to the redis list and caps its
      *
      * @param  array $record associative record array
-     *
      * @return void
      */
     protected function writeCapped(array $record)

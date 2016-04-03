@@ -348,10 +348,10 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $p = $this->getProcess(
                 sprintf(
                         '%s -r %s', self::$phpBin, escapeshellarg(
-                                'file_put_contents($s = \'' . $uri . '\', \'foo\'); flock(fopen(' . var_export(
-                                        $lock, true
-                                ) . ', \'r\'), LOCK_EX); file_put_contents($s, \'bar\');'
-                        )
+                        'file_put_contents($s = \'' . $uri . '\', \'foo\'); flock(fopen(' . var_export(
+                                $lock, true
+                        ) . ', \'r\'), LOCK_EX); file_put_contents($s, \'bar\');'
+                )
                 )
         );
 

@@ -20,7 +20,7 @@
 namespace Doctrine\ORM\Event;
 
 use Doctrine\Common\EventArgs;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
@@ -51,9 +51,9 @@ class ListenersInvoker
     /**
      * Initializes a new ListenersInvoker instance.
      *
-     * @param EntityManagerInterface $em
+     * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct( EntityManagerInterface $em )
+    public function __construct( EntityManager $em )
     {
         $this->eventManager = $em->getEventManager();
         $this->resolver     = $em->getConfiguration()->getEntityListenerResolver();

@@ -104,9 +104,9 @@ class TraceableUrlMatcherTest extends \PHPUnit_Framework_TestCase
         $routes = new RouteCollection();
         $routes->add(
                 'foo', new Route(
-                        '/foo', array(), array(), array(), 'baz', array(), array(),
-                        "request.headers.get('User-Agent') matches '/firefox/i'"
-                )
+                '/foo', array(), array(), array(), 'baz', array(), array(),
+                "request.headers.get('User-Agent') matches '/firefox/i'"
+        )
         );
 
         $context = new RequestContext();
