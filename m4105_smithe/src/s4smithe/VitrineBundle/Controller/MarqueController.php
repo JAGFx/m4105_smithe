@@ -172,8 +172,6 @@
 
 		
 		/**
-		 * @param int $limit
-		 *
 		 * @return array
 		 */
 		private function findAllMarque() {
@@ -208,7 +206,7 @@
 		/**
 		 * @param $id
 		 *
-		 * @return mixed
+		 * @return Marque
 		 */
 		private function findMarque( $id ) {
 			$mark = $this->getDoctrine()->getManager()

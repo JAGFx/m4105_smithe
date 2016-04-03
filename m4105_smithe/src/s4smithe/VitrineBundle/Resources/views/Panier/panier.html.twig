@@ -47,7 +47,7 @@
 						<td class="text-center" >{{ item.article.price|number_format(2, ',', ' ') }} €</td >
 						<td class="text-center" >{{ (item.qte * item.article.price)|number_format(2, ',', ' ') }} €</td >
 						<td class="text-center actionItem" >
-							<a href="{{ path('s4smithe_vitrine_addArticlePanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Ajouter" ><span class="fa fa-plus" ></span ></a >
+							<a href="{{ path('s4smithe_vitrine_addArticlePanier', {id: item.article.id}) }}" class="badge badge-blue" title="Ajouter" ><span class="fa fa-plus" ></span ></a >
 							<a href="{{ path('s4smithe_vitrine_removeOneArticlePanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Enlever" ><span class="fa fa-minus" ></span ></a >
 							<a href="{{ path('s4smithe_vitrine_removeArticlesPanier', {articleId: item.article.id}) }}" class="badge badge-blue" title="Supprimer" ><span class="fa fa-times" ></span ></a >
 						</td >
@@ -70,7 +70,7 @@
 
 		</table >
 
-		{% if app.session.get('userId') > 0 %}
+		{% if app.session.get('userId') > 0 and panier.nbArticle > 0 %}
 			<a href="{{ path('s4smithe_vitrine_validationPanier') }}" title="Commander" class="btn btn-primary btn-sm" >Commander</a >
 		{% endif %}
 	</div >

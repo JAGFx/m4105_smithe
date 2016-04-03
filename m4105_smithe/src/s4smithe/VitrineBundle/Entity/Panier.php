@@ -11,9 +11,9 @@
 
 	namespace s4smithe\VitrineBundle\Entity;
 
-	/**
-	 * Panier
-	 */
+		/**
+		 * Panier
+		 */
 	/**
 	 * Class Panier
 	 *
@@ -49,6 +49,32 @@
 			} else {
 				return false;
 			}
+
+			return true;
+		}
+
+		/**
+		 * @param Product $article
+		 * @param         $qte
+		 *
+		 * @return bool
+		 */
+		public function changeQuantity( \s4smithe\VitrineBundle\Entity\Product $article, $qte ) {
+
+			if ( $qte <= $article->getStock() ) {
+				if ( key_exists( $article->getId(), $this->articles ) ) {
+					$this->articles[ $article->getId() ][ 'qte' ] = $qte;
+
+				} else {
+					$this->articles[ $article->getId() ] = array(
+						'id'  => (int) $article->getId(),
+						'qte' => (int) $qte
+					);
+				}
+			} else {
+				return false;
+			}
+
 
 			return true;
 		}

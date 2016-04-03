@@ -145,7 +145,7 @@
 				$em->flush();
 			}
 
-			return $this->redirectToRoute( 'commande_index' );
+			return $this->redirectToRoute( 'client_listCommande' );
 		}
 
 		/**

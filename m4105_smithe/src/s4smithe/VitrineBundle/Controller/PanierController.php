@@ -15,6 +15,7 @@
 	use s4smithe\VitrineBundle\Entity\Commande;
 	use s4smithe\VitrineBundle\Entity\LigneCommande;
 	use s4smithe\VitrineBundle\Entity\Panier;
+	use s4smithe\VitrineBundle\Entity\Product;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 	/**
@@ -63,15 +64,15 @@
 		}
 		
 		/**
-		 * @param $articleId
-		 * @param $qte
+		 * @param Product $product
+		 * @param         $qte
 		 *
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
-		public function ajouterUnArticleAction( $articleId, $qte ) {
+		public function ajouterArticleAction( Product $product, $qte ) {
 			$panier = $this->getSessionPanier();
 			
-			$added = $panier->addArticle( $this->getArticleObj( $articleId ), $qte );
+			$added = $panier->addArticle( $product, $qte );
 			if ( $added ) {
 				$message = array(
 					'type'    => 'info',
@@ -92,7 +93,38 @@
 
 			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
 		}
-		
+
+		/**
+		 * @param Product $product
+		 * @param         $qte
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
+		public function changeQutantityAction( Product $product, $qte ) {
+			$panier = $this->getSessionPanier();
+
+			$added = $panier->changeQuantity( $product, $qte );
+			if ( $added ) {
+				$message = array(
+					'type'    => 'info',
+					'title'   => "Quantité changée",
+					'message' => 'La quantitée à bien été modifiée'
+				);
+			} else {
+				$message = array(
+					'type'    => 'warning',
+					'title'   => "Modification impossible",
+					'message' => 'Le stock de l\'article est insuffisant'
+				);
+			}
+
+			$this->setSessionPanier( $panier );
+
+			$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
+
+			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
+		}
+
 		/**
 		 * @param $articleId
 		 * @param $qte
@@ -166,6 +198,8 @@
 				$articles = array();
 
 				$em = $this->getDoctrine()->getManager();
+				$em->persist( $commande );
+				$em->flush();
 				foreach ( $panier->getArticles() as $item ) {
 					
 					// Objet Product récupérer avec l'ID de l'item
@@ -210,7 +244,7 @@
 
 
 		/**
-		 * @return mixed
+		 * @return Panier
 		 */
 		private function getSessionPanier() {
 			$session = $this->getRequest()->getSession();
@@ -238,7 +272,7 @@
 		/**
 		 * @param $id
 		 *
-		 * @return mixed
+		 * @return Product
 		 */
 		private function getArticleObj( $id ) {
 			return $this->getDoctrine()->getManager()

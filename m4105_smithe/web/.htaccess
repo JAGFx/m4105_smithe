@@ -3,6 +3,7 @@
 # mod_rewrite). Additionally, this reduces the matching process for the
 # start page (path "/") because otherwise Apache will apply the rewriting rules
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
+#Options +FollowSymlinks
 DirectoryIndex app.php
 
 # By default, Apache does not evaluate symbolic links if you did not enable this
@@ -19,6 +20,7 @@ DirectoryIndex app.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
+	#RewriteBase /web/
 
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
@@ -27,8 +29,8 @@ DirectoryIndex app.php
     # work in environments without path prefix as well, providing a safe, one-size
     # fits all solution. But as you do not need it in this case, you can comment
     # the following 2 lines to eliminate the overhead.
-    RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
-    RewriteRule ^(.*) - [E=BASE:%1]
+    #RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+    #RewriteRule ^(.*) - [E=BASE:%1]
 
     # Sets the HTTP_AUTHORIZATION header removed by apache
     RewriteCond %{HTTP:Authorization} .

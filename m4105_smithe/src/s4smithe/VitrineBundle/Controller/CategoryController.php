@@ -219,7 +219,7 @@
 		/**
 		 * @param $id
 		 *
-		 * @return mixed
+		 * @return Category
 		 */
 		private function findCtge( $id ) {
 			$ctge = $this->getDoctrine()->getManager()

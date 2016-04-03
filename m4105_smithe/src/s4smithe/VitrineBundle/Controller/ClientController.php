@@ -294,7 +294,7 @@
 		}
 
 		/**
-		 * @return mixed
+		 * @return int
 		 */
 		private function getSessionUser() {
 			$session = $this->getRequest()->getSession();
