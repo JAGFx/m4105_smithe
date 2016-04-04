@@ -306,7 +306,7 @@
 
 			if ( !$user ) {
 				$user = new Client();
-				$user->setName( 'Inconus' );
+				$user->setName( 'Inconnu' );
 			}
 
 			return $user;
