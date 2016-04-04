@@ -12,6 +12,9 @@ s4smithe\VitrineBundle\Entity\Product:       # L’espace de nom où sera créé
        name:
            type: string
            length: 100
+       image:
+                  type: string
+                  length: 255
        price:
            type: decimal
            scale: 2

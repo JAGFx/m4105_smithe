@@ -11,8 +11,6 @@ s4smithe\VitrineBundle\Entity\Client:
             - NotBlank:
                 message: Le mot de passe ne doit pas être vide.
 
-            - Type: password
-
         mail:
             - NotBlank:
                 message: Le mot de passe ne doit pas être vide.
@@ -47,6 +45,13 @@ s4smithe\VitrineBundle\Entity\Product:
         name:
             - NotBlank:
                 message: Le nom ne doit pas être vide.
+
+        file:
+            - Image:
+                allowLandscape: false
+                allowPortrait: false
+                mimeTypesMessage: Le fichier n'est pas supporté
+                maxSize: 6000000
 
         price:
             - NotBlank:
@@ -87,7 +92,7 @@ s4smithe\VitrineBundle\Entity\Marque:
                 message: Le nom ne doit pas être vide.
 
             - Length:
-                min: 5
+                min: 2
                 max: 100
                 minMessage: Le nom doit comporter au moins 5 caractères.
                 maxMessage: Le nom ne doit pas exceder 100 caractères.

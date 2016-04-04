@@ -3,7 +3,7 @@
 	 * Fichier : PanierController.php
 	 * Auteur: SMITH Emmanuel
 	 * Création: 03/03/2016
-	 * Modification: 22/03/2016
+	 * Modification: 03/04/2016
 	 *
 	 * Controôleur pour la gestion du Panier
 	 */
@@ -15,6 +15,7 @@
 	use s4smithe\VitrineBundle\Entity\Commande;
 	use s4smithe\VitrineBundle\Entity\LigneCommande;
 	use s4smithe\VitrineBundle\Entity\Panier;
+	use s4smithe\VitrineBundle\Entity\Product;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 	/**
@@ -63,20 +64,20 @@
 		}
 		
 		/**
-		 * @param $articleId
-		 * @param $qte
+		 * @param Product $product
+		 * @param         $qte
 		 *
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
-		public function ajouterUnArticleAction( $articleId, $qte ) {
+		public function ajouterArticleAction( Product $product, $qte ) {
 			$panier = $this->getSessionPanier();
 			
-			$added = $panier->addArticle( $this->getArticleObj( $articleId ), $qte );
+			$added = $panier->addArticle( $product, $qte );
 			if ( $added ) {
 				$message = array(
 					'type'    => 'info',
 					'title'   => "Article ajouté",
-					'message' => 'L\'article à bien été ajoutét'
+					'message' => 'L\'article à bien été ajouté'
 				);
 			} else {
 				$message = array(
@@ -92,7 +93,38 @@
 
 			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
 		}
-		
+
+		/**
+		 * @param Product $product
+		 * @param         $qte
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
+		public function changeQutantityAction( Product $product, $qte ) {
+			$panier = $this->getSessionPanier();
+
+			$added = $panier->changeQuantity( $product, $qte );
+			if ( $added ) {
+				$message = array(
+					'type'    => 'info',
+					'title'   => "Quantité changée",
+					'message' => 'La quantitée à bien été modifiée'
+				);
+			} else {
+				$message = array(
+					'type'    => 'warning',
+					'title'   => "Modification impossible",
+					'message' => 'Le stock de l\'article est insuffisant'
+				);
+			}
+
+			$this->setSessionPanier( $panier );
+
+			$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
+
+			return $this->redirectToRoute( 's4smithe_vitrine_contenuPanier' );
+		}
+
 		/**
 		 * @param $articleId
 		 * @param $qte
@@ -135,14 +167,14 @@
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
-		public function panierInfoHeaderAction() {
+		public function panierInfoMenuAction() {
 			$panier = $this->getSessionPanier();
 			
 			$sessionUser = $this->getSessionUser();
 			$userConnected = ( $sessionUser >= 0 ) ? true : false;
 			
 			return $this->render(
-				's4smitheVitrineBundle:Panier:panierInfo.html.twig',
+				's4smitheVitrineBundle:Panier:panierInfoMenu.html.twig',
 				array(
 					'total'         => $this->getTotalPanier(),
 					'nbArticle'     => $panier->getNbArticle(),
@@ -166,7 +198,10 @@
 				$articles = array();
 
 				$em = $this->getDoctrine()->getManager();
+				$em->persist( $commande );
+				$em->flush();
 				foreach ( $panier->getArticles() as $item ) {
+					
 					// Objet Product récupérer avec l'ID de l'item
 					$article = $this->getArticleObj( $item[ 'id' ] );
 					$article->setStock( $article->getStock() - $item[ 'qte' ] );
@@ -209,7 +244,7 @@
 
 
 		/**
-		 * @return mixed
+		 * @return Panier
 		 */
 		private function getSessionPanier() {
 			$session = $this->getRequest()->getSession();
@@ -237,7 +272,7 @@
 		/**
 		 * @param $id
 		 *
-		 * @return mixed
+		 * @return Product
 		 */
 		private function getArticleObj( $id ) {
 			return $this->getDoctrine()->getManager()

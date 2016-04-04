@@ -9,14 +9,17 @@
 	 * Entitée Product
 	 */
 
+
 	namespace s4smithe\VitrineBundle\Entity;
+
+	use Symfony\Component\HttpFoundation\File\File;
 
 	/**
 	 * Product
 	 */
 	class Product {
 
-		const PATH_IMAGE = 'images/products/';
+		const PATH_IMAGE = '../../uploads/products/';
 
 		/**
 		 * @var integer
@@ -206,6 +209,45 @@
 		 * @return string
 		 */
 		public function getPathImage() {
-			return \s4smithe\VitrineBundle\Entity\Product::PATH_IMAGE . $this->getId() . '.jpg';
+			return \s4smithe\VitrineBundle\Entity\Product::PATH_IMAGE . $this->getImage();
+		}
+
+
+		/**
+		 * @var
+		 */
+		private $image;
+
+		/**
+		 * @return mixed
+		 */
+		public function getImage() {
+			return $this->image;
+		}
+
+		/**
+		 * @param mixed $image
+		 */
+		public function setImage( $image = null ) {
+			$this->image = $image;
+		}
+
+		/**
+		 * @var
+		 */
+		private $file;
+
+		/**
+		 * @return mixed
+		 */
+		public function getFile() {
+			return $this->file;
+		}
+
+		/**
+		 * @param File|null $file
+		 */
+		public function setFile( File $file = null ) {
+			$this->file = $file;
 		}
 	}

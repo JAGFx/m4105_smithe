@@ -50,9 +50,15 @@
 		 *
 		 * @param integer $qte
 		 *
+<<<<<<< HEAD
 *@return LigneCommande
 		 */
 		public function setQte($qte) {
+=======
+		 * @return LigneCommande
+		 */
+		public function setQte( $qte ) {
+>>>>>>> 049c900ebd7867caf363febd7b73fb0a6c20a11d
 			$this->qte = $qte;
 
 			return $this;
@@ -61,7 +67,11 @@
 		/**
 		 * Get qte
 		 *
+<<<<<<< HEAD
 		 * @return integer 
+=======
+		 * @return integer
+>>>>>>> 049c900ebd7867caf363febd7b73fb0a6c20a11d
 		 */
 		public function getQte() {
 			return $this->qte;
@@ -72,9 +82,15 @@
 		 *
 		 * @param float $prix
 		 *
+<<<<<<< HEAD
 *@return LigneCommande
 		 */
 		public function setPrix($prix) {
+=======
+		 * @return LigneCommande
+		 */
+		public function setPrix( $prix ) {
+>>>>>>> 049c900ebd7867caf363febd7b73fb0a6c20a11d
 			$this->prix = $prix;
 
 			return $this;
@@ -83,7 +99,11 @@
 		/**
 		 * Get prix
 		 *
+<<<<<<< HEAD
 		 * @return float 
+=======
+		 * @return float
+>>>>>>> 049c900ebd7867caf363febd7b73fb0a6c20a11d
 		 */
 		public function getPrix() {
 			return $this->prix;
@@ -94,7 +114,11 @@
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Product $product
 		 *
+<<<<<<< HEAD
 *@return LigneCommande
+=======
+		 * @return LigneCommande
+>>>>>>> 049c900ebd7867caf363febd7b73fb0a6c20a11d
 		 */
 		public function setProduct( \s4smithe\VitrineBundle\Entity\Product $product ) {
 			$this->product = $product;
@@ -105,7 +129,11 @@
 		/**
 		 * Get product
 		 *
+<<<<<<< HEAD
 		 * @return \s4smithe\VitrineBundle\Entity\Product 
+=======
+		 * @return \s4smithe\VitrineBundle\Entity\Product
+>>>>>>> 049c900ebd7867caf363febd7b73fb0a6c20a11d
 		 */
 		public function getProduct() {
 			return $this->product;
@@ -116,9 +144,15 @@
 		 *
 		 * @param \s4smithe\VitrineBundle\Entity\Commande $commande
 		 *
+<<<<<<< HEAD
 *@return LigneCommande
 		 */
 		public function setCommande(\s4smithe\VitrineBundle\Entity\Commande $commande) {
+=======
+		 * @return LigneCommande
+		 */
+		public function setCommande( \s4smithe\VitrineBundle\Entity\Commande $commande ) {
+>>>>>>> 049c900ebd7867caf363febd7b73fb0a6c20a11d
 			$this->commande = $commande;
 
 			return $this;
@@ -127,11 +161,16 @@
 		/**
 		 * Get commande
 		 *
+<<<<<<< HEAD
 		 * @return \s4smithe\VitrineBundle\Entity\Commande 
+=======
+		 * @return \s4smithe\VitrineBundle\Entity\Commande
+>>>>>>> 049c900ebd7867caf363febd7b73fb0a6c20a11d
 		 */
 		public function getCommande() {
 			return $this->commande;
 		}
+<<<<<<< HEAD
 
 		/**
 		 * @var string
@@ -160,4 +199,6 @@
 		public function getProcuct() {
 			return $this->procuct;
 		}
+=======
+>>>>>>> 049c900ebd7867caf363febd7b73fb0a6c20a11d
 	}

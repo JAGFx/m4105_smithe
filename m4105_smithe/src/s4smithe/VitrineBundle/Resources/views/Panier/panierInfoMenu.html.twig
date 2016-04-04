@@ -1,0 +1,20 @@
+{#
+
+	  Fichier : /Panier/panierInfo.html.twig
+	  Auteur: SMITH Emmanuel
+	  Création: 01/03/2016
+	  Modification: 03/04/16
+
+	  Dropdown panier dans le menu. Comprend prix total + nb articles
+
+#}
+
+<li >
+	<a id="panier" href="{{ path('s4smithe_vitrine_contenuPanier') }}" title="Panier de {{ total|number_format(2, ',', ' ') }}€ - {{ nbArticle }} article(s)" >
+		<i class="glyphicon glyphicon-shopping-cart" ></i >
+		<div >
+			<div class="badge" >{{ total|number_format(2, ',', ' ') }}€</div >
+			<div >{{ nbArticle }} article(s)</div >
+		</div >
+	</a >
+</li >

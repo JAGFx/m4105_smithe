@@ -26,7 +26,6 @@
 
 # Assets and user uploads
 /m4105_smithe/web/bundles/
-/m4105_smithe/web/uploads/
 
 # Assets managed by Bower
 /m4105_smithe/web/assets/vendor/

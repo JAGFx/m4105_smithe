@@ -21,6 +21,10 @@
 
 {% block content %}
 	<div class="col-xs-12" >
+		{% for flashMessage in app.session.flashbag.get('message') %}
+			{% include "s4smitheVitrineBundle:Default:flashMessage.html.twig" %}
+		{% endfor %}
+
 		{{ form_start(edit_form) }}
 		{{ form_widget(edit_form) }}
 		<button type="reset" title="Annuler" class="btn btn-sm btn-default" >Annuler</button >

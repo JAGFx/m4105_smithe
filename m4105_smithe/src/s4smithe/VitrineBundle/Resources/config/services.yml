@@ -2,3 +2,4 @@ services:
 #    s4smithe_vitrine.example:
 #        class: s4smithe\VitrineBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+

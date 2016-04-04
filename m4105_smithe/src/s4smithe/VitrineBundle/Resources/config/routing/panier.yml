@@ -13,11 +13,19 @@ s4smithe_vitrine_contenuPanier:
 
 # -- Ajout d'Article
 s4smithe_vitrine_addArticlePanier:
-     path:     /addArticle/{articleId}/{qte}
-     defaults: { _controller: s4smitheVitrineBundle:Panier:ajouterUnArticle, articleId: 0, qte: 1}
+     path:     /addArticle/{id}/{qte}
+     defaults: { _controller: s4smitheVitrineBundle:Panier:ajouterArticle, qte: 1}
      requirements:
-          articleId: \d+
+          id: \d+
           qte: \d+
+
+  # -- Definir qté Article
+s4smithe_vitrine_changeQuantityPanier:
+    path:     /changeQte/{id}/{qte}
+    defaults: { _controller: s4smitheVitrineBundle:Panier:changeQutantity, qte: 1}
+    requirements:
+        id: \d+
+        qte: \d+
 
 # -- Retirer un Articles
 s4smithe_vitrine_removeOneArticlePanier:
@@ -40,7 +48,6 @@ s4smithe_vitrine_emptyPanier:
      defaults: { _controller: s4smitheVitrineBundle:Panier:emptyPanier}
 
 # -- Validation du Panier => Commande
-# TODO Forward action to CommandeController
 s4smithe_vitrine_validationPanier:
      path:     /validation
      defaults: { _controller: s4smitheVitrineBundle:Panier:validation}

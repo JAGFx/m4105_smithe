@@ -100,9 +100,9 @@
 
 
 			$editForm = $this->createFormBuilder( $commande )
-				->add( 'date', 'datetime', array( 'read_only' => true, 'disabled' => true ) )
+				->add( 'date', 'datetime', array( 'disabled' => true ) )
 				->add( 'etat' )
-				->add( 'client', null, array( 'read_only' => true, 'disabled' => true ) )
+				->add( 'client', null, array( 'disabled' => true ) )
 				->getForm();
 
 			$editForm->handleRequest( $request );
@@ -111,6 +111,14 @@
 				$em = $this->getDoctrine()->getManager();
 				$em->persist( $commande );
 				$em->flush();
+
+				$message = array(
+					'type'    => 'success',
+					'title'   => "Commande modifié",
+					'message' => 'La commande à bien été modifiée'
+				);
+
+				$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
 
 				return $this->redirectToRoute( 'commande_edit', array( 'id' => $commande->getId() ) );
 			}
@@ -137,7 +145,7 @@
 				$em->flush();
 			}
 
-			return $this->redirectToRoute( 'commande_index' );
+			return $this->redirectToRoute( 'client_listCommande' );
 		}
 
 		/**

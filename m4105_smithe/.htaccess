@@ -1,0 +1,20 @@
+SetEnv PHP_VER 5_6
+SetEnv REGISTER_GLOBALS 0
+SetEnv SESSION_USE_TRANS_SID 0
+SetEnv SHORT_OPEN_TAGS 0
+SetEnv MAGIC_QUOTES 0
+SetEnv SESSION_AUTOSTART 0
+SetEnv ZEND_OPTIMIZER 1
+
+ # --
+	Options +FollowSymlinks
+	Options -Multiviews
+	
+# Impossible de lister les fichier depuis un navigateur
+	#Options -Indexes
+		
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteRule ^(.*)$ web/$1 [QSA,L]
+</IfModule>
