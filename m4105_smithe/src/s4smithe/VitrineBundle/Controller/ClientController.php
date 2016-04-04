@@ -78,13 +78,32 @@
 
 				if ( $form->isSubmitted() && $form->isValid() ) {
 					$em = $this->getDoctrine()->getManager();
-					$em->persist( $client );
-					$em->flush();
+					$user = $em->getRepository( 's4smitheVitrineBundle:Client' )
+						->findOneBy(
+							array(
+								'mail'     => $client->getMail(),
+							)
+						);
 
-					$this->setSessionUser( $client->getId() );
+					if( !$user ) {
+						$em->persist( $client );
+						$em->flush();
 
-					return $this->redirectToRoute(
-						's4smithe_vitrine_homepage'
+						$this->setSessionUser( $client->getId() );
+
+						return $this->redirectToRoute(
+							's4smithe_vitrine_homepage'
+						);
+					}
+
+					$message = array(
+						'type'    => 'warning',
+						'title'   => "Inscription impossible",
+						'message' => 'L\email saisie existe déjà'
+					);
+
+					$this->getRequest()->getSession()->getFlashBag()->add(
+						'message', $message
 					);
 
 				}
